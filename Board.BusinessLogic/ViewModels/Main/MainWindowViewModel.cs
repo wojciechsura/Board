@@ -13,23 +13,13 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private readonly IMainWindowAccess access;
 
-        private string data;
-
         // Public methods -----------------------------------------------------
 
         public MainWindowViewModel(IMainWindowAccess access)
         {
             this.access = access;
-
-            data = "Hello, world!";
         }
 
         // Public properties --------------------------------------------------
-
-        public string Data
-        {
-            get => data;
-            set => Set(ref data, value);
-        }
     }
 }

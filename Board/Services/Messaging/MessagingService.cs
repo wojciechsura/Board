@@ -82,10 +82,5 @@ namespace Board.Services.Messaging
 
             MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-        public void Beep()
-        {
-            SystemSounds.Beep.Play();
-        }
     }
 }

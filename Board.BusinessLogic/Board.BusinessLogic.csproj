@@ -13,6 +13,6 @@
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Spooksoft.VisualStateManager" Version="1.0.7.5" />
+    <PackageReference Include="Spooksoft.VisualStateManager" Version="1.0.7.6" />
   </ItemGroup>
 </Project>
