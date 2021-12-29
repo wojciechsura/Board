@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Board.BusinessLogic\Board.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Board.Common.Wpf\Board.Common.Wpf.csproj" />
+    <ProjectReference Include="..\Board.Common\Board.Common.csproj" />
+    <ProjectReference Include="..\Board.Data.SQLite\Board.Data.SQLite.csproj" />
+    <ProjectReference Include="..\Board.Data\Board.Data.csproj" />
+    <ProjectReference Include="..\Board.Dependencies\Board.Dependencies.csproj" />
+    <ProjectReference Include="..\Board.Resources\Board.Resources.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
