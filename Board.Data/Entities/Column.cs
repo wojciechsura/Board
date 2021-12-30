@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]
-    public class Entry
+    public class Column
     {
         public int Id { get; set; }
         [Required]
-        public string? Title { get; set; }
+        public string? Name { get; set; }
         [Required]
-        public Column? Column { get; set; }
+        public Table? Table { get; set; }
+        public List<Entry> Entries { get; set; } = new List<Entry>();
     }
 }
