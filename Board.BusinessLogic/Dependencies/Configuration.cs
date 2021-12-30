@@ -1,4 +1,6 @@
-﻿using Board.BusinessLogic.Services.EventBus;
+﻿using Board.BusinessLogic.Services.DatabaseBuilder;
+using Board.BusinessLogic.Services.EventBus;
+using Board.BusinessLogic.Services.FilesystemBuilder;
 using Board.BusinessLogic.Services.Paths;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,8 @@ namespace Board.BusinessLogic.Dependencies
             // Register types
             container.RegisterType<IEventBus, EventBus>(new ContainerControlledLifetimeManager());
             container.RegisterType<IPathService, PathService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFilesystemBuilderService, FilesystemBuilderService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IDatabaseBuilderService, DatabaseBuilderService>(new ContainerControlledLifetimeManager());
         }
     }
 }

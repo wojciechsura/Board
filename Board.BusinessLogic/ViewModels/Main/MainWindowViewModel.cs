@@ -22,7 +22,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private void DoNew()
         {
-            (bool result, DocumentDefinition definition) = dialogService.ShowNewWallDialog();
+            (bool result, DocumentInfo definition) = dialogService.ShowNewWallDialog();
             
             if (result)
             {

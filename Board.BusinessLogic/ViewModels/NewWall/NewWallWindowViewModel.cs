@@ -21,7 +21,18 @@ namespace Board.BusinessLogic.ViewModels.NewWall
 
             if (result)
             {
-                // TODO
+                var databaseDef = new SQLiteDatabaseDefinition();
+                var filesystemDef = new LocalFilesystemDefinition();
+                var path = System.IO.Path.Combine(data.Path, data.WallName);
+
+                var definition = new DocumentDefinition
+                {
+                    Database = databaseDef,
+                    Filesystem = filesystemDef
+                };
+
+                var info = new DocumentInfo(path, definition);
+                Result = info;
 
                 access.Close(true);
             }
@@ -41,7 +52,7 @@ namespace Board.BusinessLogic.ViewModels.NewWall
             CancelCommand = new AppCommand(obj => DoCancel());
         }
 
-        public DocumentDefinition Result { get; private set; }
+        public DocumentInfo Result { get; private set; }
 
         public ICommand SQLiteCommand { get; }
 

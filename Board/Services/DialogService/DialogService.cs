@@ -84,7 +84,7 @@ namespace Board.Services.DialogService
                 return (false, null);
         }
 
-        public (bool result, DocumentDefinition data) ShowNewWallDialog()
+        public (bool result, DocumentInfo data) ShowNewWallDialog()
         {
             NewWallWindow dialog = new NewWallWindow();
             if (dialog.ShowDialog() == true)

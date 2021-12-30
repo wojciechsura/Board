@@ -14,6 +14,6 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, string filename) ShowSaveDialog(string filter = null, string title = null, string filename = null);
         (bool result, string path) ShowBrowseFolderDialog(string title = null, string path = null);
         (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null);
-        (bool result, DocumentDefinition data) ShowNewWallDialog();
+        (bool result, DocumentInfo data) ShowNewWallDialog();
     }
 }

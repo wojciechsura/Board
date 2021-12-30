@@ -5,7 +5,7 @@ using System.Text;
 namespace Board.BusinessLogic.Models.Document
 {
     [Serializable]
-    public class SQLiteDatabaseDefinition
+    public class SQLiteDatabaseDefinition : BaseDatabaseDefinition
     {
         public string DatabasePath { get; set; }
     }

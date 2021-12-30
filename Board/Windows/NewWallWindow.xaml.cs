@@ -41,6 +41,6 @@ namespace Board.Windows
             Close();
         }
 
-        public DocumentDefinition Result => viewModel.Result;
+        public DocumentInfo Result => viewModel.Result;
     }
 }

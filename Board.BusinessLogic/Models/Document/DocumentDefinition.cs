@@ -11,7 +11,7 @@ namespace Board.BusinessLogic.Models.Document
         [XmlElement("Database")]
         public BaseDatabaseDefinition Database { get; set; }
 
-        [XmlElement("Attachments")]
-        public BaseAttachmentsDefinition Attachments { get; set; }
+        [XmlElement("Filesystem")]
+        public BaseFilesystemDefinition Filesystem { get; set; }
     }
 }
