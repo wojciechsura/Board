@@ -1,0 +1,44 @@
+﻿<Window x:Class="Board.Windows.SQLiteConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Board.Windows"
+        xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.SQLiteConfig;assembly=Board.BusinessLogic"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type={x:Type vm:SQLiteConfigWindowViewModel}}"
+        Title="#Configure SQLite" SizeToContent="WidthAndHeight">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Margin="{StaticResource DialogItemsMargin}" Header="#Configure SQLite">
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="{StaticResource DialogItemsMargin}" Content="#Wall name" />
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="{StaticResource DialogItemsMargin}" 
+                         HorizontalAlignment="Stretch" Text="{Binding WallName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=300}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="{StaticResource DialogItemsExceptTopMargin}" Content="#Location" />
+                <DockPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource DialogItemsExceptTopMargin}">
+                    <Button DockPanel.Dock="Right" Width="24" Height="24" Padding="0"
+                            Command="{Binding OpenFolderCommand}">
+                        <Image Width="16" Height="16" Source="/Resources/Images/Open16.png" />
+                    </Button>
+                    <TextBox IsReadOnly="True" Text="{Binding Path}" />
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource DialogButton}" Content="#OK" Command="{Binding OkCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="#Cancel" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </StackPanel>
+</Window>

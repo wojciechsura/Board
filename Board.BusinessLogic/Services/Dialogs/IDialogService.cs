@@ -1,4 +1,5 @@
 ﻿using Board.BusinessLogic.Models.Dialogs;
+using Board.BusinessLogic.Models.Document;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,10 @@ namespace Board.BusinessLogic.Services.Dialogs
 {
     public interface IDialogService
     {
-        OpenDialogResult ShowOpenDialog(string filter = null, string title = null, string filename = null);
-        SaveDialogResult ShowSaveDialog(string filter = null, string title = null, string filename = null);
+        (bool result, string filename) ShowOpenDialog(string filter = null, string title = null, string filename = null);
+        (bool result, string filename) ShowSaveDialog(string filter = null, string title = null, string filename = null);
+        (bool result, string path) ShowBrowseFolderDialog(string title = null, string path = null);
+        (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null);
+        (bool result, DocumentDefinition data) ShowNewWallDialog();
     }
 }

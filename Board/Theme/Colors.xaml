@@ -4,6 +4,7 @@
     <!-- General -->
 
     <SolidColorBrush x:Key="LinkBrush">#1080e0</SolidColorBrush>
+    <SolidColorBrush x:Key="HeaderBrush">#5BB3FF</SolidColorBrush>
     
     <!-- Button -->
 

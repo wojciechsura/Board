@@ -7,6 +7,11 @@
         <ResourceDictionary Source="Fonts.xaml" />
         <ResourceDictionary Source="Dimensions.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="Label" x:Key="Header">
+        <Setter Property="FontSize" Value="{StaticResource HeaderFontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource HeaderBrush}" />
+    </Style>
     
     <Style TargetType="Button">
         <Style.Setters>

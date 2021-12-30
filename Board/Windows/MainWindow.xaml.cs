@@ -1,4 +1,5 @@
 ﻿using Board.BusinessLogic.ViewModels.Main;
+using Fluent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Board.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IMainWindowAccess
+    public partial class MainWindow : RibbonWindow, IMainWindowAccess
     {
         private MainWindowViewModel viewModel;
 

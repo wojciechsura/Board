@@ -10,6 +10,21 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\New16.png" />
+    <None Remove="Resources\Images\New32.png" />
+    <None Remove="Resources\Images\Open16.png" />
+    <None Remove="Resources\Images\Open32.png" />
+    <None Remove="Resources\Images\sqlite16.png" />
+    <None Remove="Resources\Images\sqlite32.png" />
+    <None Remove="Resources\Images\sqlite64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\New16.png" />
+    <Resource Include="Resources\Images\New32.png" />
+    <Resource Include="Resources\Images\Open16.png" />
+    <Resource Include="Resources\Images\Open32.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Board.BusinessLogic\Board.BusinessLogic.csproj" />
     <ProjectReference Include="..\Board.Common.Wpf\Board.Common.Wpf.csproj" />
     <ProjectReference Include="..\Board.Common\Board.Common.csproj" />
@@ -20,8 +35,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+    <Resource Include="Resources\Images\Sqlite16.png" />
+    <Resource Include="Resources\Images\Sqlite32.png" />
+    <Resource Include="Resources\Images\Sqlite64.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Fluent.Ribbon" Version="9.0.1" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

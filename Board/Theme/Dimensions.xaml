@@ -36,6 +36,8 @@
     <Thickness x:Key="HalfMargin" Left="3" Right="3" Top="3" Bottom="3" />
 
     <Thickness x:Key="TextBoxMargin">2,4</Thickness>
+
+    <sys:Double x:Key="HeaderFontSize">18</sys:Double>
     
     <!-- Button -->
 
