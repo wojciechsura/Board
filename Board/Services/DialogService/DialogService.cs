@@ -10,87 +10,145 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Board.Services.DialogService
 {
     internal class DialogService : IDialogService
     {
+        private readonly Stack<Window> dialogWindows = new();
+
+        private void ActivateLastDialog()
+        {
+            if (dialogWindows.Any())
+                dialogWindows.Peek().Activate();
+        }
+
+        private void PopDialog(Window dialog)
+        {
+            if (dialogWindows.Peek() != dialog)
+                throw new InvalidOperationException("Broken dialog window stack mechanism!");
+
+            dialogWindows.Pop();
+        }
+
         public (bool result, string filename) ShowOpenDialog(string filter = null, string title = null, string filename = null)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (filename != null)
-                dialog.FileName = filename;
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                if (filename != null)
+                    dialog.FileName = filename;
 
-            if (filter != null)
-                dialog.Filter = filter;
-            else
-                dialog.Filter = Strings.DefaultFilter;
+                if (filter != null)
+                    dialog.Filter = filter;
+                else
+                    dialog.Filter = Strings.DefaultFilter;
 
-            if (title != null)
-                dialog.Title = title;
-            else
-                dialog.Title = Strings.DefaultDialogTitle;
+                if (title != null)
+                    dialog.Title = title;
+                else
+                    dialog.Title = Strings.DefaultDialogTitle;
 
-            if (dialog.ShowDialog() == true)
-                return new (true, dialog.FileName);
-            else
-                return new (false, null);
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.FileName);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                ActivateLastDialog();
+            }
         }
 
         public (bool result, string filename) ShowSaveDialog(string filter = null, string title = null, string filename = null)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            if (filename != null)
-                dialog.FileName = filename;
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                if (filename != null)
+                    dialog.FileName = filename;
 
-            if (filter != null)
-                dialog.Filter = filter;
-            else
-                dialog.Filter = Strings.DefaultFilter;
+                if (filter != null)
+                    dialog.Filter = filter;
+                else
+                    dialog.Filter = Strings.DefaultFilter;
 
-            if (title != null)
-                dialog.Title = title;
-            else
-                dialog.Title = Strings.DefaultDialogTitle;
+                if (title != null)
+                    dialog.Title = title;
+                else
+                    dialog.Title = Strings.DefaultDialogTitle;
 
-            if (dialog.ShowDialog() == true)
-                return (true, dialog.FileName);
-            else
-                return (false, null);
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.FileName);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                ActivateLastDialog();
+            }
         }
 
         public (bool result, string path) ShowBrowseFolderDialog(string title = null, string path = null)
         {
-            CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
+            try
             {
-                Title = title,
-                EnsurePathExists = true,
-                DefaultDirectory = path,
-                IsFolderPicker = true
-            };
+                CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
+                {
+                    Title = title,
+                    EnsurePathExists = true,
+                    DefaultDirectory = path,
+                    IsFolderPicker = true
+                };
 
-            if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok)
-                return (true, fileDialog.FileName);
-            else
-                return (false, null);
+                if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok)
+                    return (true, fileDialog.FileName);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                ActivateLastDialog();
+            }
         }
 
         public (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null)
         {
             SQLiteConfigWindow dialog = new SQLiteConfigWindow(data);
-            if (dialog.ShowDialog() == true)
-                return (true, dialog.Result);
-            else
-                return (false, null);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.Result);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
         }
 
         public (bool result, DocumentInfo data) ShowNewWallDialog()
         {
             NewWallWindow dialog = new NewWallWindow();
-            if (dialog.ShowDialog() == true)
-                return (true, dialog.Result);
-            else
-                return (false, null);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.Result);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);                
+                ActivateLastDialog();
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Board.Data.SQLite.Migrations
 {
     [DbContext(typeof(TableContext))]
-    [Migration("20211230075038_First")]
+    [Migration("20211231142818_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace Board.Data.SQLite.Migrations
 
                     b.HasIndex("TableId");
 
-                    b.ToTable("Column");
+                    b.ToTable("Columns");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Entry", b =>
@@ -61,7 +61,7 @@ namespace Board.Data.SQLite.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Entry");
+                    b.ToTable("Entries");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Table", b =>

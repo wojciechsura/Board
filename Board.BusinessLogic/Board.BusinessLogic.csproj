@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Board.Common\Board.Common.csproj" />
+    <ProjectReference Include="..\Board.Data.SQLite\Board.Data.SQLite.csproj" />
     <ProjectReference Include="..\Board.Dependencies\Board.Dependencies.csproj" />
     <ProjectReference Include="..\Board.Resources\Board.Resources.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

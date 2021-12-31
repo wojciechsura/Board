@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,5 +125,11 @@
   </data>
   <data name="DefaultDialogTitle" xml:space="preserve">
     <value>Board</value>
+  </data>
+  <data name="Dialog.OpenWall.ProjectFilterDesc" xml:space="preserve">
+    <value>Wall project files</value>
+  </data>
+  <data name="Dialog.OpenWall.Title" xml:space="preserve">
+    <value>Open wall</value>
   </data>
 </root>

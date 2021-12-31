@@ -22,5 +22,7 @@ namespace Board.Data.SQLite
 
         public string DbPath { get; private set; }
         public DbSet<Table>? Tables { get; set; }
+        public DbSet<Column>? Columns { get; set; }
+        public DbSet<Entry>? Entries { get; set; }
     }
 }

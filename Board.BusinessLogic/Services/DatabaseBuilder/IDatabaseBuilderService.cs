@@ -1,4 +1,5 @@
 ﻿using Board.BusinessLogic.Infrastructure.Document.Database;
+using Board.BusinessLogic.Infrastructure.Document.Filesystem;
 using Board.BusinessLogic.Models.Document;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace Board.BusinessLogic.Services.DatabaseBuilder
 {
     public interface IDatabaseBuilderService
     {
-        BaseDatabase Build(string path, BaseDatabaseDefinition databaseDefinition);
+        BaseDatabase Create(string projectPath, BaseDatabaseDefinition database);
+        BaseDatabase Open(string projectPath, BaseDatabaseDefinition database);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Board.BusinessLogic.Services.DatabaseBuilder;
+﻿using AutoMapper;
+using Board.BusinessLogic.Services.DatabaseBuilder;
+using Board.BusinessLogic.Services.Document;
 using Board.BusinessLogic.Services.EventBus;
 using Board.BusinessLogic.Services.FilesystemBuilder;
 using Board.BusinessLogic.Services.Paths;
@@ -22,11 +24,20 @@ namespace Board.BusinessLogic.Dependencies
                 return;
             isConfigured = true;
 
-            // Register types
+            // Register services
             container.RegisterType<IEventBus, EventBus>(new ContainerControlledLifetimeManager());
             container.RegisterType<IPathService, PathService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IFilesystemBuilderService, FilesystemBuilderService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IDatabaseBuilderService, DatabaseBuilderService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IDocumentFactory, DocumentFactory>(new ContainerControlledLifetimeManager());
+
+            // Register mapper
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                config.AddMaps("Board.BusinessLogic");
+            });
+            var mapper = mapperConfig.CreateMapper();
+            container.RegisterInstance<IMapper>(mapper);
         }
     }
 }

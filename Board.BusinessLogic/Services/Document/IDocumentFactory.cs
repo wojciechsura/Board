@@ -8,6 +8,8 @@ namespace Board.BusinessLogic.Services.Document
 {
     public interface IDocumentFactory
     {
+        void SaveDefinition(DocumentInfo info);
+        DocumentInfo OpenDefinition(string definitionPath);
         WallDocument Create(DocumentInfo info);
         WallDocument Open(DocumentInfo info);
     }

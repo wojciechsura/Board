@@ -22,7 +22,7 @@ namespace Board.Data.SQLite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Column",
+                name: "Columns",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -32,9 +32,9 @@ namespace Board.Data.SQLite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Column", x => x.Id);
+                    table.PrimaryKey("PK_Columns", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Column_Tables_TableId",
+                        name: "FK_Columns_Tables_TableId",
                         column: x => x.TableId,
                         principalTable: "Tables",
                         principalColumn: "Id",
@@ -42,7 +42,7 @@ namespace Board.Data.SQLite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entry",
+                name: "Entries",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -52,34 +52,34 @@ namespace Board.Data.SQLite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entry", x => x.Id);
+                    table.PrimaryKey("PK_Entries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Entry_Column_ColumnId",
+                        name: "FK_Entries_Columns_ColumnId",
                         column: x => x.ColumnId,
-                        principalTable: "Column",
+                        principalTable: "Columns",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Column_Id",
-                table: "Column",
+                name: "IX_Columns_Id",
+                table: "Columns",
                 column: "Id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Column_TableId",
-                table: "Column",
+                name: "IX_Columns_TableId",
+                table: "Columns",
                 column: "TableId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entry_ColumnId",
-                table: "Entry",
+                name: "IX_Entries_ColumnId",
+                table: "Entries",
                 column: "ColumnId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entry_Id",
-                table: "Entry",
+                name: "IX_Entries_Id",
+                table: "Entries",
                 column: "Id",
                 unique: true);
 
@@ -93,10 +93,10 @@ namespace Board.Data.SQLite.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Entry");
+                name: "Entries");
 
             migrationBuilder.DropTable(
-                name: "Column");
+                name: "Columns");
 
             migrationBuilder.DropTable(
                 name: "Tables");

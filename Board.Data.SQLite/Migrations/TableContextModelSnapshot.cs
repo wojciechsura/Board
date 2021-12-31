@@ -36,7 +36,7 @@ namespace Board.Data.SQLite.Migrations
 
                     b.HasIndex("TableId");
 
-                    b.ToTable("Column");
+                    b.ToTable("Columns");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Entry", b =>
@@ -59,7 +59,7 @@ namespace Board.Data.SQLite.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Entry");
+                    b.ToTable("Entries");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Table", b =>

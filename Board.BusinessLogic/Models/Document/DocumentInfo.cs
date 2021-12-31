@@ -6,13 +6,13 @@ namespace Board.BusinessLogic.Models.Document
 {
     public class DocumentInfo
     {
-        public DocumentInfo(string path, DocumentDefinition definition)
+        public DocumentInfo(string projectPath, DocumentDefinition definition)
         {
-            Path = path;
+            ProjectPath = projectPath;
             Definition = definition;
         }
 
-        public string Path { get; }
+        public string ProjectPath { get; }
         public DocumentDefinition Definition { get; }
     }
 }

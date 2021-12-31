@@ -1,21 +1,23 @@
 ﻿<f:RibbonWindow x:Class="Board.Windows.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Board"
-        xmlns:f="urn:fluent-ribbon"
-        xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type={x:Type vm:MainWindowViewModel}}"
-        Title="MainWindow" Height="450" Width="800">
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:local="clr-namespace:Board"
+                xmlns:f="urn:fluent-ribbon"
+                xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
+                xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Main.Document;assembly=Board.BusinessLogic"
+                xmlns:c="clr-namespace:Board.Controls"
+                mc:Ignorable="d"
+                Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <f:Ribbon DockPanel.Dock="Top">
             <f:RibbonTabItem Header="#Home">
                 <f:RibbonGroupBox Header="#File">
                     <f:Button Header="#Open" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/Open32.png" 
-                              Icon="pack://application:,,,/Board;component/Resources/Images/Open16.png"/>
+                              Icon="pack://application:,,,/Board;component/Resources/Images/Open16.png"
+                              Command="{Binding OpenCommand}"/>
                     <f:Button Header="#New" SizeDefinition="Middle" 
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/New32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/New16.png"
@@ -23,5 +25,18 @@
                 </f:RibbonGroupBox>
             </f:RibbonTabItem>
         </f:Ribbon>
+
+        <TabControl ItemsSource="{Binding ActiveDocument.Tables}">
+            <TabControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vmd:TableViewModel}">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate DataType="{x:Type vmd:TableViewModel}">
+                    <c:Table />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </DockPanel>
 </f:RibbonWindow>
