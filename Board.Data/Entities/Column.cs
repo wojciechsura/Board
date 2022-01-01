@@ -18,5 +18,6 @@ namespace Board.Data.Entities
         [Required]
         public Table? Table { get; set; }
         public List<Entry> Entries { get; set; } = new List<Entry>();
+        public bool IsDeleted { get; set; }
     }
 }

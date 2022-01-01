@@ -16,5 +16,6 @@ namespace Board.Data.Entities
         [Required]
         public string? Name { get; set; }
         public List<Column> Columns { get; set; } = new List<Column>();
+        public bool IsDeleted { get; set; }
     }
 }

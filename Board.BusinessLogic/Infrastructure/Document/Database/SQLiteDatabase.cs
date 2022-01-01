@@ -34,19 +34,24 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<ColumnModel> GetColumnsForTable(int id)
         {
-            var columnEntities = context.Columns.Where(c => c.Table.Id == id);
+            var columnEntities = context.Columns
+                .Where(c => c.Table.Id == id && !c.IsDeleted)
+                .ToList();
             return mapper.Map<List<ColumnModel>>(columnEntities);
         }
 
         public override List<EntryModel> GetEntriesForColumn(int id)
         {
-            var entryEntities = context.Entries.Where(e => e.Column.Id == id);
+            var entryEntities = context.Entries
+                .Where(e => e.Column.Id == id && !e.IsDeleted)
+                .ToList();
             return mapper.Map<List<EntryModel>>(entryEntities);
         }
 
         public override List<TableModel> GetTables()
         {
-            var tableEntities = context.Tables.ToListAsync().Result;
+            var tableEntities = context.Tables.Where(t => !t.IsDeleted)
+                .ToListAsync().Result;
             return mapper.Map<List<TableModel>>(tableEntities);
         }
     }

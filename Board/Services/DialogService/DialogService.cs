@@ -173,7 +173,40 @@ namespace Board.Services.DialogService
 
         public bool ShowEditTableDialog(TableModel tableModel)
         {
-            throw new NotImplementedException();
+            TableEditorWindow dialog = new TableEditorWindow(tableModel, false);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public (bool result, bool? permanently) ShowDeleteDialog(string message)
+        {
+            DeleteDialogWindow dialog = new DeleteDialogWindow(message);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.DeletePermanently);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
         }
     }
 }

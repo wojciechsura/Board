@@ -62,4 +62,8 @@
     <Thickness x:Key="CardMargin">4</Thickness>
     <Thickness x:Key="CardPadding">4</Thickness>
     
+    <!-- Dialog window -->
+
+    <Thickness x:Key="DialogContentPadding">8</Thickness>
+    
 </ResourceDictionary>

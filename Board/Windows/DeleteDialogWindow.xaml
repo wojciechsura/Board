@@ -1,0 +1,23 @@
+﻿<Window x:Class="Board.Windows.DeleteDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Board.Windows"
+        mc:Ignorable="d"
+        ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"        
+        SizeToContent="Height"
+        Title="#Deleting" Width="400">
+    <StackPanel Orientation="Vertical">
+        <Border Margin="{StaticResource DialogContentPadding}">
+            <StackPanel Orientation="Vertical">
+                <Label Margin="{StaticResource DialogItemsMargin}" Content="{Binding Message}" />
+                <CheckBox Margin="{StaticResource DialogItemsExceptTopMargin}" Content="#Delete permanently (this cannot be reversed!)" /> 
+            </StackPanel>
+        </Border>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Style="{StaticResource DialogButton}" Content="#Yes"/>
+            <Button Style="{StaticResource DialogButton}" Content="#No" />
+        </StackPanel>
+    </StackPanel>
+</Window>
