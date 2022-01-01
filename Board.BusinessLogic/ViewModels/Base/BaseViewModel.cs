@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Board.BusinessLogic.Types.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -60,6 +61,16 @@ namespace Board.BusinessLogic.ViewModels.Base
                 field = value;
                 OnPropertyChanged(property);
                 changeHandler?.Invoke();
+            }
+        }
+
+        protected void PropertyGroupChanged(string propertyGroupName)
+        {
+            foreach (var property in GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                var notificationGroup = property.GetCustomAttribute<PropertyNotificationGroupAttribute>();
+                if (notificationGroup != null && notificationGroup.GroupName == propertyGroupName)
+                    OnPropertyChanged(property.Name);
             }
         }
 

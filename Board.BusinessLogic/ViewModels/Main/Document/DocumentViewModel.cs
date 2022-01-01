@@ -78,17 +78,15 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
         private readonly IDocumentFactory documentFactory;
 
         private TableLoadingWorker loadingWorker;
-        private bool isLoading = false;
+        private bool isLoading;
 
         private readonly ObservableCollection<TableViewModel> tables = new();
-
-        private readonly BaseCondition isLoadingCondition;
 
         // Private methods ----------------------------------------------------
 
         private DocumentViewModel()
         {
-            isLoadingCondition = new PropertyWatchCondition<DocumentViewModel>(this, vm => vm.IsLoading, false);
+            isLoading = false;
         }
 
         private void LoadTables()
@@ -167,8 +165,8 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
             set => Set(ref isLoading, value);
         }
 
-        public BaseCondition IsLoadingCondition => isLoadingCondition;
-
         public ObservableCollection<TableViewModel> Tables => tables;
+
+        public WallDocument Document => document;
     }
 }

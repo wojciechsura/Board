@@ -1,4 +1,5 @@
-﻿using Board.BusinessLogic.Models.Dialogs;
+﻿using Board.BusinessLogic.Models.Data;
+using Board.BusinessLogic.Models.Dialogs;
 using Board.BusinessLogic.Models.Document;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,7 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, string path) ShowBrowseFolderDialog(string title = null, string path = null);
         (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null);
         (bool result, DocumentInfo data) ShowNewWallDialog();
+        (bool result, TableModel model) ShowNewTableDialog();
+        bool ShowEditTableDialog(TableModel tableModel);
     }
 }

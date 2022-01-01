@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Board.BusinessLogic.Models.Data;
+using Board.Data.Entities;
 using Board.Data.SQLite;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,16 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             context = new TableContext(path);
             context.Database.Migrate();
             this.mapper = mapper;
+        }
+
+        public override void AddTable(TableModel newTable)
+        {
+            var tableEntity = mapper.Map<Table>(newTable);
+
+            context.Tables.Add(tableEntity);
+            context.SaveChanges();
+
+            mapper.Map(tableEntity, newTable);
         }
 
         public override List<ColumnModel> GetColumnsForTable(int id)

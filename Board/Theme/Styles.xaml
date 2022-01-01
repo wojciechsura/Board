@@ -248,6 +248,23 @@
         </Setter>
         <Setter Property="Margin" Value="4" />
     </Style>
+
+    <Style TargetType="Border" x:Key="Card">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource CardBorderColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource CardBackground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource CardBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{StaticResource CardCornerRadius}" />
+        <Setter Property="Margin" Value="{StaticResource CardMargin}" />
+        <Setter Property="Padding" Value="{StaticResource CardPadding}" />
+    </Style>
     
     <Style TargetType="TextBox">
         <Setter Property="Padding" Value="{StaticResource TextBoxPadding}" />

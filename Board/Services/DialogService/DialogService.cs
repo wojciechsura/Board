@@ -1,4 +1,5 @@
-﻿using Board.BusinessLogic.Models.Dialogs;
+﻿using Board.BusinessLogic.Models.Data;
+using Board.BusinessLogic.Models.Dialogs;
 using Board.BusinessLogic.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.Resources;
@@ -149,6 +150,30 @@ namespace Board.Services.DialogService
                 PopDialog(dialog);                
                 ActivateLastDialog();
             }
+        }
+
+        public (bool result, TableModel model) ShowNewTableDialog()
+        {
+            TableEditorWindow dialog = new TableEditorWindow(new TableModel(), true);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.Result);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public bool ShowEditTableDialog(TableModel tableModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Board.BusinessLogic.Models.Document;
+﻿using Board.BusinessLogic.Models.Data;
+using Board.BusinessLogic.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.BusinessLogic.Services.Document;
 using Board.BusinessLogic.Services.Paths;
@@ -6,6 +7,7 @@ using Board.BusinessLogic.ViewModels.Base;
 using Board.BusinessLogic.ViewModels.Main.Document;
 using Board.Resources;
 using Spooksoft.VisualStateManager.Commands;
+using Spooksoft.VisualStateManager.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,9 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly IDocumentFactory documentFactory;
         private readonly IPathService pathService;
 
+        private readonly BaseCondition documentNotLoadingCondition;
+        private readonly BaseCondition documentExistsCondition;
+
         private DocumentViewModel activeDocument;
 
         // Private methods ----------------------------------------------------
@@ -39,6 +44,18 @@ namespace Board.BusinessLogic.ViewModels.Main
             if (result)
             {
                 SetNewDocument(info);
+            }
+        }
+
+        private void DoNewTable()
+        {
+            (bool result, TableModel newTable) = dialogService.ShowNewTableDialog();
+            if (result)
+            {
+                activeDocument.Document.Database.AddTable(newTable);
+
+                var tableViewModel = new TableViewModel(newTable, new List<ColumnViewModel>());
+                activeDocument.Tables.Add(tableViewModel);
             }
         }
 
@@ -81,8 +98,12 @@ namespace Board.BusinessLogic.ViewModels.Main
             this.dialogService = dialogService;
             this.documentFactory = documentFactory;
 
+            documentExistsCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument != null, false);
+            documentNotLoadingCondition = new LambdaCondition<MainWindowViewModel>(this, vm => !vm.ActiveDocument.IsLoading, true);
+
             NewCommand = new AppCommand(obj => DoNew());
             OpenCommand = new AppCommand(obj => DoOpen());
+            NewTableCommand = new AppCommand(obj => DoNewTable(), documentExistsCondition & documentNotLoadingCondition);
 
             this.pathService = pathService;
         }
@@ -91,6 +112,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         public ICommand NewCommand { get; }
         public ICommand OpenCommand { get; }
+        public ICommand NewTableCommand { get; }
 
         public DocumentViewModel ActiveDocument
         {

@@ -13,9 +13,9 @@ namespace Board.BusinessLogic.MappingProfiles
     {
         public DataProfile()
         {
-            CreateMap<Table, TableModel>();
-            CreateMap<Column, ColumnModel>();
-            CreateMap<Entry, EntryModel>();
+            CreateMap<Table, TableModel>().ReverseMap();
+            CreateMap<Column, ColumnModel>().ReverseMap();
+            CreateMap<Entry, EntryModel>().ReverseMap();
         }
     }
 }

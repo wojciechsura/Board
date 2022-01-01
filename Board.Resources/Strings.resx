@@ -132,4 +132,10 @@
   <data name="Dialog.OpenWall.Title" xml:space="preserve">
     <value>Open wall</value>
   </data>
+  <data name="TableEditor.Title.New" xml:space="preserve">
+    <value>New board</value>
+  </data>
+  <data name="TableEditor.Title.Edit" xml:space="preserve">
+    <value>Edit board</value>
+  </data>
 </root>

@@ -7,21 +7,30 @@
                 xmlns:f="urn:fluent-ribbon"
                 xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
                 xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Main.Document;assembly=Board.BusinessLogic"
-                xmlns:c="clr-namespace:Board.Controls"
+                xmlns:c="clr-namespace:Board.Controls" 
+                xmlns:main="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
+                d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
                 mc:Ignorable="d"
                 Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <f:Ribbon DockPanel.Dock="Top">
             <f:RibbonTabItem Header="#Home">
                 <f:RibbonGroupBox Header="#File">
-                    <f:Button Header="#Open" SizeDefinition="Large"
+                    <f:Button Header="#Open wall" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/Open32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/Open16.png"
                               Command="{Binding OpenCommand}"/>
-                    <f:Button Header="#New" SizeDefinition="Middle" 
+                    <f:Button Header="#New wall" SizeDefinition="Middle" 
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/New32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/New16.png"
                               Command="{Binding NewCommand}"/>
+                </f:RibbonGroupBox>
+
+                <f:RibbonGroupBox Header="#Board">
+                    <f:Button Header="#New board" SizeDefinition="Large"
+                              LargeIcon="pack://application:,,,/Board;component/Resources/Images/Board32.png" 
+                              Icon="pack://application:,,,/Board;component/Resources/Images/Board16.png"
+                              Command="{Binding NewTableCommand}"/>
                 </f:RibbonGroupBox>
             </f:RibbonTabItem>
         </f:Ribbon>

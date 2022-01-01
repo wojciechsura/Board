@@ -42,5 +42,11 @@
 
     <Color x:Key="PopupBorderBackgroundColor">#eeeeee</Color>
     <Color x:Key="PopupBorderShadowColor">#000000</Color>
+    
+    <!-- Card -->
+
+    <Color x:Key="CardShadowColor">#000000</Color>
+    <Color x:Key="CardBorderColor">#c0c0c0</Color>
+    <Color x:Key="CardBackground">#ffffff</Color>
 
 </ResourceDictionary>

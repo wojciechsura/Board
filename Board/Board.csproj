@@ -10,6 +10,8 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Images\Board16.png" />
+    <None Remove="Resources\Images\Board32.png" />
     <None Remove="Resources\Images\New16.png" />
     <None Remove="Resources\Images\New32.png" />
     <None Remove="Resources\Images\Open16.png" />
@@ -19,6 +21,8 @@
     <None Remove="Resources\Images\sqlite64.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Board16.png" />
+    <Resource Include="Resources\Images\Board32.png" />
     <Resource Include="Resources\Images\New16.png" />
     <Resource Include="Resources\Images\New32.png" />
     <Resource Include="Resources\Images\Open16.png" />

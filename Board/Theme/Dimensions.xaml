@@ -55,4 +55,11 @@
 
     <CornerRadius x:Key="BorderPopupCornerRadius">6</CornerRadius>
     
+    <!-- Card -->
+
+    <Thickness x:Key="CardBorderThickness">1</Thickness>
+    <CornerRadius x:Key="CardCornerRadius">2</CornerRadius>
+    <Thickness x:Key="CardMargin">4</Thickness>
+    <Thickness x:Key="CardPadding">4</Thickness>
+    
 </ResourceDictionary>

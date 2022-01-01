@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.NewWall;assembly=Board.BusinessLogic"
         xmlns:local="clr-namespace:Board.Windows" 
+        d:DataContext="{d:DesignInstance Type=vm:NewWallWindowViewModel}"
         mc:Ignorable="d"         
         ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
         Title="#New wall" SizeToContent="WidthAndHeight">
