@@ -8,14 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.ViewModels.Main.Document
+namespace Board.BusinessLogic.ViewModels.Document
 {
     public class TableViewModel : BaseViewModel
     {
-        private const string MODEL_GROUP = "Model";
-
-        private ObservableCollection<ColumnViewModel> columns = new();
-        private TableModel table;
+        private readonly TableModel table;
+        private readonly ObservableCollection<ColumnViewModel> columns = new();
 
         public TableViewModel(TableModel table, List<ColumnViewModel> columns)
         {
@@ -25,14 +23,10 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
                 this.columns.Add(column);
         }
 
-        public void NotifyModelUpdated()
-        {
-            PropertyGroupChanged(MODEL_GROUP);
-        }
-
         public ObservableCollection<ColumnViewModel> Columns => columns;
 
-        [PropertyNotificationGroup(MODEL_GROUP)]
         public string Name => table.Name;
+
+        public TableModel Table => table;
     }
 }

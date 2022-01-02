@@ -22,16 +22,6 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             this.mapper = mapper;
         }
 
-        public override void AddTable(TableModel newTable)
-        {
-            var tableEntity = mapper.Map<Table>(newTable);
-
-            context.Tables.Add(tableEntity);
-            context.SaveChanges();
-
-            mapper.Map(tableEntity, newTable);
-        }
-
         public override List<ColumnModel> GetColumnsForTable(int id)
         {
             var columnEntities = context.Columns
@@ -53,6 +43,40 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             var tableEntities = context.Tables.Where(t => !t.IsDeleted)
                 .ToListAsync().Result;
             return mapper.Map<List<TableModel>>(tableEntities);
+        }
+
+        public override void AddTable(TableModel newTable)
+        {
+            var tableEntity = mapper.Map<Table>(newTable);
+
+            context.Tables.Add(tableEntity);
+            context.SaveChanges();
+
+            mapper.Map(tableEntity, newTable);
+        }
+
+        public override void UpdateTable(TableModel updatedTable)
+        {
+            var table = mapper.Map<Table>(updatedTable);
+            context.Update<Table>(table);
+            context.SaveChanges();
+        }
+
+        public override void DeleteTable(TableModel deletedTable, bool permanent)
+        {
+            var table = mapper.Map<Table>(deletedTable);
+
+            if (permanent)
+            {
+                context.Remove<Table>(table);
+                context.SaveChanges();
+            }
+            else
+            {
+                table.IsDeleted = true;
+                context.Update(table);
+                context.SaveChanges();
+            }
         }
     }
 }

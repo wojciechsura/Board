@@ -6,7 +6,7 @@
                 xmlns:local="clr-namespace:Board"
                 xmlns:f="urn:fluent-ribbon"
                 xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
-                xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Main.Document;assembly=Board.BusinessLogic"
+                xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
                 xmlns:c="clr-namespace:Board.Controls" 
                 xmlns:main="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
                 d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
@@ -28,14 +28,24 @@
 
                 <f:RibbonGroupBox Header="#Board">
                     <f:Button Header="#New board" SizeDefinition="Large"
-                              LargeIcon="pack://application:,,,/Board;component/Resources/Images/Board32.png" 
-                              Icon="pack://application:,,,/Board;component/Resources/Images/Board16.png"
+                              LargeIcon="pack://application:,,,/Board;component/Resources/Images/AddBoard32.png" 
+                              Icon="pack://application:,,,/Board;component/Resources/Images/AddBoard16.png"
                               Command="{Binding NewTableCommand}"/>
+                    
+                    <f:Button Header="#Edit board" SizeDefinition="Middle"
+                              LargeIcon="pack://application:,,,/Board;component/Resources/Images/EditBoard32.png" 
+                              Icon="pack://application:,,,/Board;component/Resources/Images/EditBoard16.png"
+                              Command="{Binding EditTableCommand}"/>
+
+                    <f:Button Header="#Delete board" SizeDefinition="Middle"
+                              LargeIcon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard32.png" 
+                              Icon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard16.png"
+                              Command="{Binding DeleteTableCommand}"/>
                 </f:RibbonGroupBox>
             </f:RibbonTabItem>
         </f:Ribbon>
 
-        <TabControl ItemsSource="{Binding ActiveDocument.Tables}">
+        <TabControl ItemsSource="{Binding ActiveDocument.Tables}" SelectedItem="{Binding ActiveDocument.ActiveTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TabControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type vmd:TableViewModel}">
                     <TextBlock Text="{Binding Name}" />

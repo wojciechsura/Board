@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.ViewModels.Main.Document
+namespace Board.BusinessLogic.ViewModels.Document
 {
     public class ColumnViewModel
     {
         private readonly ColumnModel column;
-        private ObservableCollection<EntryViewModel> entries = new();
+        private readonly ObservableCollection<EntryViewModel> entries = new();
 
         public ColumnViewModel(ColumnModel column, List<EntryViewModel> entries)
         {

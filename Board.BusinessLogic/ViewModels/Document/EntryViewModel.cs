@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.ViewModels.Main.Document
+namespace Board.BusinessLogic.ViewModels.Document
 {
     public class EntryViewModel
     {

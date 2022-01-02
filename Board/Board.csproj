@@ -10,8 +10,12 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\Images\Board16.png" />
-    <None Remove="Resources\Images\Board32.png" />
+    <None Remove="Resources\Images\AddBoard16.png" />
+    <None Remove="Resources\Images\AddBoard32.png" />
+    <None Remove="Resources\Images\DeleteBoard16.png" />
+    <None Remove="Resources\Images\DeleteBoard32.png" />
+    <None Remove="Resources\Images\EditBoard16.png" />
+    <None Remove="Resources\Images\EditBoard32.png" />
     <None Remove="Resources\Images\New16.png" />
     <None Remove="Resources\Images\New32.png" />
     <None Remove="Resources\Images\Open16.png" />
@@ -21,8 +25,12 @@
     <None Remove="Resources\Images\sqlite64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Board16.png" />
-    <Resource Include="Resources\Images\Board32.png" />
+    <Resource Include="Resources\Images\AddBoard16.png" />
+    <Resource Include="Resources\Images\AddBoard32.png" />
+    <Resource Include="Resources\Images\DeleteBoard16.png" />
+    <Resource Include="Resources\Images\DeleteBoard32.png" />
+    <Resource Include="Resources\Images\EditBoard16.png" />
+    <Resource Include="Resources\Images\EditBoard32.png" />
     <Resource Include="Resources\Images\New16.png" />
     <Resource Include="Resources\Images\New32.png" />
     <Resource Include="Resources\Images\Open16.png" />

@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.ViewModels.Main.Document
+namespace Board.BusinessLogic.ViewModels.Document
 {
     public class DocumentViewModel : BaseViewModel
     {
@@ -49,21 +49,7 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
                 {
                     if (CancellationPending)
                         return;
-
-                    List<ColumnModel> columns = database.GetColumnsForTable(table.Id);
-                    List<ColumnViewModel> columnViewModels = new();
-
-                    foreach (var column in columns)
-                    {
-                        List<EntryModel> entries = database.GetEntriesForColumn(column.Id);
-
-                        List<EntryViewModel> entryViewModels = entries.Select(e => new EntryViewModel(e)).ToList();
-
-                        var columnViewModel = new ColumnViewModel(column, entryViewModels);
-                        columnViewModels.Add(columnViewModel);
-                    }
-
-                    var tableViewModel = new TableViewModel(table, columnViewModels);
+                    TableViewModel tableViewModel = BuildTableViewModel(table, database);
 
                     // TODO: load columns and entities
 
@@ -75,18 +61,50 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
         // Private fields -----------------------------------------------------
 
         private readonly WallDocument document;
+
         private readonly IDocumentFactory documentFactory;
 
         private TableLoadingWorker loadingWorker;
         private bool isLoading;
 
         private readonly ObservableCollection<TableViewModel> tables = new();
+        private TableViewModel activeTable = null;
 
         // Private methods ----------------------------------------------------
 
         private DocumentViewModel()
         {
             isLoading = false;
+        }
+
+        private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database)
+        {
+            List<ColumnModel> columns = database.GetColumnsForTable(table.Id);
+            List<ColumnViewModel> columnViewModels = new();
+
+            foreach (var column in columns)
+            {
+                ColumnViewModel columnViewModel = BuildColumnViewModel(column, database);
+                columnViewModels.Add(columnViewModel);
+            }
+
+            var tableViewModel = new TableViewModel(table, columnViewModels);
+            return tableViewModel;
+        }
+
+        private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database)
+        {
+            List<EntryModel> entries = database.GetEntriesForColumn(column.Id);
+
+            List<EntryViewModel> entryViewModels = entries.Select(e => BuildEntryViewModel(e, database)).ToList();
+
+            var columnViewModel = new ColumnViewModel(column, entryViewModels);
+            return columnViewModel;
+        }
+
+        private static EntryViewModel BuildEntryViewModel(EntryModel entry, BaseDatabase database)
+        {
+            return new EntryViewModel(entry);
         }
 
         private void LoadTables()
@@ -165,8 +183,51 @@ namespace Board.BusinessLogic.ViewModels.Main.Document
             set => Set(ref isLoading, value);
         }
 
+        public void AddTableFromModel(TableModel newTable)
+        {
+            document.Database.AddTable(newTable);
+
+            var tableViewModel = BuildTableViewModel(newTable, document.Database);
+            tables.Add(tableViewModel);
+
+            if (ActiveTable == null)
+                ActiveTable = tableViewModel;
+        }
+
+        public void UpdateTableFromModel(TableViewModel tableViewModel, TableModel updatedTable)
+        {
+            document.Database.UpdateTable(updatedTable);
+
+            var newTableViewModel = BuildTableViewModel(updatedTable, document.Database);
+
+            int index = tables.IndexOf(tableViewModel);
+            tables[index] = newTableViewModel;
+
+            ActiveTable = newTableViewModel;
+        }
+
+        public void DeleteTable(TableViewModel tableViewModel, bool permanent)
+        {
+            document.Database.DeleteTable(tableViewModel.Table, permanent);
+            int index = tables.IndexOf(tableViewModel);
+
+            tables.RemoveAt(index);
+            index = Math.Max(0, Math.Min(index, tables.Count - 1));
+
+            if (tables.Count > 0)
+                ActiveTable = tables[index];
+        }
+
+        // Public properties --------------------------------------------------
+
         public ObservableCollection<TableViewModel> Tables => tables;
 
         public WallDocument Document => document;
+
+        public TableViewModel ActiveTable
+        {
+            get => activeTable;
+            set => Set(ref activeTable, value);
+        }
     }
 }

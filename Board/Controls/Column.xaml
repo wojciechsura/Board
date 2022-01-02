@@ -5,7 +5,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Main.Document;assembly=Board.BusinessLogic"
+      xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
       xmlns:local="clr-namespace:Board.Controls"
       mc:Ignorable="d" Width="300">
     <Grid.RowDefinitions>
