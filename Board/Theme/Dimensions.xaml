@@ -65,9 +65,26 @@
     <sys:Double x:Key="CardShadowDirection">270</sys:Double>
     <sys:Double x:Key="CardShadowDepth">1</sys:Double>
     <sys:Double x:Key="CardShadowOpacity">0.3</sys:Double>
+
+    <!-- Table -->
+
+    <Thickness x:Key="TablePadding">8</Thickness>
+    
+    <!-- Column -->
+
+    <Thickness x:Key="ColumnBorderThickness">1</Thickness>
+    <sys:Double x:Key="ColumnWidth">300</sys:Double>
+    <Thickness x:Key="ColumnMargin">0,0,8,0</Thickness>
+    <CornerRadius x:Key="ColumnCornerRadius">5</CornerRadius>
+    <sys:Double x:Key="ColumnShadowBlurRadius">3</sys:Double>
+    <sys:Double x:Key="ColumnShadowDirection">270</sys:Double>
+    <sys:Double x:Key="ColumnShadowDepth">1</sys:Double>
+    <sys:Double x:Key="ColumnShadowOpacity">0.3</sys:Double>
+
+    <Thickness x:Key="ColumnHeaderMargin">8</Thickness>
     
     <!-- Dialog window -->
-
+   
     <Thickness x:Key="DialogContentPadding">8</Thickness>
     
 </ResourceDictionary>

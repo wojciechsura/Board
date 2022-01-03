@@ -18,7 +18,7 @@ namespace Board.Controls
     /// <summary>
     /// Interaction logic for Column.xaml
     /// </summary>
-    public partial class Column : Grid
+    public partial class Column : Border
     {
         public Column()
         {

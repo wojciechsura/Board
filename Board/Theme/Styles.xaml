@@ -13,10 +13,7 @@
         <Setter Property="Foreground" Value="{StaticResource HeaderBrush}" />
     </Style>
 
-    <Style TargetType="Label" x:Key="ColumnHeaderLabel">
-        <Setter Property="FontWeight" Value="Bold" />
-    </Style>
-    
+   
     <Style TargetType="Button">
         <Style.Setters>
             <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
@@ -280,6 +277,46 @@
         <Setter Property="CornerRadius" Value="{StaticResource CardCornerRadius}" />
         <Setter Property="Margin" Value="{StaticResource CardMargin}" />
         <Setter Property="Padding" Value="{StaticResource CardPadding}" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="Column">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ColumnBorderColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ColumnBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="{StaticResource ColumnShadowBlurRadius}" Color="{StaticResource ColumnShadowColor}"
+                                  Direction="{StaticResource ColumnShadowDirection}" ShadowDepth="{StaticResource ColumnShadowDepth}"
+                                  Opacity="{StaticResource ColumnShadowOpacity}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource ColumnBorderThickness}" />
+        <Setter Property="Width" Value="{StaticResource ColumnWidth}" />
+        <Setter Property="Margin" Value="{StaticResource ColumnMargin}" />
+        <Setter Property="CornerRadius" Value="{StaticResource ColumnCornerRadius}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ColumnHeaderLabel">
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ColumnHeaderForeground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style TargetType="StackPanel" x:Key="TableContents">
+        <Setter Property="Margin" Value="{StaticResource TablePadding}" />
     </Style>
     
     <Style TargetType="TextBox">
