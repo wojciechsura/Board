@@ -16,6 +16,9 @@ namespace Board.BusinessLogic.MappingProfiles
             CreateMap<Table, TableModel>().ReverseMap();
             CreateMap<Column, ColumnModel>().ReverseMap();
             CreateMap<Entry, EntryModel>().ReverseMap();
+            CreateMap<TableModel, TableModel>();
+            CreateMap<ColumnModel, ColumnModel>();
+            CreateMap<EntryModel, EntryModel>();
         }
     }
 }

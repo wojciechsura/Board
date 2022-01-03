@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
@@ -95,10 +96,8 @@ namespace Board.Common.Wpf.Behaviors
             var element = sender as FrameworkElement;
             if (element != null)
             {
-                if (element.ContextMenu.DataContext == null)
-                {
-                    element.ContextMenu.SetBinding(FrameworkElement.DataContextProperty, new Binding { Source = element.DataContext });
-                }
+                BindingOperations.ClearBinding(element.ContextMenu, ContextMenu.DataContextProperty);
+                element.ContextMenu.SetBinding(FrameworkElement.DataContextProperty, new Binding { Source = element.DataContext });
 
                 var target = GetPlacementTarget(element);
                 if (target != null)

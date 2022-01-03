@@ -304,7 +304,7 @@
                         <Border x:Name="Inner" BorderThickness="0,0,0,2"
                                 CornerRadius="{StaticResource TextBoxBorderCornerRadius}">
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="Transparent" />
+                                <SolidColorBrush Color="{StaticResource TextBoxUnfocusedBorder}" />
                             </Border.BorderBrush>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" />
                         </Border>

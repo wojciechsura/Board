@@ -57,14 +57,14 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateTable(TableModel updatedTable)
         {
-            var table = mapper.Map<Table>(updatedTable);
-            context.Update<Table>(table);
+            var table = context.Tables.First(t => t.Id == updatedTable.Id);
+            mapper.Map(updatedTable, table);
             context.SaveChanges();
         }
 
         public override void DeleteTable(TableModel deletedTable, bool permanent)
         {
-            var table = mapper.Map<Table>(deletedTable);
+            var table = context.Tables.First(t => t.Id == deletedTable.Id);
 
             if (permanent)
             {
@@ -74,7 +74,6 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             else
             {
                 table.IsDeleted = true;
-                context.Update(table);
                 context.SaveChanges();
             }
         }
@@ -84,18 +83,19 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             var column = mapper.Map<Column>(newColumn);
             context.Columns.Add(column);
             context.SaveChanges();
+            mapper.Map(column, newColumn);
         }
 
         public override void UpdateColumn(ColumnModel updatedColumn)
         {
-            var column = mapper.Map<Column>(updatedColumn);
-            context.Update<Column>(column);
+            var column = context.Columns.First(c => c.Id == updatedColumn.Id);
+            mapper.Map(updatedColumn, column);
             context.SaveChanges();
         }
 
         public override void DeleteColumn(ColumnModel deletedColumn, bool permanent)
         {
-            var column = mapper.Map<Column>(deletedColumn);
+            var column = context.Columns.First(c => c.Id == deletedColumn.Id);
 
             if (permanent)
             {
@@ -105,7 +105,6 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             else
             {
                 column.IsDeleted = true;
-                context.Update(column);
                 context.SaveChanges();
             }
         }

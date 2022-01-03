@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Board.Windows"
+        xmlns:local="clr-namespace:Board.Windows" xmlns:deletedialog="clr-namespace:Board.BusinessLogic.ViewModels.DeleteDialog;assembly=Board.BusinessLogic" d:DataContext="{d:DesignInstance Type=deletedialog:DeleteDialogWindowViewModel}"
         mc:Ignorable="d"
         ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"        
         SizeToContent="Height"
@@ -11,13 +11,14 @@
     <StackPanel Orientation="Vertical">
         <Border Margin="{StaticResource DialogContentPadding}">
             <StackPanel Orientation="Vertical">
-                <Label Margin="{StaticResource DialogItemsMargin}" Content="{Binding Message}" />
-                <CheckBox Margin="{StaticResource DialogItemsExceptTopMargin}" Content="#Delete permanently (this cannot be reversed!)" /> 
+                <Label Margin="{StaticResource DialogItemsMargin}" Padding="0" Content="{Binding Message}" />
+                <CheckBox Margin="{StaticResource DialogItemsExceptTopMargin}" Padding="0" Content="#Delete permanently (this cannot be reversed!)"
+                          IsChecked="{Binding DeletePermanently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/> 
             </StackPanel>
         </Border>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Style="{StaticResource DialogButton}" Content="#Yes"/>
-            <Button Style="{StaticResource DialogButton}" Content="#No" />
+            <Button Style="{StaticResource DialogButton}" Content="#Yes" Command="{Binding YesCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="#No" Command="{Binding NoCommand}" />
         </StackPanel>
     </StackPanel>
 </Window>

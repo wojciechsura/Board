@@ -34,6 +34,7 @@
     <Color x:Key="TextBoxBackground">#ffffff</Color>
     <Color x:Key="TextBoxForeground">#000000</Color>
     <Color x:Key="TextBoxBorder">#e0e0e0</Color>
+    <Color x:Key="TextBoxUnfocusedBorder">#858585</Color>
     <Color x:Key="TextBoxFocusedBorder">#0078d4</Color>
     <Color x:Key="TextBoxDisabledBackground">#f3f3f3</Color>
     <Color x:Key="TextBoxDisabledForeground">#838383</Color>

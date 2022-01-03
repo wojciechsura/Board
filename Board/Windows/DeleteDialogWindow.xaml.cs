@@ -20,7 +20,7 @@ namespace Board.Windows
     /// <summary>
     /// Logika interakcji dla klasy DeleteDialogWindow.xaml
     /// </summary>
-    public partial class DeleteDialogWindow : Window
+    public partial class DeleteDialogWindow : Window, IDeleteDialogWindowAccess
     {
         private readonly DeleteDialogWindowViewModel viewModel;
 
@@ -34,5 +34,11 @@ namespace Board.Windows
         }
 
         public bool DeletePermanently => viewModel.DeletePermanently;
+
+        public void Close(bool result)
+        {
+            DialogResult = result;
+            Close();
+        }
     }
 }
