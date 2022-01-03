@@ -31,11 +31,13 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private class TableLoadingWorker : BackgroundWorker
         {
-            private BaseDatabase database;
+            private readonly BaseDatabase database;
+            private readonly IDocumentHandler handler;            
 
-            public TableLoadingWorker(BaseDatabase database)
+            public TableLoadingWorker(BaseDatabase database, IDocumentHandler handler)
             {
                 this.database = database;
+                this.handler = handler;
                 WorkerSupportsCancellation = true;
                 WorkerReportsProgress = true;
             }
@@ -49,7 +51,7 @@ namespace Board.BusinessLogic.ViewModels.Document
                 {
                     if (CancellationPending)
                         return;
-                    TableViewModel tableViewModel = BuildTableViewModel(table, database);
+                    TableViewModel tableViewModel = BuildTableViewModel(table, database, handler);
 
                     // TODO: load columns and entities
 
@@ -63,6 +65,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         private readonly WallDocument document;
 
         private readonly IDocumentFactory documentFactory;
+        private readonly IDocumentHandler handler;
 
         private TableLoadingWorker loadingWorker;
         private bool isLoading;
@@ -72,39 +75,40 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         // Private methods ----------------------------------------------------
 
-        private DocumentViewModel()
+        private DocumentViewModel(IDocumentHandler handler)
         {
             isLoading = false;
+            this.handler = handler;
         }
 
-        private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database)
+        private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database, IDocumentHandler handler)
         {
             List<ColumnModel> columns = database.GetColumnsForTable(table.Id);
             List<ColumnViewModel> columnViewModels = new();
 
             foreach (var column in columns)
             {
-                ColumnViewModel columnViewModel = BuildColumnViewModel(column, database);
+                ColumnViewModel columnViewModel = BuildColumnViewModel(column, database, handler);
                 columnViewModels.Add(columnViewModel);
             }
 
-            var tableViewModel = new TableViewModel(table, columnViewModels);
+            var tableViewModel = new TableViewModel(table, columnViewModels, handler);
             return tableViewModel;
         }
 
-        private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database)
+        private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database, IDocumentHandler handler)
         {
             List<EntryModel> entries = database.GetEntriesForColumn(column.Id);
 
-            List<EntryViewModel> entryViewModels = entries.Select(e => BuildEntryViewModel(e, database)).ToList();
+            List<EntryViewModel> entryViewModels = entries.Select(e => BuildEntryViewModel(e, database, handler)).ToList();
 
-            var columnViewModel = new ColumnViewModel(column, entryViewModels);
+            var columnViewModel = new ColumnViewModel(column, entryViewModels, handler);
             return columnViewModel;
         }
 
-        private static EntryViewModel BuildEntryViewModel(EntryModel entry, BaseDatabase database)
+        private static EntryViewModel BuildEntryViewModel(EntryModel entry, BaseDatabase database, IDocumentHandler handler)
         {
-            return new EntryViewModel(entry);
+            return new EntryViewModel(entry, handler);
         }
 
         private void LoadTables()
@@ -119,7 +123,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             IsLoading = true;
 
-            loadingWorker = new TableLoadingWorker(document.Database);
+            loadingWorker = new TableLoadingWorker(document.Database, handler);
             loadingWorker.ProgressChanged += HandleLoadingWorkerProgress;
             loadingWorker.RunWorkerCompleted += HandleLoadingWorkerCompleted;
             loadingWorker.RunWorkerAsync();
@@ -142,8 +146,8 @@ namespace Board.BusinessLogic.ViewModels.Document
         /// <summary>
         /// Use this ctor for creating new document from prepared document info
         /// </summary>
-        public DocumentViewModel(IDocumentFactory documentFactory, DocumentInfo info)
-            : this()
+        public DocumentViewModel(IDocumentFactory documentFactory, DocumentInfo info, IDocumentHandler handler)
+            : this(handler)
         {
             this.documentFactory = documentFactory;
 
@@ -156,8 +160,8 @@ namespace Board.BusinessLogic.ViewModels.Document
         /// <summary>
         /// Use this ctor for opening existing document from given definition path
         /// </summary>
-        public DocumentViewModel(IDocumentFactory documentFactory, string definitionPath)
-            : this()
+        public DocumentViewModel(IDocumentFactory documentFactory, string definitionPath, IDocumentHandler handler)
+            : this(handler)
         {
             this.documentFactory = documentFactory;
 
@@ -187,7 +191,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             document.Database.AddTable(newTable);
 
-            var tableViewModel = BuildTableViewModel(newTable, document.Database);
+            var tableViewModel = BuildTableViewModel(newTable, document.Database, handler);
             tables.Add(tableViewModel);
 
             if (ActiveTable == null)
@@ -198,12 +202,23 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             document.Database.UpdateTable(updatedTable);
 
-            var newTableViewModel = BuildTableViewModel(updatedTable, document.Database);
+            var newTableViewModel = BuildTableViewModel(updatedTable, document.Database, handler);
 
             int index = tables.IndexOf(tableViewModel);
             tables[index] = newTableViewModel;
 
             ActiveTable = newTableViewModel;
+        }
+
+        public void UpdateColumnFromModel(ColumnViewModel columnViewModel, ColumnModel updatedColumn)
+        {
+            document.Database.UpdateColumn(updatedColumn);
+
+            var newColumnViewModel = BuildColumnViewModel(updatedColumn, document.Database, handler);
+
+            var tableViewModel = columnViewModel.Parent;
+            int index = tableViewModel.Columns.IndexOf(columnViewModel);
+            tableViewModel.Columns[index] = newColumnViewModel;
         }
 
         public void DeleteTable(TableViewModel tableViewModel, bool permanent)
@@ -216,6 +231,22 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             if (tables.Count > 0)
                 ActiveTable = tables[index];
+        }
+
+        internal void DeleteColumn(ColumnViewModel columnViewModel, bool permanent)
+        {
+            var tableViewModel = columnViewModel.Parent;
+            document.Database.DeleteColumn(columnViewModel.Column, permanent);
+            tableViewModel.Columns.Remove(columnViewModel);
+        }
+
+        public void AddColumnFromModel(TableViewModel tableViewModel, ColumnModel newColumn)
+        {
+            newColumn.TableId = tableViewModel.Table.Id;
+            document.Database.AddColumn(newColumn);
+
+            var columnViewModel = BuildColumnViewModel(newColumn, document.Database, handler);
+            tableViewModel.Columns.Add(columnViewModel);
         }
 
         // Public properties --------------------------------------------------

@@ -15,5 +15,9 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         public abstract void AddTable(TableModel newTable);
         public abstract void UpdateTable(TableModel updatedTable);
         public abstract void DeleteTable(TableModel table, bool permanent);
+
+        public abstract void AddColumn(ColumnModel newColumn);
+        public abstract void UpdateColumn(ColumnModel updatedColumn);
+        public abstract void DeleteColumn(ColumnModel column, bool permanent);        
     }
 }

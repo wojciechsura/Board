@@ -7,13 +7,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
       xmlns:local="clr-namespace:Board.Controls"
+      xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
       mc:Ignorable="d" Width="300">
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1*" />
     </Grid.RowDefinitions>
 
-    <Label Grid.Row="0" Content="{Binding Name}" />
+    <DockPanel Grid.Row="0">
+        <Button x:Name="bColumnMenu" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Content="···"
+                b:ContextMenuOnLeftClick.Enabled="True" b:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bColumnMenu}"
+                b:ContextMenuOnLeftClick.Placement="Bottom">
+            <Button.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="#Edit column" />
+                    <MenuItem Header="#Delete column" />
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Label Style="{StaticResource ColumnHeaderLabel}" Content="{Binding Name}" />
+    </DockPanel>
 
     <ItemsControl Grid.Row="1" ItemsSource="{Binding Entries}">
         <ItemsControl.ItemsPanel>

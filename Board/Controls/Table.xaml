@@ -23,6 +23,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button VerticalAlignment="Top">#New column...</Button>
+        <Button VerticalAlignment="Top" Content="#New column..." Command="{Binding NewColumnCommand}" />
     </StackPanel>
 </ScrollViewer>

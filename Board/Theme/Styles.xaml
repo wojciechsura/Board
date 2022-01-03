@@ -12,6 +12,10 @@
         <Setter Property="FontSize" Value="{StaticResource HeaderFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource HeaderBrush}" />
     </Style>
+
+    <Style TargetType="Label" x:Key="ColumnHeaderLabel">
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
     
     <Style TargetType="Button">
         <Style.Setters>
@@ -119,6 +123,11 @@
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="Margin" Value="0,6,6,6" />
         <Setter Property="MinHeight" Value="23" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="FlatButton" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
 
     <Style TargetType="ToggleButton">
@@ -258,6 +267,13 @@
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource CardBackground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="{StaticResource CardShadowBlurRadius}" Color="{StaticResource CardShadowColor}"
+                                  Direction="{StaticResource CardShadowDirection}" ShadowDepth="{StaticResource CardShadowDepth}"
+                                  Opacity="{StaticResource CardShadowOpacity}"/>
             </Setter.Value>
         </Setter>
         <Setter Property="BorderThickness" Value="{StaticResource CardBorderThickness}" />

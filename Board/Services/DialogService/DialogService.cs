@@ -208,5 +208,43 @@ namespace Board.Services.DialogService
                 ActivateLastDialog();
             }
         }
+
+        public (bool result, ColumnModel model) ShowNewColumnDialog()
+        {
+            ColumnEditorWindow dialog = new ColumnEditorWindow(new ColumnModel(), true);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.Result);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public bool ShowEditColumnDialog(ColumnModel columnModel)
+        {
+            ColumnEditorWindow dialog = new ColumnEditorWindow(columnModel, false);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Board.BusinessLogic.Models.Data
     public class ColumnModel
     {
         public string Name { get; set; }
+        public int TableId { get; set; }
         public int Id { get; set; }
     }
 }

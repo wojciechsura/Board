@@ -17,6 +17,8 @@ namespace Board.Data.Entities
         public string? Title { get; set; }
         [Required]
         public Column? Column { get; set; }
+        [ForeignKey(nameof(Column))]
+        public int ColumnId { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

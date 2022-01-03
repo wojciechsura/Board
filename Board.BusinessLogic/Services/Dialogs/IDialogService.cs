@@ -18,5 +18,8 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, DocumentInfo data) ShowNewWallDialog();
         (bool result, TableModel model) ShowNewTableDialog();
         bool ShowEditTableDialog(TableModel tableModel);
+        (bool result, bool? permanently) ShowDeleteDialog(string message);
+        (bool result, ColumnModel model) ShowNewColumnDialog();
+        bool ShowEditColumnDialog(ColumnModel columnModel);
     }
 }

@@ -138,4 +138,16 @@
   <data name="TableEditor.Title.Edit" xml:space="preserve">
     <value>Edytuj tablicę</value>
   </data>
+  <data name="ColumnEditor.Title.Edit" xml:space="preserve">
+    <value>Edytuj kolumnę</value>
+  </data>
+  <data name="ColumnEditor.Title.New" xml:space="preserve">
+    <value>Nowa kolumna</value>
+  </data>
+  <data name="Message.TableDeletion" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć tablicę {0}?</value>
+  </data>
+  <data name="Message.ColumnDeletion" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć kolumnę {0}?</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ using Unity;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel, IDocumentHandler
     {
         // Private fields -----------------------------------------------------
 
@@ -61,7 +61,15 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private void DoDeleteTable()
         {
-            throw new NotImplementedException();
+            var tableViewModel = activeDocument.ActiveTable;
+            var message = String.Format(Strings.Message_TableDeletion, tableViewModel.Name);
+
+            (bool result, bool? permanent) = dialogService.ShowDeleteDialog(message);
+
+            if (result)
+            {
+                activeDocument.DeleteTable(tableViewModel, permanent.Value);
+            }
         }
 
         private void DoEditTable()
@@ -74,7 +82,6 @@ namespace Board.BusinessLogic.ViewModels.Main
                 activeDocument.UpdateTableFromModel(activeDocument.ActiveTable, modelClone);
             }
         }
-
 
         private void DoOpen()
         {
@@ -103,8 +110,42 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             var documentFactory = Board.Dependencies.Container.Instance.Resolve<IDocumentFactory>();
 
-            var newDocument = new DocumentViewModel(documentFactory, info);
+            var newDocument = new DocumentViewModel(documentFactory, info, this);
             ActiveDocument = newDocument;
+        }
+
+        // IDocumentHandler implementation ------------------------------------
+
+        void IDocumentHandler.NewColumnRequest(TableViewModel tableViewModel)
+        {
+            (bool result, ColumnModel newColumn) = dialogService.ShowNewColumnDialog();
+            if (result)
+            {
+                activeDocument.AddColumnFromModel(tableViewModel, newColumn);
+            }
+        }
+
+        void IDocumentHandler.EditColumnRequest(ColumnViewModel columnViewModel)
+        {
+            var modelClone = mapper.Map<ColumnModel>(columnViewModel.Column);
+
+            var result = dialogService.ShowEditColumnDialog(modelClone);
+            if (result)
+            {
+                activeDocument.UpdateColumnFromModel(columnViewModel, modelClone);
+            }
+        }
+
+        void IDocumentHandler.DeleteColumnRequest(ColumnViewModel columnViewModel)
+        {
+            var message = String.Format(Strings.Message_ColumnDeletion, columnViewModel.Name);
+
+            (bool result, bool? permanent) = dialogService.ShowDeleteDialog(message);
+
+            if (result)
+            {
+                activeDocument.DeleteColumn(columnViewModel, permanent.Value);
+            }
         }
 
         // Public methods -----------------------------------------------------

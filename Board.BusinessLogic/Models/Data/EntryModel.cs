@@ -9,6 +9,7 @@ namespace Board.BusinessLogic.Models.Data
     public class EntryModel
     {
         public string Id { get; set; }
+        public int ColumnId { get; set; }
         public string Title { get; set; }
     }
 }

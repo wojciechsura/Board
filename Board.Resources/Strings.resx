@@ -138,4 +138,16 @@
   <data name="TableEditor.Title.Edit" xml:space="preserve">
     <value>Edit board</value>
   </data>
+  <data name="ColumnEditor.Title.Edit" xml:space="preserve">
+    <value>Edit column</value>
+  </data>
+  <data name="ColumnEditor.Title.New" xml:space="preserve">
+    <value>New column</value>
+  </data>
+  <data name="Message.TableDeletion" xml:space="preserve">
+    <value>Are you sure you want to delete board {0}?</value>
+  </data>
+  <data name="Message.ColumnDeletion" xml:space="preserve">
+    <value>Are you sure you want to delete column {0}?</value>
+  </data>
 </root>

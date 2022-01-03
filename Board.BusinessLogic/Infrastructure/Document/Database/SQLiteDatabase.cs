@@ -78,5 +78,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 context.SaveChanges();
             }
         }
+
+        public override void AddColumn(ColumnModel newColumn)
+        {
+            var column = mapper.Map<Column>(newColumn);
+            context.Columns.Add(column);
+            context.SaveChanges();
+        }
     }
 }
