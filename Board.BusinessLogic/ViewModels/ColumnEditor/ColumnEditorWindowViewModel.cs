@@ -15,13 +15,12 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
     public class ColumnEditorWindowViewModel : ModelEditorViewModel<ColumnModel>
     {
         private readonly IColumnEditorWindowAccess access;
-        private readonly ColumnModel editedColumn;
-
+        private readonly ColumnModel column;
         private string name;
 
         private void DoOk()
         {
-            UpdatePropertiesToModel(editedColumn);
+            UpdatePropertiesToModel(column);
             access.Close(true);
         }
 
@@ -30,10 +29,10 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
             access.Close(false);
         }
 
-        public ColumnEditorWindowViewModel(IColumnEditorWindowAccess access, ColumnModel editedColumn, bool isNew)
+        public ColumnEditorWindowViewModel(IColumnEditorWindowAccess access, ColumnModel column, bool isNew)
         {
             this.access = access;
-            this.editedColumn = editedColumn ?? throw new ArgumentNullException(nameof(editedColumn));
+            this.column = column ?? throw new ArgumentNullException(nameof(column));
 
             if (isNew)
                 Title = Strings.ColumnEditor_Title_New;
@@ -43,7 +42,7 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
             OkCommand = new AppCommand(obj => DoOk());
             CancelCommand = new AppCommand(obj => DoCancel());
 
-            UpdatePropertiesFromModel(editedColumn);
+            UpdatePropertiesFromModel(column);
         }
 
         [RepresentsModelProperty(nameof(ColumnModel.Name))]
@@ -59,6 +58,6 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
 
         public string Title { get; }
 
-        public ColumnModel Result => editedColumn;
+        public ColumnModel Result => column;
     }
 }

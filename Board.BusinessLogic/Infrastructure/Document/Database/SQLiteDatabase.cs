@@ -85,5 +85,29 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             context.Columns.Add(column);
             context.SaveChanges();
         }
+
+        public override void UpdateColumn(ColumnModel updatedColumn)
+        {
+            var column = mapper.Map<Column>(updatedColumn);
+            context.Update<Column>(column);
+            context.SaveChanges();
+        }
+
+        public override void DeleteColumn(ColumnModel deletedColumn, bool permanent)
+        {
+            var column = mapper.Map<Column>(deletedColumn);
+
+            if (permanent)
+            {
+                context.Remove<Column>(column);
+                context.SaveChanges();
+            }
+            else
+            {
+                column.IsDeleted = true;
+                context.Update(column);
+                context.SaveChanges();
+            }
+        }
     }
 }

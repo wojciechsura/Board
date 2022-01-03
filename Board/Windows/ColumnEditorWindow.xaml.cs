@@ -37,12 +37,12 @@ namespace Board.Windows
 
         // Public methods -----------------------------------------------------
 
-        public ColumnEditorWindow(ColumnModel table, bool isNew)
+        public ColumnEditorWindow(ColumnModel column, bool isNew)
         {
             InitializeComponent();
 
             viewModel = Dependencies.Container.Instance.Resolve<ColumnEditorWindowViewModel>(new ParameterOverride("access", this),
-                new ParameterOverride("table", table),
+                new ParameterOverride("column", column),
                 new ParameterOverride("isNew", isNew));
             DataContext = viewModel;
         }

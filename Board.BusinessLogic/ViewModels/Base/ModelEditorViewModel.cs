@@ -25,6 +25,8 @@ namespace Board.BusinessLogic.ViewModels.Base
                     var modelProperty = modelType.GetProperty(boundAttribute.ModelProperty, BindingFlags.Public | BindingFlags.Instance);
                     if (modelProperty != null)
                         action(property, modelProperty);
+                    else
+                        throw new InvalidOperationException($"Property {boundAttribute.ModelProperty} not found on object of type {modelType.Name}!");
                 }
             }
         }

@@ -7,7 +7,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
       xmlns:local="clr-namespace:Board.Controls"
-      xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
+      xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf" d:DataContext="{d:DesignInstance Type=dvm:ColumnViewModel}"
       mc:Ignorable="d" Width="300">
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -20,8 +20,8 @@
                 b:ContextMenuOnLeftClick.Placement="Bottom">
             <Button.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="#Edit column" />
-                    <MenuItem Header="#Delete column" />
+                    <MenuItem Header="#Edit column" Command="{Binding EditColumnCommand}"/>
+                    <MenuItem Header="#Delete column" Command="{Binding DeleteColumnCommand}"/>
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>

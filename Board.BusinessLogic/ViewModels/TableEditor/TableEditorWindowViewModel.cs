@@ -15,13 +15,13 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
     public class TableEditorWindowViewModel : ModelEditorViewModel<TableModel>
     {
         private readonly ITableEditorWindowAccess access;
-        private readonly TableModel editedTable;
+        private readonly TableModel table;
 
         private string name;
 
         private void DoOk()
         {
-            UpdatePropertiesToModel(editedTable);
+            UpdatePropertiesToModel(table);
             access.Close(true);
         }
 
@@ -30,10 +30,10 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
             access.Close(false);
         }
 
-        public TableEditorWindowViewModel(ITableEditorWindowAccess access, TableModel editedTable, bool isNew)
+        public TableEditorWindowViewModel(ITableEditorWindowAccess access, TableModel table, bool isNew)
         {
             this.access = access;
-            this.editedTable = editedTable ?? throw new ArgumentNullException(nameof(editedTable));
+            this.table = table ?? throw new ArgumentNullException(nameof(table));
 
             if (isNew)
                 Title = Strings.TableEditor_Title_New;
@@ -43,7 +43,7 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
             OkCommand = new AppCommand(obj => DoOk());
             CancelCommand = new AppCommand(obj => DoCancel());
 
-            UpdatePropertiesFromModel(editedTable);
+            UpdatePropertiesFromModel(table);
         }
 
         [RepresentsModelProperty(nameof(TableModel.Name))]
@@ -59,6 +59,6 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
 
         public string Title { get; }
 
-        public TableModel Result => editedTable;
+        public TableModel Result => table;
     }
 }
