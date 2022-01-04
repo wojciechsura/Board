@@ -148,6 +148,35 @@ namespace Board.BusinessLogic.ViewModels.Main
             }
         }
 
+        void IDocumentHandler.SaveNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        {
+            activeDocument.AddEntryFromInplaceNew(newInplaceEntryViewModel);
+        }
+
+        void IDocumentHandler.CancelNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        {
+            activeDocument.RemoveInplaceNewEntry(newInplaceEntryViewModel);
+        }
+
+        void IDocumentHandler.NewInplaceEntryRequest(ColumnViewModel columnViewModel)
+        {
+            activeDocument.AddNewInplaceEntry(columnViewModel);            
+        }
+
+        void IDocumentHandler.DeleteEntryRequest(EntryViewModel entryViewModel)
+        {
+            var shortenedTitle = entryViewModel.Title.Length > 32 ? $"{entryViewModel.Title.Substring(0, 32)}..." : entryViewModel.Title;
+
+            var message = String.Format(Strings.Message_EntryDeletion, shortenedTitle);
+
+            (bool result, bool? permanent) = dialogService.ShowDeleteDialog(message);
+            
+            if (result)
+            {
+                activeDocument.DeleteEntry(entryViewModel, permanent.Value);
+            }
+        }
+
         // Public methods -----------------------------------------------------
 
         public MainWindowViewModel(IMainWindowAccess access, IDialogService dialogService, IDocumentFactory documentFactory, IPathService pathService, IMapper mapper)

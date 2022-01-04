@@ -18,6 +18,11 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public abstract void AddColumn(ColumnModel newColumn);
         public abstract void UpdateColumn(ColumnModel updatedColumn);
-        public abstract void DeleteColumn(ColumnModel column, bool permanent);        
+        public abstract void DeleteColumn(ColumnModel column, bool permanent);
+
+        public abstract void AddEntry(EntryModel newEntry);
+        public abstract void UpdateEntry(EntryModel updatedEntry);
+        public abstract void DeleteEntry(EntryModel deletedEntry, bool permanent);
+
     }
 }

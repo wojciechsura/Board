@@ -108,5 +108,35 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 context.SaveChanges();
             }
         }
+
+        public override void AddEntry(EntryModel newEntry)
+        {
+            var entry = mapper.Map<Entry>(newEntry);
+            context.Entries.Add(entry);
+            context.SaveChanges();
+        }
+
+        public override void UpdateEntry(EntryModel updatedEntry)
+        {
+            var entry = context.Entries.First(e => e.Id == updatedEntry.Id);
+            mapper.Map(updatedEntry, entry);
+            context.SaveChanges();
+        }
+
+        public override void DeleteEntry(EntryModel deletedEntry, bool permanent)
+        {
+            var entry = context.Entries.First(e => e.Id == deletedEntry.Id);
+
+            if (permanent)
+            {
+                context.Remove<Entry>(entry);
+                context.SaveChanges();
+            }
+            else
+            {
+                entry.IsDeleted = true;
+                context.SaveChanges();
+            }
+        }
     }
 }

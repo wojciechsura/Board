@@ -1,27 +1,32 @@
 ﻿using Board.BusinessLogic.Infrastructure.Collections;
 using Board.BusinessLogic.Models.Data;
 using Board.BusinessLogic.ViewModels.Base;
+using Spooksoft.VisualStateManager.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
-    public class EntryViewModel : BaseViewModel, IParentedItem<ColumnViewModel>
+    public class EntryViewModel : BaseEntryViewModel
     {
         private readonly EntryModel entry;
-        private readonly IDocumentHandler handler;
 
         public EntryViewModel(EntryModel entry, IDocumentHandler handler)
+            : base(handler)
         {
             this.entry = entry;
-            this.handler = handler;
+
+            DeleteEntryCommand = new AppCommand(obj => handler.DeleteEntryRequest(this));
         }
 
-        public ColumnViewModel Parent { get; set; }
-
         public string Title => entry.Title;
+
+        public ICommand DeleteEntryCommand { get; }
+
+        public EntryModel Entry => entry;
     }
 }

@@ -150,4 +150,7 @@
   <data name="Message.ColumnDeletion" xml:space="preserve">
     <value>Are you sure you want to delete column {0}?</value>
   </data>
+  <data name="Message.EntryDeletion" xml:space="preserve">
+    <value>Are you sure you want to delete entry {0}?</value>
+  </data>
 </root>

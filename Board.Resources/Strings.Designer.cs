@@ -133,6 +133,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete entry {0}?.
+        /// </summary>
+        public static string Message_EntryDeletion {
+            get {
+                return ResourceManager.GetString("Message.EntryDeletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete board {0}?.
         /// </summary>
         public static string Message_TableDeletion {

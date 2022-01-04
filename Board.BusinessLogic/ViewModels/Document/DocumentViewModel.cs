@@ -100,7 +100,10 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             List<EntryModel> entries = database.GetEntriesForColumn(column.Id);
 
-            List<EntryViewModel> entryViewModels = entries.Select(e => BuildEntryViewModel(e, database, handler)).ToList();
+            List<BaseEntryViewModel> entryViewModels = entries
+                .Select(e => BuildEntryViewModel(e, database, handler))
+                .Cast<BaseEntryViewModel>()
+                .ToList();
 
             var columnViewModel = new ColumnViewModel(column, entryViewModels, handler);
             return columnViewModel;
@@ -247,6 +250,38 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             var columnViewModel = BuildColumnViewModel(newColumn, document.Database, handler);
             tableViewModel.Columns.Add(columnViewModel);
+        }
+
+        public void AddNewInplaceEntry(ColumnViewModel columnViewModel)
+        {
+            columnViewModel.Entries.Add(new NewInplaceEntryViewModel(handler));
+        }
+
+        public void AddEntryFromInplaceNew(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        {
+            var columnViewModel = newInplaceEntryViewModel.Parent;
+
+            var newEntry = newInplaceEntryViewModel.Entry;
+            newEntry.ColumnId = columnViewModel.Column.Id;
+            document.Database.AddEntry(newEntry);
+            var entryViewModel = BuildEntryViewModel(newEntry, document.Database, handler);
+
+            // Replace inplace editor with new entry
+            int index = columnViewModel.Entries.IndexOf(newInplaceEntryViewModel);
+            columnViewModel.Entries.RemoveAt(index);
+            columnViewModel.Entries.Insert(index, entryViewModel);
+        }
+
+        public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        {
+            newInplaceEntryViewModel.Parent.Entries.Remove(newInplaceEntryViewModel);
+        }
+
+        public void DeleteEntry(EntryViewModel entryViewModel, bool permanent)
+        {
+            var columnViewModel = entryViewModel.Parent;
+            document.Database.DeleteEntry(entryViewModel.Entry, permanent);
+            columnViewModel.Entries.Remove(entryViewModel);
         }
 
         // Public properties --------------------------------------------------

@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="{StaticResource ColumnHeaderMargin}">
@@ -40,11 +41,18 @@
                     <StackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type dvm:NewInplaceEntryViewModel}">
+                    <local:NewInplaceEntry />
+                </DataTemplate>
+
                 <DataTemplate DataType="{x:Type dvm:EntryViewModel}">
                     <local:Entry />
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.Resources>
         </ItemsControl>
+
+        <Button Grid.Row="2" Content="#Add card" Command="{Binding NewInplaceEntryCommand}" 
+                HorizontalAlignment="Left" Style="{StaticResource FlatButton}"/>
     </Grid>
 </Border>

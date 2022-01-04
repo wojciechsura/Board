@@ -1,0 +1,22 @@
+﻿<!-- Bind DataContext to EntryViewModel instance -->
+
+<Border x:Class="Board.Controls.NewInplaceEntry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Board.Controls" 
+        xmlns:document="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" 
+        d:DataContext="{d:DesignInstance Type=document:NewInplaceEntryViewModel}"
+        mc:Ignorable="d" 
+        Style="{StaticResource Card}">
+    <StackPanel Orientation="Vertical">
+        <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
+                 TextWrapping="Wrap"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding SaveCommand}" Content="#Save" Style="{StaticResource DialogButton}" />
+            <Button Command="{Binding CancelCommand}" Content="#Cancel" Style="{StaticResource DialogButton}" />
+        </StackPanel>
+    </StackPanel>
+</Border>

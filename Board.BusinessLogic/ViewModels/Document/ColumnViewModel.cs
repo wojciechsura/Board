@@ -16,9 +16,9 @@ namespace Board.BusinessLogic.ViewModels.Document
     {
         private readonly ColumnModel column;
         private readonly IDocumentHandler handler;
-        private readonly ObservableParentedCollection<EntryViewModel, ColumnViewModel> entries;
+        private readonly ObservableParentedCollection<BaseEntryViewModel, ColumnViewModel> entries;
 
-        public ColumnViewModel(ColumnModel column, List<EntryViewModel> entries, IDocumentHandler handler)
+        public ColumnViewModel(ColumnModel column, List<BaseEntryViewModel> entries, IDocumentHandler handler)
         {
             this.entries = new(this);
 
@@ -29,14 +29,16 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             EditColumnCommand = new AppCommand(obj => handler.EditColumnRequest(this));
             DeleteColumnCommand = new AppCommand(obj => handler.DeleteColumnRequest(this));
+            NewInplaceEntryCommand = new AppCommand(obj => handler.NewInplaceEntryRequest(this));
         }
 
         public TableViewModel Parent { get; set; }
 
-        public ObservableParentedCollection<EntryViewModel, ColumnViewModel> Entries => entries;
+        public ObservableParentedCollection<BaseEntryViewModel, ColumnViewModel> Entries => entries;
 
         public ICommand EditColumnCommand { get; }
         public ICommand DeleteColumnCommand { get; }
+        public ICommand NewInplaceEntryCommand { get; }
 
         public string Name => column.Name;
 
