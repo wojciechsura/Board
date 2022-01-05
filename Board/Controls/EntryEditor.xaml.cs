@@ -21,7 +21,11 @@ namespace Board.Controls
     /// </summary>
     public partial class EntryEditor : Border
     {
+        // Private fields -----------------------------------------------------
+
         private EntryEditorViewModel viewModel;
+
+        // Private methods ----------------------------------------------------
 
         private void BeginTitleEdit()
         {
@@ -38,6 +42,23 @@ namespace Board.Controls
         {
             viewModel.SetTitle(tbTitleEditor.Text);
             IsEditingTitle = false;
+        }
+
+        private void BeginDescriptionEdit()
+        {
+            tbDescription.Text = viewModel.Description;
+            IsEditingDescription = true;
+        }
+
+        private void CancelDescriptionEdit()
+        {
+            IsEditingDescription = false;
+        }
+
+        private void CommitDescriptionEdit()
+        {
+            viewModel.SetDescription(tbDescription.Text);
+            IsEditingDescription = false;
         }
 
         private void CancelTitleClick(object sender, RoutedEventArgs e)
@@ -79,6 +100,28 @@ namespace Board.Controls
             viewModel = (EntryEditorViewModel)e.NewValue;
         }
 
+        private void EditDescriptionClick(object sender, RoutedEventArgs e)
+        {
+            BeginDescriptionEdit();
+        }
+
+        private void CancelDescriptionClick(object sender, RoutedEventArgs e)
+        {
+            CancelDescriptionEdit();
+        }
+
+        private void SaveDescriptionClick(object sender, RoutedEventArgs e)
+        {
+            CommitDescriptionEdit();
+        }
+
+        private void DescriptionLabelMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            BeginDescriptionEdit();
+        }
+
+        // Public methods -----------------------------------------------------
+
         public EntryEditor()
         {
             InitializeComponent();
@@ -97,6 +140,20 @@ namespace Board.Controls
             get { return (bool)GetValue(IsEditingTitleProperty); }
             set { SetValue(IsEditingTitleProperty, value); }
         }
+
+        #endregion
+
+        #region IsEditingDescription dependency property
+
+        public bool IsEditingDescription
+        {
+            get { return (bool)GetValue(IsEditingDescriptionProperty); }
+            set { SetValue(IsEditingDescriptionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsEditingDescription.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEditingDescriptionProperty =
+            DependencyProperty.Register("IsEditingDescription", typeof(bool), typeof(EntryEditor), new PropertyMetadata(false));
 
         #endregion
     }

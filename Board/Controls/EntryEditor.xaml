@@ -7,37 +7,87 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Board.Controls" 
         xmlns:mvm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
+        xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
         d:DataContext="{d:DesignInstance Type=mvm:EntryEditorViewModel}"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
         mc:Ignorable="d" 
         Style="{StaticResource Popup}" 
-        x:Name="root" DataContextChanged="EditorDataContextChanged">
+        x:Name="root" DataContextChanged="EditorDataContextChanged"
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
+    <Border.Resources>
+        <sys:Double x:Key="TitleFontSize">20</sys:Double>
 
-    <StackPanel Orientation="Vertical">
+        <Thickness x:Key="EditorPadding">16</Thickness>
+        <Thickness x:Key="EditorSectionPadding">0,8,0,0</Thickness>
+    </Border.Resources>
+    
+    <StackPanel Orientation="Vertical" Width="500" Margin="{StaticResource EditorPadding}">
 
-        <Grid HorizontalAlignment="Stretch">
-            <DockPanel Width="300" Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+        <Grid x:Name="gTitle" HorizontalAlignment="Stretch" Background="Transparent">
+            <DockPanel Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                 <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="EditTitleClick"
-                        Padding="0">
+                        Padding="0" Visibility="{Binding ElementName=gTitle, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
                 </Button>
-                <Label x:Name="lTitle" Margin="{StaticResource PopupItemsMargin}" Content="{Binding Title}" 
-                                   HorizontalAlignment="Left" VerticalAlignment="Center" MouseLeftButtonDown="TitleLabelMouseDown"/>
+                <Label x:Name="lTitle" Padding="0" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoCondensed}"
+                       Cursor="Hand" Content="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                       MouseLeftButtonDown="TitleLabelMouseDown" />
             </DockPanel>
-            <DockPanel Width="300" Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="SaveTitleClick"
-                        Padding="0">
-                    <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
-                </Button>
+            <DockPanel Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                 <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="CancelTitleClick"
                         Padding="0">
                     <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
                 </Button>
-                <TextBox x:Name="tbTitleEditor" Margin="{StaticResource PopupItemsMargin}"
+                <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="SaveTitleClick"
+                        Padding="0">
+                    <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
+                </Button>
+                <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoCondensed}"
                          VerticalAlignment="Center" KeyDown="TitleKeyDown"/>
             </DockPanel>
         </Grid>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Orientation="Vertical" x:Name="spDescription" Margin="{StaticResource EditorSectionPadding}"
+                    Background="Transparent">
+        
+            <Grid HorizontalAlignment="Stretch">
+                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" 
+                        Padding="0" Click="EditDescriptionClick" Visibility="{Binding ElementName=spDescription, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                        <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
+                    </Button>
+
+                    <Label Content="#Description" Padding="0" VerticalAlignment="Center" Cursor="Hand" 
+                       MouseLeftButtonDown="DescriptionLabelMouseDown"/>
+                </DockPanel>
+
+                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"
+                        Padding="0" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Click="CancelDescriptionClick">
+                        <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
+                    </Button>
+                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"                        
+                        Padding="0" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Click="SaveDescriptionClick">
+                        <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
+                    </Button>
+                    <Label Content="#Description" Padding="0" VerticalAlignment="Center" />
+                </DockPanel>
+            </Grid>
+
+            <Grid HorizontalAlignment="Stretch">
+                <WebBrowser Height="300" HorizontalAlignment="Stretch"
+                            e:WebBrowserExtension.Html="{Binding Description, Converter={StaticResource MarkdownToHtmlConverter}}"
+                            Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
+                <TextBox x:Name="tbDescription" Height="300" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                     
+                         Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" 
+                         HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
+            </Grid>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="{StaticResource EditorSectionPadding}">
             <Button Style="{StaticResource DialogButton}" Content="Close" Command="{Binding CloseCommand}" />
         </StackPanel>
 

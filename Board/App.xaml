@@ -14,6 +14,8 @@
             <c:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
             <c:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <c:MarkdownToHtmlConverter x:Key="MarkdownToHtmlConverter" />
+            <c:MultiBoolToVisbilityConverter x:Key="MultiBoolToVisibilityConverter" />
+            <c:NegateConverter x:Key="NegateConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

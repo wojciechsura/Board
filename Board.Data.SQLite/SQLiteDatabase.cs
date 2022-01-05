@@ -113,8 +113,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var entry = mapper.Map<Entry>(newEntry);
             context.Entries.Add(entry);
-            mapper.Map(entry, newEntry);
             context.SaveChanges();
+            mapper.Map(entry, newEntry);
         }
 
         public override void UpdateEntry(EntryModel updatedEntry)

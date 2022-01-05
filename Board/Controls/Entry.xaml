@@ -28,7 +28,7 @@
             </Button.ContextMenu>
         </Button>
 
-        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand">
+        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand" VerticalAlignment="Center">
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding EditEntryCommand}"/>
             </i:Interaction.Behaviors>

@@ -375,7 +375,7 @@
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{StaticResource TextBoxUnfocusedBorder}" />
                             </Border.BorderBrush>
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" />
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Stretch" />
                         </Border>
 
                         <VisualStateManager.VisualStateGroups>
