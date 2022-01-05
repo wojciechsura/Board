@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Document;
+﻿using Board.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.BusinessLogic.ViewModels.NewWall;
 using Spooksoft.VisualStateManager.Commands;

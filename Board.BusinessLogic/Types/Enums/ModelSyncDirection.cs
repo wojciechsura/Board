@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.Models.Events
+namespace Board.BusinessLogic.Types.Enums
 {
-    public class BaseEvent
+    public enum ModelSyncDirection
     {
+        FromModel,
+        ToModel,
+        BothWays
     }
 }

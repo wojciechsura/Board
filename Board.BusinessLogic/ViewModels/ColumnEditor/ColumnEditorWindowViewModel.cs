@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Data;
+﻿using Board.Models.Data;
 using Board.BusinessLogic.Types.Attributes;
 using Board.BusinessLogic.ViewModels.Base;
 using Board.Resources;
@@ -20,7 +20,7 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
 
         private void DoOk()
         {
-            UpdatePropertiesToModel(column);
+            UpdateToModel(column);
             access.Close(true);
         }
 
@@ -42,10 +42,10 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
             OkCommand = new AppCommand(obj => DoOk());
             CancelCommand = new AppCommand(obj => DoCancel());
 
-            UpdatePropertiesFromModel(column);
+            UpdateFromModel(column);
         }
 
-        [RepresentsModelProperty(nameof(ColumnModel.Name))]
+        [SyncWithModel(nameof(ColumnModel.Name))]
         public string Name
         {
             get => name;

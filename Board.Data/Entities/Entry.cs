@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable disable
+
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]
@@ -14,9 +16,10 @@ namespace Board.Data.Entities
     {
         public int Id { get; set; }
         [Required]
-        public string? Title { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         [Required]
-        public Column? Column { get; set; }
+        public Column Column { get; set; }
         [ForeignKey(nameof(Column))]
         public int ColumnId { get; set; }
         public bool IsDeleted { get; set; }

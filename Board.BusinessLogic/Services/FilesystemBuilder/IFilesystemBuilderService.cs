@@ -1,5 +1,5 @@
 ﻿using Board.BusinessLogic.Infrastructure.Document.Filesystem;
-using Board.BusinessLogic.Models.Document;
+using Board.Models.Document;
 using System;
 using System.Collections.Generic;
 using System.Text;

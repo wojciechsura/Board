@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Events;
+﻿using Board.Models.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;

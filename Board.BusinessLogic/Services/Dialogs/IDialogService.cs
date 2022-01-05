@@ -1,6 +1,6 @@
-﻿using Board.BusinessLogic.Models.Data;
-using Board.BusinessLogic.Models.Dialogs;
-using Board.BusinessLogic.Models.Document;
+﻿using Board.Models.Data;
+using Board.Models.Dialogs;
+using Board.Models.Document;
 using System;
 using System.Collections.Generic;
 using System.Linq;

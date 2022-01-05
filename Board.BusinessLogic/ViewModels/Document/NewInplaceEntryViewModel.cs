@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Data;
+﻿using Board.Models.Data;
 using Board.BusinessLogic.Types.Attributes;
 using Spooksoft.VisualStateManager.Commands;
 using System;

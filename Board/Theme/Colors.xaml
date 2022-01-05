@@ -57,4 +57,9 @@
     <Color x:Key="ColumnShadowColor">#000000</Color>
 
     <Color x:Key="ColumnHeaderForeground">#606060</Color>
+    
+    <!-- Overlay -->
+
+    <Color x:Key="OverlayBackground">#60000000</Color>
+    
 </ResourceDictionary>

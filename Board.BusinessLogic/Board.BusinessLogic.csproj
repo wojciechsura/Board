@@ -8,10 +8,12 @@
     <ProjectReference Include="..\Board.Common\Board.Common.csproj" />
     <ProjectReference Include="..\Board.Data.SQLite\Board.Data.SQLite.csproj" />
     <ProjectReference Include="..\Board.Dependencies\Board.Dependencies.csproj" />
+    <ProjectReference Include="..\Board.Models\Board.Models.csproj" />
     <ProjectReference Include="..\Board.Resources\Board.Resources.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Markdig" Version="0.26.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.261602">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

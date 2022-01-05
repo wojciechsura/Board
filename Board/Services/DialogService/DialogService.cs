@@ -1,6 +1,6 @@
-﻿using Board.BusinessLogic.Models.Data;
-using Board.BusinessLogic.Models.Dialogs;
-using Board.BusinessLogic.Models.Document;
+﻿using Board.Models.Data;
+using Board.Models.Dialogs;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.Resources;
 using Board.Windows;

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.Models.Data
+namespace Board.Models.Data
 {
     public class EntryModel
     {
         public int Id { get; set; }
         public int ColumnId { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
     }
 }

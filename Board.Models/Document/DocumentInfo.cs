@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Board.BusinessLogic.Models.Document
+namespace Board.Models.Document
 {
     public class DocumentInfo
     {

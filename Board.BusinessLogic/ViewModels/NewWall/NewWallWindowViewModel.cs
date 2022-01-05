@@ -1,5 +1,5 @@
-﻿using Board.BusinessLogic.Models.Dialogs;
-using Board.BusinessLogic.Models.Document;
+﻿using Board.Models.Dialogs;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.BusinessLogic.ViewModels.Base;
 using Spooksoft.VisualStateManager.Commands;

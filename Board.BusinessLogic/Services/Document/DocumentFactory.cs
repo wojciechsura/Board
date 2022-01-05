@@ -1,6 +1,6 @@
 ﻿using Board.BusinessLogic.Infrastructure.Document;
 using Board.BusinessLogic.Infrastructure.Document.Database;
-using Board.BusinessLogic.Models.Document;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.DatabaseBuilder;
 using Board.BusinessLogic.Services.FilesystemBuilder;
 using Board.BusinessLogic.Services.Paths;

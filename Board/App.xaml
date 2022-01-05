@@ -11,6 +11,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <c:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+            <c:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <c:MarkdownToHtmlConverter x:Key="MarkdownToHtmlConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

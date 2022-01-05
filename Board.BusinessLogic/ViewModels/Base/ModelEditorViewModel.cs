@@ -1,4 +1,5 @@
 ﻿using Board.BusinessLogic.Types.Attributes;
+using Board.BusinessLogic.Types.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,22 @@ namespace Board.BusinessLogic.ViewModels.Base
     {
         // Protected methods --------------------------------------------------
 
-        protected void IterateProperties(TModel model, Action<PropertyInfo, PropertyInfo> action)
+        protected void IterateProperties(TModel model, Action<MemberInfo, PropertyInfo> action, ModelSyncDirection direction)
         {
             var thisType = GetType();
             var modelType = model.GetType();
 
-            foreach (var property in thisType.GetProperties())
+            List<MemberInfo> properties = thisType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).Cast<MemberInfo>().ToList();
+            List<MemberInfo> fields = thisType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).Cast<MemberInfo>().ToList();
+
+            foreach (var member in properties.Concat(fields))
             {
-                var boundAttribute = property.GetCustomAttribute<RepresentsModelPropertyAttribute>(true);
-                if (boundAttribute != null)
+                var boundAttribute = member.GetCustomAttribute<SyncWithModelAttribute>(true);
+                if (boundAttribute != null && (direction == ModelSyncDirection.BothWays || boundAttribute.Direction == ModelSyncDirection.BothWays || boundAttribute.Direction == direction))
                 {
                     var modelProperty = modelType.GetProperty(boundAttribute.ModelProperty, BindingFlags.Public | BindingFlags.Instance);
                     if (modelProperty != null)
-                        action(property, modelProperty);
+                        action(member, modelProperty);
                     else
                         throw new InvalidOperationException($"Property {boundAttribute.ModelProperty} not found on object of type {modelType.Name}!");
                 }
@@ -35,13 +39,17 @@ namespace Board.BusinessLogic.ViewModels.Base
         /// Finds all properties decorated with <see cref="RepresentsModelPropertyAttribute"/>
         /// and updates them with values retrieved form specific properties of given model.
         /// </summary>
-        protected virtual void UpdatePropertiesFromModel(TModel model)
+        protected virtual void UpdateFromModel(TModel model)
         {
-            IterateProperties(model, (PropertyInfo thisProperty, PropertyInfo modelProperty) =>
+            IterateProperties(model, (MemberInfo thisProperty, PropertyInfo modelProperty) =>
             {
                 var data = modelProperty.GetValue(model, null);
-                thisProperty.SetValue(this, data, null);
-            });
+
+                if (thisProperty is PropertyInfo propertyInfo)
+                    propertyInfo.SetValue(this, data, null);
+                else if (thisProperty is FieldInfo fieldInfo)
+                    fieldInfo.SetValue(this, data);
+            }, ModelSyncDirection.FromModel);
         }
 
         /// <summary>
@@ -49,13 +57,19 @@ namespace Board.BusinessLogic.ViewModels.Base
         /// and updates specific model's properties with their values.
         /// </summary>
         /// <param name="model"></param>
-        protected virtual void UpdatePropertiesToModel(TModel model)
+        protected virtual void UpdateToModel(TModel model)
         {
-            IterateProperties(model, (PropertyInfo thisProperty, PropertyInfo modelProperty) =>
+            IterateProperties(model, (MemberInfo thisProperty, PropertyInfo modelProperty) =>
             {
-                var data = thisProperty.GetValue(this, null);
+                object data = null;
+
+                if (thisProperty is PropertyInfo propertyInfo)
+                    data = propertyInfo.GetValue(this, null);
+                else if (thisProperty is FieldInfo fieldInfo)
+                    data = fieldInfo.GetValue(this);
+
                 modelProperty.SetValue(model, data, null);
-            });
+            }, ModelSyncDirection.ToModel);
         }
     }
 }

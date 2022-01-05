@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board", "Board\Board.csproj", "{183DC56C-BA23-4447-9154-9A37F94C068D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board", "Board\Board.csproj", "{183DC56C-BA23-4447-9154-9A37F94C068D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.BusinessLogic", "Board.BusinessLogic\Board.BusinessLogic.csproj", "{5211C9C4-D889-4B95-A764-1F267D1F172D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.BusinessLogic", "Board.BusinessLogic\Board.BusinessLogic.csproj", "{5211C9C4-D889-4B95-A764-1F267D1F172D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Common", "Board.Common\Board.Common.csproj", "{4674027A-70DB-413E-AB24-1418A567C307}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Common", "Board.Common\Board.Common.csproj", "{4674027A-70DB-413E-AB24-1418A567C307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Common.Wpf", "Board.Common.Wpf\Board.Common.Wpf.csproj", "{83251DEC-1FEC-4000-AE63-288D92B4B1D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Common.Wpf", "Board.Common.Wpf\Board.Common.Wpf.csproj", "{83251DEC-1FEC-4000-AE63-288D92B4B1D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Dependencies", "Board.Dependencies\Board.Dependencies.csproj", "{FF2F6EC0-944A-4504-9195-3F28E12A934E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Dependencies", "Board.Dependencies\Board.Dependencies.csproj", "{FF2F6EC0-944A-4504-9195-3F28E12A934E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Resources", "Board.Resources\Board.Resources.csproj", "{DDDE62C3-A181-421D-953C-5EED78C0F5A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Resources", "Board.Resources\Board.Resources.csproj", "{DDDE62C3-A181-421D-953C-5EED78C0F5A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Data", "Board.Data\Board.Data.csproj", "{A5985E08-8494-4BDB-BD9F-34D13990DA4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Data", "Board.Data\Board.Data.csproj", "{A5985E08-8494-4BDB-BD9F-34D13990DA4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Data.SQLite", "Board.Data.SQLite\Board.Data.SQLite.csproj", "{18519B1B-176D-4F2D-9DEB-4BD45D148294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Data.SQLite", "Board.Data.SQLite\Board.Data.SQLite.csproj", "{18519B1B-176D-4F2D-9DEB-4BD45D148294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Models", "Board.Models\Board.Models.csproj", "{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{18519B1B-176D-4F2D-9DEB-4BD45D148294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18519B1B-176D-4F2D-9DEB-4BD45D148294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18519B1B-176D-4F2D-9DEB-4BD45D148294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

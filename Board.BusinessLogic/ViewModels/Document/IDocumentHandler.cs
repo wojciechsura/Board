@@ -15,5 +15,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         void CancelNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel);
         void NewInplaceEntryRequest(ColumnViewModel columnViewModel);
         void DeleteEntryRequest(EntryViewModel entryViewModel);
+        void EditEntryRequest(EntryViewModel entryViewModel);
+        void RequestEditorClose(EntryViewModel entryToUpdate);
     }
 }

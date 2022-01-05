@@ -1,7 +1,7 @@
 ﻿using Board.BusinessLogic.Infrastructure.Document;
 using Board.BusinessLogic.Infrastructure.Document.Database;
-using Board.BusinessLogic.Models.Data;
-using Board.BusinessLogic.Models.Document;
+using Board.Models.Data;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.Document;
 using Board.BusinessLogic.ViewModels.Base;
 using Spooksoft.VisualStateManager.Conditions;
@@ -222,6 +222,16 @@ namespace Board.BusinessLogic.ViewModels.Document
             var tableViewModel = columnViewModel.Parent;
             int index = tableViewModel.Columns.IndexOf(columnViewModel);
             tableViewModel.Columns[index] = newColumnViewModel;
+        }
+
+        public void UpdateEntry(EntryViewModel entryViewModel)
+        {
+            var entryModel = document.Database.GetEntryById(entryViewModel.Entry.Id);
+            var newEntryViewModel = BuildEntryViewModel(entryModel, document.Database, handler);
+
+            var columnViewModel = entryViewModel.Parent;
+            var index = columnViewModel.Entries.IndexOf(entryViewModel);
+            columnViewModel.Entries[index] = newEntryViewModel;
         }
 
         public void DeleteTable(TableViewModel tableViewModel, bool permanent)

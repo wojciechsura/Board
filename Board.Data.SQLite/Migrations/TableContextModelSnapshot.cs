@@ -39,7 +39,7 @@ namespace Board.Data.SQLite.Migrations
 
                     b.HasIndex("TableId");
 
-                    b.ToTable("Columns", (string)null);
+                    b.ToTable("Columns");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Entry", b =>
@@ -50,6 +50,9 @@ namespace Board.Data.SQLite.Migrations
 
                     b.Property<int>("ColumnId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -65,7 +68,7 @@ namespace Board.Data.SQLite.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Entries", (string)null);
+                    b.ToTable("Entries");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Table", b =>
@@ -86,7 +89,7 @@ namespace Board.Data.SQLite.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Tables", (string)null);
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Column", b =>

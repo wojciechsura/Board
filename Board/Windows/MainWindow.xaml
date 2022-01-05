@@ -12,50 +12,59 @@
                 d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
                 mc:Ignorable="d"
                 Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <f:Ribbon DockPanel.Dock="Top">
-            <f:RibbonTabItem Header="#Home">
-                <f:RibbonGroupBox Header="#File">
-                    <f:Button Header="#Open wall" SizeDefinition="Large"
+    <Grid>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <f:Ribbon DockPanel.Dock="Top">
+                <f:RibbonTabItem Header="#Home">
+                    <f:RibbonGroupBox Header="#File">
+                        <f:Button Header="#Open wall" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/Open32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/Open16.png"
                               Command="{Binding OpenCommand}"/>
-                    <f:Button Header="#New wall" SizeDefinition="Middle" 
+                        <f:Button Header="#New wall" SizeDefinition="Middle" 
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/New32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/New16.png"
                               Command="{Binding NewCommand}"/>
-                </f:RibbonGroupBox>
+                    </f:RibbonGroupBox>
 
-                <f:RibbonGroupBox Header="#Board">
-                    <f:Button Header="#New board" SizeDefinition="Large"
+                    <f:RibbonGroupBox Header="#Board">
+                        <f:Button Header="#New board" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/AddBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/AddBoard16.png"
                               Command="{Binding NewTableCommand}"/>
-                    
-                    <f:Button Header="#Edit board" SizeDefinition="Middle"
+
+                        <f:Button Header="#Edit board" SizeDefinition="Middle"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/EditBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/EditBoard16.png"
                               Command="{Binding EditTableCommand}"/>
 
-                    <f:Button Header="#Delete board" SizeDefinition="Middle"
+                        <f:Button Header="#Delete board" SizeDefinition="Middle"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard16.png"
                               Command="{Binding DeleteTableCommand}"/>
-                </f:RibbonGroupBox>
-            </f:RibbonTabItem>
-        </f:Ribbon>
+                    </f:RibbonGroupBox>
+                </f:RibbonTabItem>
+            </f:Ribbon>
 
-        <TabControl ItemsSource="{Binding ActiveDocument.Tables}" SelectedItem="{Binding ActiveDocument.ActiveTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <TabControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type vmd:TableViewModel}">
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate DataType="{x:Type vmd:TableViewModel}">
-                    <c:Table />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
-    </DockPanel>
+            <TabControl ItemsSource="{Binding ActiveDocument.Tables}" SelectedItem="{Binding ActiveDocument.ActiveTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vmd:TableViewModel}">
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vmd:TableViewModel}">
+                        <c:Table />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </DockPanel>
+
+        <Border Background="#60000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Style="{StaticResource Overlay}" Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}">
+
+            <c:EntryEditor x:Name="eeEntry" DataContext="{Binding EntryEditor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        </Border>
+    </Grid>
 </f:RibbonWindow>

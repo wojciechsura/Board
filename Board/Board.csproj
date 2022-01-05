@@ -29,10 +29,13 @@
     <None Remove="Resources\Fonts\RobotoCondensed-LightItalic.ttf" />
     <None Remove="Resources\Fonts\RobotoCondensed-Regular.ttf" />
     <None Remove="Resources\Fonts\SegoeUI-VF.ttf" />
+    <None Remove="Resources\Images\Accept16.png" />
     <None Remove="Resources\Images\AddBoard16.png" />
     <None Remove="Resources\Images\AddBoard32.png" />
+    <None Remove="Resources\Images\Cancel16.png" />
     <None Remove="Resources\Images\DeleteBoard16.png" />
     <None Remove="Resources\Images\DeleteBoard32.png" />
+    <None Remove="Resources\Images\Edit16.png" />
     <None Remove="Resources\Images\EditBoard16.png" />
     <None Remove="Resources\Images\EditBoard32.png" />
     <None Remove="Resources\Images\New16.png" />
@@ -63,10 +66,13 @@
     <Resource Include="Resources\Fonts\RobotoCondensed-LightItalic.ttf" />
     <Resource Include="Resources\Fonts\RobotoCondensed-Regular.ttf" />
     <Content Include="Resources\Fonts\SegoeUI-VF.ttf" />
+    <Resource Include="Resources\Images\Accept16.png" />
     <Resource Include="Resources\Images\AddBoard16.png" />
     <Resource Include="Resources\Images\AddBoard32.png" />
+    <Resource Include="Resources\Images\Cancel16.png" />
     <Resource Include="Resources\Images\DeleteBoard16.png" />
     <Resource Include="Resources\Images\DeleteBoard32.png" />
+    <Resource Include="Resources\Images\Edit16.png" />
     <Resource Include="Resources\Images\EditBoard16.png" />
     <Resource Include="Resources\Images\EditBoard32.png" />
     <Resource Include="Resources\Images\New16.png" />
@@ -99,5 +105,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Data;
+﻿using Board.Models.Data;
 using Board.BusinessLogic.ViewModels.ColumnEditor;
 using System;
 using System.Collections.Generic;

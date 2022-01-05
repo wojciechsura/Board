@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Dialogs;
+﻿using Board.Models.Dialogs;
 using Board.BusinessLogic.ViewModels.SQLiteConfig;
 using System;
 using System.Collections.Generic;

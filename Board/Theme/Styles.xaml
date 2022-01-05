@@ -303,6 +303,38 @@
         <Setter Property="CornerRadius" Value="{StaticResource ColumnCornerRadius}" />
     </Style>
 
+    <Style TargetType="Border" x:Key="Overlay">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource OverlayBackground}" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="Transparent" />
+                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource OverlayBackground}" />
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="{StaticResource OverlayBackground}" />
+                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="Transparent" />
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style TargetType="Label" x:Key="ColumnHeaderLabel">
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="FontWeight" Value="Bold" />

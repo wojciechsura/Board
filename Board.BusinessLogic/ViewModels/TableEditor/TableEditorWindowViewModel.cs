@@ -1,4 +1,4 @@
-﻿using Board.BusinessLogic.Models.Data;
+﻿using Board.Models.Data;
 using Board.BusinessLogic.Types.Attributes;
 using Board.BusinessLogic.ViewModels.Base;
 using Board.Resources;
@@ -21,7 +21,7 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
 
         private void DoOk()
         {
-            UpdatePropertiesToModel(table);
+            UpdateToModel(table);
             access.Close(true);
         }
 
@@ -43,10 +43,10 @@ namespace Board.BusinessLogic.ViewModels.TableEditor
             OkCommand = new AppCommand(obj => DoOk());
             CancelCommand = new AppCommand(obj => DoCancel());
 
-            UpdatePropertiesFromModel(table);
+            UpdateFromModel(table);
         }
 
-        [RepresentsModelProperty(nameof(TableModel.Name))]
+        [SyncWithModel(nameof(TableModel.Name))]
         public string Name
         {
             get => name;

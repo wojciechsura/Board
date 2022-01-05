@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Board.BusinessLogic.Infrastructure.Document.Database;
-using Board.BusinessLogic.Models.Document;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.Paths;
 using System;
 using System.Collections.Generic;

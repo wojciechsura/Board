@@ -1,5 +1,5 @@
 ﻿using Board.BusinessLogic.Infrastructure.Collections;
-using Board.BusinessLogic.Models.Data;
+using Board.Models.Data;
 using Board.BusinessLogic.ViewModels.Base;
 using Spooksoft.VisualStateManager.Commands;
 using System;
@@ -21,12 +21,13 @@ namespace Board.BusinessLogic.ViewModels.Document
             this.entry = entry;
 
             DeleteEntryCommand = new AppCommand(obj => handler.DeleteEntryRequest(this));
+            EditEntryCommand = new AppCommand(obj => handler.EditEntryRequest(this));
         }
 
         public string Title => entry.Title;
 
         public ICommand DeleteEntryCommand { get; }
-
+        public ICommand EditEntryCommand { get; }
         public EntryModel Entry => entry;
     }
 }

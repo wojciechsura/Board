@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Board.BusinessLogic.Models.Data;
-using Board.BusinessLogic.Models.Document;
+using Board.Models.Data;
+using Board.Models.Document;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.BusinessLogic.Services.Document;
 using Board.BusinessLogic.Services.Paths;
@@ -34,6 +34,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly BaseCondition tableSelectedCondition;
 
         private DocumentViewModel activeDocument;
+        private EntryEditorViewModel entryEditor;
 
         // Private methods ----------------------------------------------------
 
@@ -177,6 +178,17 @@ namespace Board.BusinessLogic.ViewModels.Main
             }
         }
 
+        void IDocumentHandler.EditEntryRequest(EntryViewModel entryViewModel)
+        {            
+            EntryEditor = new EntryEditorViewModel(entryViewModel.Entry.Id, entryViewModel, activeDocument.Document, this);
+        }
+
+        void IDocumentHandler.RequestEditorClose(EntryViewModel entryToUpdate)
+        {
+            activeDocument.UpdateEntry(entryToUpdate);
+            EntryEditor = null;
+        }
+
         // Public methods -----------------------------------------------------
 
         public MainWindowViewModel(IMainWindowAccess access, IDialogService dialogService, IDocumentFactory documentFactory, IPathService pathService, IMapper mapper)
@@ -211,6 +223,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => activeDocument;
             set => Set(ref activeDocument, value);
+        }
+
+        public EntryEditorViewModel EntryEditor
+        {
+            get => entryEditor;
+            set => Set(ref entryEditor, value);
         }
     }
 }

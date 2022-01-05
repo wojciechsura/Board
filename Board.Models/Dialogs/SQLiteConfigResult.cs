@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Board.BusinessLogic.Models.Dialogs
+namespace Board.Models.Dialogs
 {
     public class SQLiteConfigResult
     {

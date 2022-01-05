@@ -5,23 +5,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
+        xmlns:local="clr-namespace:Board.Controls" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" 
         xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
-        xmlns:local="clr-namespace:Board.Controls" xmlns:document="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" d:DataContext="{d:DesignInstance Type=document:EntryViewModel}"
+        d:DataContext="{d:DesignInstance Type=vmd:EntryViewModel}"
         mc:Ignorable="d" 
         x:Name="root"
         Style="{StaticResource Card}">
     <DockPanel>
         <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
                 Visibility="{Binding ElementName=root, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"
-                b:ContextMenuOnLeftClick.Enabled="True"
-                b:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bMenu}"
-                b:ContextMenuOnLeftClick.Placement="Bottom">
+                e:ContextMenuOnLeftClick.Enabled="True"
+                e:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bMenu}"
+                e:ContextMenuOnLeftClick.Placement="Bottom">
             <Button.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="#Show" Command="{Binding EditEntryCommand}" />
                     <MenuItem Header="#Delete" Command="{Binding DeleteEntryCommand}" />
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <Label Content="{Binding Title, Mode=OneWay}" />
+
+        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand">
+            <i:Interaction.Behaviors>
+                <b:ClickBehavior Command="{Binding EditEntryCommand}"/>
+            </i:Interaction.Behaviors>
+        </Label>
     </DockPanel>
 </Border>

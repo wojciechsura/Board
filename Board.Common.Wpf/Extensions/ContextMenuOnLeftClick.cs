@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
-namespace Board.Common.Wpf.Behaviors
+namespace Board.Common.Wpf.Extensions
 {
     public static class ContextMenuOnLeftClick
     {
@@ -48,7 +48,7 @@ namespace Board.Common.Wpf.Behaviors
 
         #endregion
 
-        #region 
+        #region Enabled attached property
 
         public static bool GetEnabled(DependencyObject obj)
         {

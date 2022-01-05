@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.Models.Dialogs
+namespace Board.Models.Dialogs
 {
-    public class OpenDialogResult
+    public class SaveDialogResult
     {
-        public OpenDialogResult(bool result, string fileName)
+        public SaveDialogResult(bool result, string fileName)
         {
             Result = result;
             FileName = fileName;

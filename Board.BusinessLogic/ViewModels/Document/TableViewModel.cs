@@ -1,5 +1,5 @@
 ﻿using Board.BusinessLogic.Infrastructure.Collections;
-using Board.BusinessLogic.Models.Data;
+using Board.Models.Data;
 using Board.BusinessLogic.Types.Attributes;
 using Board.BusinessLogic.ViewModels.Base;
 using Spooksoft.VisualStateManager.Commands;

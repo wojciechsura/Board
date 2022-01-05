@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Board.BusinessLogic.Models.Document
+namespace Board.Models.Document
 {
     [XmlRoot("Document")]
     public class DocumentDefinition
     {
         [XmlElement("Database")]
-        public BaseDatabaseDefinition Database { get; set; }
+        public BaseDatabaseDefinition? Database { get; set; }
 
         [XmlElement("Filesystem")]
-        public BaseFilesystemDefinition Filesystem { get; set; }
+        public BaseFilesystemDefinition? Filesystem { get; set; }
     }
 }

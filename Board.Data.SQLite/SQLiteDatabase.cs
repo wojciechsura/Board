@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Board.BusinessLogic.Models.Data;
+using Board.Models.Data;
 using Board.Data.Entities;
 using Board.Data.SQLite;
 using Microsoft.EntityFrameworkCore;
@@ -113,6 +113,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var entry = mapper.Map<Entry>(newEntry);
             context.Entries.Add(entry);
+            mapper.Map(entry, newEntry);
             context.SaveChanges();
         }
 
@@ -137,6 +138,20 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 entry.IsDeleted = true;
                 context.SaveChanges();
             }
+        }
+
+        public override EntryModel GetFullEntryById(int id)
+        {
+            var entry = context.Entries.First(e => e.Id == id);
+            var result = mapper.Map<EntryModel>(entry);
+            return result;
+        }
+
+        public override EntryModel GetEntryById(int id)
+        {
+            var entry = context.Entries.First(e => e.Id == id);
+            var result = mapper.Map<EntryModel>(entry);
+            return result;
         }
     }
 }
