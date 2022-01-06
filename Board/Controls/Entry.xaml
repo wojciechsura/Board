@@ -13,13 +13,13 @@
         d:DataContext="{d:DesignInstance Type=vmd:EntryViewModel}"
         mc:Ignorable="d" 
         x:Name="root"
-        Style="{StaticResource Card}">
+        Style="{StaticResource Card}" DataContextChanged="HandleDataContextChanged">
     <DockPanel>
         <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
                 Visibility="{Binding ElementName=root, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"
                 e:ContextMenuOnLeftClick.Enabled="True"
                 e:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bMenu}"
-                e:ContextMenuOnLeftClick.Placement="Bottom">
+                e:ContextMenuOnLeftClick.Placement="Bottom" VerticalAlignment="Top">
             <Button.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="#Show" Command="{Binding EditEntryCommand}" />
@@ -28,7 +28,10 @@
             </Button.ContextMenu>
         </Button>
 
-        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand" VerticalAlignment="Center">
+        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand" VerticalAlignment="Stretch"
+               VerticalContentAlignment="Center" MouseDown="HandleHeaderMouseDown"
+               MouseMove="HandleHeaderMouseMove" MouseUp="HandleHeaderMouseUp" 
+               GiveFeedback="HandleHeaderGiveFeedback">
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding EditEntryCommand}"/>
             </i:Interaction.Behaviors>
