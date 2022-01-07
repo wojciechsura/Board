@@ -26,6 +26,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var columnEntities = context.Columns
                 .Where(c => c.Table.Id == id && !c.IsDeleted)
+                .OrderBy(c => c.Order)
                 .ToList();
             return mapper.Map<List<ColumnModel>>(columnEntities);
         }
@@ -34,6 +35,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var entryEntities = context.Entries
                 .Where(e => e.Column.Id == id && !e.IsDeleted)
+                .OrderBy(e => e.Order)
                 .ToList();
             return mapper.Map<List<EntryModel>>(entryEntities);
         }
@@ -41,11 +43,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         public override List<TableModel> GetTables()
         {
             var tableEntities = context.Tables.Where(t => !t.IsDeleted)
-                .ToListAsync().Result;
+                .OrderBy(t => t.Order)
+                .ToList();
             return mapper.Map<List<TableModel>>(tableEntities);
         }
 
-        public override void AddTable(TableModel newTable)
+        public override void AddTable(OrderedTableModel newTable)
         {
             var tableEntity = mapper.Map<Table>(newTable);
 
@@ -53,6 +56,13 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             context.SaveChanges();
 
             mapper.Map(tableEntity, newTable);
+        }
+
+        public override void UpdateOrderedTable(OrderedTableModel updatedTable)
+        {
+            var table = context.Tables.First(t => t.Id == updatedTable.Id);
+            mapper.Map(updatedTable, table);
+            context.SaveChanges();
         }
 
         public override void UpdateTable(TableModel updatedTable)
@@ -78,12 +88,19 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
-        public override void AddColumn(ColumnModel newColumn)
+        public override void AddColumn(OrderedColumnModel newColumn)
         {
             var column = mapper.Map<Column>(newColumn);
             context.Columns.Add(column);
             context.SaveChanges();
             mapper.Map(column, newColumn);
+        }
+
+        public override void UpdateOrderedColumn(OrderedColumnModel updatedColumn)
+        {
+            var column = context.Columns.First(c => c.Id == updatedColumn.Id);
+            mapper.Map(updatedColumn, column);
+            context.SaveChanges();
         }
 
         public override void UpdateColumn(ColumnModel updatedColumn)
@@ -109,12 +126,19 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
-        public override void AddEntry(EntryModel newEntry)
+        public override void AddEntry(OrderedEntryModel newEntry)
         {
             var entry = mapper.Map<Entry>(newEntry);
             context.Entries.Add(entry);
             context.SaveChanges();
             mapper.Map(entry, newEntry);
+        }
+
+        public override void UpdateOrderedEntry(OrderedEntryModel updatedEntry)
+        {
+            var entry = context.Entries.First(e => e.Id == updatedEntry.Id);
+            mapper.Map(updatedEntry, entry);
+            context.SaveChanges();
         }
 
         public override void UpdateEntry(EntryModel updatedEntry)
@@ -152,6 +176,141 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             var entry = context.Entries.First(e => e.Id == id);
             var result = mapper.Map<EntryModel>(entry);
             return result;
+        }
+
+        public override long GetFirstEntryOrder(int columnId)
+        {
+            return context.Entries
+                .Where(e => e.ColumnId == columnId)
+                .Min(e => e.Order);
+        }
+
+        public override long GetLastEntryOrder(int columnId)
+        {
+            return context.Entries
+                .Where(e => e.ColumnId == columnId)
+                .Max(e => e.Order);
+        }
+
+        public override int GetEntryCount(int columnId)
+        {
+            return context.Entries
+                .Count(e => e.ColumnId == columnId);
+        }
+
+        public override List<OrderedEntryModel> GetOrderedEntries(int columnId, int skip, int take)
+        {
+            var entries = context.Entries
+                .Where(e => e.ColumnId == columnId)
+                .OrderBy(e => e.Order)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+
+            var result = mapper.Map<List<OrderedEntryModel>>(entries);
+            return result;
+        }
+
+        public override void UpdateOrderedEntries(List<OrderedEntryModel> updatedItems)
+        {
+            List<Entry> entities = new();
+
+            foreach (var item in updatedItems)
+            {
+                var entry = context.Entries.Single(e => e.Id == item.Id);
+                mapper.Map(item, entry);
+            }
+
+            context.SaveChanges();
+        }
+
+        public override long GetFirstColumnOrder(int tableId)
+        {
+            return context.Columns
+                .Where(c => c.TableId == tableId)
+                .Min(c => c.Order);
+        }
+
+        public override long GetLastColumnOrder(int tableId)
+        {
+            return context.Columns
+                .Where(c => c.TableId == tableId)
+                .Max(c => c.Order);
+        }
+
+        public override int GetColumnCount(int tableId)
+        {
+            return context.Columns
+                .Count(c => c.TableId == tableId);
+        }
+
+        public override List<OrderedColumnModel> GetOrderedColumns(int tableId, int skip, int take)
+        {
+            var columns = context.Columns
+                .Where(c => c.TableId == tableId)
+                .OrderBy(c => c.Order)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+
+            var result = mapper.Map<List<OrderedColumnModel>>(columns);
+
+            return result;
+        }
+
+        public override void UpdateOrderedColumns(List<OrderedColumnModel> updatedItems)
+        {
+            List<Column> entities = new();
+
+            foreach (var item in updatedItems)
+            {
+                var column = context.Columns.Single(e => e.Id == item.Id);
+                mapper.Map(item, column);
+            }
+
+            context.SaveChanges();
+        }
+
+        public override long GetFirstTableOrder()
+        {
+            return context.Tables
+                .Min(t => t.Order);
+        }
+
+        public override long GetLastTableOrder()
+        {
+            return context.Tables
+                .Max(t => t.Order);
+        }
+
+        public override int GetTableCount()
+        {
+            return context.Tables.Count();
+        }
+
+        public override List<OrderedTableModel> GetOrderedTables(int skip, int take)
+        {
+            var tables = context.Tables
+                .OrderBy(t => t.Order)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+
+            var result = mapper.Map<List<OrderedTableModel>>(tables);
+            return result;
+        }
+
+        public override void UpdateOrderedTables(List<OrderedTableModel> updatedItems)
+        {
+            List<Table> entities = new();
+
+            foreach (var item in updatedItems)
+            {
+                var table = context.Tables.Single(e => e.Id == item.Id);
+                mapper.Map(item, table);
+            }
+
+            context.SaveChanges();
         }
     }
 }

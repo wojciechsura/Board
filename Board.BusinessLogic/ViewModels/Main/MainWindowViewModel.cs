@@ -111,7 +111,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             var documentFactory = Board.Dependencies.Container.Instance.Resolve<IDocumentFactory>();
 
-            var newDocument = new DocumentViewModel(documentFactory, info, this);
+            var newDocument = new DocumentViewModel(mapper, documentFactory, info, this);
             ActiveDocument = newDocument;
         }
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Board.Data.SQLite.Migrations
 {
     [DbContext(typeof(TableContext))]
-    [Migration("20211231142818_First")]
+    [Migration("20220107195840_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,15 @@ namespace Board.Data.SQLite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<long>("Order")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
@@ -37,6 +43,9 @@ namespace Board.Data.SQLite.Migrations
                         .IsUnique();
 
                     b.HasIndex("TableId");
+
+                    b.HasIndex(new[] { "Order", "TableId" }, "IX_ColumnOrder")
+                        .IsUnique();
 
                     b.ToTable("Columns");
                 });
@@ -50,6 +59,15 @@ namespace Board.Data.SQLite.Migrations
                     b.Property<int>("ColumnId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("Order")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -61,6 +79,9 @@ namespace Board.Data.SQLite.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
+                    b.HasIndex(new[] { "Order", "ColumnId" }, "IX_EntryOrder")
+                        .IsUnique();
+
                     b.ToTable("Entries");
                 });
 
@@ -70,13 +91,22 @@ namespace Board.Data.SQLite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<long>("Order")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "Order" }, "IX_TableOrder")
                         .IsUnique();
 
                     b.ToTable("Tables");

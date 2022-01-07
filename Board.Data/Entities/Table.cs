@@ -12,11 +12,14 @@ using System.Threading.Tasks;
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]
+    [Index(nameof(Order), Name = "IX_TableOrder", IsUnique = true)]
     public class Table
     {
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public long Order { get; set; }
         public List<Column> Columns { get; set; } = new List<Column>();
         public bool IsDeleted { get; set; }
     }

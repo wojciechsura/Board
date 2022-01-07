@@ -14,7 +14,9 @@ namespace Board.Data.SQLite.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Order = table.Column<long>(type: "INTEGER", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +30,9 @@ namespace Board.Data.SQLite.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    TableId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Order = table.Column<long>(type: "INTEGER", nullable: false),
+                    TableId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +52,10 @@ namespace Board.Data.SQLite.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
-                    ColumnId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<long>(type: "INTEGER", nullable: false),
+                    ColumnId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,6 +67,12 @@ namespace Board.Data.SQLite.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ColumnOrder",
+                table: "Columns",
+                columns: new[] { "Order", "TableId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Columns_Id",
@@ -81,6 +94,18 @@ namespace Board.Data.SQLite.Migrations
                 name: "IX_Entries_Id",
                 table: "Entries",
                 column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EntryOrder",
+                table: "Entries",
+                columns: new[] { "Order", "ColumnId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TableOrder",
+                table: "Tables",
+                column: "Order",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -12,6 +12,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Board.BusinessLogic.Infrastructure.EntityOrdering;
+using AutoMapper;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
@@ -60,12 +62,122 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
+        private class EntryOrdering : BaseEntityOrdering<OrderedEntryModel>
+        {
+            private readonly BaseDatabase database;
+
+            protected override long GetFirstOrderValue(int groupId)
+            {
+                return database.GetFirstEntryOrder(groupId);
+            }
+
+            protected override long GetLastOrderValue(int groupId)
+            {
+                return database.GetLastEntryOrder(groupId);
+            }
+
+            protected override int GetModelCount(int groupId)
+            {
+                return database.GetEntryCount(groupId);
+            }
+
+            protected override List<OrderedEntryModel> GetOrderedModels(int groupId, int skip, int take)
+            {
+                return database.GetOrderedEntries(groupId, skip, take);
+            }
+
+            protected override void UpdateItems(int groupId, List<OrderedEntryModel> updatedItems)
+            {
+                database.UpdateOrderedEntries(updatedItems);
+            }
+
+            public EntryOrdering(BaseDatabase database)
+            {
+                this.database = database;
+            }
+        }
+
+        private class ColumnOrdering : BaseEntityOrdering<OrderedColumnModel>
+        {
+            private readonly BaseDatabase database;
+
+            protected override long GetFirstOrderValue(int groupId)
+            {
+                return database.GetFirstColumnOrder(groupId);
+            }
+
+            protected override long GetLastOrderValue(int groupId)
+            {
+                return database.GetLastColumnOrder(groupId);
+            }
+
+            protected override int GetModelCount(int groupId)
+            {
+                return database.GetColumnCount(groupId);
+            }
+
+            protected override List<OrderedColumnModel> GetOrderedModels(int groupId, int skip, int take)
+            {
+                return database.GetOrderedColumns(groupId, skip, take);
+            }
+
+            protected override void UpdateItems(int groupId, List<OrderedColumnModel> updatedItems)
+            {
+                database.UpdateOrderedColumns(updatedItems);
+            }
+
+            public ColumnOrdering(BaseDatabase database)
+            {
+                this.database = database;
+            }
+        }
+
+        private class TableOrdering : BaseEntityOrdering<OrderedTableModel>
+        {
+            private readonly BaseDatabase database;
+
+            protected override long GetFirstOrderValue(int groupId)
+            {
+                return database.GetFirstTableOrder();
+            }
+
+            protected override long GetLastOrderValue(int groupId)
+            {
+                return database.GetLastTableOrder();
+            }
+
+            protected override int GetModelCount(int groupId)
+            {
+                return database.GetTableCount();
+            }
+
+            protected override List<OrderedTableModel> GetOrderedModels(int groupId, int skip, int take)
+            {
+                return database.GetOrderedTables(skip, take);
+            }
+
+            protected override void UpdateItems(int groupId, List<OrderedTableModel> updatedItems)
+            {
+                database.UpdateOrderedTables(updatedItems);
+            }
+
+            public TableOrdering(BaseDatabase database)
+            {
+                this.database = database;
+            }
+        }
+
         // Private fields -----------------------------------------------------
 
         private readonly WallDocument document;
 
+        private readonly EntryOrdering entryOrdering;
+        private readonly ColumnOrdering columnOrdering;
+        private readonly TableOrdering tableOrdering;
+
         private readonly IDocumentFactory documentFactory;
         private readonly IDocumentHandler handler;
+        private readonly IMapper mapper;
 
         private TableLoadingWorker loadingWorker;
         private bool isLoading;
@@ -149,13 +261,18 @@ namespace Board.BusinessLogic.ViewModels.Document
         /// <summary>
         /// Use this ctor for creating new document from prepared document info
         /// </summary>
-        public DocumentViewModel(IDocumentFactory documentFactory, DocumentInfo info, IDocumentHandler handler)
+        public DocumentViewModel(IMapper mapper, IDocumentFactory documentFactory, DocumentInfo info, IDocumentHandler handler)
             : this(handler)
         {
+            this.mapper = mapper;
             this.documentFactory = documentFactory;
 
             documentFactory.SaveDefinition(info);
             document = documentFactory.Create(info);
+
+            entryOrdering = new EntryOrdering(document.Database);
+            columnOrdering = new ColumnOrdering(document.Database);
+            tableOrdering = new TableOrdering(document.Database);
 
             LoadTables();
         }
@@ -163,13 +280,18 @@ namespace Board.BusinessLogic.ViewModels.Document
         /// <summary>
         /// Use this ctor for opening existing document from given definition path
         /// </summary>
-        public DocumentViewModel(IDocumentFactory documentFactory, string definitionPath, IDocumentHandler handler)
+        public DocumentViewModel(IMapper mapper, IDocumentFactory documentFactory, string definitionPath, IDocumentHandler handler)
             : this(handler)
         {
+            this.mapper = mapper;
             this.documentFactory = documentFactory;
 
             var documentInfo = documentFactory.OpenDefinition(definitionPath);
             document = documentFactory.Open(documentInfo);
+
+            entryOrdering = new EntryOrdering(document.Database);
+            columnOrdering = new ColumnOrdering(document.Database);
+            tableOrdering = new TableOrdering(document.Database);
 
             LoadTables();
         }
@@ -192,7 +314,13 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public void AddTableFromModel(TableModel newTable)
         {
-            document.Database.AddTable(newTable);
+            // Fill in order
+            var newOrderedTable = mapper.Map<OrderedTableModel>(newTable);
+            var tableCount = document.Database.GetTableCount();
+            tableOrdering.SetNewOrder(newOrderedTable, tableCount, 0);
+            document.Database.AddTable(newOrderedTable);
+
+            mapper.Map(newOrderedTable, newTable);
 
             var tableViewModel = BuildTableViewModel(newTable, document.Database, handler);
             tables.Add(tableViewModel);
@@ -256,7 +384,14 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void AddColumnFromModel(TableViewModel tableViewModel, ColumnModel newColumn)
         {
             newColumn.TableId = tableViewModel.Table.Id;
-            document.Database.AddColumn(newColumn);
+
+            // Fill in order
+            var newOrderedColumn = mapper.Map<OrderedColumnModel>(newColumn);
+            var columnCount = document.Database.GetColumnCount(tableViewModel.Table.Id);
+            columnOrdering.SetNewOrder(newOrderedColumn, columnCount, tableViewModel.Table.Id);
+            document.Database.AddColumn(newOrderedColumn);
+
+            mapper.Map(newOrderedColumn, newColumn);
 
             var columnViewModel = BuildColumnViewModel(newColumn, document.Database, handler);
             tableViewModel.Columns.Add(columnViewModel);
@@ -273,13 +408,20 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             var newEntry = newInplaceEntryViewModel.Entry;
             newEntry.ColumnId = columnViewModel.Column.Id;
-            document.Database.AddEntry(newEntry);
+
+            // Fill in order
+            var newOrderedEntry = mapper.Map<OrderedEntryModel>(newEntry);
+            var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id);
+            entryOrdering.SetNewOrder(newOrderedEntry, entryCount, columnViewModel.Column.Id);
+            document.Database.AddEntry(newOrderedEntry);
+
+            mapper.Map(newOrderedEntry, newEntry);
+
             var entryViewModel = BuildEntryViewModel(newEntry, document.Database, handler);
 
-            // Replace inplace editor with new entry
-            int index = columnViewModel.Entries.IndexOf(newInplaceEntryViewModel);
-            columnViewModel.Entries.RemoveAt(index);
-            columnViewModel.Entries.Insert(index, entryViewModel);
+            // Add new entry in the end
+            columnViewModel.Entries.Remove(newInplaceEntryViewModel);
+            columnViewModel.Entries.Add(entryViewModel);
         }
 
         public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)

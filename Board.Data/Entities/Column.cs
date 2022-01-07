@@ -12,11 +12,14 @@ using System.Threading.Tasks;
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]
+    [Index(new[] { nameof(Order), nameof(TableId)}, Name = "IX_ColumnOrder", IsUnique = true)]
     public class Column
     {
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }        
+        [Required]
+        public long Order { get; set; }
         [Required]
         public Table Table { get; set; }
         [ForeignKey(nameof(Table))]
