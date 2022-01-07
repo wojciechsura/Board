@@ -33,7 +33,8 @@
             <Label Style="{StaticResource ColumnHeaderLabel}" 
                    Content="{Binding Name}" 
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
-                   MouseDown="HandleHeaderMouseDown" MouseMove="HandleHeaderMouseMove" MouseUp="HandleHeaderMouseUp"/>
+                   MouseDown="HandleHeaderMouseDown" MouseMove="HandleHeaderMouseMove" 
+                   MouseUp="HandleHeaderMouseUp" GiveFeedback="HandleHeaderGiveFeedback"/>
         </DockPanel>
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"

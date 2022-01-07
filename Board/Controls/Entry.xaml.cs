@@ -25,7 +25,7 @@ namespace Board.Controls
     {
         private bool inDragDrop;
         private EntryViewModel viewModel;
-        private DragAdorner adorner;
+        private DragAdorner dragAdorner;
 
         public Entry()
         {
@@ -49,13 +49,13 @@ namespace Board.Controls
                 while (parent is not null && parent is not Table)
                     parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
 
-                adorner = new DragAdorner(this, e.GetPosition(this));
+                dragAdorner = new DragAdorner(this, e.GetPosition(this));
 
                 var adornerLayer = AdornerLayer.GetAdornerLayer(parent);
 
-                adornerLayer.Add(adorner);
+                adornerLayer.Add(dragAdorner);
                 DragDrop.DoDragDrop(lSender, viewModel, DragDropEffects.Move);
-                adornerLayer.Remove(adorner);
+                adornerLayer.Remove(dragAdorner);
             }
         }
 
@@ -69,12 +69,12 @@ namespace Board.Controls
 
         private void HandleHeaderGiveFeedback(object sender, GiveFeedbackEventArgs e)
         {
-            if (adorner != null)
+            if (dragAdorner != null)
             {
                 Label label = sender as Label;
                 var pos = label.PointFromScreen(Win32.AbsoluteMousePosition);
 
-                adorner.UpdatePosition(pos);
+                dragAdorner.UpdatePosition(pos);
             }
         }
 

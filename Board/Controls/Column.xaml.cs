@@ -1,4 +1,6 @@
 ﻿using Board.BusinessLogic.ViewModels.Document;
+using Board.Common.Wpf.Controls;
+using Board.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +26,12 @@ namespace Board.Controls
         private const double ADORNER_HEIGHT = 5;
         private readonly Point POINT_ZERO = new Point(0, 0);
 
-        private class DropAdorner : Adorner
+        private class EntryDropAdorner : Adorner
         {
             private Brush brush;
             private double locationY;
 
-            public DropAdorner(UIElement adornedElement, double locationY) 
+            public EntryDropAdorner(UIElement adornedElement, double locationY) 
                 : base(adornedElement)
             {
                 brush = new SolidColorBrush(Color.FromArgb(255, 30, 60, 90));
@@ -50,27 +52,64 @@ namespace Board.Controls
         }
 
         private ColumnViewModel viewModel;
-        private DropAdorner dropAdorner;
+        
+        // Drag
+        private DragAdorner dragAdorner;
+        private bool inDragDrop;
+
+        // Drop
+        private EntryDropAdorner dropAdorner;
         private List<(double yStart, double height)> dropEntryBorders;
 
         public Column()
         {
             InitializeComponent();
+            inDragDrop = false;
         }
 
         private void HandleHeaderMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            inDragDrop = false;
         }
 
         private void HandleHeaderMouseMove(object sender, MouseEventArgs e)
         {
-            
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                sender is Label lSender &&
+                viewModel != null)
+            {
+                FrameworkElement parent = lSender;
+
+                while (parent is not null && parent is not Table)
+                    parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
+
+                dragAdorner = new DragAdorner(this, e.GetPosition(this));
+
+                var adornerLayer = AdornerLayer.GetAdornerLayer(parent);
+
+                adornerLayer.Add(dragAdorner);
+                DragDrop.DoDragDrop(lSender, viewModel, DragDropEffects.Move);
+                adornerLayer.Remove(dragAdorner);
+            }
         }
 
         private void HandleHeaderMouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (inDragDrop && e.ChangedButton == MouseButton.Left)
+            {
+                inDragDrop = false;
+            }
+        }
 
+        private void HandleHeaderGiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            if (dragAdorner != null)
+            {
+                Label label = sender as Label;
+                var pos = label.PointFromScreen(Win32.AbsoluteMousePosition);
+
+                dragAdorner.UpdatePosition(pos);
+            }
         }
 
         private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -80,7 +119,7 @@ namespace Board.Controls
 
         private void AddDropAdorner(ItemsControl items, double locationY)
         {
-            dropAdorner = new DropAdorner(items, locationY);
+            dropAdorner = new EntryDropAdorner(items, locationY);
             var layer = AdornerLayer.GetAdornerLayer(items);
             layer.Add(dropAdorner);
         }
@@ -175,6 +214,11 @@ namespace Board.Controls
             if (entryViewModel != null && dropAdorner != null)
             {
                 var items = sender as ItemsControl;
+                var position = e.GetPosition(items);
+                (double adornerY, int newIndex) = EvalDropData(items, position);
+
+                // TODO inform viewmodel about move request
+
                 RemoveDropAdorner(items);
             }
         }
