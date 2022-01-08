@@ -178,15 +178,21 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             return result;
         }
 
-        public override long GetFirstEntryOrder(int columnId)
+        public override long? GetFirstEntryOrder(int columnId)
         {
+            if (GetEntryCount(columnId) == 0)
+                return null;
+
             return context.Entries
                 .Where(e => e.ColumnId == columnId)
                 .Min(e => e.Order);
         }
 
-        public override long GetLastEntryOrder(int columnId)
+        public override long? GetLastEntryOrder(int columnId)
         {
+            if (GetEntryCount(columnId) == 0)
+                return null;
+
             return context.Entries
                 .Where(e => e.ColumnId == columnId)
                 .Max(e => e.Order);
@@ -224,15 +230,21 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             context.SaveChanges();
         }
 
-        public override long GetFirstColumnOrder(int tableId)
+        public override long? GetFirstColumnOrder(int tableId)
         {
+            if (GetColumnCount(tableId) == 0)
+                return null;
+
             return context.Columns
                 .Where(c => c.TableId == tableId)
                 .Min(c => c.Order);
         }
 
-        public override long GetLastColumnOrder(int tableId)
+        public override long? GetLastColumnOrder(int tableId)
         {
+            if (GetColumnCount(tableId) == 0)
+                return null;
+
             return context.Columns
                 .Where(c => c.TableId == tableId)
                 .Max(c => c.Order);
@@ -271,14 +283,20 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             context.SaveChanges();
         }
 
-        public override long GetFirstTableOrder()
+        public override long? GetFirstTableOrder()
         {
+            if (GetTableCount() == 0)
+                return null;
+
             return context.Tables
                 .Min(t => t.Order);
         }
 
-        public override long GetLastTableOrder()
+        public override long? GetLastTableOrder()
         {
+            if (GetTableCount() == 0)
+                return null;
+
             return context.Tables
                 .Max(t => t.Order);
         }

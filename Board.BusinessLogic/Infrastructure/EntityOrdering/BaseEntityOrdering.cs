@@ -15,8 +15,8 @@ namespace Board.BusinessLogic.Infrastructure.EntityOrdering
         private const long ORDER_STEP = 1024;
         private const int REORDER_BATCH = 50;
 
-        protected abstract long GetLastOrderValue(int groupId);
-        protected abstract long GetFirstOrderValue(int groupId);
+        protected abstract long? GetLastOrderValue(int groupId);
+        protected abstract long? GetFirstOrderValue(int groupId);
         protected abstract int GetModelCount(int groupId);
         protected abstract List<TModel> GetOrderedModels(int groupId, int skip, int take);
         protected abstract void UpdateItems(int groupId, List<TModel> updatedItems);
@@ -30,9 +30,18 @@ namespace Board.BusinessLogic.Infrastructure.EntityOrdering
             // New first item - trivial
             if (desiredPosition == 0)
             {
-                long firstOrder = GetFirstOrderValue(groupId);
-                firstOrder -= ORDER_STEP;
-                model.Order = firstOrder;
+                long? firstOrder = GetFirstOrderValue(groupId);
+
+                if (firstOrder != null)
+                {
+                    firstOrder -= ORDER_STEP;
+                    model.Order = firstOrder.Value;
+                }
+                else
+                {
+                    firstOrder = 0;
+                    model.Order = firstOrder.Value;
+                }
 
                 #if DEBUG_REORDERING
                 System.Diagnostics.Debug.WriteLine($"Desired position is zero, new order: {firstOrder}");
@@ -46,9 +55,17 @@ namespace Board.BusinessLogic.Infrastructure.EntityOrdering
             // New last item - trivial
             if (desiredPosition >= count)
             {
-                long lastOrder = GetLastOrderValue(groupId);
-                lastOrder += ORDER_STEP;
-                model.Order = lastOrder;
+                long? lastOrder = GetLastOrderValue(groupId);
+                if (lastOrder != null)
+                {
+                    lastOrder += ORDER_STEP;
+                    model.Order = lastOrder.Value;
+                }
+                else
+                {
+                    lastOrder = 0;
+                    model.Order = lastOrder.Value;
+                }
 
                 #if DEBUG_REORDERING
                 System.Diagnostics.Debug.WriteLine($"Desired position is after last, new order: {lastOrder}");

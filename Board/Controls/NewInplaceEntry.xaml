@@ -9,9 +9,9 @@
         xmlns:document="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" 
         d:DataContext="{d:DesignInstance Type=document:NewInplaceEntryViewModel}"
         mc:Ignorable="d" 
-        Style="{StaticResource Card}">
+        Style="{StaticResource Card}" FocusManager.FocusedElement="{Binding ElementName=tbEntryTitle}">
     <StackPanel Orientation="Vertical">
-        <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
+        <TextBox x:Name="tbEntryTitle" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
                  TextWrapping="Wrap"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

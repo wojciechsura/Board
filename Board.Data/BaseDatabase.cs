@@ -30,18 +30,18 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         public abstract EntryModel GetFullEntryById(int id);
         public abstract EntryModel GetEntryById(int id);
 
-        public abstract long GetFirstEntryOrder(int columnId);
-        public abstract long GetLastEntryOrder(int columnId);
+        public abstract long? GetFirstEntryOrder(int columnId);
+        public abstract long? GetLastEntryOrder(int columnId);
         public abstract int GetEntryCount(int columnId);
         public abstract List<OrderedEntryModel> GetOrderedEntries(int columnId, int skip, int take);
         public abstract void UpdateOrderedEntries(List<OrderedEntryModel> updatedItems);
-        public abstract long GetFirstColumnOrder(int tableId);
-        public abstract long GetLastColumnOrder(int tableId);
+        public abstract long? GetFirstColumnOrder(int tableId);
+        public abstract long? GetLastColumnOrder(int tableId);
         public abstract int GetColumnCount(int tableId);
         public abstract List<OrderedColumnModel> GetOrderedColumns(int tableId, int skip, int take);
         public abstract void UpdateOrderedColumns(List<OrderedColumnModel> updatedItems);
-        public abstract long GetFirstTableOrder();
-        public abstract long GetLastTableOrder();
+        public abstract long? GetFirstTableOrder();
+        public abstract long? GetLastTableOrder();
         public abstract int GetTableCount();
         public abstract List<OrderedTableModel> GetOrderedTables(int skip, int take);
         public abstract void UpdateOrderedTables(List<OrderedTableModel> updatedItems);

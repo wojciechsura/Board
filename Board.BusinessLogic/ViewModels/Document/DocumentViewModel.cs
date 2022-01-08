@@ -66,12 +66,12 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             private readonly BaseDatabase database;
 
-            protected override long GetFirstOrderValue(int groupId)
+            protected override long? GetFirstOrderValue(int groupId)
             {
                 return database.GetFirstEntryOrder(groupId);
             }
 
-            protected override long GetLastOrderValue(int groupId)
+            protected override long? GetLastOrderValue(int groupId)
             {
                 return database.GetLastEntryOrder(groupId);
             }
@@ -101,12 +101,12 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             private readonly BaseDatabase database;
 
-            protected override long GetFirstOrderValue(int groupId)
+            protected override long? GetFirstOrderValue(int groupId)
             {
                 return database.GetFirstColumnOrder(groupId);
             }
 
-            protected override long GetLastOrderValue(int groupId)
+            protected override long? GetLastOrderValue(int groupId)
             {
                 return database.GetLastColumnOrder(groupId);
             }
@@ -136,12 +136,12 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             private readonly BaseDatabase database;
 
-            protected override long GetFirstOrderValue(int groupId)
+            protected override long? GetFirstOrderValue(int groupId)
             {
                 return database.GetFirstTableOrder();
             }
 
-            protected override long GetLastOrderValue(int groupId)
+            protected override long? GetLastOrderValue(int groupId)
             {
                 return database.GetLastTableOrder();
             }

@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
-        Title="{Binding Title}">
+        Title="{Binding Title}" FocusManager.FocusedElement="{Binding ElementName=tbTableName}">
     <StackPanel Orientation="Vertical">
         <GroupBox Header="{Binding Title}" Margin="{StaticResource DialogItemsMargin}">
             <Grid>
@@ -22,7 +22,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Content="#Board name" Margin="{StaticResource DialogItemsMargin}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                <TextBox x:Name="tbTableName" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Margin="{StaticResource DialogItemsMargin}" />
             </Grid>
         </GroupBox>
