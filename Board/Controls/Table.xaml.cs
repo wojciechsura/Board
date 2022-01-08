@@ -51,6 +51,7 @@ namespace Board.Controls
 
         private ColumnDropAdorner dropAdorner;
         private List<(double xStart, double width)> dropColumnBorders;
+        private TableViewModel viewModel;
 
         private void AddDropAdorner(ItemsControl items, double locationX)
         {
@@ -150,17 +151,22 @@ namespace Board.Controls
 
         private void TableDrop(object sender, DragEventArgs e)
         {
-            var columnViewModel = e.Data.GetData(typeof(ColumnViewModel));
+            var columnViewModel = (ColumnViewModel)e.Data.GetData(typeof(ColumnViewModel));
             if (columnViewModel != null && dropAdorner != null)
             {
                 var items = sender as ItemsControl;
                 var position = e.GetPosition(items);
                 (double adornerX, int newIndex) = EvalDropData(items, position);
 
-                // TODO inform viewmodel about move request
+                viewModel.RequestMoveColumn(columnViewModel, newIndex);                
 
                 RemoveDropAdorner(items);
             }
+        }
+
+        private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            viewModel = (TableViewModel)e.NewValue;
         }
     }
 }

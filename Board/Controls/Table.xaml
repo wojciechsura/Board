@@ -9,7 +9,7 @@
               xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
-              SnapsToDevicePixels="True">
+              SnapsToDevicePixels="True" DataContextChanged="HandleDataContextChanged">
     <StackPanel Orientation="Horizontal" Style="{StaticResource TableContents}">
         <ItemsControl ItemsSource="{Binding Columns}" AllowDrop="True"
                       Background="Transparent"

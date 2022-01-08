@@ -31,6 +31,11 @@ namespace Board.BusinessLogic.ViewModels.Document
             NewColumnCommand = new AppCommand(obj => handler.NewColumnRequest(this));
         }
 
+        public void RequestMoveColumn(ColumnViewModel columnViewModel, int newIndex)
+        {
+            handler.RequestMoveColumn(columnViewModel, this, newIndex);
+        }
+
         public ObservableParentedCollection<ColumnViewModel, TableViewModel> Columns => columns;
 
         public string Name => table.Name;

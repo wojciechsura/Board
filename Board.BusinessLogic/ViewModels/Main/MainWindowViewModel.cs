@@ -194,6 +194,11 @@ namespace Board.BusinessLogic.ViewModels.Main
             activeDocument.MoveEntry(entryViewModel, targetColumnViewModel, newIndex);
         }
 
+        void IDocumentHandler.RequestMoveColumn(ColumnViewModel columnViewModel, TableViewModel tableViewModel, int newIndex)
+        {
+            activeDocument.MoveColumn(columnViewModel, tableViewModel, newIndex);
+        }
+
         // Public methods -----------------------------------------------------
 
         public MainWindowViewModel(IMainWindowAccess access, IDialogService dialogService, IDocumentFactory documentFactory, IPathService pathService, IMapper mapper)

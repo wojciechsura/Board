@@ -474,6 +474,29 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
+        public void MoveColumn(ColumnViewModel columnViewModel, TableViewModel targetTableViewModel, int newIndex)
+        {
+            if (columnViewModel.Parent != targetTableViewModel)
+                throw new ArgumentException("Moving columns between tables is not yet supported!");
+
+            OrderedColumnModel orderedColumn = mapper.Map<OrderedColumnModel>(columnViewModel.Column);
+            columnOrdering.SetNewOrder(orderedColumn, newIndex, targetTableViewModel.Table.Id);
+            document.Database.UpdateOrderedColumn(orderedColumn);
+            mapper.Map(orderedColumn, columnViewModel.Column);
+
+            var currentIndex = targetTableViewModel.Columns.IndexOf(columnViewModel);
+            if (newIndex != currentIndex && newIndex != currentIndex + 1)
+            {
+                bool afterCurrent = newIndex > currentIndex;
+                if (afterCurrent)
+                    newIndex -= 1;
+
+                targetTableViewModel.Columns.RemoveAt(currentIndex);
+                targetTableViewModel.Columns.Insert(newIndex, columnViewModel);
+            }
+        }
+
+
         // Public properties --------------------------------------------------
 
         public ObservableCollection<TableViewModel> Tables => tables;
