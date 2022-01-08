@@ -32,6 +32,11 @@ namespace Board.BusinessLogic.ViewModels.Document
             NewInplaceEntryCommand = new AppCommand(obj => handler.NewInplaceEntryRequest(this));
         }
 
+        public void RequestMoveEntry(EntryViewModel entryViewModel, int newIndex)
+        {
+            handler.RequestMoveEntry(entryViewModel, this, newIndex);
+        }
+
         public TableViewModel Parent { get; set; }
 
         public ObservableParentedCollection<BaseEntryViewModel, ColumnViewModel> Entries => entries;

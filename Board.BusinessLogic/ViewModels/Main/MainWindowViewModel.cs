@@ -189,6 +189,11 @@ namespace Board.BusinessLogic.ViewModels.Main
             EntryEditor = null;
         }
 
+        void IDocumentHandler.RequestMoveEntry(EntryViewModel entryViewModel, ColumnViewModel targetColumnViewModel, int newIndex)
+        {
+            activeDocument.MoveEntry(entryViewModel, targetColumnViewModel, newIndex);
+        }
+
         // Public methods -----------------------------------------------------
 
         public MainWindowViewModel(IMainWindowAccess access, IDialogService dialogService, IDocumentFactory documentFactory, IPathService pathService, IMapper mapper)

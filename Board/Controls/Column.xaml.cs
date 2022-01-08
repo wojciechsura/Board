@@ -210,14 +210,14 @@ namespace Board.Controls
 
         private void ColumnDrop(object sender, DragEventArgs e)
         {
-            var entryViewModel = e.Data.GetData(typeof(EntryViewModel));
+            var entryViewModel = (EntryViewModel)e.Data.GetData(typeof(EntryViewModel));
             if (entryViewModel != null && dropAdorner != null)
             {
                 var items = sender as ItemsControl;
                 var position = e.GetPosition(items);
                 (double adornerY, int newIndex) = EvalDropData(items, position);
 
-                // TODO inform viewmodel about move request
+                viewModel.RequestMoveEntry(entryViewModel, newIndex);
 
                 RemoveDropAdorner(items);
             }

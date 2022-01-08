@@ -436,6 +436,44 @@ namespace Board.BusinessLogic.ViewModels.Document
             columnViewModel.Entries.Remove(entryViewModel);
         }
 
+        public void MoveEntry(EntryViewModel entryViewModel, ColumnViewModel targetColumnViewModel, int newIndex)
+        {
+            if (entryViewModel.Parent == targetColumnViewModel)
+            {
+                // Move entry within the same column
+                OrderedEntryModel orderedEntry = mapper.Map<OrderedEntryModel>(entryViewModel.Entry);
+                // Note: old order doesn't matter even if the underlying entity will be updated
+                // during reordering process.
+                entryOrdering.SetNewOrder(orderedEntry, newIndex, targetColumnViewModel.Column.Id);
+                document.Database.UpdateOrderedEntry(orderedEntry);
+                mapper.Map(orderedEntry, entryViewModel.Entry);
+
+                var currentIndex = targetColumnViewModel.Entries.IndexOf(entryViewModel);
+                if (newIndex != currentIndex && newIndex != currentIndex + 1)
+                {
+                    bool afterCurrent = newIndex > currentIndex;
+                    if (afterCurrent)
+                        newIndex -= 1;
+
+                    targetColumnViewModel.Entries.RemoveAt(currentIndex);
+                    targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);
+                }
+            }
+            else
+            {
+                // Move entry from column to column
+
+                OrderedEntryModel orderedEntry = mapper.Map<OrderedEntryModel>(entryViewModel.Entry);
+                entryOrdering.SetNewOrder(orderedEntry, newIndex, targetColumnViewModel.Column.Id);
+                orderedEntry.ColumnId = targetColumnViewModel.Column.Id;
+                document.Database.UpdateOrderedEntry(orderedEntry);
+                mapper.Map(orderedEntry, entryViewModel.Entry);
+
+                entryViewModel.Parent.Entries.Remove(entryViewModel);
+                targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);
+            }
+        }
+
         // Public properties --------------------------------------------------
 
         public ObservableCollection<TableViewModel> Tables => tables;
