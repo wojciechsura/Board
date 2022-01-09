@@ -24,5 +24,7 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, ColumnModel model) ShowNewColumnDialog();
         bool ShowEditColumnDialog(ColumnModel columnModel);
         EditActions ShowEditTagsDialog(WallDocument document, int tableId);
+        (bool result, TagModel model) ShowNewTagDialog();
+        bool ShowEditTagDialog(TagModel tagModel);
     }
 }

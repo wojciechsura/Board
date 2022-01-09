@@ -1,6 +1,8 @@
 ﻿using Board.BusinessLogic.Infrastructure.Document;
+using Board.BusinessLogic.Services.Dialogs;
 using Board.BusinessLogic.Types.Enums;
 using Board.BusinessLogic.ViewModels.Tag;
+using Board.Models.Data;
 using Spooksoft.VisualStateManager.Commands;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace Board.BusinessLogic.ViewModels.TagList
         private readonly ITagListWindowAccess access;
         private readonly WallDocument document;
         private readonly int tableId;
+        private readonly IDialogService dialogService;
 
         private void LoadTags()
         {
@@ -37,15 +40,18 @@ namespace Board.BusinessLogic.ViewModels.TagList
 
         private void DoNewTag()
         {
-            throw new NotImplementedException();
+            (bool result, TagModel newTag) = dialogService.ShowNewTagDialog();
+
+            // TODO
         }
 
 
-        public TagListWindowViewModel(ITagListWindowAccess access, WallDocument document, int tableId)
+        public TagListWindowViewModel(ITagListWindowAccess access, WallDocument document, int tableId, IDialogService dialogService)
         {
             this.access = access;
             this.document = document;
             this.tableId = tableId;
+            this.dialogService = dialogService;
 
             NewTagCommand = new AppCommand(obj => DoNewTag());
             CloseCommand = new AppCommand(obj => DoClose());

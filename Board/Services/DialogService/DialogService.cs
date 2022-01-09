@@ -252,12 +252,53 @@ namespace Board.Services.DialogService
         public EditActions ShowEditTagsDialog(WallDocument document, int tableId)
         {
             TagListWindow dialog = new TagListWindow(document, tableId);
+            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
             dialogWindows.Push(dialog);
 
             try
             {
                 dialog.ShowDialog();
                 return dialog.Result;
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public (bool result, TagModel model) ShowNewTagDialog()
+        {
+            TagEditorWindow dialog = new TagEditorWindow(new TagModel(), true);
+            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return (true, dialog.Result);
+                else
+                    return (false, null);
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public bool ShowEditTagDialog(TagModel tagModel)
+        {
+            TagEditorWindow dialog = new TagEditorWindow(tagModel, false);
+            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                if (dialog.ShowDialog() == true)
+                    return true;
+                else
+                    return false;
             }
             finally
             {

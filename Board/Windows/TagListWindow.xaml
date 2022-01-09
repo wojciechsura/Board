@@ -8,6 +8,7 @@
         xmlns:vmt="clr-namespace:Board.BusinessLogic.ViewModels.Tag;assembly=Board.BusinessLogic" 
         xmlns:c="clr-namespace:Board.Controls"
         mc:Ignorable="d"
+        ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Title="#Tags" SizeToContent="WidthAndHeight">
     <StackPanel Orientation="Vertical">
         <GroupBox Header="#Tags" Margin="{StaticResource DialogItemsMargin}">

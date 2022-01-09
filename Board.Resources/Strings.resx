@@ -153,4 +153,10 @@
   <data name="Message.EntryDeletion" xml:space="preserve">
     <value>Are you sure you want to delete entry {0}?</value>
   </data>
+  <data name="TagEditor.Title.New" xml:space="preserve">
+    <value>New tag</value>
+  </data>
+  <data name="TagEditor.Title.Edit" xml:space="preserve">
+    <value>Edit tag</value>
+  </data>
 </root>
