@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.Models.Data
+namespace Board.BusinessLogic.Types.Enums
 {
-    public class OrderedColumnModel : ColumnModel, IOrderedModel
+    [Flags]
+    public enum EditActions
     {
-        public long Order { get; set; }
+        Add = 1,
+        Edit = 2,
+        Delete = 4
     }
 }

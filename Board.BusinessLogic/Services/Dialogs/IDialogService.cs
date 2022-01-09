@@ -1,4 +1,6 @@
-﻿using Board.Models.Data;
+﻿using Board.BusinessLogic.Infrastructure.Document;
+using Board.BusinessLogic.Types.Enums;
+using Board.Models.Data;
 using Board.Models.Dialogs;
 using Board.Models.Document;
 using System;
@@ -21,5 +23,6 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, bool? permanently) ShowDeleteDialog(string message);
         (bool result, ColumnModel model) ShowNewColumnDialog();
         bool ShowEditColumnDialog(ColumnModel columnModel);
+        EditActions ShowEditTagsDialog(WallDocument document, int tableId);
     }
 }

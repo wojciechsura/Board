@@ -47,7 +47,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             protected override void OnDoWork(DoWorkEventArgs e)
             {
                 // Load all tables
-                List<TableModel> tables = database.GetTables();
+                List<TableModel> tables = database.GetTables(false);
 
                 foreach (var table in tables)
                 {
@@ -62,33 +62,41 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
-        private class EntryOrdering : BaseEntityOrdering<OrderedEntryModel>
+        private class EntryOrdering : BaseEntityOrdering<EntryModel>
         {
             private readonly BaseDatabase database;
 
-            protected override long? GetFirstOrderValue(int groupId)
+            protected override long GetFirstOrderValue(int groupId)
             {
-                return database.GetFirstEntryOrder(groupId);
+                return database.GetFirstEntryOrder(groupId, true);
             }
 
-            protected override long? GetLastOrderValue(int groupId)
+            protected override long GetLastOrderValue(int groupId)
             {
-                return database.GetLastEntryOrder(groupId);
+                return database.GetLastEntryOrder(groupId, true);
             }
 
             protected override int GetModelCount(int groupId)
             {
-                return database.GetEntryCount(groupId);
+                return database.GetEntryCount(groupId, false);
             }
 
-            protected override List<OrderedEntryModel> GetOrderedModels(int groupId, int skip, int take)
+            protected override List<EntryModel> GetOrderedModels(int groupId, int skip, int take)
             {
-                return database.GetOrderedEntries(groupId, skip, take);
+                return database.GetEntries(groupId, skip, take, true);
             }
 
-            protected override void UpdateItems(int groupId, List<OrderedEntryModel> updatedItems)
+            protected override void UpdateItems(int groupId, List<EntryModel> updatedItems)
             {
-                database.UpdateOrderedEntries(updatedItems);
+                database.UpdateEntries(updatedItems);
+            }
+
+            protected override (EntryModel indexModel, EntryModel nextModel) GetModelWithSuccessor(int groupId, int index)
+            {
+                var indexModel = database.GetEntries(groupId, index, 1, false)[0];
+                var nextModel = database.GetNextEntry(indexModel, true);
+
+                return (indexModel, nextModel);
             }
 
             public EntryOrdering(BaseDatabase database)
@@ -97,33 +105,41 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
-        private class ColumnOrdering : BaseEntityOrdering<OrderedColumnModel>
+        private class ColumnOrdering : BaseEntityOrdering<ColumnModel>
         {
             private readonly BaseDatabase database;
 
-            protected override long? GetFirstOrderValue(int groupId)
+            protected override long GetFirstOrderValue(int groupId)
             {
-                return database.GetFirstColumnOrder(groupId);
+                return database.GetFirstColumnOrder(groupId, true);
             }
 
-            protected override long? GetLastOrderValue(int groupId)
+            protected override long GetLastOrderValue(int groupId)
             {
-                return database.GetLastColumnOrder(groupId);
+                return database.GetLastColumnOrder(groupId, true);
             }
 
             protected override int GetModelCount(int groupId)
             {
-                return database.GetColumnCount(groupId);
+                return database.GetColumnCount(groupId, false);
             }
 
-            protected override List<OrderedColumnModel> GetOrderedModels(int groupId, int skip, int take)
+            protected override List<ColumnModel> GetOrderedModels(int groupId, int skip, int take)
             {
-                return database.GetOrderedColumns(groupId, skip, take);
+                return database.GetColumns(groupId, skip, take, true);
             }
 
-            protected override void UpdateItems(int groupId, List<OrderedColumnModel> updatedItems)
+            protected override void UpdateItems(int groupId, List<ColumnModel> updatedItems)
             {
-                database.UpdateOrderedColumns(updatedItems);
+                database.UpdateColumns(updatedItems);
+            }
+
+            protected override (ColumnModel indexModel, ColumnModel nextModel) GetModelWithSuccessor(int groupId, int index)
+            {
+                var indexModel = database.GetColumns(groupId, index, 1, false)[0];
+                var nextModel = database.GetNextColumn(indexModel, true);
+
+                return (indexModel, nextModel);
             }
 
             public ColumnOrdering(BaseDatabase database)
@@ -132,33 +148,41 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
-        private class TableOrdering : BaseEntityOrdering<OrderedTableModel>
+        private class TableOrdering : BaseEntityOrdering<TableModel>
         {
             private readonly BaseDatabase database;
 
-            protected override long? GetFirstOrderValue(int groupId)
+            protected override long GetFirstOrderValue(int groupId)
             {
-                return database.GetFirstTableOrder();
+                return database.GetFirstTableOrder(true);
             }
 
-            protected override long? GetLastOrderValue(int groupId)
+            protected override long GetLastOrderValue(int groupId)
             {
-                return database.GetLastTableOrder();
+                return database.GetLastTableOrder(true);
             }
 
             protected override int GetModelCount(int groupId)
             {
-                return database.GetTableCount();
+                return database.GetTableCount(false);
             }
 
-            protected override List<OrderedTableModel> GetOrderedModels(int groupId, int skip, int take)
+            protected override List<TableModel> GetOrderedModels(int groupId, int skip, int take)
             {
-                return database.GetOrderedTables(skip, take);
+                return database.GetTables(skip, take, true);
             }
 
-            protected override void UpdateItems(int groupId, List<OrderedTableModel> updatedItems)
+            protected override void UpdateItems(int groupId, List<TableModel> updatedItems)
             {
-                database.UpdateOrderedTables(updatedItems);
+                database.UpdateTables(updatedItems);
+            }
+
+            protected override (TableModel indexModel, TableModel nextModel) GetModelWithSuccessor(int groupId, int index)
+            {
+                var indexModel = database.GetTables(index, 1, false)[0];
+                var nextModel = database.GetNextTable(indexModel, true);
+
+                return (indexModel, nextModel);
             }
 
             public TableOrdering(BaseDatabase database)
@@ -195,7 +219,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database, IDocumentHandler handler)
         {
-            List<ColumnModel> columns = database.GetColumnsForTable(table.Id);
+            List<ColumnModel> columns = database.GetColumns(table.Id, false);
             List<ColumnViewModel> columnViewModels = new();
 
             foreach (var column in columns)
@@ -210,7 +234,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database, IDocumentHandler handler)
         {
-            List<EntryModel> entries = database.GetEntriesForColumn(column.Id);
+            List<EntryModel> entries = database.GetEntries(column.Id, false);
 
             List<BaseEntryViewModel> entryViewModels = entries
                 .Select(e => BuildEntryViewModel(e, database, handler))
@@ -315,12 +339,9 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void AddTableFromModel(TableModel newTable)
         {
             // Fill in order
-            var newOrderedTable = mapper.Map<OrderedTableModel>(newTable);
-            var tableCount = document.Database.GetTableCount();
-            tableOrdering.SetNewOrder(newOrderedTable, tableCount, 0);
-            document.Database.AddTable(newOrderedTable);
-
-            mapper.Map(newOrderedTable, newTable);
+            var tableCount = document.Database.GetTableCount(false);
+            tableOrdering.SetNewOrder(newTable, tableCount, 0);
+            document.Database.AddTable(newTable);
 
             var tableViewModel = BuildTableViewModel(newTable, document.Database, handler);
             tables.Add(tableViewModel);
@@ -374,7 +395,7 @@ namespace Board.BusinessLogic.ViewModels.Document
                 ActiveTable = tables[index];
         }
 
-        internal void DeleteColumn(ColumnViewModel columnViewModel, bool permanent)
+        public void DeleteColumn(ColumnViewModel columnViewModel, bool permanent)
         {
             var tableViewModel = columnViewModel.Parent;
             document.Database.DeleteColumn(columnViewModel.Column, permanent);
@@ -383,15 +404,13 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public void AddColumnFromModel(TableViewModel tableViewModel, ColumnModel newColumn)
         {
+            // Add entity
             newColumn.TableId = tableViewModel.Table.Id;
 
             // Fill in order
-            var newOrderedColumn = mapper.Map<OrderedColumnModel>(newColumn);
-            var columnCount = document.Database.GetColumnCount(tableViewModel.Table.Id);
-            columnOrdering.SetNewOrder(newOrderedColumn, columnCount, tableViewModel.Table.Id);
-            document.Database.AddColumn(newOrderedColumn);
-
-            mapper.Map(newOrderedColumn, newColumn);
+            var columnCount = document.Database.GetColumnCount(tableViewModel.Table.Id, false);
+            columnOrdering.SetNewOrder(newColumn, columnCount, tableViewModel.Table.Id);
+            document.Database.AddColumn(newColumn);
 
             var columnViewModel = BuildColumnViewModel(newColumn, document.Database, handler);
             tableViewModel.Columns.Add(columnViewModel);
@@ -410,12 +429,9 @@ namespace Board.BusinessLogic.ViewModels.Document
             newEntry.ColumnId = columnViewModel.Column.Id;
 
             // Fill in order
-            var newOrderedEntry = mapper.Map<OrderedEntryModel>(newEntry);
-            var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id);
-            entryOrdering.SetNewOrder(newOrderedEntry, entryCount, columnViewModel.Column.Id);
-            document.Database.AddEntry(newOrderedEntry);
-
-            mapper.Map(newOrderedEntry, newEntry);
+            var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id, false);
+            entryOrdering.SetNewOrder(newEntry, entryCount, columnViewModel.Column.Id);
+            document.Database.AddEntry(newEntry);
 
             var entryViewModel = BuildEntryViewModel(newEntry, document.Database, handler);
 
@@ -427,6 +443,21 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)
         {
             newInplaceEntryViewModel.Parent.Entries.Remove(newInplaceEntryViewModel);
+        }
+
+        public void ReloadTable(TableViewModel updatedTable)
+        {
+            int tableId = updatedTable.Table.Id;
+
+            var tableModel = document.Database.GetTable(tableId);
+            var newTableViewModel = BuildTableViewModel(tableModel, document.Database, handler);
+
+            int index = tables.IndexOf(updatedTable);
+            bool selected = ActiveTable == updatedTable;
+
+            tables[index] = newTableViewModel;
+            if (selected)
+                ActiveTable = newTableViewModel;
         }
 
         public void DeleteEntry(EntryViewModel entryViewModel, bool permanent)
@@ -441,12 +472,10 @@ namespace Board.BusinessLogic.ViewModels.Document
             if (entryViewModel.Parent == targetColumnViewModel)
             {
                 // Move entry within the same column
-                OrderedEntryModel orderedEntry = mapper.Map<OrderedEntryModel>(entryViewModel.Entry);
                 // Note: old order doesn't matter even if the underlying entity will be updated
                 // during reordering process.
-                entryOrdering.SetNewOrder(orderedEntry, newIndex, targetColumnViewModel.Column.Id);
-                document.Database.UpdateOrderedEntry(orderedEntry);
-                mapper.Map(orderedEntry, entryViewModel.Entry);
+                entryOrdering.SetNewOrder(entryViewModel.Entry, newIndex, targetColumnViewModel.Column.Id);
+                document.Database.UpdateEntry(entryViewModel.Entry);
 
                 var currentIndex = targetColumnViewModel.Entries.IndexOf(entryViewModel);
                 if (newIndex != currentIndex && newIndex != currentIndex + 1)
@@ -463,11 +492,9 @@ namespace Board.BusinessLogic.ViewModels.Document
             {
                 // Move entry from column to column
 
-                OrderedEntryModel orderedEntry = mapper.Map<OrderedEntryModel>(entryViewModel.Entry);
-                entryOrdering.SetNewOrder(orderedEntry, newIndex, targetColumnViewModel.Column.Id);
-                orderedEntry.ColumnId = targetColumnViewModel.Column.Id;
-                document.Database.UpdateOrderedEntry(orderedEntry);
-                mapper.Map(orderedEntry, entryViewModel.Entry);
+                entryOrdering.SetNewOrder(entryViewModel.Entry, newIndex, targetColumnViewModel.Column.Id);
+                entryViewModel.Entry.ColumnId = targetColumnViewModel.Column.Id;
+                document.Database.UpdateEntry(entryViewModel.Entry);
 
                 entryViewModel.Parent.Entries.Remove(entryViewModel);
                 targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);
@@ -479,10 +506,8 @@ namespace Board.BusinessLogic.ViewModels.Document
             if (columnViewModel.Parent != targetTableViewModel)
                 throw new ArgumentException("Moving columns between tables is not yet supported!");
 
-            OrderedColumnModel orderedColumn = mapper.Map<OrderedColumnModel>(columnViewModel.Column);
-            columnOrdering.SetNewOrder(orderedColumn, newIndex, targetTableViewModel.Table.Id);
-            document.Database.UpdateOrderedColumn(orderedColumn);
-            mapper.Map(orderedColumn, columnViewModel.Column);
+            columnOrdering.SetNewOrder(columnViewModel.Column, newIndex, targetTableViewModel.Table.Id);
+            document.Database.UpdateColumn(columnViewModel.Column);
 
             var currentIndex = targetTableViewModel.Columns.IndexOf(columnViewModel);
             if (newIndex != currentIndex && newIndex != currentIndex + 1)

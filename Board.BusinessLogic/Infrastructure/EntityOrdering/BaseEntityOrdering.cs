@@ -9,18 +9,51 @@ using System.Threading.Tasks;
 
 namespace Board.BusinessLogic.Infrastructure.EntityOrdering
 {
+    /// <summary>
+    /// Handles persisting item order in the database.
+    /// </summary>
+    /// <remarks>
+    /// If items are not soft-deletable, implementations are straightforward.
+    /// This class can also work with soft-deletable items, with the following
+    /// required changes to the implementations:
+    /// 
+    /// <list type="bullet">
+    ///     <item><code>GetLastOrderValue</code> must return last order value regardless of soft-deletion;</item>
+    ///     <item><code>GetFirstOrderValue</code> must return first order value regardless of soft-deletion;</item>
+    ///     <item><code>GetModelCount</code> must return count of <strong>not deleted</strong> items;</item>
+    ///     <item><code>GetOrderedModels</code> must return items regardless of soft-deletion;</item>
+    ///     <item><code>GetModelWithSuccessor</code> must return (index)-th <strong>not deleted</strong> item and its immediate successor (regardless of soft-deletion)</item>
+    ///     <item><code>UpdateItems</code> should update all items, regardless of soft-deletion.</item>
+    /// </list>
+    /// 
+    /// Such implementation will also update softly-deleted items' positions, so
+    /// that if they are undeleted, they will return to (more or less) their
+    /// previous location.
+    /// </remarks>
+    /// <typeparam name="TModel"></typeparam>
     public abstract class BaseEntityOrdering<TModel>
         where TModel : IOrderedModel
     {
         private const long ORDER_STEP = 1024;
         private const int REORDER_BATCH = 50;
 
-        protected abstract long? GetLastOrderValue(int groupId);
-        protected abstract long? GetFirstOrderValue(int groupId);
+        /// <summary>Returns order value of last item ( = greatest order value)</summary>
+        protected abstract long GetLastOrderValue(int groupId);
+        /// <summary>Returns order value of first item ( = smallest order value)</summary>
+        protected abstract long GetFirstOrderValue(int groupId);
+        /// <summary>Returns count of ordered items</summary>
         protected abstract int GetModelCount(int groupId);
+        /// <summary>Returns a list of models ordered by the order field</summary>
         protected abstract List<TModel> GetOrderedModels(int groupId, int skip, int take);
+        /// <summary>Returns model at index <paramref name="index"/> and its immediate successor.</summary>
+        protected abstract (TModel indexModel, TModel nextModel) GetModelWithSuccessor(int groupId, int index);
+        /// <summary>Persists changes made to given list of models.</summary>
         protected abstract void UpdateItems(int groupId, List<TModel> updatedItems);
 
+        /// <summary>
+        /// Sets order field of given model. If neccessary, reorders existing items
+        /// so that new order value can be properly generated.
+        /// </summary>        
         public void SetNewOrder(TModel model, int desiredPosition, int groupId)
         {
             #if DEBUG_REORDERING
@@ -76,21 +109,19 @@ namespace Board.BusinessLogic.Infrastructure.EntityOrdering
 
             #if DEBUG_REORDERING
             System.Diagnostics.Debug.WriteLine($"Desired position is middle, picking two neighbors");
-            #endif
+#endif
 
             // Pick two items, between which new one is being inserted
-            List<TModel> surroundingItems = GetOrderedModels(groupId, desiredPosition - 1, 2);
-            if (surroundingItems.Count != 2 || surroundingItems[0] is null || surroundingItems[1] is null)
-                throw new InvalidOperationException("Fatal error: expected exactly two non-null items returned");
+            (TModel indexModel, TModel successorModel) = GetModelWithSuccessor(groupId, desiredPosition - 1);
 
             #if DEBUG_REORDERING
-            System.Diagnostics.Debug.WriteLine($"Neighbor orders are: {surroundingItems[0].Order} and {surroundingItems[1].Order}");
+            System.Diagnostics.Debug.WriteLine($"Neighbor orders are: {indexModel.Order} and {successorModel.Order}");
             #endif
 
-            long midOrder = (surroundingItems[0].Order + surroundingItems[1].Order) / 2;
+            long midOrder = (indexModel.Order + successorModel.Order) / 2;
 
             // There is place in between two items
-            if (midOrder > surroundingItems[0].Order && midOrder < surroundingItems[1].Order)
+            if (midOrder > indexModel.Order && midOrder < successorModel.Order)
             {
                 #if DEBUG_REORDERING
                 System.Diagnostics.Debug.WriteLine($"Mid order will be used: {midOrder}");

@@ -28,10 +28,12 @@
             </Button.ContextMenu>
         </Button>
 
-        <Label Content="{Binding Title, Mode=OneWay}" Cursor="Hand" VerticalAlignment="Stretch"
+        <Label Cursor="Hand" VerticalAlignment="Stretch"
                VerticalContentAlignment="Center" MouseDown="HandleHeaderMouseDown"
                MouseMove="HandleHeaderMouseMove" MouseUp="HandleHeaderMouseUp" 
                GiveFeedback="HandleHeaderGiveFeedback">
+            <TextBlock Text="{Binding Title, Mode=OneWay}"
+                       TextWrapping="Wrap" />
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding EditEntryCommand}"/>
             </i:Interaction.Behaviors>

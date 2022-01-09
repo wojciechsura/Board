@@ -1,0 +1,24 @@
+﻿<!-- Bind datacontext to TagViewModel -->
+    
+<Border x:Class="Board.Controls.Tag"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Board.Controls" 
+        xmlns:tag="clr-namespace:Board.BusinessLogic.ViewModels.Tag;assembly=Board.BusinessLogic" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        d:DataContext="{d:DesignInstance Type=tag:TagViewModel}"
+        mc:Ignorable="d">
+    <Border.Resources>
+        <Thickness x:Key="TagTextMargin">2,10</Thickness>
+        <CornerRadius x:Key="TagCornerRadius">4</CornerRadius>
+        <sys:Double x:Key="TagFontSize">8</sys:Double>
+    </Border.Resources>
+
+    <Border.Background>
+        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
+    </Border.Background>
+
+    <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}" Foreground="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
+</Border>

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Board.Data.SQLite.Migrations
 {
     [DbContext(typeof(TableContext))]
-    [Migration("20220107195840_First")]
+    [Migration("20220109211824_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,50 @@ namespace Board.Data.SQLite.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("Board.Data.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Color")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TableId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("TableId");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("EntryTag", b =>
+                {
+                    b.Property<int>("EntriesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EntriesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("EntryTag");
+                });
+
             modelBuilder.Entity("Board.Data.Entities.Column", b =>
                 {
                     b.HasOne("Board.Data.Entities.Table", "Table")
@@ -132,6 +176,32 @@ namespace Board.Data.SQLite.Migrations
                         .IsRequired();
 
                     b.Navigation("Column");
+                });
+
+            modelBuilder.Entity("Board.Data.Entities.Tag", b =>
+                {
+                    b.HasOne("Board.Data.Entities.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("EntryTag", b =>
+                {
+                    b.HasOne("Board.Data.Entities.Entry", null)
+                        .WithMany()
+                        .HasForeignKey("EntriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Board.Data.Entities.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Board.Data.Entities.Column", b =>

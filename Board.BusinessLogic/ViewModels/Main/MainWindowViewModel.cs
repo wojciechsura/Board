@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
+using Board.BusinessLogic.Types.Enums;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
@@ -97,6 +98,16 @@ namespace Board.BusinessLogic.ViewModels.Main
             {
                 DocumentInfo info = documentFactory.OpenDefinition(path);
                 SetNewDocument(info);
+            }
+        }
+
+        private void DoOpenTagEditor()
+        {
+            var changes = dialogService.ShowEditTagsDialog(activeDocument.Document, activeDocument.ActiveTable.Table.Id);
+
+            if ((changes & (EditActions.Edit | EditActions.Delete)) != 0)
+            {
+                activeDocument.ReloadTable(activeDocument.ActiveTable);
             }
         }
 
@@ -216,6 +227,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             NewTableCommand = new AppCommand(obj => DoNewTable(), documentExistsCondition & documentNotLoadingCondition);
             EditTableCommand = new AppCommand(obj => DoEditTable(), documentExistsCondition & tableSelectedCondition);
             DeleteTableCommand = new AppCommand(obj => DoDeleteTable(), documentExistsCondition & tableSelectedCondition);
+            OpenTagEditorCommand = new AppCommand(obj => DoOpenTagEditor(), documentExistsCondition & tableSelectedCondition);
 
             this.pathService = pathService;
             this.mapper = mapper;
@@ -228,6 +240,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         public ICommand NewTableCommand { get; }
         public ICommand EditTableCommand { get; }
         public ICommand DeleteTableCommand { get; }
+        public ICommand OpenTagEditorCommand { get; }
 
         public DocumentViewModel ActiveDocument
         {

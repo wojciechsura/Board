@@ -361,7 +361,7 @@
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource TextBoxForeground}" />
                         </TextBlock.Foreground>
-                        <Border x:Name="Outer" BorderThickness="1,1,1,2" 
+                        <Border x:Name="Outer" BorderThickness="1,1,1,2"
                                 CornerRadius="{StaticResource TextBoxBorderCornerRadius}">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{StaticResource TextBoxBorder}" />
@@ -370,7 +370,7 @@
                                 <SolidColorBrush Color="{StaticResource TextBoxBackground}" />
                             </Border.Background>
                         </Border>
-                        <Border x:Name="Inner" BorderThickness="0,0,0,2"
+                        <Border x:Name="Inner" BorderThickness="0,0,0,1" Margin="0,0,0,1"
                                 CornerRadius="{StaticResource TextBoxBorderCornerRadius}">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{StaticResource TextBoxUnfocusedBorder}" />
@@ -407,6 +407,14 @@
                                 <VisualState x:Name="Unfocused" />
                                 <VisualState x:Name="Focused">
                                     <Storyboard>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="Inner"
+                                                                          Storyboard.TargetProperty="BorderThickness">
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0,0,0,2" />
+                                        </ThicknessAnimationUsingKeyFrames>
+                                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="Inner"
+                                                                          Storyboard.TargetProperty="Margin">
+                                            <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0,0,0,0" />
+                                        </ThicknessAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Inner"
                                                                       Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{StaticResource TextBoxFocusedBorder}" />

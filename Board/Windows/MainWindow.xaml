@@ -43,6 +43,10 @@
                               Icon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard16.png"
                               Command="{Binding DeleteTableCommand}"/>
                     </f:RibbonGroupBox>
+
+                    <f:RibbonGroupBox Header="#Tags">
+                        <f:Button Header="#Editor" SizeDefinition="Large" Command="{Binding OpenTagEditorCommand}" />
+                    </f:RibbonGroupBox>
                 </f:RibbonTabItem>
             </f:Ribbon>
 

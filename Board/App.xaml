@@ -16,6 +16,8 @@
             <c:MarkdownToHtmlConverter x:Key="MarkdownToHtmlConverter" />
             <c:MultiBoolToVisbilityConverter x:Key="MultiBoolToVisibilityConverter" />
             <c:NegateConverter x:Key="NegateConverter" />
+            <c:IntToColorConverter x:Key="IntToColorConverter" />
+            <c:IntToForegroundColorConverter x:Key="IntToForegroundColorConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

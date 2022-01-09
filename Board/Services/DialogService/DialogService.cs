@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Board.BusinessLogic.Infrastructure.Document;
+using Board.BusinessLogic.Types.Enums;
 
 namespace Board.Services.DialogService
 {
@@ -239,6 +241,23 @@ namespace Board.Services.DialogService
                     return true;
                 else
                     return false;
+            }
+            finally
+            {
+                PopDialog(dialog);
+                ActivateLastDialog();
+            }
+        }
+
+        public EditActions ShowEditTagsDialog(WallDocument document, int tableId)
+        {
+            TagListWindow dialog = new TagListWindow(document, tableId);
+            dialogWindows.Push(dialog);
+
+            try
+            {
+                dialog.ShowDialog();
+                return dialog.Result;
             }
             finally
             {

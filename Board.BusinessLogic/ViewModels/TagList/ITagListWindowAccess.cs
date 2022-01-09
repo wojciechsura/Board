@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.Models.Data
+namespace Board.BusinessLogic.ViewModels.TagList
 {
-    public class OrderedEntryModel : EntryModel, IOrderedModel
+    public interface ITagListWindowAccess
     {
-        public long Order { get; set; }
+        void Close();
     }
 }

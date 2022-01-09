@@ -26,5 +26,6 @@ namespace Board.Data.Entities
         [ForeignKey(nameof(Column))]
         public int ColumnId { get; set; }
         public bool IsDeleted { get; set; }
+        public virtual List<Tag> Tags { get; set; }
     }
 }

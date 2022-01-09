@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable disable
+
 namespace Board.Models.Data
 {
-    public class ColumnModel : IOrderedModel
+    public class TagModel
     {
-        public string? Name { get; set; }
-        public int TableId { get; set; }
         public int Id { get; set; }
-        public long Order { get; set; }
+        public string Name { get; set; }
+        public int Color { get; set; }
+        public int TableId { get; set; }
     }
 }
