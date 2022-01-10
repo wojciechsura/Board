@@ -5,27 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Board.Windows"
         xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.TagList;assembly=Board.BusinessLogic" 
-        xmlns:vmt="clr-namespace:Board.BusinessLogic.ViewModels.Tag;assembly=Board.BusinessLogic" 
         xmlns:c="clr-namespace:Board.Controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Title="#Tags" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <Thickness x:Key="TagTextMargin">10,2</Thickness>
+        <CornerRadius x:Key="TagCornerRadius">8</CornerRadius>
+        <sys:Double x:Key="TagFontSize">8</sys:Double>
+    </Window.Resources>
     <StackPanel Orientation="Vertical">
         <GroupBox Header="#Tags" Margin="{StaticResource DialogItemsMargin}">
             <StackPanel Orientation="Vertical">
                 <ListBox Width="300" Height="200" Margin="{StaticResource DialogItemsMargin}"
-                         HorizontalContentAlignment="Stretch">
+                         HorizontalContentAlignment="Stretch" ItemsSource="{Binding Tags}">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vmt:TagViewModel}">
-                            <DockPanel>
-                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24">
+                        <DataTemplate DataType="{x:Type vm:TagViewModel}">
+                            <DockPanel x:Name="itemRoot" Background="Transparent">
+                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"
+                                        Command="{Binding EditCommand}"
+                                        Padding="0" Visibility="{Binding ElementName=itemRoot, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                                     <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
                                 </Button>
-                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24">
-                                    <Image Width="16" Height="16" Source="\Resources\Images\Delete16.png" />
+                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"
+                                        Command="{Binding DeleteCommand}"
+                                        Padding="0" Visibility="{Binding ElementName=itemRoot, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                                    <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
                                 </Button>
                                 <Grid>
-                                    <c:Tag HorizontalAlignment="Left"  Margin="{StaticResource DialogItemsMargin}"/>
+                                    <Border HorizontalAlignment="Left" CornerRadius="{StaticResource TagCornerRadius}">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
+                                        </Border.Background>
+
+                                        <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}"                                                    
+                                                   VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Border>
                                 </Grid>
                             </DockPanel>
                         </DataTemplate>

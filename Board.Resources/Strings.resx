@@ -159,4 +159,7 @@
   <data name="TagEditor.Title.Edit" xml:space="preserve">
     <value>Edit tag</value>
   </data>
+  <data name="Message.TagDeletion" xml:space="preserve">
+    <value>Are you sure you want to delete tag {0}?</value>
+  </data>
 </root>

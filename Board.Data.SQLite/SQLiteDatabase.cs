@@ -373,20 +373,51 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(updatedEntry, entry);
             context.SaveChanges();
         }
-        
+
         #endregion
 
-        #region Tabs
+        #region Tags
 
-        public override List<TagModel> GetTags(int tableId)
+        public override void AddTag(TagModel newTag)
+        {
+            var tag = mapper.Map<Tag>(newTag);
+            context.Tags.Add(tag);
+            context.SaveChanges();
+            mapper.Map(tag, newTag);
+        }
+
+        public override void DeleteTag(TagModel deletedTag, bool permanent)
+        {
+            var tag = context.Tags.First(e => e.Id == deletedTag.Id);
+
+            if (permanent)
+            {
+                context.Remove<Tag>(tag);
+                context.SaveChanges();
+            }
+            else
+            {
+                tag.IsDeleted = true;
+                context.SaveChanges();
+            }
+        }
+
+        public override List<TagModel> GetTags(int tableId, bool includeDeleted)
         {
             var tagEntries = context.Tags
-                .Where(t => t.TableId == tableId && !t.IsDeleted)
+                .Where(t => t.TableId == tableId && (includeDeleted || !t.IsDeleted))
                 .OrderBy(t => t.Name)
                 .ToList();
 
             var result = mapper.Map<List<TagModel>>(tagEntries);
             return result;
+        }
+
+        public override void UpdateTag(TagModel updatedTag)
+        {
+            var tag = context.Tags.First(t => t.Id == updatedTag.Id);
+            mapper.Map(updatedTag, tag);
+            context.SaveChanges();
         }
 
         #endregion

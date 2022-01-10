@@ -249,7 +249,7 @@ namespace Board.Services.DialogService
             }
         }
 
-        public EditActions ShowEditTagsDialog(WallDocument document, int tableId)
+        public void ShowEditTagsDialog(WallDocument document, int tableId)
         {
             TagListWindow dialog = new TagListWindow(document, tableId);
             dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
@@ -258,7 +258,6 @@ namespace Board.Services.DialogService
             try
             {
                 dialog.ShowDialog();
-                return dialog.Result;
             }
             finally
             {

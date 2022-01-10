@@ -23,7 +23,7 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, bool? permanently) ShowDeleteDialog(string message);
         (bool result, ColumnModel model) ShowNewColumnDialog();
         bool ShowEditColumnDialog(ColumnModel columnModel);
-        EditActions ShowEditTagsDialog(WallDocument document, int tableId);
+        void ShowEditTagsDialog(WallDocument document, int tableId);
         (bool result, TagModel model) ShowNewTagDialog();
         bool ShowEditTagDialog(TagModel tagModel);
     }

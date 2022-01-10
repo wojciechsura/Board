@@ -39,8 +39,6 @@ namespace Board.Windows
                 new ParameterOverride("tableId", tableId),
                 new ParameterOverride("document", document));
             DataContext = viewModel;            
-        }
-
-        public EditActions Result => viewModel.Result;
+        }        
     }
 }

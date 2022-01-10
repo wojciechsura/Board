@@ -58,7 +58,10 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         #region Tags
 
-        public abstract List<TagModel> GetTags(int tableId);
+        public abstract void AddTag(TagModel newTag);
+        public abstract void DeleteTag(TagModel tag, bool permanent);
+        public abstract List<TagModel> GetTags(int tableId, bool includeDeleted);
+        public abstract void UpdateTag(TagModel updatedTag);
 
         #endregion
     }

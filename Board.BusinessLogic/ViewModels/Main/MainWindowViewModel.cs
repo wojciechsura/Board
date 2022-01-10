@@ -103,12 +103,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private void DoOpenTagEditor()
         {
-            var changes = dialogService.ShowEditTagsDialog(activeDocument.Document, activeDocument.ActiveTable.Table.Id);
-
-            if ((changes & (EditActions.Edit | EditActions.Delete)) != 0)
-            {
-                activeDocument.ReloadTable(activeDocument.ActiveTable);
-            }
+            dialogService.ShowEditTagsDialog(activeDocument.Document, activeDocument.ActiveTable.Table.Id);
         }
 
         private void SetNewDocument(DocumentInfo info)

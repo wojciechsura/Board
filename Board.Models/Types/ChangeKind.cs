@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board.BusinessLogic.Types.Enums
+namespace Board.Models.Types
 {
-    [Flags]
-    public enum EditActions
+    public enum ChangeKind
     {
-        Add = 1,
-        Edit = 2,
-        Delete = 4
+        Add,
+        Edit,
+        Delete
     }
 }

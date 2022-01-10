@@ -11,8 +11,8 @@
     <StackPanel Orientation="Vertical">
         <Border Margin="{StaticResource DialogContentPadding}">
             <StackPanel Orientation="Vertical">
-                <Label Margin="{StaticResource DialogItemsMargin}" Padding="0" Content="{Binding Message}" />
-                <CheckBox Margin="{StaticResource DialogItemsExceptTopMargin}" Padding="0" Content="#Delete permanently (this cannot be reversed!)"
+                <Label Margin="{StaticResource PopupItemsMargin}" Padding="0" Content="{Binding Message}" />
+                <CheckBox Margin="{StaticResource PopupItemsExceptTopMargin}" Padding="0" Content="#Delete permanently (this cannot be reversed!)"
                           IsChecked="{Binding DeletePermanently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/> 
             </StackPanel>
         </Border>
