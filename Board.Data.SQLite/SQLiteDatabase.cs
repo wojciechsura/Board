@@ -417,6 +417,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
+        public override TagDisplayModel GetTagDisplay(int tagId)
+        {
+            var tag = context.Tags.First(t => t.Id == tagId);
+            return mapper.Map<TagDisplayModel>(tag);
+        }
+
         public override List<TagModel> GetTags(int tableId, bool includeDeleted)
         {
             var tagEntries = context.Tags

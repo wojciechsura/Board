@@ -61,6 +61,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public abstract void AddTag(TagModel newTag);
         public abstract void DeleteTag(int tagId, bool permanent);
+        public abstract TagDisplayModel GetTagDisplay(int tagId);
         public abstract List<TagModel> GetTags(int tableId, bool includeDeleted);
         public abstract void UpdateTag(TagModel updatedTag);
 

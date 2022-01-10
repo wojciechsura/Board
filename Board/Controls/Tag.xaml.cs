@@ -18,7 +18,7 @@ namespace Board.Controls
     /// <summary>
     /// Interaction logic for Tag.xaml
     /// </summary>
-    public partial class Tag : UserControl
+    public partial class Tag : Border
     {
         public Tag()
         {

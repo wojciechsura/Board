@@ -19,5 +19,6 @@ namespace Board.BusinessLogic.ViewModels.Document
         public string Name => tag.Name;
 
         public int Color => tag.Color;
+        public TagDisplayModel Tag => tag;
     }
 }

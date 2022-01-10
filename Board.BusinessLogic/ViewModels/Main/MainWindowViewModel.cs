@@ -17,10 +17,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Board.BusinessLogic.Types.Enums;
+using Board.BusinessLogic.Services.EventBus;
+using Board.Models.Events;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class MainWindowViewModel : BaseViewModel, IDocumentHandler
+    public class MainWindowViewModel : BaseViewModel, IDocumentHandler, IEventListener<TagChangedEvent>
     {
         // Private fields -----------------------------------------------------
 
@@ -29,7 +31,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly IDocumentFactory documentFactory;
         private readonly IPathService pathService;
         private readonly IMapper mapper;
-
+        private readonly IEventBus eventBus;
         private readonly BaseCondition documentNotLoadingCondition;
         private readonly BaseCondition documentExistsCondition;
         private readonly BaseCondition tableSelectedCondition;
@@ -205,13 +207,31 @@ namespace Board.BusinessLogic.ViewModels.Main
             activeDocument.MoveColumn(columnViewModel, tableViewModel, newIndex);
         }
 
+        // IEventListener<TagChangedEvent> implementation ---------------------
+
+        void IEventListener<TagChangedEvent>.Receive(TagChangedEvent @event)
+        {
+            if (activeDocument != null)
+                activeDocument.ApplyTagChange(@event.ChangeKind, @event.TableId, @event.TagId);
+        }
+
         // Public methods -----------------------------------------------------
 
-        public MainWindowViewModel(IMainWindowAccess access, IDialogService dialogService, IDocumentFactory documentFactory, IPathService pathService, IMapper mapper)
+        public MainWindowViewModel(IMainWindowAccess access,
+            IDialogService dialogService,
+            IDocumentFactory documentFactory,
+            IPathService pathService,
+            IMapper mapper,
+            IEventBus eventBus)
         {
             this.access = access;
             this.dialogService = dialogService;
             this.documentFactory = documentFactory;
+            this.pathService = pathService;
+            this.mapper = mapper;
+            this.eventBus = eventBus;
+
+            eventBus.Register<TagChangedEvent>(this);
 
             documentExistsCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument != null, false);
             documentNotLoadingCondition = new LambdaCondition<MainWindowViewModel>(this, vm => !vm.ActiveDocument.IsLoading, true);
@@ -224,8 +244,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             DeleteTableCommand = new AppCommand(obj => DoDeleteTable(), documentExistsCondition & tableSelectedCondition);
             OpenTagEditorCommand = new AppCommand(obj => DoOpenTagEditor(), documentExistsCondition & tableSelectedCondition);
 
-            this.pathService = pathService;
-            this.mapper = mapper;
         }
 
         // Public properties --------------------------------------------------

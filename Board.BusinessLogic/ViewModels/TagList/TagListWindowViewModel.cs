@@ -71,7 +71,7 @@ namespace Board.BusinessLogic.ViewModels.TagList
             var tagViewModel = new TagViewModel(newTag, this);
             InsertTag(tagViewModel);
 
-            eventBus.Send(new TagChangedEvent(ChangeKind.Add, newTag.Id));
+            eventBus.Send(new TagChangedEvent(ChangeKind.Add, tableId, newTag.Id));
         }
 
         // ITagHandler implementation -----------------------------------------
@@ -89,7 +89,7 @@ namespace Board.BusinessLogic.ViewModels.TagList
                 RemoveTag(tagViewModel);
                 InsertTag(newTagViewModel);
 
-                eventBus.Send(new TagChangedEvent(ChangeKind.Edit, tagModel.Id));
+                eventBus.Send(new TagChangedEvent(ChangeKind.Edit, tableId, tagModel.Id));
             }
         }
 
@@ -99,10 +99,10 @@ namespace Board.BusinessLogic.ViewModels.TagList
             (bool result, bool? permanently) = dialogService.ShowDeleteDialog(message);
             if (result)
             {
-                document.Database.DeleteTag(tagViewModel.Tag, permanently.Value);
+                document.Database.DeleteTag(tagViewModel.Tag.Id, permanently.Value);
                 RemoveTag(tagViewModel);
 
-                eventBus.Send(new TagChangedEvent(ChangeKind.Delete, tagViewModel.Tag.Id));
+                eventBus.Send(new TagChangedEvent(ChangeKind.Delete, tableId, tagViewModel.Tag.Id));
             }
         }
 

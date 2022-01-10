@@ -9,13 +9,15 @@ namespace Board.Models.Events
 {
     public class TagChangedEvent : BaseEvent
     {
-        public TagChangedEvent(ChangeKind changeKind, int id)
+        public TagChangedEvent(ChangeKind changeKind, int tableId, int tagId)
         {
             ChangeKind = changeKind;
-            Id = id;
+            TableId = tableId;
+            TagId = tagId;
         }
 
         public ChangeKind ChangeKind { get; }
-        public int Id { get; set; }
+        public int TableId { get; }
+        public int TagId { get; set; }
     }
 }

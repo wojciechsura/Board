@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Board.BusinessLogic.Infrastructure.EntityOrdering;
 using AutoMapper;
+using Board.Models.Types;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
@@ -400,6 +401,52 @@ namespace Board.BusinessLogic.ViewModels.Document
             var tableViewModel = columnViewModel.Parent;
             document.Database.DeleteColumn(columnViewModel.Column.Id, permanent);
             tableViewModel.Columns.Remove(columnViewModel);
+        }
+
+        public void ApplyTagChange(ChangeKind changeKind, int tableId, int tagId)
+        {
+            var tableViewModel = tables.FirstOrDefault(t => t.Table.Id == tableId);
+
+            switch (changeKind)
+            {
+                case ChangeKind.Add:
+                    {
+                        // Nothing to do (no entries have this tag yet)
+                        break;
+                    }
+                case ChangeKind.Edit:
+                    {
+                        var newTagDisplay = document.Database.GetTagDisplay(tagId);
+
+                        foreach (var column in tableViewModel.Columns)
+                            foreach (var entry in column.Entries.OfType<EntryViewModel>())
+                            {
+                                var oldTag = entry.Tags.FirstOrDefault(t => t.Tag.Id == tagId);
+                                if (oldTag != null)
+                                {
+                                    var index = entry.Tags.IndexOf(oldTag);
+                                    var newTag = new TagViewModel(newTagDisplay);
+                                    entry.Tags[index] = newTag;
+                                }
+                            }
+
+                        break;
+                    }
+                case ChangeKind.Delete:
+                    {
+                        foreach (var column in tableViewModel.Columns)
+                            foreach (var entry in column.Entries.OfType<EntryViewModel>())
+                            {
+                                var oldTag = entry.Tags.First(t => t.Tag.Id == tagId);
+                                if (oldTag != null)
+                                    entry.Tags.Remove(oldTag);
+                            }
+
+                        break;
+                    }
+                default:
+                    throw new InvalidOperationException("Unsupported change kind!");
+            }
         }
 
         public void AddColumnFromModel(TableViewModel tableViewModel, ColumnModel newColumn)
