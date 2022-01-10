@@ -20,6 +20,9 @@ namespace Board.BusinessLogic.MappingProfiles
             CreateMap<TableModel, TableModel>();
             CreateMap<ColumnModel, ColumnModel>();
             CreateMap<EntryModel, EntryModel>();
+
+            CreateMap<Tag, TagDisplayModel>();
+            CreateMap<Entry, EntryDisplayModel>();
         }
     }
 }

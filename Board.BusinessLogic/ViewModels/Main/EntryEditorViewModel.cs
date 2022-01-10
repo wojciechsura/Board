@@ -29,7 +29,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             WallDocument document,
             IDocumentHandler handler)
         {
-            var fullEntryModel = document.Database.GetFullEntryById(entryId);
+            var fullEntryModel = document.Database.GetEntryDisplay(entryId);
             this.entryId = entryId;
             this.document = document;
             this.handler = handler;

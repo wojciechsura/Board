@@ -36,9 +36,9 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(tableEntity, newTable);
         }
 
-        public override void DeleteTable(TableModel deletedTable, bool permanent)
+        public override void DeleteTable(int tableId, bool permanent)
         {
-            var table = context.Tables.First(t => t.Id == deletedTable.Id);
+            var table = context.Tables.First(t => t.Id == tableId);
 
             if (permanent)
             {
@@ -152,9 +152,9 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(column, newColumn);
         }
 
-        public override void DeleteColumn(ColumnModel deletedColumn, bool permanent)
+        public override void DeleteColumn(int columnId, bool permanent)
         {
-            var column = context.Columns.First(c => c.Id == deletedColumn.Id);
+            var column = context.Columns.First(c => c.Id == columnId);
 
             if (permanent)
             {
@@ -262,9 +262,9 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(entry, newEntry);
         }
 
-        public override void DeleteEntry(EntryModel deletedEntry, bool permanent)
+        public override void DeleteEntry(int entryId, bool permanent)
         {
-            var entry = context.Entries.First(e => e.Id == deletedEntry.Id);
+            var entry = context.Entries.First(e => e.Id == entryId);
 
             if (permanent)
             {
@@ -276,6 +276,19 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 entry.IsDeleted = true;
                 context.SaveChanges();
             }
+        }
+
+        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, bool includeDeleted)
+        {
+            var entryEntities = context.Entries
+                .Include(e => e.Tags)
+                .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
+                .OrderBy(e => e.Order)
+                .ToList();
+
+            var result = mapper.Map<List<EntryDisplayModel>>(entryEntities);
+
+            return result;
         }
 
         public override List<EntryModel> GetEntries(int columnId, bool includeDeleted)
@@ -324,10 +337,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 .Min(e => e.Order);
         }
 
-        public override EntryModel GetFullEntryById(int id)
+        public override EntryDisplayModel GetEntryDisplay(int entryId)
         {
-            var entry = context.Entries.First(e => e.Id == id && !e.IsDeleted);
-            var result = mapper.Map<EntryModel>(entry);
+            var entry = context.Entries
+                .Include(e => e.Tags)
+                .First(e => e.Id == entryId && !e.IsDeleted);
+            var result = mapper.Map<EntryDisplayModel>(entry);
             return result;
         }
 
@@ -386,9 +401,9 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(tag, newTag);
         }
 
-        public override void DeleteTag(TagModel deletedTag, bool permanent)
+        public override void DeleteTag(int tagId, bool permanent)
         {
-            var tag = context.Tags.First(e => e.Id == deletedTag.Id);
+            var tag = context.Tags.First(e => e.Id == tagId);
 
             if (permanent)
             {

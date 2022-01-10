@@ -234,7 +234,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database, IDocumentHandler handler)
         {
-            List<EntryModel> entries = database.GetEntries(column.Id, false);
+            List<EntryDisplayModel> entries = database.GetDisplayEntries(column.Id, false);
 
             List<BaseEntryViewModel> entryViewModels = entries
                 .Select(e => BuildEntryViewModel(e, database, handler))
@@ -245,7 +245,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             return columnViewModel;
         }
 
-        private static EntryViewModel BuildEntryViewModel(EntryModel entry, BaseDatabase database, IDocumentHandler handler)
+        private static EntryViewModel BuildEntryViewModel(EntryDisplayModel entry, BaseDatabase database, IDocumentHandler handler)
         {
             return new EntryViewModel(entry, handler);
         }
@@ -375,7 +375,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public void UpdateEntry(EntryViewModel entryViewModel)
         {
-            var entryModel = document.Database.GetEntryById(entryViewModel.Entry.Id);
+            var entryModel = document.Database.GetEntryDisplay(entryViewModel.Entry.Id);
             var newEntryViewModel = BuildEntryViewModel(entryModel, document.Database, handler);
 
             var columnViewModel = entryViewModel.Parent;
@@ -385,7 +385,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public void DeleteTable(TableViewModel tableViewModel, bool permanent)
         {
-            document.Database.DeleteTable(tableViewModel.Table, permanent);
+            document.Database.DeleteTable(tableViewModel.Table.Id, permanent);
             int index = tables.IndexOf(tableViewModel);
 
             tables.RemoveAt(index);
@@ -398,7 +398,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void DeleteColumn(ColumnViewModel columnViewModel, bool permanent)
         {
             var tableViewModel = columnViewModel.Parent;
-            document.Database.DeleteColumn(columnViewModel.Column, permanent);
+            document.Database.DeleteColumn(columnViewModel.Column.Id, permanent);
             tableViewModel.Columns.Remove(columnViewModel);
         }
 
@@ -433,7 +433,8 @@ namespace Board.BusinessLogic.ViewModels.Document
             entryOrdering.SetNewOrder(newEntry, entryCount, columnViewModel.Column.Id);
             document.Database.AddEntry(newEntry);
 
-            var entryViewModel = BuildEntryViewModel(newEntry, document.Database, handler);
+            var displayEntry = document.Database.GetEntryDisplay(newEntry.Id);
+            var entryViewModel = BuildEntryViewModel(displayEntry, document.Database, handler);
 
             // Add new entry in the end
             columnViewModel.Entries.Remove(newInplaceEntryViewModel);
@@ -463,7 +464,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void DeleteEntry(EntryViewModel entryViewModel, bool permanent)
         {
             var columnViewModel = entryViewModel.Parent;
-            document.Database.DeleteEntry(entryViewModel.Entry, permanent);
+            document.Database.DeleteEntry(entryViewModel.Entry.Id, permanent);
             columnViewModel.Entries.Remove(entryViewModel);
         }
 
@@ -474,8 +475,10 @@ namespace Board.BusinessLogic.ViewModels.Document
                 // Move entry within the same column
                 // Note: old order doesn't matter even if the underlying entity will be updated
                 // during reordering process.
-                entryOrdering.SetNewOrder(entryViewModel.Entry, newIndex, targetColumnViewModel.Column.Id);
-                document.Database.UpdateEntry(entryViewModel.Entry);
+
+                var entryModel = document.Database.GetEntryById(entryViewModel.Entry.Id);
+                entryOrdering.SetNewOrder(entryModel, newIndex, targetColumnViewModel.Column.Id);
+                document.Database.UpdateEntry(entryModel);
 
                 var currentIndex = targetColumnViewModel.Entries.IndexOf(entryViewModel);
                 if (newIndex != currentIndex && newIndex != currentIndex + 1)
@@ -492,9 +495,10 @@ namespace Board.BusinessLogic.ViewModels.Document
             {
                 // Move entry from column to column
 
-                entryOrdering.SetNewOrder(entryViewModel.Entry, newIndex, targetColumnViewModel.Column.Id);
-                entryViewModel.Entry.ColumnId = targetColumnViewModel.Column.Id;
-                document.Database.UpdateEntry(entryViewModel.Entry);
+                var entryModel = document.Database.GetEntryById(entryViewModel.Entry.Id);
+                entryOrdering.SetNewOrder(entryModel, newIndex, targetColumnViewModel.Column.Id);
+                entryModel.ColumnId = targetColumnViewModel.Column.Id;
+                document.Database.UpdateEntry(entryModel);
 
                 entryViewModel.Parent.Entries.Remove(entryViewModel);
                 targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);

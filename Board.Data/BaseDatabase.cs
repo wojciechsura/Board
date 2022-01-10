@@ -11,7 +11,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         #region Tables
 
         public abstract void AddTable(TableModel newTable);
-        public abstract void DeleteTable(TableModel table, bool permanent);
+        public abstract void DeleteTable(int tableId, bool permanent);
         public abstract long GetFirstTableOrder(bool includeDeleted);
         public abstract long GetLastTableOrder(bool includeDeleted);
         public abstract TableModel GetNextTable(TableModel table, bool includeDeleted);
@@ -27,7 +27,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         #region Columns
 
         public abstract void AddColumn(ColumnModel newColumn);
-        public abstract void DeleteColumn(ColumnModel column, bool permanent);
+        public abstract void DeleteColumn(int columnId, bool permanent);
         public abstract int GetColumnCount(int tableId, bool includeDeleted);
         public abstract List<ColumnModel> GetColumns(int tableId, bool includeDeleted);
         public abstract List<ColumnModel> GetColumns(int tableId, int skip, int take, bool includeDeleted);
@@ -42,13 +42,14 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         #region Entries
 
         public abstract void AddEntry(EntryModel newEntry);
-        public abstract void DeleteEntry(EntryModel deletedEntry, bool permanent);
+        public abstract void DeleteEntry(int entryId, bool permanent);
+        public abstract List<EntryDisplayModel> GetDisplayEntries(int id, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, int skip, int take, bool includeDeleted);
         public abstract EntryModel GetEntryById(int id);
         public abstract int GetEntryCount(int columnId, bool includeDeleted);
         public abstract long GetFirstEntryOrder(int columnId, bool includeDeleted);
-        public abstract EntryModel GetFullEntryById(int id);
+        public abstract EntryDisplayModel GetEntryDisplay(int entryId);
         public abstract long GetLastEntryOrder(int columnId, bool includeDeleted);
         public abstract EntryModel GetNextEntry(EntryModel entry, bool includeDeleted);
         public abstract void UpdateEntries(List<EntryModel> updatedItems);
@@ -59,7 +60,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         #region Tags
 
         public abstract void AddTag(TagModel newTag);
-        public abstract void DeleteTag(TagModel tag, bool permanent);
+        public abstract void DeleteTag(int tagId, bool permanent);
         public abstract List<TagModel> GetTags(int tableId, bool includeDeleted);
         public abstract void UpdateTag(TagModel updatedTag);
 
