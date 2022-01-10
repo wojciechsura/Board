@@ -7,17 +7,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Board.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d" BorderBrush="#40000000" BorderThickness="1" CornerRadius="8">
+        mc:Ignorable="d" CornerRadius="8">
     <Border.Resources>
         <Thickness x:Key="TagTextMargin">10,2</Thickness>
-        <sys:Double x:Key="TagFontSize">8</sys:Double>
     </Border.Resources>
     <Border.Background>
         <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
     </Border.Background>
 
-    <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}" FontSize="{StaticResource TagFontSize}"
-               VerticalAlignment="Center" HorizontalAlignment="Center" d:Text="Tag name">
+    <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" d:Text="Tag name">
         <TextBlock.Foreground>
             <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
         </TextBlock.Foreground>

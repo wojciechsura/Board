@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 using Board.BusinessLogic.Infrastructure.Document;
 using System.Windows.Input;
 using Spooksoft.VisualStateManager.Commands;
+using System.Collections.ObjectModel;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class EntryEditorViewModel : ModelEditorViewModel<EntryModel>
+    public class EntryEditorViewModel : ModelEditorViewModel<EntryEditModel>, IEntryEditorHandler
     {
+        // Private fields -----------------------------------------------------
+
         private readonly int entryId;
+        private readonly int tableId;
         private readonly WallDocument document;
         private readonly IDocumentHandler handler;
 
@@ -24,19 +28,78 @@ namespace Board.BusinessLogic.ViewModels.Main
         [SyncWithModel(nameof(EntryModel.Description))]
         private string description;
 
+        // Private methods ----------------------------------------------------
+
+        private void InsertTag<TTag>(ObservableCollection<TTag> tags, TTag tag)
+            where TTag : BaseTagViewModel
+        {
+            int i = 0;
+            while (i < tags.Count && string.Compare(tags[i].Name, tag.Name) < 0)
+                i++;
+
+            tags.Insert(i, tag);
+        }
+
+        // Protected methods --------------------------------------------------
+
+        protected override void UpdateFromModel(EntryEditModel model)
+        {
+            base.UpdateFromModel(model);
+
+            var tags = document.Database.GetTags(tableId, false)
+                .OrderBy(t => t.Name);
+
+            foreach (var tag in tags)
+            {
+                if (model.Tags.Any(t => t.Id == tag.Id))
+                    AddedTags.Add(new AddedTagViewModel(tag, this));
+                else
+                    AvailableTags.Add(new AvailableTagViewModel(tag, this));
+            }
+        }
+
+        // IEntryEditorHandler ------------------------------------------------
+
+        void IEntryEditorHandler.AddTag(AvailableTagViewModel tag)
+        {
+            document.Database.AddTagToEntry(entryId, tag.Tag.Id);
+
+            var addedTag = new AddedTagViewModel(tag.Tag, this);
+            AvailableTags.Remove(tag);
+            InsertTag(AddedTags, addedTag);
+        }
+
+        void IEntryEditorHandler.RemoveTag(AddedTagViewModel tag)
+        {
+            document.Database.RemoveTagFromEntry(entryId, tag.Tag.Id);
+
+            var availableTag = new AvailableTagViewModel(tag.Tag, this);
+            AddedTags.Remove(tag);
+            InsertTag(AvailableTags, availableTag);
+        }
+
+
+        // Public methods -----------------------------------------------------
+
         public EntryEditorViewModel(int entryId, 
+            int tableId,
             EntryViewModel editedEntryViewModel,
             WallDocument document,
             IDocumentHandler handler)
         {
-            var fullEntryModel = document.Database.GetEntryById(entryId);
+            var editEntryModel = document.Database.GetEntryEdit(entryId);
+
             this.entryId = entryId;
+            this.tableId = tableId;
             this.document = document;
             this.handler = handler;
 
             CloseCommand = new AppCommand(obj => handler.RequestEditorClose(editedEntryViewModel));
 
-            UpdateFromModel(fullEntryModel);
+            AddedTags = new ObservableCollection<AddedTagViewModel>();
+            AvailableTags = new ObservableCollection<AvailableTagViewModel>();
+
+            UpdateFromModel(editEntryModel);
         }
 
         public void SetTitle(string title)
@@ -57,6 +120,8 @@ namespace Board.BusinessLogic.ViewModels.Main
             Description = description;
         }
 
+        // Public properties --------------------------------------------------
+
         public string Title
         {
             get => title;
@@ -68,6 +133,9 @@ namespace Board.BusinessLogic.ViewModels.Main
             get => description;
             set => Set(ref description, value);
         } 
+
+        public ObservableCollection<AddedTagViewModel> AddedTags { get; }
+        public ObservableCollection<AvailableTagViewModel> AvailableTags { get; }
 
         public ICommand CloseCommand { get; }
     }

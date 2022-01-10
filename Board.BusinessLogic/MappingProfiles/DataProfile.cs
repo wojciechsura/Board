@@ -23,6 +23,7 @@ namespace Board.BusinessLogic.MappingProfiles
 
             CreateMap<Tag, TagDisplayModel>();
             CreateMap<Entry, EntryDisplayModel>();
+            CreateMap<Entry, EntryEditModel>();
         }
     }
 }

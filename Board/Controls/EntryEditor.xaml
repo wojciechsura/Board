@@ -5,11 +5,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:Board.Controls" 
+        xmlns:c="clr-namespace:Board.Controls" 
         xmlns:mvm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
         xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
         d:DataContext="{d:DesignInstance Type=mvm:EntryEditorViewModel}"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
         mc:Ignorable="d" 
         Style="{StaticResource Popup}" 
         x:Name="root" DataContextChanged="EditorDataContextChanged"
@@ -54,6 +55,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -86,10 +88,66 @@
             </Grid>
 
             <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Tag16.png" />
-            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource SectionLabel}" Content="#Tags" />
 
-            <Image Grid.Row="2" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
-            <Grid Grid.Row="2" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
+            <DockPanel x:Name="dpTags" Grid.Row="1" Grid.Column="1" Background="Transparent">
+                <ToggleButton x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Right" Style="{StaticResource FlatToggleButton}" 
+                              Width="24" Height="24" Padding="0"
+                              Visibility="{Binding ElementName=dpTags, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <Image Width="16" Height="16" Source="\Resources\Images\Add16.png" />
+                </ToggleButton>
+
+                <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
+                       Placement="Bottom" PlacementTarget="{Binding ElementName=dpTags}">
+                    <Border Style="{StaticResource Popup}">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="#Add tag" Margin="{StaticResource PopupItemsMargin}" />
+                            <ScrollViewer Width="200" Height="300" HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding AvailableTags}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
+                                            <c:Tag Cursor="Hand">
+                                                <i:Interaction.Behaviors>
+                                                    <b:ClickBehavior Command="{Binding AddCommand}"/>
+                                                </i:Interaction.Behaviors>
+                                            </c:Tag>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                
+                <Label Style="{StaticResource SectionLabel}" Content="#Tags" />
+            </DockPanel>
+
+            <DockPanel Grid.Row="2" Grid.Column="1">
+                <ItemsControl ItemsSource="{Binding AddedTags}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
+                            <c:Tag Margin="{StaticResource DialogItemsMargin}" Cursor="Hand">
+                                <i:Interaction.Behaviors>
+                                    <b:ClickBehavior Command="{Binding RemoveCommand}"/>
+                                </i:Interaction.Behaviors>
+                            </c:Tag>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+            
+            <Image Grid.Row="3" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
+            <Grid Grid.Row="3" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
                 <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" 
                         Padding="0" Click="EditDescriptionClick" Visibility="{Binding ElementName=spDescription, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
@@ -115,7 +173,7 @@
                 </DockPanel>
             </Grid>
 
-            <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch">
+            <Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch">
                 <WebBrowser Height="200" HorizontalAlignment="Stretch"
                             e:WebBrowserExtension.Html="{Binding Description, Converter={StaticResource MarkdownToHtmlConverter}}"
                             Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
