@@ -33,8 +33,12 @@
     <None Remove="Resources\Images\AddBoard16.png" />
     <None Remove="Resources\Images\AddBoard32.png" />
     <None Remove="Resources\Images\Cancel16.png" />
+    <None Remove="Resources\Images\Card16.png" />
+    <None Remove="Resources\Images\Card32.png" />
     <None Remove="Resources\Images\DeleteBoard16.png" />
     <None Remove="Resources\Images\DeleteBoard32.png" />
+    <None Remove="Resources\Images\Description16.png" />
+    <None Remove="Resources\Images\Description32.png" />
     <None Remove="Resources\Images\Edit16.png" />
     <None Remove="Resources\Images\EditBoard16.png" />
     <None Remove="Resources\Images\EditBoard32.png" />
@@ -45,6 +49,8 @@
     <None Remove="Resources\Images\sqlite16.png" />
     <None Remove="Resources\Images\sqlite32.png" />
     <None Remove="Resources\Images\sqlite64.png" />
+    <None Remove="Resources\Images\Tag16.png" />
+    <None Remove="Resources\Images\Tag32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Fonts\Roboto-Black.ttf" />
@@ -70,8 +76,12 @@
     <Resource Include="Resources\Images\AddBoard16.png" />
     <Resource Include="Resources\Images\AddBoard32.png" />
     <Resource Include="Resources\Images\Cancel16.png" />
+    <Resource Include="Resources\Images\Card16.png" />
+    <Resource Include="Resources\Images\Card32.png" />
     <Resource Include="Resources\Images\DeleteBoard16.png" />
     <Resource Include="Resources\Images\DeleteBoard32.png" />
+    <Resource Include="Resources\Images\Description16.png" />
+    <Resource Include="Resources\Images\Description32.png" />
     <Resource Include="Resources\Images\Edit16.png" />
     <Resource Include="Resources\Images\EditBoard16.png" />
     <Resource Include="Resources\Images\EditBoard32.png" />
@@ -94,6 +104,8 @@
     <Resource Include="Resources\Images\Sqlite16.png" />
     <Resource Include="Resources\Images\Sqlite32.png" />
     <Resource Include="Resources\Images\Sqlite64.png" />
+    <Resource Include="Resources\Images\Tag16.png" />
+    <Resource Include="Resources\Images\Tag32.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fluent.Ribbon" Version="9.0.1" />
