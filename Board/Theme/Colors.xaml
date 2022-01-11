@@ -29,6 +29,15 @@
     <Color x:Key="ButtonCheckedBorder">#0078d4</Color>
     <Color x:Key="ButtonCheckedBackground">#d8e6f1</Color>
 
+    <!-- ColumnButton -->
+
+    <Color x:Key="ColumnButtonBackground">#00000000</Color>
+    <Color x:Key="ColumnButtonHoverBackground">#30000000</Color>
+    <Color x:Key="ColumnButtonPressedBackground">#60000000</Color>
+    <Color x:Key="ColumnButtonForeground">#606060</Color>
+    <Color x:Key="ColumnButtonDisabledForeground">#838383</Color>
+    
+    
     <!-- Textbox -->
 
     <Color x:Key="TextBoxBackground">#ffffff</Color>
@@ -38,7 +47,7 @@
     <Color x:Key="TextBoxFocusedBorder">#0078d4</Color>
     <Color x:Key="TextBoxDisabledBackground">#f3f3f3</Color>
     <Color x:Key="TextBoxDisabledForeground">#838383</Color>
-    
+
     <!-- Border -->
 
     <Color x:Key="PopupBorderBackgroundColor">#eeeeee</Color>

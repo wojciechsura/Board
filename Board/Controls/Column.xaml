@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="{StaticResource ColumnHeaderMargin}">
-            <Button x:Name="bColumnMenu" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" 
+            <Button x:Name="bColumnMenu" DockPanel.Dock="Right" Style="{StaticResource ColumnButton}" 
                     Content="···" VerticalAlignment="Center"
                 e:ContextMenuOnLeftClick.Enabled="True" e:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bColumnMenu}"
                 e:ContextMenuOnLeftClick.Placement="Bottom">
@@ -61,6 +61,7 @@
         </ScrollViewer>
 
         <Button Grid.Row="2" Content="#Add card" Command="{Binding NewInplaceEntryCommand}" 
-                HorizontalAlignment="Left" Style="{StaticResource FlatButton}"/>
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Style="{StaticResource ColumnButton}"/>
     </Grid>
 </Border>
