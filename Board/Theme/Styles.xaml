@@ -266,13 +266,6 @@
                 <SolidColorBrush Color="{StaticResource CardBackground}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="{StaticResource CardShadowBlurRadius}" Color="{StaticResource CardShadowColor}"
-                                  Direction="{StaticResource CardShadowDirection}" ShadowDepth="{StaticResource CardShadowDepth}"
-                                  Opacity="{StaticResource CardShadowOpacity}"/>
-            </Setter.Value>
-        </Setter>
         <Setter Property="BorderThickness" Value="{StaticResource CardBorderThickness}" />
         <Setter Property="CornerRadius" Value="{StaticResource CardCornerRadius}" />
         <Setter Property="Margin" Value="{StaticResource CardMargin}" />
@@ -288,13 +281,6 @@
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource ColumnBackgroundColor}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="{StaticResource ColumnShadowBlurRadius}" Color="{StaticResource ColumnShadowColor}"
-                                  Direction="{StaticResource ColumnShadowDirection}" ShadowDepth="{StaticResource ColumnShadowDepth}"
-                                  Opacity="{StaticResource ColumnShadowOpacity}"/>
             </Setter.Value>
         </Setter>
         <Setter Property="BorderThickness" Value="{StaticResource ColumnBorderThickness}" />

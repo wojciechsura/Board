@@ -57,14 +57,10 @@
     
     <!-- Card -->
 
-    <Thickness x:Key="CardBorderThickness">1,1,1,1</Thickness>
+    <Thickness x:Key="CardBorderThickness">1,1,1,2</Thickness>
     <CornerRadius x:Key="CardCornerRadius">2</CornerRadius>
     <Thickness x:Key="CardMargin">4</Thickness>
     <Thickness x:Key="CardPadding">4</Thickness>
-    <sys:Double x:Key="CardShadowBlurRadius">3</sys:Double>
-    <sys:Double x:Key="CardShadowDirection">270</sys:Double>
-    <sys:Double x:Key="CardShadowDepth">1</sys:Double>
-    <sys:Double x:Key="CardShadowOpacity">0.3</sys:Double>
 
     <!-- Table -->
 
@@ -72,14 +68,10 @@
     
     <!-- Column -->
 
-    <Thickness x:Key="ColumnBorderThickness">1</Thickness>
+    <Thickness x:Key="ColumnBorderThickness">1,1,1,2</Thickness>
     <sys:Double x:Key="ColumnWidth">300</sys:Double>
     <Thickness x:Key="ColumnMargin">0,0,8,0</Thickness>
     <CornerRadius x:Key="ColumnCornerRadius">5</CornerRadius>
-    <sys:Double x:Key="ColumnShadowBlurRadius">3</sys:Double>
-    <sys:Double x:Key="ColumnShadowDirection">270</sys:Double>
-    <sys:Double x:Key="ColumnShadowDepth">1</sys:Double>
-    <sys:Double x:Key="ColumnShadowOpacity">0.3</sys:Double>
 
     <Thickness x:Key="ColumnHeaderMargin">8</Thickness>
     

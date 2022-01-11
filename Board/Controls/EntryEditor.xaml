@@ -9,7 +9,7 @@
         xmlns:mvm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
         xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
         d:DataContext="{d:DesignInstance Type=mvm:EntryEditorViewModel}"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf" xmlns:mdxaml="clr-namespace:MdXaml;assembly=MdXaml"
         mc:Ignorable="d" 
         Style="{StaticResource Popup}" 
         x:Name="root" DataContextChanged="EditorDataContextChanged"
@@ -116,11 +116,10 @@
             </Grid>
 
             <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch">
-                <WebBrowser Height="200" HorizontalAlignment="Stretch"
-                            e:WebBrowserExtension.Html="{Binding Description, Converter={StaticResource MarkdownToHtmlConverter}}"
-                            Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
+                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                              Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" />
                 <TextBox x:Name="tbDescription" Height="200" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                     
-                         Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" 
+                         Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
                          HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
             </Grid>
 

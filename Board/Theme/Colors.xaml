@@ -48,13 +48,11 @@
 
     <Color x:Key="CardBorderColor">#c0c0c0</Color>
     <Color x:Key="CardBackground">#ffffff</Color>
-    <Color x:Key="CardShadowColor">#000000</Color>
 
     <!-- Column -->
 
     <Color x:Key="ColumnBorderColor">#f0f0f0</Color>
     <Color x:Key="ColumnBackgroundColor">#f8f8f8</Color>
-    <Color x:Key="ColumnShadowColor">#000000</Color>
 
     <Color x:Key="ColumnHeaderForeground">#606060</Color>
     
