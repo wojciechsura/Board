@@ -262,6 +262,17 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             mapper.Map(entry, newEntry);
         }
 
+        public override void AddTagToEntry(int entryId, int tagId)
+        {
+            var entry = context.Entries.Find(entryId);
+            if (!entry.Tags.Any(t => t.Id == tagId))
+            {
+                var tag = context.Tags.Find(tagId);
+                entry.Tags.Add(tag);
+                context.SaveChanges();
+            }
+        }
+
         public override void DeleteEntry(int entryId, bool permanent)
         {
             var entry = context.Entries.First(e => e.Id == entryId);
@@ -311,6 +322,16 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 .ToList();
 
             var result = mapper.Map<List<EntryModel>>(entries);
+            return result;
+        }
+
+        public override EntryEditModel GetEntryEdit(int entryId)
+        {
+            var entry = context.Entries
+                .Include(e => e.Tags)
+                .FirstOrDefault(e => e.Id == entryId);
+
+            var result = mapper.Map<EntryEditModel>(entry);
             return result;
         }
 
@@ -367,6 +388,14 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 return null;
 
             return mapper.Map<EntryModel>(entryEntity);
+        }
+
+        public override void RemoveTagFromEntry(int entryId, int tagId)
+        {
+            var entry = context.Entries.Find(entryId);
+            var tag = context.Tags.Find(tagId);
+            entry.Tags.Remove(tag);
+            context.SaveChanges();
         }
 
         public override void UpdateEntries(List<EntryModel> updatedItems)

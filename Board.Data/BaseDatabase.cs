@@ -42,19 +42,21 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         #region Entries
 
         public abstract void AddEntry(EntryModel newEntry);
+        public abstract void AddTagToEntry(int entryId, int tagId);
         public abstract void DeleteEntry(int entryId, bool permanent);
         public abstract List<EntryDisplayModel> GetDisplayEntries(int id, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, int skip, int take, bool includeDeleted);
         public abstract EntryModel GetEntryById(int id);
         public abstract int GetEntryCount(int columnId, bool includeDeleted);
-        public abstract long GetFirstEntryOrder(int columnId, bool includeDeleted);
         public abstract EntryDisplayModel GetEntryDisplay(int entryId);
+        public abstract EntryEditModel GetEntryEdit(int entryId);
+        public abstract long GetFirstEntryOrder(int columnId, bool includeDeleted);
         public abstract long GetLastEntryOrder(int columnId, bool includeDeleted);
         public abstract EntryModel GetNextEntry(EntryModel entry, bool includeDeleted);
+        public abstract void RemoveTagFromEntry(int entryId, int tagId);
         public abstract void UpdateEntries(List<EntryModel> updatedItems);
         public abstract void UpdateEntry(EntryModel updatedEntry);
-
         #endregion
 
         #region Tags
