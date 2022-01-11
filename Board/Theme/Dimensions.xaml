@@ -45,7 +45,11 @@
     <Thickness x:Key="ButtonPadding">10,6</Thickness>
     <Thickness x:Key="ButtonMargin">4,2</Thickness>
     <CornerRadius x:Key="ButtonBorderCornerRadius">2</CornerRadius>
-    
+
+    <!-- ColumnButton -->
+
+    <CornerRadius x:Key="ColumnButtonCornerRadius">4</CornerRadius>
+
     <!-- TextBox -->
 
     <Thickness x:Key="TextBoxPadding">4,6</Thickness>
@@ -57,9 +61,9 @@
     
     <!-- Card -->
 
-    <Thickness x:Key="CardBorderThickness">1,1,1,2</Thickness>
-    <CornerRadius x:Key="CardCornerRadius">2</CornerRadius>
-    <Thickness x:Key="CardMargin">4</Thickness>
+    <Thickness x:Key="CardBorderThickness">0,0,0,1</Thickness>
+    <CornerRadius x:Key="CardCornerRadius">4</CornerRadius>
+    <Thickness x:Key="CardMargin">8,8,8,0</Thickness>
     <Thickness x:Key="CardPadding">4</Thickness>
 
     <!-- Table -->
@@ -68,12 +72,13 @@
     
     <!-- Column -->
 
+    <Thickness x:Key="ColumnCardAreaMargin">0,0,0,8</Thickness>
     <Thickness x:Key="ColumnBorderThickness">1,1,1,2</Thickness>
     <sys:Double x:Key="ColumnWidth">300</sys:Double>
     <Thickness x:Key="ColumnMargin">0,0,8,0</Thickness>
     <CornerRadius x:Key="ColumnCornerRadius">5</CornerRadius>
 
-    <Thickness x:Key="ColumnHeaderMargin">8</Thickness>
+    <Thickness x:Key="ColumnHeaderMargin">8,8,8,0</Thickness>
     
     <!-- Dialog window -->
    

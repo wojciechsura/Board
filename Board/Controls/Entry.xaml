@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
-        xmlns:local="clr-namespace:Board.Controls" 
+        xmlns:c="clr-namespace:Board.Controls" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" 
         xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
@@ -15,6 +15,20 @@
         x:Name="root"
         Style="{StaticResource Card}" DataContextChanged="HandleDataContextChanged">
     <DockPanel>
+        <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Tags}" Margin="{StaticResource DialogItemsMargin}"
+                      Visibility="{Binding Tags.Count, Converter={StaticResource CollapseIfZeroConverter}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vmd:TagViewModel}">
+                    <c:SmallTag />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
         <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
                 Visibility="{Binding ElementName=root, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"
                 e:ContextMenuOnLeftClick.Enabled="True"

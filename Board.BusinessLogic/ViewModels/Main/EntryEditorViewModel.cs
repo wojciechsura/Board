@@ -23,6 +23,9 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly WallDocument document;
         private readonly IDocumentHandler handler;
 
+        private bool isEditingTitle = false;
+        private bool isEditingDescription = false;
+
         [SyncWithModel(nameof(EntryModel.Title))]
         private string title;
         [SyncWithModel(nameof(EntryModel.Description))]
@@ -77,7 +80,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             AddedTags.Remove(tag);
             InsertTag(AvailableTags, availableTag);
         }
-
 
         // Public methods -----------------------------------------------------
 
@@ -134,7 +136,20 @@ namespace Board.BusinessLogic.ViewModels.Main
             set => Set(ref description, value);
         } 
 
+        public bool IsEditingTitle
+        {
+            get => isEditingTitle;
+            set => Set(ref isEditingTitle, value);
+        }
+
+        public bool IsEditingDescription
+        {
+            get => isEditingDescription;
+            set => Set(ref isEditingDescription, value);
+        }
+
         public ObservableCollection<AddedTagViewModel> AddedTags { get; }
+
         public ObservableCollection<AvailableTagViewModel> AvailableTags { get; }
 
         public ICommand CloseCommand { get; }

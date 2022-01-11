@@ -32,9 +32,10 @@
     <!-- ColumnButton -->
 
     <Color x:Key="ColumnButtonBackground">#00000000</Color>
-    <Color x:Key="ColumnButtonHoverBackground">#30000000</Color>
-    <Color x:Key="ColumnButtonPressedBackground">#60000000</Color>
     <Color x:Key="ColumnButtonForeground">#606060</Color>
+    <Color x:Key="ColumnButtonHoverBackground">#30000000</Color>
+    <Color x:Key="ColumnButtonHoverForeground">#ff000000</Color>
+    <Color x:Key="ColumnButtonPressedBackground">#60000000</Color>
     <Color x:Key="ColumnButtonDisabledForeground">#838383</Color>
     
     
@@ -58,10 +59,14 @@
     <Color x:Key="CardBorderColor">#c0c0c0</Color>
     <Color x:Key="CardBackground">#ffffff</Color>
 
+    <!-- Card editor -->
+
+    <Color x:Key="DescriptionBackground">#ffffff</Color>
+    
     <!-- Column -->
 
     <Color x:Key="ColumnBorderColor">#f0f0f0</Color>
-    <Color x:Key="ColumnBackgroundColor">#f8f8f8</Color>
+    <Color x:Key="ColumnBackgroundColor">#ebecf0</Color>
 
     <Color x:Key="ColumnHeaderForeground">#606060</Color>
     

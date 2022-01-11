@@ -27,5 +27,6 @@ namespace Board.Data.SQLite
         public DbSet<Column> Columns { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

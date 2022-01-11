@@ -30,35 +30,35 @@ namespace Board.Controls
         private void BeginTitleEdit()
         {
             tbTitleEditor.Text = viewModel.Title;
-            IsEditingTitle = true;
+            viewModel.IsEditingTitle = true;
         }
 
         private void CancelTitleEdit()
         {
-            IsEditingTitle = false;
+            viewModel.IsEditingTitle = false;
         }
 
         private void CommitTitleEdit()
         {
             viewModel.SetTitle(tbTitleEditor.Text);
-            IsEditingTitle = false;
+            viewModel.IsEditingTitle = false;
         }
 
         private void BeginDescriptionEdit()
         {
             tbDescription.Text = viewModel.Description;
-            IsEditingDescription = true;
+            viewModel.IsEditingDescription = true;
         }
 
         private void CancelDescriptionEdit()
         {
-            IsEditingDescription = false;
+            viewModel.IsEditingDescription = false;
         }
 
         private void CommitDescriptionEdit()
         {
             viewModel.SetDescription(tbDescription.Text);
-            IsEditingDescription = false;
+            viewModel.IsEditingDescription = false;
         }
 
         private void CancelTitleClick(object sender, RoutedEventArgs e)
@@ -126,35 +126,5 @@ namespace Board.Controls
         {
             InitializeComponent();
         }
-
-        // Dependency properties ----------------------------------------------
-
-        #region IsEditingTitle dependency property
-
-        // Using a DependencyProperty as the backing store for IsEditingTitle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsEditingTitleProperty =
-            DependencyProperty.Register("IsEditingTitle", typeof(bool), typeof(EntryEditor), new PropertyMetadata(false));
-
-        public bool IsEditingTitle
-        {
-            get { return (bool)GetValue(IsEditingTitleProperty); }
-            set { SetValue(IsEditingTitleProperty, value); }
-        }
-
-        #endregion
-
-        #region IsEditingDescription dependency property
-
-        public bool IsEditingDescription
-        {
-            get { return (bool)GetValue(IsEditingDescriptionProperty); }
-            set { SetValue(IsEditingDescriptionProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsEditingDescription.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsEditingDescriptionProperty =
-            DependencyProperty.Register("IsEditingDescription", typeof(bool), typeof(EntryEditor), new PropertyMetadata(false));
-
-        #endregion
     }
 }

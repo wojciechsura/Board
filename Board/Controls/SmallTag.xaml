@@ -1,0 +1,14 @@
+﻿<!-- Bind DataContext to TagViewModel -->
+
+<Border x:Class="Board.Controls.SmallTag"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Board.Controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d" CornerRadius="4" Width="50" Height="8" d:Background="Red" Margin="0,0,8,0">
+    <Border.Background>
+        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
+    </Border.Background>
+</Border>

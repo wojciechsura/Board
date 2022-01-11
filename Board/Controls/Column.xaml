@@ -38,8 +38,8 @@
         </DockPanel>
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Auto">        
-            <ItemsControl ItemsSource="{Binding Entries}" AllowDrop="True"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Entries}" AllowDrop="True" Margin="{StaticResource ColumnCardAreaMargin}"
                           Background="Transparent" MinHeight="32"
                           PreviewDragEnter="ColumnDragEnter" PreviewDragOver="ColumnDragOver" 
                           PreviewDragLeave="ColumnDragLeave" PreviewDrop="ColumnDrop">

@@ -16,7 +16,7 @@
         mc:Ignorable="d" 
         Style="{StaticResource Popup}" 
         x:Name="root" DataContextChanged="EditorDataContextChanged"
-        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True">
     <Border.Resources>
         <sys:Double x:Key="TitleFontSize">20</sys:Double>
         <sys:Double x:Key="SectionFontSize">14</sys:Double>
@@ -58,6 +58,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -67,15 +69,17 @@
             <Image Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" />
 
             <Grid Grid.Row="0" Grid.Column="1" x:Name="gTitle" HorizontalAlignment="Stretch" Background="Transparent">
-                <DockPanel Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="EditTitleClick"
                             Padding="0" Visibility="{Binding ElementName=gTitle, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
                         <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
                     </Button>
                     <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" 
-                           Cursor="Hand" Content="{Binding Title}" MouseLeftButtonDown="TitleLabelMouseDown" />
+                           Cursor="Hand" MouseLeftButtonDown="TitleLabelMouseDown">
+                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
+                    </Label>
                 </DockPanel>
-                <DockPanel Visibility="{Binding ElementName=root, Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="CancelTitleClick"
                             Padding="0">
                         <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
@@ -85,7 +89,7 @@
                         <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
                     </Button>
                     <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoCondensed}"
-                             VerticalAlignment="Center" KeyDown="TitleKeyDown"/>
+                             VerticalAlignment="Center" KeyDown="TitleKeyDown" TextWrapping="Wrap"/>
                 </DockPanel>
             </Grid>
 
@@ -93,41 +97,40 @@
 
             <DockPanel x:Name="dpTags" Grid.Row="1" Grid.Column="1" Background="Transparent">
                 <ToggleButton x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Right" Style="{StaticResource FlatToggleButton}" 
-                              Width="24" Height="24" Padding="0"
-                              Visibility="{Binding ElementName=dpTags, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
+                              Width="24" Height="24" Padding="0">
                     <Image Width="16" Height="16" Source="\Resources\Images\Add16.png" />
                 </ToggleButton>
-
-                <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
-                       Placement="Bottom" PlacementTarget="{Binding ElementName=dpTags}">
-                    <Border Style="{StaticResource Popup}">
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="#Add tag" Margin="{StaticResource PopupItemsMargin}" />
-                            <ScrollViewer Width="200" Height="300" HorizontalScrollBarVisibility="Disabled"
-                                          VerticalScrollBarVisibility="Auto">
-                                <ItemsControl ItemsSource="{Binding AvailableTags}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
-                                            <c:Tag Cursor="Hand">
-                                                <i:Interaction.Behaviors>
-                                                    <b:ClickBehavior Command="{Binding AddCommand}"/>
-                                                </i:Interaction.Behaviors>
-                                            </c:Tag>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </StackPanel>
-                    </Border>
-                </Popup>
-                
+               
                 <Label Style="{StaticResource SectionLabel}" Content="#Tags" />
             </DockPanel>
+
+            <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
+                       Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
+                <Border Style="{StaticResource Popup}">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="#Add tag" Margin="{StaticResource PopupItemsMargin}" />
+                        <ScrollViewer MinWidth="200" MinHeight="100" HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding AvailableTags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
+                                        <c:Tag Cursor="Hand" Margin="4,4,4,0">
+                                            <i:Interaction.Behaviors>
+                                                <b:ClickBehavior Command="{Binding AddCommand}"/>
+                                            </i:Interaction.Behaviors>
+                                        </c:Tag>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Popup>
 
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <ItemsControl ItemsSource="{Binding AddedTags}">
@@ -150,7 +153,7 @@
             
             <Image Grid.Row="3" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
             <Grid Grid.Row="3" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
-                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" 
                         Padding="0" Click="EditDescriptionClick" Visibility="{Binding ElementName=spDescription, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
                         <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
@@ -160,14 +163,14 @@
                            Cursor="Hand" MouseLeftButtonDown="DescriptionLabelMouseDown"/>
                 </DockPanel>
 
-                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}">
+                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"
-                        Padding="0" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Padding="0" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
                             Click="CancelDescriptionClick">
                         <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
                     </Button>
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"                        
-                        Padding="0" Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Padding="0" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
                             Click="SaveDescriptionClick">
                         <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
                     </Button>
@@ -176,12 +179,19 @@
             </Grid>
 
             <Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch">
-                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                                              Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" />
+                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"                                             
+                                             Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
+                    <mdxaml:MarkdownScrollViewer.Background>
+                        <SolidColorBrush Color="{StaticResource DescriptionBackground}" />
+                    </mdxaml:MarkdownScrollViewer.Background>
+                </mdxaml:MarkdownScrollViewer>
                 <TextBox x:Name="tbDescription" Height="200" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                     
-                         Visibility="{Binding ElementName=root, Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
+                         Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
                          HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
             </Grid>
+
+            <Image Grid.Row="5" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Comment16.png" />
+            <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource SectionLabel}" Content="#Comments" />
 
         </Grid>
 

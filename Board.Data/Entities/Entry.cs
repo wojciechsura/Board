@@ -27,5 +27,6 @@ namespace Board.Data.Entities
         public int ColumnId { get; set; }
         public bool IsDeleted { get; set; }
         public virtual List<Tag> Tags { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }
