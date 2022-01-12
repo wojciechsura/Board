@@ -12,7 +12,6 @@
         <Setter Property="FontSize" Value="{StaticResource HeaderFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource HeaderBrush}" />
     </Style>
-
    
     <Style TargetType="Button">
         <Style.Setters>
@@ -376,7 +375,7 @@
         <Setter Property="CornerRadius" Value="{StaticResource ColumnCornerRadius}" />
     </Style>
 
-    <Style TargetType="Border" x:Key="Overlay">
+    <Style TargetType="ScrollViewer" x:Key="Overlay">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource OverlayBackground}" />
@@ -503,10 +502,8 @@
         </Setter>
     </Style>
 
-    <!--
     <Style TargetType="Window">
         <Setter Property="FontFamily" Value="{StaticResource SegoeUiVariable}" />
     </Style>
-    -->
     
 </ResourceDictionary>

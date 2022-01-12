@@ -1,22 +1,24 @@
 ﻿<!-- Bind DataContext to EntryViewModel instance -->
 
-<Border x:Class="Board.Controls.InplaceCommentEditor"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:Board.Controls" 
-        xmlns:m="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
-        d:DataContext="{d:DesignInstance Type=m:NewInplaceCommentViewModel}"
-        mc:Ignorable="d" 
-        Style="{StaticResource Card}" FocusManager.FocusedElement="{Binding ElementName=tbEntryTitle}">
-    <StackPanel Orientation="Vertical">
-        <TextBox x:Name="tbEntryTitle" Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
-                 TextWrapping="Wrap" Height="150" VerticalContentAlignment="Top" AcceptsReturn="True" />
+<StackPanel x:Class="Board.Controls.InplaceCommentEditor"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:Board.Controls" 
+            xmlns:m="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
+            d:DataContext="{d:DesignInstance Type=m:InplaceCommentEditorViewModel}"
+            mc:Ignorable="d" 
+            Orientation="Vertical"
+            FocusManager.FocusedElement="{Binding ElementName=tbEntryTitle}">
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Command="{Binding SaveCommand}" Content="#Save" Style="{StaticResource DialogButton}" />
-            <Button Command="{Binding CancelCommand}" Content="#Cancel" Style="{StaticResource DialogButton}" />
-        </StackPanel>
+    <Label Content="#Add comment" Visibility="{Binding IsNew, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+    <TextBox x:Name="tbEntryTitle" Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
+                TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" />
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Content, Converter={StaticResource HideIfEmptyStringConverter}}">
+        <Button Command="{Binding SaveCommand}" Content="#Save" Style="{StaticResource DialogButton}" />
+        <Button Command="{Binding CancelCommand}" Content="#Cancel" Style="{StaticResource DialogButton}" />
     </StackPanel>
-</Border>
+</StackPanel>

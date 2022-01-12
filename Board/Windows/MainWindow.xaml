@@ -64,11 +64,13 @@
             </TabControl>
         </DockPanel>
 
-        <Border Background="#60000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                Style="{StaticResource Overlay}" Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}">
+        <ScrollViewer Background="#60000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      Style="{StaticResource Overlay}" 
+                      Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}">
 
             <c:EntryEditor x:Name="eeEntry" DataContext="{Binding EntryEditor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        </Border>
+        </ScrollViewer>
     </Grid>
 </f:RibbonWindow>

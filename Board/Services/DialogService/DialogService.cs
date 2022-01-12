@@ -35,6 +35,11 @@ namespace Board.Services.DialogService
             dialogWindows.Pop();
         }
 
+        private Window GetOwnerWindow()
+        {
+            return dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+        }
+
         public (bool result, string filename) ShowOpenDialog(string filter = null, string title = null, string filename = null)
         {
             try
@@ -119,6 +124,7 @@ namespace Board.Services.DialogService
         public (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null)
         {
             SQLiteConfigWindow dialog = new SQLiteConfigWindow(data);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -138,6 +144,7 @@ namespace Board.Services.DialogService
         public (bool result, DocumentInfo data) ShowNewWallDialog()
         {
             NewWallWindow dialog = new NewWallWindow();
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -157,6 +164,7 @@ namespace Board.Services.DialogService
         public (bool result, TableModel model) ShowNewTableDialog()
         {
             TableEditorWindow dialog = new TableEditorWindow(new TableModel(), true);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -176,6 +184,7 @@ namespace Board.Services.DialogService
         public bool ShowEditTableDialog(TableModel tableModel)
         {
             TableEditorWindow dialog = new TableEditorWindow(tableModel, false);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -195,6 +204,7 @@ namespace Board.Services.DialogService
         public (bool result, bool? permanently) ShowDeleteDialog(string message)
         {
             DeleteDialogWindow dialog = new DeleteDialogWindow(message);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -214,6 +224,7 @@ namespace Board.Services.DialogService
         public (bool result, ColumnModel model) ShowNewColumnDialog()
         {
             ColumnEditorWindow dialog = new ColumnEditorWindow(new ColumnModel(), true);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -233,6 +244,7 @@ namespace Board.Services.DialogService
         public bool ShowEditColumnDialog(ColumnModel columnModel)
         {
             ColumnEditorWindow dialog = new ColumnEditorWindow(columnModel, false);
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -252,7 +264,7 @@ namespace Board.Services.DialogService
         public void ShowEditTagsDialog(WallDocument document, int tableId)
         {
             TagListWindow dialog = new TagListWindow(document, tableId);
-            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -269,7 +281,7 @@ namespace Board.Services.DialogService
         public (bool result, TagModel model) ShowNewTagDialog()
         {
             TagEditorWindow dialog = new TagEditorWindow(new TagModel(), true);
-            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try
@@ -289,7 +301,7 @@ namespace Board.Services.DialogService
         public bool ShowEditTagDialog(TagModel tagModel)
         {
             TagEditorWindow dialog = new TagEditorWindow(tagModel, false);
-            dialog.Owner = dialogWindows.Any() ? dialogWindows.Peek() : Application.Current.MainWindow;
+            dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
             try

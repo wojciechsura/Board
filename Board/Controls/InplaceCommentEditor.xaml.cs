@@ -18,7 +18,7 @@ namespace Board.Controls
     /// <summary>
     /// Interaction logic for NewInplaceComment.xaml
     /// </summary>
-    public partial class InplaceCommentEditor : Border
+    public partial class InplaceCommentEditor : StackPanel
     {
         public InplaceCommentEditor()
         {
