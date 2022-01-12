@@ -2,7 +2,6 @@
 {
     public interface IEntryEditorHandler
     {
-        void AddTag(AvailableTagViewModel tag);
-        void RemoveTag(AddedTagViewModel tag);
+        void ToggleTag(AvailableTagViewModel tag);
     }
 }

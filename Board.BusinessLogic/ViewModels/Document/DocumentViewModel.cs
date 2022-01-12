@@ -468,11 +468,11 @@ namespace Board.BusinessLogic.ViewModels.Document
             columnViewModel.Entries.Add(new NewInplaceEntryViewModel(handler));
         }
 
-        public void AddEntryFromInplaceNew(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        public void AddEntryFromInplaceNew(NewInplaceCommentViewModel newInplaceEntryViewModel)
         {
             var columnViewModel = newInplaceEntryViewModel.Parent;
 
-            var newEntry = newInplaceEntryViewModel.Entry;
+            var newEntry = newInplaceEntryViewModel.Comment;
             newEntry.ColumnId = columnViewModel.Column.Id;
 
             // Fill in order
@@ -488,7 +488,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             columnViewModel.Entries.Add(entryViewModel);
         }
 
-        public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        public void RemoveInplaceNewEntry(NewInplaceCommentViewModel newInplaceEntryViewModel)
         {
             newInplaceEntryViewModel.Parent.Entries.Remove(newInplaceEntryViewModel);
         }

@@ -52,7 +52,6 @@
     <!-- Border -->
 
     <Color x:Key="PopupBorderBackgroundColor">#eeeeee</Color>
-    <Color x:Key="PopupBorderShadowColor">#000000</Color>
     
     <!-- Card -->
 
@@ -73,5 +72,11 @@
     <!-- Overlay -->
 
     <Color x:Key="OverlayBackground">#60000000</Color>
+    
+    <!-- Entry editor -->
+
+    <Color x:Key="EntryEditorBackgroundColor">#dddddd</Color>
+    <Color x:Key="EntryEditorTextContentBackground">#ffffff</Color>
+    <Color x:Key="EntryEditorTextContentBorder">#eeeeee</Color>    
     
 </ResourceDictionary>

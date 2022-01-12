@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class EntryEditorViewModel : ModelEditorViewModel<EntryEditModel>, IEntryEditorHandler
+    public class EntryEditorViewModel : BaseViewModel, IEntryEditorHandler
     {
         // Private fields -----------------------------------------------------
 
@@ -43,9 +43,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             tags.Insert(i, tag);
         }
 
-        // Protected methods --------------------------------------------------
-
-        protected override void UpdateFromModel(EntryEditModel model)
+        private void UpdateFromModel(EntryEditModel model)
         {
             base.UpdateFromModel(model);
 
@@ -54,31 +52,47 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             foreach (var tag in tags)
             {
+                AvailableTagViewModel availableTag = new AvailableTagViewModel(tag, this);
+
                 if (model.Tags.Any(t => t.Id == tag.Id))
+                {
                     AddedTags.Add(new AddedTagViewModel(tag, this));
-                else
-                    AvailableTags.Add(new AvailableTagViewModel(tag, this));
+                    availableTag.IsSelected = true;
+                }
+
+                AvailableTags.Add(availableTag);
+            }
+
+            Comments.Add(new NewInplaceCommentViewModel(handler, new CommentModel(), true));
+
+            foreach (var comment in model.Comments.OrderByDescending(c => c.Added))
+            {
+                CommentViewModel commentViewModel = new(comment, handler);
+                Comments.Add(commentViewModel);
             }
         }
 
         // IEntryEditorHandler ------------------------------------------------
 
-        void IEntryEditorHandler.AddTag(AvailableTagViewModel tag)
+        void IEntryEditorHandler.ToggleTag(AvailableTagViewModel tag)
         {
-            document.Database.AddTagToEntry(entryId, tag.Tag.Id);
+            if (tag.IsSelected)
+            {
+                document.Database.RemoveTagFromEntry(entryId, tag.Tag.Id);
+                
+                tag.IsSelected = false;
 
-            var addedTag = new AddedTagViewModel(tag.Tag, this);
-            AvailableTags.Remove(tag);
-            InsertTag(AddedTags, addedTag);
-        }
+                var addedTag = AddedTags.FirstOrDefault(t => t.Tag.Id == tag.Tag.Id);
+                AddedTags.Remove(addedTag);
+            }
+            else
+            {
+                document.Database.AddTagToEntry(entryId, tag.Tag.Id);
 
-        void IEntryEditorHandler.RemoveTag(AddedTagViewModel tag)
-        {
-            document.Database.RemoveTagFromEntry(entryId, tag.Tag.Id);
-
-            var availableTag = new AvailableTagViewModel(tag.Tag, this);
-            AddedTags.Remove(tag);
-            InsertTag(AvailableTags, availableTag);
+                var addedTag = new AddedTagViewModel(tag.Tag, this);
+                InsertTag(AddedTags, addedTag);
+                tag.IsSelected = true;
+            }
         }
 
         // Public methods -----------------------------------------------------
@@ -98,8 +112,9 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             CloseCommand = new AppCommand(obj => handler.RequestEditorClose(editedEntryViewModel));
 
-            AddedTags = new ObservableCollection<AddedTagViewModel>();
-            AvailableTags = new ObservableCollection<AvailableTagViewModel>();
+            AddedTags = new ();
+            AvailableTags = new ();
+            Comments = new();
 
             UpdateFromModel(editEntryModel);
         }
@@ -151,6 +166,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         public ObservableCollection<AddedTagViewModel> AddedTags { get; }
 
         public ObservableCollection<AvailableTagViewModel> AvailableTags { get; }
+
+        public ObservableCollection<BaseCommentViewModel> Comments { get; }
 
         public ICommand CloseCommand { get; }
     }

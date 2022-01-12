@@ -11,11 +11,10 @@ namespace Board.BusinessLogic.ViewModels.Main
 {
     public class AddedTagViewModel : BaseTagViewModel
     {
-        public AddedTagViewModel(TagModel tag, IEntryEditorHandler handler) : base(tag, handler)
+        public AddedTagViewModel(TagModel tag, IEntryEditorHandler handler) 
+            : base(tag, handler)
         {
-            RemoveCommand = new AppCommand(obj => handler.RemoveTag(this));
-        }
 
-        public ICommand RemoveCommand { get; }
+        }
     }
 }

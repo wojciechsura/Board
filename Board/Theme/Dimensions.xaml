@@ -84,4 +84,8 @@
    
     <Thickness x:Key="DialogContentPadding">8</Thickness>
     
+    <!-- Entry editor -->
+
+    <CornerRadius x:Key="EntryEditorCornerRadius">6</CornerRadius>
+
 </ResourceDictionary>

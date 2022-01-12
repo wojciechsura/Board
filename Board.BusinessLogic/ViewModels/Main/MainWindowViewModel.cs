@@ -157,12 +157,12 @@ namespace Board.BusinessLogic.ViewModels.Main
             }
         }
 
-        void IDocumentHandler.SaveNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        void IDocumentHandler.SaveNewInplaceEntryRequest(Document.NewInplaceCommentViewModel newInplaceEntryViewModel)
         {
             activeDocument.AddEntryFromInplaceNew(newInplaceEntryViewModel);
         }
 
-        void IDocumentHandler.CancelNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel)
+        void IDocumentHandler.CancelNewInplaceEntryRequest(Document.NewInplaceCommentViewModel newInplaceEntryViewModel)
         {
             activeDocument.RemoveInplaceNewEntry(newInplaceEntryViewModel);
         }

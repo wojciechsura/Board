@@ -316,14 +316,32 @@
                 <SolidColorBrush Color="{StaticResource PopupBorderBackgroundColor}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="4" Opacity="0.5" ShadowDepth="0" Direction="0" Color="{StaticResource PopupBorderShadowColor}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Margin" Value="4" />
+        <Setter Property="Margin" Value="{StaticResource DialogItemsMargin}" />
     </Style>
 
+    <Style TargetType="Border" x:Key="EntryEditor">
+        <Setter Property="CornerRadius" Value="{StaticResource EntryEditorCornerRadius}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource EntryEditorBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="{StaticResource DialogItemsMargin}" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="Comment">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource EntryEditorTextContentBackground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource EntryEditorTextContentBorder}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="Border" x:Key="Card">
         <Setter Property="BorderBrush">
             <Setter.Value>

@@ -1,4 +1,5 @@
-﻿using Board.Models.Data;
+﻿using Board.BusinessLogic.ViewModels.Base;
+using Board.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class BaseTagViewModel
+    public class BaseTagViewModel : BaseViewModel
     {
         private readonly TagModel tag;
         private readonly IEntryEditorHandler handler;

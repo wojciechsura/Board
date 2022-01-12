@@ -14,7 +14,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
         mc:Ignorable="d" 
-        Style="{StaticResource Popup}" 
+        Style="{StaticResource EntryEditor}" 
         x:Name="root" DataContextChanged="EditorDataContextChanged"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True">
     <Border.Resources>
@@ -141,17 +141,14 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
-                            <c:Tag Margin="{StaticResource DialogItemsMargin}" Cursor="Hand">
-                                <i:Interaction.Behaviors>
-                                    <b:ClickBehavior Command="{Binding RemoveCommand}"/>
-                                </i:Interaction.Behaviors>
-                            </c:Tag>
+                            <c:Tag Margin="{StaticResource DialogItemsMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </DockPanel>
             
             <Image Grid.Row="3" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
+            
             <Grid Grid.Row="3" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
                 <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" 
@@ -179,12 +176,17 @@
             </Grid>
 
             <Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch">
-                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"                                             
-                                             Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
-                    <mdxaml:MarkdownScrollViewer.Background>
-                        <SolidColorBrush Color="{StaticResource DescriptionBackground}" />
-                    </mdxaml:MarkdownScrollViewer.Background>
-                </mdxaml:MarkdownScrollViewer>
+                <Border Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
+                        BorderThickness="1">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource EntryEditorTextContentBackground}" />
+                    </Border.Background>
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{StaticResource EntryEditorTextContentBorder}" />
+                    </Border.BorderBrush>
+
+                    <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
+                </Border>
                 <TextBox x:Name="tbDescription" Height="200" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                     
                          Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
                          HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
@@ -192,6 +194,35 @@
 
             <Image Grid.Row="5" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Comment16.png" />
             <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource SectionLabel}" Content="#Comments" />
+
+            <ScrollViewer Grid.Row="6" Grid.Column="1" MaxHeight="300" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
+                          Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
+                <ItemsControl>
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>
+                                    <TextBlock Text="{Binding Added}" />
+                                </Label>
+                                <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}">
+                                    <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                                 VerticalScrollBarVisibility="Disabled"
+                                                                 Markdown="{Binding Content}" />
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type mvm:NewInplaceCommentViewModel}">
+                            <c:NewInplaceComment />
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
 
         </Grid>
 

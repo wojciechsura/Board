@@ -293,6 +293,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var entryEntities = context.Entries
                 .Include(e => e.Tags)
+                .Include(e => e.Comments)
                 .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
                 .OrderBy(e => e.Order)
                 .ToList();
