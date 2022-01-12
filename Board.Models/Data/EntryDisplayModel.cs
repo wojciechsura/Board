@@ -13,6 +13,6 @@ namespace Board.Models.Data
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public List<TagDisplayModel> Tags { get; set; }
+        public List<TagModel> Tags { get; set; }        
     }
 }

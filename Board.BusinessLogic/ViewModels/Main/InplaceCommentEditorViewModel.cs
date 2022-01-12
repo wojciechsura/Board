@@ -1,4 +1,5 @@
-﻿using Board.BusinessLogic.ViewModels.Document;
+﻿using Board.BusinessLogic.Infrastructure.Collections;
+using Board.BusinessLogic.ViewModels.Document;
 using Board.Models.Data;
 using Spooksoft.VisualStateManager.Commands;
 using System;
@@ -10,19 +11,26 @@ using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class NewInplaceCommentViewModel : BaseCommentViewModel
+    public class InplaceCommentEditorViewModel : BaseCommentViewModel
     {
         private readonly bool isNew;
         private readonly CommentModel comment;
 
-        public NewInplaceCommentViewModel(IDocumentHandler handler, CommentModel comment, bool isNew)
+        private void DoSave(IEntryEditorHandler handler)
+        {
+            comment.Added = DateTime.Now;
+            comment.Modified = comment.Added;
+            handler.SaveCommentRequest(this);
+        }
+
+        public InplaceCommentEditorViewModel(IEntryEditorHandler handler, CommentModel comment, bool isNew)
             : base(handler)
         {
             this.comment = comment;
             this.isNew = isNew;
 
-            SaveCommand = new AppCommand(obj => handler.SaveNewInplaceCommentRequest(this));
-            CancelCommand = new AppCommand(obj => handler.CancelNewInplaceCommentRequest(this));
+            SaveCommand = new AppCommand(obj => DoSave(handler));
+            CancelCommand = new AppCommand(obj => handler.CancelCommentRequest(this));
         }
 
         public string Content
@@ -35,5 +43,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         public ICommand CancelCommand { get; }
 
         public CommentModel Comment => comment;
+
+        public bool IsNew => isNew;
     }
 }

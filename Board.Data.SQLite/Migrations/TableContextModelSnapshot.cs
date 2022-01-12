@@ -65,6 +65,9 @@ namespace Board.Data.SQLite.Migrations
                     b.Property<int>("EntryId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("TEXT");
 

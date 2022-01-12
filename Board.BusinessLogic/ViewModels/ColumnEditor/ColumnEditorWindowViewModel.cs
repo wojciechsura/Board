@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.ColumnEditor
 {
-    public class ColumnEditorWindowViewModel : ModelEditorViewModel<ColumnModel>
+    public class ColumnEditorWindowViewModel : BaseViewModel
     {
         private readonly IColumnEditorWindowAccess access;
         private readonly ColumnModel column;

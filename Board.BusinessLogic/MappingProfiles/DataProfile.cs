@@ -22,10 +22,8 @@ namespace Board.BusinessLogic.MappingProfiles
             CreateMap<ColumnModel, ColumnModel>();
             CreateMap<EntryModel, EntryModel>();
 
-            CreateMap<Tag, TagDisplayModel>();
             CreateMap<Entry, EntryDisplayModel>();
             CreateMap<Entry, EntryEditModel>();
-            CreateMap<Comment, CommentDisplayModel>();
         }
     }
 }

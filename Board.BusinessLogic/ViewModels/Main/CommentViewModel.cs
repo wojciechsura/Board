@@ -12,14 +12,14 @@ namespace Board.BusinessLogic.ViewModels.Main
 {
     public class CommentViewModel : BaseCommentViewModel
     {
-        private readonly CommentDisplayModel comment;
+        private readonly CommentModel comment;
 
-        [SyncWithModel(nameof(CommentDisplayModel.Content))]
+        [SyncWithModel(nameof(CommentModel.Content))]
         private string content;
-        [SyncWithModel(nameof(CommentDisplayModel.Added))]
+        [SyncWithModel(nameof(CommentModel.Added))]
         private DateTime added;
 
-        public CommentViewModel(CommentDisplayModel comment, IDocumentHandler handler)
+        public CommentViewModel(CommentModel comment, IEntryEditorHandler handler)
             : base(handler)
         {
             this.comment = comment;

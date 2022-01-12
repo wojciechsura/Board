@@ -7,17 +7,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Board.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d" CornerRadius="10" MinWidth="80">
+        mc:Ignorable="d" CornerRadius="4"
+        d:Background="Red">
     <Border.Resources>
-        <Thickness x:Key="TagTextMargin">10,4</Thickness>
-        <sys:Double x:Key="TagFontSize">10</sys:Double>
+        <CornerRadius x:Key="TagCornerRadius">4</CornerRadius>
+        <Thickness x:Key="TagTextMargin">10,6</Thickness>
+        <sys:Double x:Key="TagFontSize">12</sys:Double>
+        <FontWeight x:Key="TagFontWeight">Bold</FontWeight>
     </Border.Resources>
     <Border.Background>
         <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
     </Border.Background>
 
-    <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" d:Text="Tag name"
-               FontSize="{StaticResource TagFontSize}" FontWeight="Bold" FontFamily="{StaticResource RobotoCondensed}">
+    <TextBlock Text="{Binding Name}" Margin="{StaticResource TagTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontSize="{StaticResource TagFontSize}" FontWeight="{StaticResource TagFontWeight}" FontFamily="{StaticResource Roboto}"
+               d:Text="Tag name" d:Foreground="Black">
         <TextBlock.Foreground>
             <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
         </TextBlock.Foreground>

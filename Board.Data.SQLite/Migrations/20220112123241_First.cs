@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -91,6 +92,29 @@ namespace Board.Data.SQLite.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Added = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Modified = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Content = table.Column<string>(type: "TEXT", nullable: false),
+                    EntryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Entries_EntryId",
+                        column: x => x.EntryId,
+                        principalTable: "Entries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EntryTag",
                 columns: table => new
                 {
@@ -130,6 +154,17 @@ namespace Board.Data.SQLite.Migrations
                 name: "IX_Columns_TableId",
                 table: "Columns",
                 column: "TableId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_EntryId",
+                table: "Comments",
+                column: "EntryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_Id",
+                table: "Comments",
+                column: "Id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entries_ColumnId",
@@ -179,6 +214,9 @@ namespace Board.Data.SQLite.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comments");
+
             migrationBuilder.DropTable(
                 name: "EntryTag");
 

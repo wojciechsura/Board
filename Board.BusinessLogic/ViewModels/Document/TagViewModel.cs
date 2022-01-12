@@ -9,9 +9,9 @@ namespace Board.BusinessLogic.ViewModels.Document
 {
     public class TagViewModel
     {
-        private readonly TagDisplayModel tag;
+        private readonly TagModel tag;
 
-        public TagViewModel(TagDisplayModel tag)
+        public TagViewModel(TagModel tag)
         {
             this.tag = tag;
         }
@@ -19,6 +19,6 @@ namespace Board.BusinessLogic.ViewModels.Document
         public string Name => tag.Name;
 
         public int Color => tag.Color;
-        public TagDisplayModel Tag => tag;
+        public TagModel Tag => tag;
     }
 }

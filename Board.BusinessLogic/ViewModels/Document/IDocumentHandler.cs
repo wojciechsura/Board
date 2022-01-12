@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Board.BusinessLogic.ViewModels.Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace Board.BusinessLogic.ViewModels.Document
         void NewColumnRequest(TableViewModel tableViewModel);
         void EditColumnRequest(ColumnViewModel columnViewModel);
         void DeleteColumnRequest(ColumnViewModel columnViewModel);
-        void SaveNewInplaceEntryRequest(NewInplaceCommentViewModel newInplaceEntryViewModel);
-        void CancelNewInplaceEntryRequest(NewInplaceCommentViewModel newInplaceEntryViewModel);
+        void SaveNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel);
+        void CancelNewInplaceEntryRequest(NewInplaceEntryViewModel newInplaceEntryViewModel);
         void NewInplaceEntryRequest(ColumnViewModel columnViewModel);
         void DeleteEntryRequest(EntryViewModel entryViewModel);
         void EditEntryRequest(EntryViewModel entryViewModel);

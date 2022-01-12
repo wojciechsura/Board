@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.TableEditor
 {
-    public class TableEditorWindowViewModel : ModelEditorViewModel<TableModel>
+    public class TableEditorWindowViewModel : BaseViewModel
     {
         private readonly ITableEditorWindowAccess access;
         private readonly TableModel table;

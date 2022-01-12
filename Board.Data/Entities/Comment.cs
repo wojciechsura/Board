@@ -19,5 +19,6 @@ namespace Board.Data.Entities
         [Required]
         public Entry Entry { get; set; }
         public int EntryId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

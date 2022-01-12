@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.TagEditor
 {
-    public class TagEditorWindowViewModel : ModelEditorViewModel<TagModel>
+    public class TagEditorWindowViewModel : BaseViewModel
     {
         private readonly TagModel tag;
         private readonly ITagEditorWindowAccess access;

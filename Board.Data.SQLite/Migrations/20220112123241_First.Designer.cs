@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Board.Data.SQLite.Migrations
 {
     [DbContext(typeof(TableContext))]
-    [Migration("20220111212957_AddedComments")]
-    partial class AddedComments
+    [Migration("20220112123241_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,9 @@ namespace Board.Data.SQLite.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("EntryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Modified")

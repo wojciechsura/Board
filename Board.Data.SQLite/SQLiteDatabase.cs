@@ -447,12 +447,6 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
-        public override TagDisplayModel GetTagDisplay(int tagId)
-        {
-            var tag = context.Tags.First(t => t.Id == tagId);
-            return mapper.Map<TagDisplayModel>(tag);
-        }
-
         public override List<TagModel> GetTags(int tableId, bool includeDeleted)
         {
             var tagEntries = context.Tags
@@ -464,11 +458,56 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             return result;
         }
 
+        public override TagModel GetTag(int tagId)
+        {
+            return mapper.Map<TagModel>(context.Tags.Find(tagId));
+        }
+
         public override void UpdateTag(TagModel updatedTag)
         {
-            var tag = context.Tags.First(t => t.Id == updatedTag.Id);
+            var tag = context.Tags.Find(updatedTag.Id);
             mapper.Map(updatedTag, tag);
             context.SaveChanges();
+        }
+
+        #endregion
+
+        #region Comments
+
+        public override void AddComment(CommentModel commentModel)
+        {
+            var comment = mapper.Map<Comment>(commentModel);
+            context.Add<Comment>(comment);
+            context.SaveChanges();
+            mapper.Map(commentModel, comment);
+        }
+
+        public override void UpdateComment(CommentModel updatedComment)
+        {
+            var comment = context.Comments.Find(updatedComment.Id);
+            mapper.Map(updatedComment, comment);
+            context.SaveChanges();
+        }
+
+        public override void DeleteComment(int commentId, bool permanent)
+        {
+            var comment = context.Comments.Find(commentId);
+
+            if (permanent)
+            {
+                context.Remove<Comment>(comment);
+                context.SaveChanges();
+            }
+            else
+            {
+                comment.IsDeleted = true;
+                context.SaveChanges();
+            }
+        }
+
+        public override CommentModel GetComment(int commentId)
+        {
+            return mapper.Map<CommentModel>(context.Comments.Find(commentId));
         }
 
         #endregion

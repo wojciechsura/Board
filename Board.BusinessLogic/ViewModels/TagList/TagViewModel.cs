@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.TagList
 {
-    public class TagViewModel : ModelEditorViewModel<TagModel>
+    public class TagViewModel : BaseViewModel
     {
         private readonly TagModel tag;
         private readonly ITagHandler handler;

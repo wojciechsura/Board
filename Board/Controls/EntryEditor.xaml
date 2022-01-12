@@ -197,23 +197,23 @@
 
             <ScrollViewer Grid.Row="6" Grid.Column="1" MaxHeight="300" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
                           Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
-                <ItemsControl>
+                <ItemsControl ItemsSource="{Binding Comments}">
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
                             <StackPanel Orientation="Vertical">
                                 <Label>
-                                    <TextBlock Text="{Binding Added}" />
+                                    <TextBlock Text="{Binding Added, Mode=OneWay}" />
                                 </Label>
                                 <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}">
                                     <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
                                                                  VerticalScrollBarVisibility="Disabled"
-                                                                 Markdown="{Binding Content}" />
+                                                                 Markdown="{Binding Content, Mode=OneWay}" />
                                 </Border>
                             </StackPanel>
                         </DataTemplate>
 
-                        <DataTemplate DataType="{x:Type mvm:NewInplaceCommentViewModel}">
-                            <c:NewInplaceComment />
+                        <DataTemplate DataType="{x:Type mvm:InplaceCommentEditorViewModel}">
+                            <c:InplaceCommentEditor />
                         </DataTemplate>
                     </ItemsControl.Resources>
                     <ItemsControl.ItemsPanel>

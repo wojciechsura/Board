@@ -13,7 +13,7 @@ namespace Board.Models.Data
         public string? Title { get; set; }
         public string? Description { get; set; }
         public long Order { get; set; }
-        public List<TagDisplayModel> Tags { get; set; }
-        public List<CommentDisplayModel> Comments { get; set; }
+        public List<TagModel> Tags { get; set; }
+        public List<CommentModel> Comments { get; set; }
     }
 }

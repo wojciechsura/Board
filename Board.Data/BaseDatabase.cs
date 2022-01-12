@@ -63,9 +63,18 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public abstract void AddTag(TagModel newTag);
         public abstract void DeleteTag(int tagId, bool permanent);
-        public abstract TagDisplayModel GetTagDisplay(int tagId);
         public abstract List<TagModel> GetTags(int tableId, bool includeDeleted);
         public abstract void UpdateTag(TagModel updatedTag);
+        public abstract TagModel GetTag(int tagId);
+
+        #endregion
+
+        #region Comments
+
+        public abstract void AddComment(CommentModel commentModel);
+        public abstract void UpdateComment(CommentModel commentModel);
+        public abstract void DeleteComment(int commentId, bool permanent);
+        public abstract CommentModel GetComment(int commentId);
 
         #endregion
     }

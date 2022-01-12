@@ -416,7 +416,7 @@ namespace Board.BusinessLogic.ViewModels.Document
                     }
                 case ChangeKind.Edit:
                     {
-                        var newTagDisplay = document.Database.GetTagDisplay(tagId);
+                        var newTagDisplay = document.Database.GetTag(tagId);
 
                         foreach (var column in tableViewModel.Columns)
                             foreach (var entry in column.Entries.OfType<EntryViewModel>())
@@ -468,11 +468,11 @@ namespace Board.BusinessLogic.ViewModels.Document
             columnViewModel.Entries.Add(new NewInplaceEntryViewModel(handler));
         }
 
-        public void AddEntryFromInplaceNew(NewInplaceCommentViewModel newInplaceEntryViewModel)
+        public void AddEntryFromInplaceNew(NewInplaceEntryViewModel newInplaceEntryViewModel)
         {
             var columnViewModel = newInplaceEntryViewModel.Parent;
 
-            var newEntry = newInplaceEntryViewModel.Comment;
+            var newEntry = newInplaceEntryViewModel.Entry;
             newEntry.ColumnId = columnViewModel.Column.Id;
 
             // Fill in order
@@ -488,7 +488,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             columnViewModel.Entries.Add(entryViewModel);
         }
 
-        public void RemoveInplaceNewEntry(NewInplaceCommentViewModel newInplaceEntryViewModel)
+        public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)
         {
             newInplaceEntryViewModel.Parent.Entries.Remove(newInplaceEntryViewModel);
         }

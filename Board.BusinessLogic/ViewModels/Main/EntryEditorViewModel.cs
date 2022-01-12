@@ -63,11 +63,11 @@ namespace Board.BusinessLogic.ViewModels.Main
                 AvailableTags.Add(availableTag);
             }
 
-            Comments.Add(new NewInplaceCommentViewModel(handler, new CommentModel(), true));
+            Comments.Add(new InplaceCommentEditorViewModel(this, new CommentModel() { EntryId = entryId }, true));
 
             foreach (var comment in model.Comments.OrderByDescending(c => c.Added))
             {
-                CommentViewModel commentViewModel = new(comment, handler);
+                CommentViewModel commentViewModel = new(comment, this);
                 Comments.Add(commentViewModel);
             }
         }
@@ -135,6 +135,44 @@ namespace Board.BusinessLogic.ViewModels.Main
             document.Database.UpdateEntry(model);
 
             Description = description;
+        }
+
+        void IEntryEditorHandler.SaveCommentRequest(InplaceCommentEditorViewModel inplaceCommentEditorViewModel)
+        {
+            if (inplaceCommentEditorViewModel.IsNew)
+            {
+                // Add new comment
+                var commentModel = inplaceCommentEditorViewModel.Comment;
+                document.Database.AddComment(commentModel);
+
+                ReplaceCommentEditor(inplaceCommentEditorViewModel, commentModel);
+
+                Comments.Insert(0, new InplaceCommentEditorViewModel(this, new CommentModel() { EntryId = entryId }, true));
+            }
+            else
+            {
+                var commentModel = inplaceCommentEditorViewModel.Comment;
+                document.Database.UpdateComment(commentModel);
+
+                ReplaceCommentEditor(inplaceCommentEditorViewModel, commentModel);
+            }
+        }
+
+        void IEntryEditorHandler.CancelCommentRequest(InplaceCommentEditorViewModel inplaceCommentEditorViewModel)
+        {
+            if (inplaceCommentEditorViewModel.IsNew)
+                throw new InvalidOperationException("Cannot cancel a new comment.");
+
+            var commentModel = document.Database.GetComment(inplaceCommentEditorViewModel.Comment.Id);
+            ReplaceCommentEditor(inplaceCommentEditorViewModel, commentModel);
+        }
+
+        private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
+        {
+            var commentViewModel = new CommentViewModel(commentModel, this);
+            var index = Comments.IndexOf(inplaceCommentEditorViewModel);
+            Comments.RemoveAt(index);
+            Comments.Insert(index, commentViewModel);
         }
 
         // Public properties --------------------------------------------------

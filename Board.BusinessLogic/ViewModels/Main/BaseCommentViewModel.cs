@@ -5,9 +5,9 @@ namespace Board.BusinessLogic.ViewModels.Main
 {
     public class BaseCommentViewModel : BaseViewModel
     {
-        protected readonly IDocumentHandler handler;
+        protected readonly IEntryEditorHandler handler;
 
-        public BaseCommentViewModel(IDocumentHandler handler)
+        public BaseCommentViewModel(IEntryEditorHandler handler)
         {
             this.handler = handler;
         }
