@@ -437,7 +437,7 @@ namespace Board.BusinessLogic.ViewModels.Document
                         foreach (var column in tableViewModel.Columns)
                             foreach (var entry in column.Entries.OfType<EntryViewModel>())
                             {
-                                var oldTag = entry.Tags.First(t => t.Tag.Id == tagId);
+                                var oldTag = entry.Tags.FirstOrDefault(t => t.Tag.Id == tagId);
                                 if (oldTag != null)
                                     entry.Tags.Remove(oldTag);
                             }

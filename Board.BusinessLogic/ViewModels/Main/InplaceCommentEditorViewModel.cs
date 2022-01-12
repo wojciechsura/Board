@@ -36,7 +36,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         public string Content
         {
             get => comment.Content;
-            set => {
+            set 
+            {
                 comment.Content = value;
                 OnPropertyChanged(nameof(Content));
             }

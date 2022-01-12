@@ -11,6 +11,8 @@ using Board.BusinessLogic.Infrastructure.Document;
 using System.Windows.Input;
 using Spooksoft.VisualStateManager.Commands;
 using System.Collections.ObjectModel;
+using Board.BusinessLogic.Services.Dialogs;
+using Board.Resources;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
@@ -22,7 +24,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly int tableId;
         private readonly WallDocument document;
         private readonly IDocumentHandler handler;
-
+        private readonly IDialogService dialogService;
         private bool isEditingTitle = false;
         private bool isEditingDescription = false;
 
@@ -95,48 +97,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             }
         }
 
-        // Public methods -----------------------------------------------------
-
-        public EntryEditorViewModel(int entryId, 
-            int tableId,
-            EntryViewModel editedEntryViewModel,
-            WallDocument document,
-            IDocumentHandler handler)
-        {
-            var editEntryModel = document.Database.GetEntryEdit(entryId);
-
-            this.entryId = entryId;
-            this.tableId = tableId;
-            this.document = document;
-            this.handler = handler;
-
-            CloseCommand = new AppCommand(obj => handler.RequestEditorClose(editedEntryViewModel));
-
-            AddedTags = new ();
-            AvailableTags = new ();
-            Comments = new();
-
-            UpdateFromModel(editEntryModel);
-        }
-
-        public void SetTitle(string title)
-        {
-            var model = document.Database.GetEntryById(entryId);
-            model.Title = title;
-            document.Database.UpdateEntry(model);
-
-            Title = title;
-        }
-
-        public void SetDescription(string description)
-        {
-            var model = document.Database.GetEntryById(entryId);
-            model.Description = description;
-            document.Database.UpdateEntry(model);
-
-            Description = description;
-        }
-
         void IEntryEditorHandler.SaveCommentRequest(InplaceCommentEditorViewModel inplaceCommentEditorViewModel)
         {
             if (inplaceCommentEditorViewModel.IsNew)
@@ -167,6 +127,72 @@ namespace Board.BusinessLogic.ViewModels.Main
             ReplaceCommentEditor(inplaceCommentEditorViewModel, commentModel);
         }
 
+        void IEntryEditorHandler.EditCommentRequest(CommentViewModel commentViewModel)
+        {
+            var inplaceEditorViewModel = new InplaceCommentEditorViewModel(this, commentViewModel.Comment, false);
+            var index = Comments.IndexOf(commentViewModel);
+            Comments.RemoveAt(index);
+            Comments.Insert(index, inplaceEditorViewModel);
+        }
+
+        void IEntryEditorHandler.DeleteCommentRequest(CommentViewModel commentViewModel)
+        {
+            (bool result, bool? permanent) = dialogService.ShowDeleteDialog(string.Format(Strings.Message_CommentDeletion, commentViewModel.Added));
+            if (result)
+            {
+                document.Database.DeleteComment(commentViewModel.Comment.Id, permanent.Value);
+                Comments.Remove(commentViewModel);
+            }
+        }
+
+        // Public methods -----------------------------------------------------
+
+        public EntryEditorViewModel(int entryId, 
+            int columnId,
+            int tableId,
+            EntryViewModel editedEntryViewModel,
+            WallDocument document,
+            IDocumentHandler handler,
+            IDialogService dialogService)
+        {
+            var columnModel = document.Database.GetColumn(columnId);
+            ColumnName = columnModel.Name;
+
+            var editEntryModel = document.Database.GetEntryEdit(entryId);
+
+            this.entryId = entryId;
+            this.tableId = tableId;
+            this.document = document;
+            this.handler = handler;
+            this.dialogService = dialogService;
+
+            CloseCommand = new AppCommand(obj => handler.RequestEditorClose(editedEntryViewModel));
+
+            AddedTags = new ();
+            AvailableTags = new ();
+            Comments = new();
+
+            UpdateFromModel(editEntryModel);
+        }
+
+        public void SetTitle(string title)
+        {
+            var model = document.Database.GetEntryById(entryId);
+            model.Title = title;
+            document.Database.UpdateEntry(model);
+
+            Title = title;
+        }
+
+        public void SetDescription(string description)
+        {
+            var model = document.Database.GetEntryById(entryId);
+            model.Description = description;
+            document.Database.UpdateEntry(model);
+
+            Description = description;
+        }
+
         private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
         {
             var commentViewModel = new CommentViewModel(commentModel, this);
@@ -176,6 +202,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         }
 
         // Public properties --------------------------------------------------
+
+        public string ColumnName { get; }
 
         public string Title
         {

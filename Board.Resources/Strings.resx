@@ -162,4 +162,7 @@
   <data name="Message.TagDeletion" xml:space="preserve">
     <value>Are you sure you want to delete tag {0}?</value>
   </data>
+  <data name="Message.CommentDeletion" xml:space="preserve">
+    <value>Are you sure you want to delete comment from {0}?</value>
+  </data>
 </root>

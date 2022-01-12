@@ -1,12 +1,35 @@
-﻿<UserControl x:Class="Board.Controls.Comment"
+﻿<!-- Bind DataContext to CommentViewModel -->
+    
+<StackPanel x:Class="Board.Controls.Comment"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Board.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
-</UserControl>
+             xmlns:local="clr-namespace:Board.Controls" 
+            xmlns:mdxaml="clr-namespace:MdXaml;assembly=MdXaml" 
+            xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+            xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
+            mc:Ignorable="d" 
+            Orientation="Vertical">
+    <Label>
+        <TextBlock Text="{Binding Added, Mode=OneWay}" />
+    </Label>
+    <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}">
+        <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                                VerticalScrollBarVisibility="Disabled"
+                                                                Markdown="{Binding Content, Mode=OneWay}" />
+    </Border>
+    <StackPanel Orientation="Horizontal">
+        <Label Content="#Edit" Cursor="Hand">
+            <i:Interaction.Behaviors>
+                <b:ClickBehavior Command="{Binding EditCommentCommand}" />
+            </i:Interaction.Behaviors>
+        </Label>
+        <Label Content="-" />
+        <Label Content="#Delete" Cursor="Hand">
+            <i:Interaction.Behaviors>
+                <b:ClickBehavior Command="{Binding DeleteCommentCommand}" />
+            </i:Interaction.Behaviors>
+        </Label>
+    </StackPanel>
+</StackPanel>

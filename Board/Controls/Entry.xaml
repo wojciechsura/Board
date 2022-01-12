@@ -46,7 +46,7 @@
                VerticalContentAlignment="Center" MouseDown="HandleHeaderMouseDown"
                MouseMove="HandleHeaderMouseMove" MouseUp="HandleHeaderMouseUp" 
                GiveFeedback="HandleHeaderGiveFeedback">
-            <TextBlock Text="{Binding Title, Mode=OneWay}"
+            <TextBlock Text="{Binding Title, Mode=OneWay}" FontSize="{StaticResource CardFontSize}"
                        TextWrapping="Wrap" />
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding EditEntryCommand}"/>

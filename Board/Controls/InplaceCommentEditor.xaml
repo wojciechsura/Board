@@ -19,6 +19,6 @@
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Content, Converter={StaticResource HideIfEmptyStringConverter}}">
         <Button Command="{Binding SaveCommand}" Content="#Save" Style="{StaticResource DialogButton}" />
-        <Button Command="{Binding CancelCommand}" Content="#Cancel" Style="{StaticResource DialogButton}" />
+        <Button Command="{Binding CancelCommand}" Content="#Cancel" Style="{StaticResource DialogButton}" Visibility="{Binding IsNew, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
     </StackPanel>
 </StackPanel>

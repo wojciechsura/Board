@@ -55,7 +55,7 @@
     
     <!-- Card -->
 
-    <Color x:Key="CardBorderColor">#c0c0c0</Color>
+    <Color x:Key="CardBorderColor">#b0b0b0</Color>
     <Color x:Key="CardBackground">#ffffff</Color>
 
     <!-- Card editor -->
@@ -71,11 +71,11 @@
     
     <!-- Overlay -->
 
-    <Color x:Key="OverlayBackground">#60000000</Color>
+    <Color x:Key="OverlayBackground">#a0000000</Color>
     
     <!-- Entry editor -->
 
-    <Color x:Key="EntryEditorBackgroundColor">#dddddd</Color>
+    <Color x:Key="EntryEditorBackgroundColor">#f4f4f4</Color>
     <Color x:Key="EntryEditorTextContentBackground">#ffffff</Color>
     <Color x:Key="EntryEditorTextContentBorder">#eeeeee</Color>    
     

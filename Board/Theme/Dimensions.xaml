@@ -49,6 +49,7 @@
     <!-- ColumnButton -->
 
     <CornerRadius x:Key="ColumnButtonCornerRadius">4</CornerRadius>
+    <Thickness x:Key="ColumnButtonMargin">8,8,8,8</Thickness>
 
     <!-- TextBox -->
 
@@ -61,6 +62,7 @@
     
     <!-- Card -->
 
+    <sys:Double x:Key="CardFontSize">14</sys:Double>
     <Thickness x:Key="CardBorderThickness">0,0,0,1</Thickness>
     <CornerRadius x:Key="CardCornerRadius">4</CornerRadius>
     <Thickness x:Key="CardMargin">8,8,8,0</Thickness>
@@ -72,7 +74,8 @@
     
     <!-- Column -->
 
-    <Thickness x:Key="ColumnCardAreaMargin">0,0,0,8</Thickness>
+    <sys:Double x:Key="ColumnHeaderFontSize">14</sys:Double>
+    <Thickness x:Key="ColumnCardAreaMargin">0</Thickness>
     <Thickness x:Key="ColumnBorderThickness">1,1,1,2</Thickness>
     <sys:Double x:Key="ColumnWidth">300</sys:Double>
     <Thickness x:Key="ColumnMargin">0,0,8,0</Thickness>
@@ -86,6 +89,8 @@
     
     <!-- Entry editor -->
 
-    <CornerRadius x:Key="EntryEditorCornerRadius">6</CornerRadius>
+    <sys:Double x:Key="EntryEditorWidth">500</sys:Double>
+    <CornerRadius x:Key="EntryEditorCornerRadius">3</CornerRadius>
+    <Thickness x:Key="EntryEditorSpacing">0,0,0,20</Thickness>
 
 </ResourceDictionary>

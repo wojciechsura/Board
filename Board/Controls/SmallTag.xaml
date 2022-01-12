@@ -7,7 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:Board.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d" CornerRadius="4" Width="50" Height="8" d:Background="Red" Margin="0,0,8,0">
+        mc:Ignorable="d" CornerRadius="4" Width="40" Height="8" d:Background="Red" Margin="0,0,8,0">
     <Border.Background>
         <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
     </Border.Background>

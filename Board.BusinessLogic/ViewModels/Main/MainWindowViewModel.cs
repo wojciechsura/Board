@@ -188,7 +188,13 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         void IDocumentHandler.EditEntryRequest(EntryViewModel entryViewModel)
         {            
-            EntryEditor = new EntryEditorViewModel(entryViewModel.Entry.Id, entryViewModel.Parent.Parent.Table.Id, entryViewModel, activeDocument.Document, this);
+            EntryEditor = new EntryEditorViewModel(entryViewModel.Entry.Id,
+                entryViewModel.Parent.Column.Id,
+                entryViewModel.Parent.Parent.Table.Id,
+                entryViewModel,
+                activeDocument.Document,
+                this,
+                dialogService);
         }
 
         void IDocumentHandler.RequestEditorClose(EntryViewModel entryToUpdate)

@@ -18,7 +18,7 @@ namespace Board.Controls
     /// <summary>
     /// Interaction logic for Comment.xaml
     /// </summary>
-    public partial class Comment : UserControl
+    public partial class Comment : StackPanel
     {
         public Comment()
         {

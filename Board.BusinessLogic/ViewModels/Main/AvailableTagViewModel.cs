@@ -18,10 +18,10 @@ namespace Board.BusinessLogic.ViewModels.Main
         public AvailableTagViewModel(TagModel tag, IEntryEditorHandler handler) : base(tag, handler)
         {
             isSelected = false;
-            AddCommand = new AppCommand(obj => handler.ToggleTag(this));
+            ToggleCommand = new AppCommand(obj => handler.ToggleTag(this));
         }
 
-        public ICommand AddCommand { get; }
+        public ICommand ToggleCommand { get; }
         public bool IsSelected
         {
             get => isSelected;

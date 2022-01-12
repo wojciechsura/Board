@@ -27,7 +27,7 @@
 
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
-            <Setter Property="FontFamily" Value="{StaticResource RobotoCondensed}" />
+            <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Padding" Value="0" />
         </Style>
@@ -50,7 +50,7 @@
 
     <StackPanel Orientation="Vertical">
 
-        <Grid Width="400" Margin="{StaticResource EditorPadding}">
+        <Grid Width="{StaticResource EntryEditorWidth}" Margin="{StaticResource EditorPadding}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -66,87 +66,109 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" />
-
-            <Grid Grid.Row="0" Grid.Column="1" x:Name="gTitle" HorizontalAlignment="Stretch" Background="Transparent">
-                <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="EditTitleClick"
-                            Padding="0" Visibility="{Binding ElementName=gTitle, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
-                    </Button>
-                    <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" 
-                           Cursor="Hand" MouseLeftButtonDown="TitleLabelMouseDown">
-                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
-                    </Label>
-                </DockPanel>
-                <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="CancelTitleClick"
-                            Padding="0">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
-                    </Button>
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="SaveTitleClick"
-                            Padding="0">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
-                    </Button>
-                    <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource RobotoCondensed}"
-                             VerticalAlignment="Center" KeyDown="TitleKeyDown" TextWrapping="Wrap"/>
-                </DockPanel>
-            </Grid>
-
-            <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Tag16.png" />
-
-            <DockPanel x:Name="dpTags" Grid.Row="1" Grid.Column="1" Background="Transparent">
-                <ToggleButton x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Right" Style="{StaticResource FlatToggleButton}" 
-                              Width="24" Height="24" Padding="0">
-                    <Image Width="16" Height="16" Source="\Resources\Images\Add16.png" />
-                </ToggleButton>
-               
-                <Label Style="{StaticResource SectionLabel}" Content="#Tags" />
-            </DockPanel>
-
-            <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
-                       Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
-                <Border Style="{StaticResource Popup}">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="#Add tag" Margin="{StaticResource PopupItemsMargin}" />
-                        <ScrollViewer MinWidth="200" MinHeight="100" HorizontalScrollBarVisibility="Disabled"
-                                          VerticalScrollBarVisibility="Auto">
-                            <ItemsControl ItemsSource="{Binding AvailableTags}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
-                                        <c:Tag Cursor="Hand" Margin="4,4,4,0">
-                                            <i:Interaction.Behaviors>
-                                                <b:ClickBehavior Command="{Binding AddCommand}"/>
-                                            </i:Interaction.Behaviors>
-                                        </c:Tag>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </StackPanel>
-                </Border>
-            </Popup>
-
-            <DockPanel Grid.Row="2" Grid.Column="1">
-                <ItemsControl ItemsSource="{Binding AddedTags}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
-                            <c:Tag Margin="{StaticResource DialogItemsMargin}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </DockPanel>
+            <!-- Header and general information -->
             
+            <Image Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" 
+                   VerticalAlignment="Top" />
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+            
+                <Grid x:Name="gTitle" HorizontalAlignment="Stretch" Background="Transparent" Margin="{StaticResource DialogItemsBottomMargin}">
+                    <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="EditTitleClick"
+                                Padding="0" Visibility="{Binding ElementName=gTitle, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
+                        </Button>
+                        <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" 
+                               Cursor="Hand" MouseLeftButtonDown="TitleLabelMouseDown">
+                            <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
+                        </Label>
+                    </DockPanel>
+                    <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
+                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="CancelTitleClick"
+                                Padding="0">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
+                        </Button>
+                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="SaveTitleClick"
+                                Padding="0">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
+                        </Button>
+                        <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource Roboto}"
+                                 VerticalAlignment="Center" KeyDown="TitleKeyDown" TextWrapping="Wrap"/>
+                    </DockPanel>
+                </Grid>
+
+                <Label Padding="0" Margin="{StaticResource EntryEditorSpacing}">
+                    <TextBlock>
+                        <TextBlock.Inlines>
+                            <Run Text="#In column " />
+                            <Run FontWeight="Bold" Text="{Binding ColumnName, Mode=OneWay}" />
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                </Label>
+
+                <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="#Tags" />
+
+                <DockPanel Margin="{StaticResource EntryEditorSpacing}">
+                    <ToggleButton x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Left" 
+                              Width="24" Height="24" Padding="0" Margin="{StaticResource DialogItemsExceptBottomMargin}">
+                        <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" />
+                    </ToggleButton>
+
+                    <ItemsControl ItemsSource="{Binding AddedTags}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
+                                <c:Tag Margin="{StaticResource DialogItemsExceptBottomMargin}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DockPanel>
+
+                <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
+                       Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
+                    <Border Style="{StaticResource Popup}">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="#Add tag" Margin="{StaticResource PopupItemsMargin}" />
+                            <ScrollViewer MinWidth="200" MinHeight="100" HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding AvailableTags}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
+                                            <Border>
+                                                <Button HorizontalAlignment="Stretch" Content="{Binding Name}"                                                         
+                                                        Cursor="Hand" Margin="{StaticResource DialogItemsExceptBottomMargin}"
+                                                        Command="{Binding ToggleCommand}" Style="{StaticResource TagToggleButton}">
+                                                    <Button.Background>
+                                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
+                                                    </Button.Background>
+                                                    <Button.Foreground>
+                                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
+                                                    </Button.Foreground>
+                                                </Button>
+                                            </Border>
+
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
+            </StackPanel>
+           
+
+           
             <Image Grid.Row="3" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
             
             <Grid Grid.Row="3" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
@@ -198,16 +220,7 @@
             <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
-                        <StackPanel Orientation="Vertical">
-                            <Label>
-                                <TextBlock Text="{Binding Added, Mode=OneWay}" />
-                            </Label>
-                            <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}">
-                                <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                                                VerticalScrollBarVisibility="Disabled"
-                                                                Markdown="{Binding Content, Mode=OneWay}" />
-                            </Border>
-                        </StackPanel>
+                        <c:Comment />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type mvm:InplaceCommentEditorViewModel}">

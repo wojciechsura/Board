@@ -14,13 +14,15 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 {
     public class SQLiteDatabase : BaseDatabase
     {
-        private readonly TableContext context;
+        private readonly string path;
         private readonly IMapper mapper;
 
         public SQLiteDatabase(string path, IMapper mapper)
         {
-            context = new TableContext(path);
+            var context = new TableContext(path);
+
             context.Database.Migrate();
+            this.path = path;
             this.mapper = mapper;
         }
 
@@ -28,6 +30,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddTable(TableModel newTable)
         {
+            var context = new TableContext(path);
+
             var tableEntity = mapper.Map<Table>(newTable);
 
             context.Tables.Add(tableEntity);
@@ -38,6 +42,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void DeleteTable(int tableId, bool permanent)
         {
+            var context = new TableContext(path);
+
             var table = context.Tables.First(t => t.Id == tableId);
 
             if (permanent)
@@ -54,6 +60,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override long GetFirstTableOrder(bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetTableCount(includeDeleted) == 0)
                 return 0;
 
@@ -64,6 +72,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override long GetLastTableOrder(bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetTableCount(includeDeleted) == 0)
                 return 0;
 
@@ -74,6 +84,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override TableModel GetNextTable(TableModel table, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var tableEntity = context.Tables
                 .Where(t => t.Order > table.Order && (includeDeleted || !t.IsDeleted))
                 .OrderBy(t => t.Order)
@@ -87,6 +99,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override TableModel GetTable(int tableId)
         {
+            var context = new TableContext(path);
+
             var table = context.Tables
                 .Single(t => t.Id == tableId);
 
@@ -96,11 +110,15 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override int GetTableCount(bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             return context.Tables.Count(t => includeDeleted || !t.IsDeleted);
         }
 
         public override List<TableModel> GetTables(bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var tableEntities = context.Tables.Where(t => includeDeleted || !t.IsDeleted)
                 .OrderBy(t => t.Order)
                 .ToList();
@@ -109,6 +127,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<TableModel> GetTables(int skip, int take, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var tables = context.Tables
                 .Where(t => includeDeleted || !t.IsDeleted)
                 .OrderBy(t => t.Order)
@@ -122,6 +142,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateTable(TableModel updatedTable)
         {
+            var context = new TableContext(path);
+
             var table = context.Tables.First(t => t.Id == updatedTable.Id);
             mapper.Map(updatedTable, table);
             context.SaveChanges();
@@ -129,6 +151,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateTables(List<TableModel> updatedItems)
         {
+            var context = new TableContext(path);
+
             List<Table> entities = new();
 
             foreach (var item in updatedItems)
@@ -146,6 +170,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddColumn(ColumnModel newColumn)
         {
+            var context = new TableContext(path);
+
             var column = mapper.Map<Column>(newColumn);
             context.Columns.Add(column);
             context.SaveChanges();
@@ -154,6 +180,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void DeleteColumn(int columnId, bool permanent)
         {
+            var context = new TableContext(path);
+
             var column = context.Columns.First(c => c.Id == columnId);
 
             if (permanent)
@@ -168,14 +196,25 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
+        public override ColumnModel GetColumn(int columnId)
+        {
+            var context = new TableContext(path);
+
+            return mapper.Map<ColumnModel>(context.Columns.Find(columnId));
+        }
+
         public override int GetColumnCount(int tableId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             return context.Columns
                 .Count(c => c.TableId == tableId && (includeDeleted || !c.IsDeleted));
         }
 
         public override List<ColumnModel> GetColumns(int tableId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var columnEntities = context.Columns
                 .Where(c => c.Table.Id == tableId && (includeDeleted || !c.IsDeleted))
                 .OrderBy(c => c.Order)
@@ -185,6 +224,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<ColumnModel> GetColumns(int tableId, int skip, int take, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var columns = context.Columns
                 .Where(c => c.TableId == tableId && (includeDeleted || !c.IsDeleted))
                 .OrderBy(c => c.Order)
@@ -199,6 +240,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override long GetFirstColumnOrder(int tableId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetColumnCount(tableId, includeDeleted) == 0)
                 return 0;
 
@@ -209,6 +252,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override long GetLastColumnOrder(int tableId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetColumnCount(tableId, includeDeleted) == 0)
                 return 0;
 
@@ -219,6 +264,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override ColumnModel GetNextColumn(ColumnModel column, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var columnEntity = context.Columns
                 .Where(c => c.TableId == column.TableId && c.Order > column.Order && (includeDeleted || !c.IsDeleted))
                 .OrderBy(c => c.Order)
@@ -232,6 +279,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateColumn(ColumnModel updatedColumn)
         {
+            var context = new TableContext(path);
+
             var column = context.Columns.First(c => c.Id == updatedColumn.Id);
             mapper.Map(updatedColumn, column);
             context.SaveChanges();
@@ -239,6 +288,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateColumns(List<ColumnModel> updatedItems)
         {
+            var context = new TableContext(path);
+
             List<Column> entities = new();
 
             foreach (var item in updatedItems)
@@ -256,6 +307,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddEntry(EntryModel newEntry)
         {
+            var context = new TableContext(path);
+
             var entry = mapper.Map<Entry>(newEntry);
             context.Entries.Add(entry);
             context.SaveChanges();
@@ -264,7 +317,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddTagToEntry(int entryId, int tagId)
         {
-            var entry = context.Entries.Find(entryId);
+            var context = new TableContext(path);
+
+            var entry = context.Entries
+                .Include(e => e.Tags)
+                .First(e => e.Id == entryId);
+
             if (!entry.Tags.Any(t => t.Id == tagId))
             {
                 var tag = context.Tags.Find(tagId);
@@ -275,6 +333,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void DeleteEntry(int entryId, bool permanent)
         {
+            var context = new TableContext(path);
+
             var entry = context.Entries.First(e => e.Id == entryId);
 
             if (permanent)
@@ -291,9 +351,11 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<EntryDisplayModel> GetDisplayEntries(int columnId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var entryEntities = context.Entries
-                .Include(e => e.Tags)
-                .Include(e => e.Comments)
+                .Include(e => e.Tags.Where(t => (includeDeleted || !t.IsDeleted)).OrderBy(t => t.Name))
+                .Include(e => e.Comments.Where(c => (includeDeleted || !c.IsDeleted)).OrderByDescending(c => c.Added))
                 .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
                 .OrderBy(e => e.Order)
                 .ToList();
@@ -305,6 +367,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<EntryModel> GetEntries(int columnId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var entryEntities = context.Entries
                 .Where(e => e.Column.Id == columnId && (includeDeleted || !e.IsDeleted))
                 .OrderBy(e => e.Order)
@@ -315,6 +379,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<EntryModel> GetEntries(int columnId, int skip, int take, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var entries = context.Entries
                 .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
                 .OrderBy(e => e.Order)
@@ -328,8 +394,11 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override EntryEditModel GetEntryEdit(int entryId)
         {
+            var context = new TableContext(path);
+
             var entry = context.Entries
-                .Include(e => e.Tags)
+                .Include(e => e.Tags.Where(t => !t.IsDeleted))
+                .Include(e => e.Comments.Where(c => !c.IsDeleted))
                 .FirstOrDefault(e => e.Id == entryId);
 
             var result = mapper.Map<EntryEditModel>(entry);
@@ -338,6 +407,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override EntryModel GetEntryById(int id)
         {
+            var context = new TableContext(path);
+
             var entry = context.Entries.First(e => e.Id == id && !e.IsDeleted);
             var result = mapper.Map<EntryModel>(entry);
             return result;
@@ -345,12 +416,16 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override int GetEntryCount(int columnId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             return context.Entries
                 .Count(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted));
         }
 
         public override long GetFirstEntryOrder(int columnId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetEntryCount(columnId, includeDeleted) == 0)
                 return 0;
 
@@ -361,8 +436,10 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override EntryDisplayModel GetEntryDisplay(int entryId)
         {
+            var context = new TableContext(path);
+
             var entry = context.Entries
-                .Include(e => e.Tags)
+                .Include(e => e.Tags.Where(t => !t.IsDeleted))
                 .First(e => e.Id == entryId && !e.IsDeleted);
             var result = mapper.Map<EntryDisplayModel>(entry);
             return result;
@@ -370,6 +447,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override long GetLastEntryOrder(int columnId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             if (GetEntryCount(columnId, includeDeleted) == 0)
                 return 0;
 
@@ -380,6 +459,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override EntryModel GetNextEntry(EntryModel entry, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var entryEntity = context.Entries
                 .Where(e => e.ColumnId == entry.ColumnId && e.Order > entry.Order && (includeDeleted || !e.IsDeleted))
                 .OrderBy(e => e.Order)
@@ -393,7 +474,12 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void RemoveTagFromEntry(int entryId, int tagId)
         {
-            var entry = context.Entries.Find(entryId);
+            var context = new TableContext(path);
+
+            var entry = context.Entries
+                .Include(e => e.Tags)
+                .First(e => e.Id == entryId);
+                
             var tag = context.Tags.Find(tagId);
             entry.Tags.Remove(tag);
             context.SaveChanges();
@@ -401,6 +487,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateEntries(List<EntryModel> updatedItems)
         {
+            var context = new TableContext(path);
+
             List<Entry> entities = new();
 
             foreach (var item in updatedItems)
@@ -414,6 +502,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void UpdateEntry(EntryModel updatedEntry)
         {
+            var context = new TableContext(path);
+
             var entry = context.Entries.First(e => e.Id == updatedEntry.Id);
             mapper.Map(updatedEntry, entry);
             context.SaveChanges();
@@ -425,6 +515,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddTag(TagModel newTag)
         {
+            var context = new TableContext(path);
+
             var tag = mapper.Map<Tag>(newTag);
             context.Tags.Add(tag);
             context.SaveChanges();
@@ -433,6 +525,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void DeleteTag(int tagId, bool permanent)
         {
+            var context = new TableContext(path);
+
             var tag = context.Tags.First(e => e.Id == tagId);
 
             if (permanent)
@@ -449,6 +543,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override List<TagModel> GetTags(int tableId, bool includeDeleted)
         {
+            var context = new TableContext(path);
+
             var tagEntries = context.Tags
                 .Where(t => t.TableId == tableId && (includeDeleted || !t.IsDeleted))
                 .OrderBy(t => t.Name)
@@ -460,11 +556,15 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override TagModel GetTag(int tagId)
         {
+            var context = new TableContext(path);
+
             return mapper.Map<TagModel>(context.Tags.Find(tagId));
         }
 
         public override void UpdateTag(TagModel updatedTag)
         {
+            var context = new TableContext(path);
+
             var tag = context.Tags.Find(updatedTag.Id);
             mapper.Map(updatedTag, tag);
             context.SaveChanges();
@@ -476,14 +576,18 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void AddComment(CommentModel commentModel)
         {
+            var context = new TableContext(path);
+
             var comment = mapper.Map<Comment>(commentModel);
             context.Add<Comment>(comment);
             context.SaveChanges();
-            mapper.Map(commentModel, comment);
+            mapper.Map(comment, commentModel);
         }
 
         public override void UpdateComment(CommentModel updatedComment)
         {
+            var context = new TableContext(path);
+
             var comment = context.Comments.Find(updatedComment.Id);
             mapper.Map(updatedComment, comment);
             context.SaveChanges();
@@ -491,6 +595,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override void DeleteComment(int commentId, bool permanent)
         {
+            var context = new TableContext(path);
+
             var comment = context.Comments.Find(commentId);
 
             if (permanent)
@@ -507,6 +613,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public override CommentModel GetComment(int commentId)
         {
+            var context = new TableContext(path);
+
             return mapper.Map<CommentModel>(context.Comments.Find(commentId));
         }
 

@@ -2,11 +2,13 @@
 using Board.BusinessLogic.ViewModels.Base;
 using Board.BusinessLogic.ViewModels.Document;
 using Board.Models.Data;
+using Spooksoft.VisualStateManager.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
@@ -24,10 +26,16 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             this.comment = comment;
 
+            EditCommentCommand = new AppCommand(obj => handler.EditCommentRequest(this));
+            DeleteCommentCommand = new AppCommand(obj => handler.DeleteCommentRequest(this));
+
             UpdateFromModel(comment);
         }
 
         public string Content => content;
-        public string Added => added.ToString("dd-MM-yyyy");
+        public string Added => added.ToString("dd-MM-yyyy, HH:mm:ss");
+        public ICommand EditCommentCommand { get; }
+        public ICommand DeleteCommentCommand { get; }
+        public CommentModel Comment => comment;
     }
 }

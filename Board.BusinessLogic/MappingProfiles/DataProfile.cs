@@ -13,11 +13,16 @@ namespace Board.BusinessLogic.MappingProfiles
     {
         public DataProfile()
         {
-            CreateMap<Table, TableModel>().ReverseMap();
-            CreateMap<Column, ColumnModel>().ReverseMap();
-            CreateMap<Entry, EntryModel>().ReverseMap();
-            CreateMap<Tag, TagModel>().ReverseMap();
-            CreateMap<Comment, CommentModel>().ReverseMap();
+            CreateMap<Table, TableModel>().ReverseMap()
+                .ForMember(e => e.Id, o => o.Ignore());
+            CreateMap<Column, ColumnModel>().ReverseMap()
+                .ForMember(e => e.Id, o => o.Ignore());
+            CreateMap<Entry, EntryModel>().ReverseMap()
+                .ForMember(e => e.Id, o => o.Ignore());
+            CreateMap<Tag, TagModel>().ReverseMap()
+                .ForMember(e => e.Id, o => o.Ignore());
+            CreateMap<Comment, CommentModel>().ReverseMap()
+                .ForMember(e => e.Id, o => o.Ignore());
             CreateMap<TableModel, TableModel>();
             CreateMap<ColumnModel, ColumnModel>();
             CreateMap<EntryModel, EntryModel>();

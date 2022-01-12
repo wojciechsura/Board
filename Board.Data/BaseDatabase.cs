@@ -28,6 +28,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public abstract void AddColumn(ColumnModel newColumn);
         public abstract void DeleteColumn(int columnId, bool permanent);
+        public abstract ColumnModel GetColumn(int columnId);
         public abstract int GetColumnCount(int tableId, bool includeDeleted);
         public abstract List<ColumnModel> GetColumns(int tableId, bool includeDeleted);
         public abstract List<ColumnModel> GetColumns(int tableId, int skip, int take, bool includeDeleted);

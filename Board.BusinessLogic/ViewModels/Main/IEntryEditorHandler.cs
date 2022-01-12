@@ -5,5 +5,7 @@
         void ToggleTag(AvailableTagViewModel tag);
         void SaveCommentRequest(InplaceCommentEditorViewModel inplaceCommentEditorViewModel);
         void CancelCommentRequest(InplaceCommentEditorViewModel inplaceCommentEditorViewModel);
+        void EditCommentRequest(CommentViewModel commentViewModel);
+        void DeleteCommentRequest(CommentViewModel commentViewModel);
     }
 }
