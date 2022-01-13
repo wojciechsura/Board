@@ -131,7 +131,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Border" CornerRadius="{StaticResource ColumnButtonCornerRadius}"
+                    <Border x:Name="Border" CornerRadius="{StaticResource GrayButtonCornerRadius}"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter Content="{TemplateBinding Content}" 
                                           Margin="{TemplateBinding Padding}"/>
@@ -141,18 +141,18 @@
         </Setter>        
     </Style>
     
-    <Style TargetType="Button" x:Key="ColumnButton">
+    <Style TargetType="Button" x:Key="GrayButton">
         <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
-        <Setter Property="Margin" Value="{StaticResource ColumnButtonMargin}" />
+        <Setter Property="Margin" Value="{StaticResource GrayButtonMargin}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Border" CornerRadius="{StaticResource ColumnButtonCornerRadius}">
+                    <Border x:Name="Border" CornerRadius="{StaticResource GrayButtonCornerRadius}">
                         <Border.Background>
                             <SolidColorBrush Color="Transparent" />
                         </Border.Background>
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource ColumnButtonForeground}" />
+                            <SolidColorBrush Color="{StaticResource GrayButtonForeground}" />
                         </TextBlock.Foreground>
                         
                         <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" 
@@ -169,10 +169,10 @@
                                 <VisualState x:Name="Normal" >
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonBackground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonBackground}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonForeground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonForeground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -180,10 +180,10 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonHoverBackground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonHoverBackground}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonHoverForeground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonHoverForeground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -191,14 +191,14 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonPressedBackground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonPressedBackground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ColumnButtonDisabledForeground}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource GrayButtonDisabledForeground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -209,7 +209,80 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="Button" x:Key="EntryEditorButton">
+        <Setter Property="Height" Value="{StaticResource EntryEditorButtonHeight}" />
+        <Setter Property="Padding" Value="{StaticResource EntryEditorButtonPadding}" />
+        <Setter Property="Margin" Value="{StaticResource EntryEditorButtonMargin}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" CornerRadius="{StaticResource EntryEditorButtonCornerRadius}">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource EntryEditorButtonBackground}" />
+                        </Border.Background>
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource EntryEditorButtonForeground}" />
+                        </TextBlock.Foreground>
+
+                        <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal" >
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonBackground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonForeground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonHoverBackground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonHoverForeground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonPressedBackground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource EntryEditorButtonDisabledForeground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style TargetType="ToggleButton">
         <Style.Setters>
             <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />

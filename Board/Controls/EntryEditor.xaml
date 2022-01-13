@@ -18,22 +18,22 @@
         x:Name="root" DataContextChanged="EditorDataContextChanged"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True">
     <Border.Resources>
-        <sys:Double x:Key="TitleFontSize">20</sys:Double>
-        <sys:Double x:Key="SectionFontSize">14</sys:Double>
-        <Thickness x:Key="SectionImageMargin">8,8</Thickness>
+        <sys:Double x:Key="EntryEditorTitleFontSize">20</sys:Double>
+        <sys:Double x:Key="EntryEditorSectionFontSize">16</sys:Double>
+        <Thickness x:Key="EntryEditorSectionImageMargin">8,8</Thickness>
 
         <Thickness x:Key="EditorPadding">16</Thickness>
         <Thickness x:Key="EditorExceptTopPadding">16,0,16,16</Thickness>
 
         <Style TargetType="Label" x:Key="TitleLabel">
-            <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
+            <Setter Property="FontSize" Value="{StaticResource EntryEditorTitleFontSize}" />
             <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Padding" Value="0" />
         </Style>
 
         <Style TargetType="Label" x:Key="SectionLabel">
-            <Setter Property="FontSize" Value="{StaticResource SectionFontSize}" />
+            <Setter Property="FontSize" Value="{StaticResource EntryEditorSectionFontSize}" />
             <Setter Property="FontFamily" Value="{StaticResource RobotoCondensed}" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Padding" Value="0" />
@@ -43,7 +43,7 @@
         <Style TargetType="Image" x:Key="SectionImage">
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
-            <Setter Property="Margin" Value="{StaticResource SectionImageMargin}" />
+            <Setter Property="Margin" Value="{StaticResource EntryEditorSectionImageMargin}" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Border.Resources>
@@ -74,28 +74,31 @@
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
             
                 <Grid x:Name="gTitle" HorizontalAlignment="Stretch" Background="Transparent" Margin="{StaticResource DialogItemsBottomMargin}">
-                    <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="EditTitleClick"
-                                Padding="0" Visibility="{Binding ElementName=gTitle, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
+                    <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource EntryEditorButton}" 
+                                Click="EditTitleClick"
+                                Content="#Edit">
                         </Button>
                         <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" 
                                Cursor="Hand" MouseLeftButtonDown="TitleLabelMouseDown">
                             <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
                         </Label>
                     </DockPanel>
-                    <DockPanel Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="CancelTitleClick"
-                                Padding="0">
-                            <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
-                        </Button>
-                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" Click="SaveTitleClick"
-                                Padding="0">
-                            <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
-                        </Button>
+
+                    <StackPanel Orientation="Vertical" 
+                                Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}}">
+
                         <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource TitleFontSize}" FontFamily="{StaticResource Roboto}"
-                                 VerticalAlignment="Center" KeyDown="TitleKeyDown" TextWrapping="Wrap"/>
-                    </DockPanel>
+                                 KeyDown="TitleKeyDown" TextWrapping="Wrap" Margin="{StaticResource DialogItemsMargin}"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource EntryEditorButton}" Click="SaveTitleClick"
+                                    Margin="{StaticResource DialogItemsMargin}"
+                                    Content="#Save" />
+                            <Button Style="{StaticResource EntryEditorButton}" Click="CancelTitleClick"                               
+                                    Margin="{StaticResource DialogItemsExceptLeftMargin}" Content="#Cancel" />
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
 
                 <Label Padding="0" Margin="{StaticResource EntryEditorSpacing}">
@@ -110,10 +113,14 @@
                 <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="#Tags" />
 
                 <DockPanel Margin="{StaticResource EntryEditorSpacing}">
-                    <ToggleButton x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Left" 
-                              Width="24" Height="24" Padding="0" Margin="{StaticResource DialogItemsExceptBottomMargin}">
+                    <Button x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Left" 
+                            Style="{StaticResource EntryEditorButton}"
+                            Width="{StaticResource EntryEditorButtonHeight}" 
+                            Margin="{StaticResource DialogItemsRightMargin}"
+                            Padding="0"
+                            Click="tbTags_Click">
                         <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" />
-                    </ToggleButton>
+                    </Button>
 
                     <ItemsControl ItemsSource="{Binding AddedTags}">
                         <ItemsControl.ItemsPanel>
@@ -123,13 +130,13 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
-                                <c:Tag Margin="{StaticResource DialogItemsExceptBottomMargin}" />
+                                <c:Tag Margin="{StaticResource DialogItemsBottomRightMargin}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </DockPanel>
 
-                <Popup StaysOpen="False" AllowsTransparency="True" IsOpen="{Binding ElementName=tbTags, Path=IsChecked}"
+                <Popup x:Name="pTags" StaysOpen="False" AllowsTransparency="True"
                        Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
                     <Border Style="{StaticResource Popup}">
                         <StackPanel Orientation="Vertical">
@@ -167,37 +174,20 @@
 
             </StackPanel>
            
-
+            <!-- Description -->
            
             <Image Grid.Row="3" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" />
             
-            <Grid Grid.Row="3" Grid.Column="1" x:Name="spDescription" Background="Transparent" HorizontalAlignment="Stretch">
-                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24" 
-                        Padding="0" Click="EditDescriptionClick" Visibility="{Binding ElementName=spDescription, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Edit16.png" />
-                    </Button>
+            <DockPanel Grid.Row="3" Grid.Column="1">
+                <Button VerticalAlignment="Center" DockPanel.Dock="Right" 
+                        Style="{StaticResource EntryEditorButton}"
+                        Click="EditDescriptionClick" Content="#Edit" 
+                        Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
 
-                    <Label Style="{StaticResource SectionLabel}" Content="#Description" VerticalAlignment="Center" 
-                           Cursor="Hand" MouseLeftButtonDown="DescriptionLabelMouseDown"/>
-                </DockPanel>
-
-                <DockPanel HorizontalAlignment="Stretch" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"
-                        Padding="0" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
-                            Click="CancelDescriptionClick">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Cancel16.png" />
-                    </Button>
-                    <Button VerticalAlignment="Center" DockPanel.Dock="Right" Style="{StaticResource FlatButton}" Width="24" Height="24"                        
-                        Padding="0" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}"
-                            Click="SaveDescriptionClick">
-                        <Image Width="16" Height="16" Source="\Resources\Images\Accept16.png" />
-                    </Button>
-                    <Label Style="{StaticResource SectionLabel}" Content="#Description" VerticalAlignment="Center" />
-                </DockPanel>
-            </Grid>
-
-            <Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch">
+                <Label Style="{StaticResource SectionLabel}" Content="#Description" VerticalAlignment="Center" />
+            </DockPanel>
+            
+            <Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" Margin="{StaticResource EntryEditorSpacing}">
                 <Border Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
                         BorderThickness="1">
                     <Border.Background>
@@ -209,9 +199,20 @@
 
                     <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
                 </Border>
-                <TextBox x:Name="tbDescription" Height="200" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                     
-                         Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}" 
+
+                <StackPanel Orientation="Vertical" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TextBox x:Name="tbDescription" Height="200" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                                              
                          HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}" 
+                                Click="SaveDescriptionClick" Content="#Save"
+                                Margin="{StaticResource DialogItemsMargin}"/>
+                        <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}"                         
+                                Click="CancelDescriptionClick" Content="#Cancel" 
+                                Margin="{StaticResource DialogItemsExceptLeftMargin}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
 
             <Image Grid.Row="5" Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Comment16.png" />

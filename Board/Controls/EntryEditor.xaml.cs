@@ -120,6 +120,11 @@ namespace Board.Controls
             BeginDescriptionEdit();
         }
 
+        private void tbTags_Click(object sender, RoutedEventArgs e)
+        {
+            pTags.IsOpen = true;
+        }
+
         // Public methods -----------------------------------------------------
 
         public EntryEditor()

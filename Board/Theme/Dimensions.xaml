@@ -29,6 +29,9 @@
     <Thickness x:Key="DialogItemsVerticalOnlyMargin" Left="0" Top="4" Right="0" Bottom="4" />
     <Thickness x:Key="DialogItemsHorizontalOnlyMargin" Left="4" Top="0" Right="4" Bottom="0" />
 
+    <Thickness x:Key="DialogItemsBottomRightMargin" Left="0" Top="0" Right="4" Bottom="4" />
+    <Thickness x:Key="DialogItemsBottomLeftMargin" Left="4" Top="0" Right="0" Bottom="4" />
+
     <Thickness x:Key="DialogItemsMargin" Left="4" Top="4" Right="4" Bottom="4" />
 
     <Thickness x:Key="DefaultMargin">4</Thickness>
@@ -46,10 +49,17 @@
     <Thickness x:Key="ButtonMargin">4,2</Thickness>
     <CornerRadius x:Key="ButtonBorderCornerRadius">2</CornerRadius>
 
-    <!-- ColumnButton -->
+    <!-- GrayButton -->
 
-    <CornerRadius x:Key="ColumnButtonCornerRadius">4</CornerRadius>
-    <Thickness x:Key="ColumnButtonMargin">8,8,8,8</Thickness>
+    <CornerRadius x:Key="GrayButtonCornerRadius">4</CornerRadius>
+    <Thickness x:Key="GrayButtonMargin">8,8,8,8</Thickness>
+
+    <!-- EntryEditorButton -->
+
+    <CornerRadius x:Key="EntryEditorButtonCornerRadius">4</CornerRadius>
+    <Thickness x:Key="EntryEditorButtonMargin">8,8,8,8</Thickness>
+    <sys:Double x:Key="EntryEditorButtonHeight">32</sys:Double>
+    <Thickness x:Key="EntryEditorButtonPadding">10,0</Thickness>
 
     <!-- TextBox -->
 

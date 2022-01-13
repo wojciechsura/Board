@@ -8,10 +8,10 @@
         xmlns:local="clr-namespace:Board.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" CornerRadius="4"
-        d:Background="Red">
+        d:Background="Red" Height="{StaticResource EntryEditorButtonHeight}">
     <Border.Resources>
         <CornerRadius x:Key="TagCornerRadius">4</CornerRadius>
-        <Thickness x:Key="TagTextMargin">10,6</Thickness>
+        <Thickness x:Key="TagTextMargin">10,0</Thickness>
         <sys:Double x:Key="TagFontSize">12</sys:Double>
         <FontWeight x:Key="TagFontWeight">Bold</FontWeight>
     </Border.Resources>

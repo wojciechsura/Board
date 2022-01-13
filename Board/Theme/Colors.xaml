@@ -29,16 +29,24 @@
     <Color x:Key="ButtonCheckedBorder">#0078d4</Color>
     <Color x:Key="ButtonCheckedBackground">#d8e6f1</Color>
 
-    <!-- ColumnButton -->
+    <!-- GrayButton -->
 
-    <Color x:Key="ColumnButtonBackground">#00000000</Color>
-    <Color x:Key="ColumnButtonForeground">#606060</Color>
-    <Color x:Key="ColumnButtonHoverBackground">#30000000</Color>
-    <Color x:Key="ColumnButtonHoverForeground">#ff000000</Color>
-    <Color x:Key="ColumnButtonPressedBackground">#60000000</Color>
-    <Color x:Key="ColumnButtonDisabledForeground">#838383</Color>
-    
-    
+    <Color x:Key="GrayButtonBackground">#00000000</Color>
+    <Color x:Key="GrayButtonForeground">#606060</Color>
+    <Color x:Key="GrayButtonHoverBackground">#30000000</Color>
+    <Color x:Key="GrayButtonHoverForeground">#ff000000</Color>
+    <Color x:Key="GrayButtonPressedBackground">#60000000</Color>
+    <Color x:Key="GrayButtonDisabledForeground">#838383</Color>
+
+    <!-- EntryEditorButton -->
+
+    <Color x:Key="EntryEditorButtonBackground">#e4e4e4</Color>
+    <Color x:Key="EntryEditorButtonForeground">#606060</Color>
+    <Color x:Key="EntryEditorButtonHoverBackground">#30000000</Color>
+    <Color x:Key="EntryEditorButtonHoverForeground">#ff000000</Color>
+    <Color x:Key="EntryEditorButtonPressedBackground">#60000000</Color>
+    <Color x:Key="EntryEditorButtonDisabledForeground">#838383</Color>
+
     <!-- Textbox -->
 
     <Color x:Key="TextBoxBackground">#ffffff</Color>
