@@ -133,11 +133,17 @@
 
                 <Popup x:Name="pTags" StaysOpen="False" AllowsTransparency="True"
                        Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
-                    <Border Style="{StaticResource Popup}">
+                    <Border Style="{StaticResource EntryEditorPopup}">
                         <StackPanel Orientation="Vertical">
-                            <Label Content="{x:Static res:Strings.EntryEditor_Label_AddTag}" Margin="{StaticResource PopupItemsMargin}" />
-                            <ScrollViewer MinWidth="200" MinHeight="100" HorizontalScrollBarVisibility="Disabled"
-                                          VerticalScrollBarVisibility="Auto">
+                            <Label Content="{x:Static res:Strings.EntryEditor_Label_AddTag}" Margin="{StaticResource PopupItemsMargin}" 
+                                   HorizontalAlignment="Center"/>
+
+                            <Separator Margin="{StaticResource PopupItemsExceptTopMargin}" />
+
+                            <Label Content="{x:Static res:Strings.EntryEditor_Label_Tags}" Margin="{StaticResource PopupItemsExceptTopMargin}" />
+
+                            <ScrollViewer Width="200" MaxHeight="200" HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto" Margin="{StaticResource PopupItemsExceptTopMargin}">
                                 <ItemsControl ItemsSource="{Binding AvailableTags}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -158,7 +164,7 @@
                                                     </Button.Foreground>
                                                     <Button.Content>
                                                         <DockPanel>
-                                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right"
+                                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right" FontSize="14"
                                                                    Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}" />
                                                             <TextBlock Text="{Binding Name}" />
                                                         </DockPanel>
@@ -251,7 +257,7 @@
             </DockPanel>
 
             <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
-                <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" />
+                <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" Margin="{StaticResource DialogItemsBottomMargin}"/>
 
                 <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
                     <ItemsControl.Resources>

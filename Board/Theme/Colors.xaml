@@ -89,8 +89,8 @@
     <!-- Comment -->
 
     <Color x:Key="CommentContentBackground">#ffffff</Color>
-    <Color x:Key="CommentContentBorder">#eeeeee</Color>
-    <Color x:Key="CommentGrayLabelForeground">#606060</Color>
+    <Color x:Key="CommentContentBorder">#c0c0c0</Color>
+    <Color x:Key="CommentGrayLabelForeground">#909090</Color>
 
     <!-- Overlay -->
 
@@ -99,5 +99,8 @@
     <!-- Entry editor -->
 
     <Color x:Key="EntryEditorBackgroundColor">#f4f4f4</Color>
+
+    <Color x:Key="EntryEditorPopupBackgroundColor">#ffffff</Color>
+    <Color x:Key="EntryEditorPopupBorderColor">#c0c0c0</Color>
     
 </ResourceDictionary>

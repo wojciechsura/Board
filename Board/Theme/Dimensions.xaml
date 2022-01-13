@@ -101,8 +101,9 @@
     <!-- Comment -->
 
     <Thickness x:Key="CommentContentBorderThickness">1</Thickness>
-    <Thickness x:Key="CommentPadding">12</Thickness>
+    <Thickness x:Key="CommentPadding">10</Thickness>
     <Thickness x:Key="CommentLabelPadding">0,2,4,2</Thickness>
+    <CornerRadius x:Key="CommentCornerRadius">3</CornerRadius>
 
     <!-- Dialog window -->
    
@@ -112,6 +113,8 @@
 
     <sys:Double x:Key="EntryEditorWidth">500</sys:Double>
     <CornerRadius x:Key="EntryEditorCornerRadius">3</CornerRadius>
-
+    <Thickness x:Key="EntryEditorPopupPadding">8</Thickness>
+    <Thickness x:Key="EntryEditorPopupBorderThickness">1</Thickness>
+    <CornerRadius x:Key="EntryEditorPopupCornerRadius">3</CornerRadius>
 
 </ResourceDictionary>

@@ -476,6 +476,22 @@
         <Setter Property="Margin" Value="{StaticResource DialogItemsMargin}" />
     </Style>
 
+    <Style TargetType="Border" x:Key="EntryEditorPopup">
+        <Setter Property="Padding" Value="{StaticResource EntryEditorPopupPadding}" />
+        <Setter Property="BorderThickness" Value="{StaticResource EntryEditorPopupBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{StaticResource EntryEditorPopupCornerRadius}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource EntryEditorPopupBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource EntryEditorPopupBorderColor}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="Border" x:Key="EntryEditor">
         <Setter Property="CornerRadius" Value="{StaticResource EntryEditorCornerRadius}" />
         <Setter Property="Background">
@@ -499,6 +515,7 @@
         </Setter>
         <Setter Property="Padding" Value="{StaticResource CommentPadding}" />
         <Setter Property="BorderThickness" Value="{StaticResource CommentContentBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{StaticResource CommentCornerRadius}" />
     </Style>
     
     <Style TargetType="Border" x:Key="Card">
