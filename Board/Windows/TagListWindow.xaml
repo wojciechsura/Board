@@ -7,16 +7,17 @@
         xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.TagList;assembly=Board.BusinessLogic" 
         xmlns:c="clr-namespace:Board.Controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
-        Title="#Tags" SizeToContent="WidthAndHeight">
+        Title="{x:Static res:Strings.TagListWindow_Title_Tags}" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Thickness x:Key="TagTextMargin">10,2</Thickness>
         <CornerRadius x:Key="TagCornerRadius">8</CornerRadius>
         <sys:Double x:Key="TagFontSize">8</sys:Double>
     </Window.Resources>
     <StackPanel Orientation="Vertical">
-        <GroupBox Header="#Tags" Margin="{StaticResource DialogItemsMargin}">
+        <GroupBox Header="{x:Static res:Strings.TagListWindow_GroupBox_Tags}" Margin="{StaticResource DialogItemsMargin}">
             <StackPanel Orientation="Vertical">
                 <ListBox Width="300" Height="200" Margin="{StaticResource DialogItemsMargin}"
                          HorizontalContentAlignment="Stretch" ItemsSource="{Binding Tags}">
@@ -51,12 +52,12 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Style="{StaticResource DialogButton}" Command="{Binding NewTagCommand}" Content="#New tag" HorizontalAlignment="Left"
+                <Button Style="{StaticResource DialogButton}" Command="{Binding NewTagCommand}" Content="{x:Static res:Strings.TagListWindow_Button_NewTag}" HorizontalAlignment="Left"
                         Margin="{StaticResource DialogItemsExceptTopMargin}"/>
             </StackPanel>
         </GroupBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource DialogButton}" Command="{Binding CloseCommand}" Content="#Close" />
+            <Button Style="{StaticResource DialogButton}" Command="{Binding CloseCommand}" Content="{x:Static res:Strings.Common_Close}" />
         </StackPanel>
     </StackPanel>
 </Window>

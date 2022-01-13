@@ -4,27 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.NewWall;assembly=Board.BusinessLogic"
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
         xmlns:local="clr-namespace:Board.Windows" 
         d:DataContext="{d:DesignInstance Type=vm:NewWallWindowViewModel}"
         mc:Ignorable="d"         
         ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
-        Title="#New wall" SizeToContent="WidthAndHeight">
+        Title="{x:Static res:Strings.NewWallWindow_Title}" SizeToContent="WidthAndHeight">
     <StackPanel Orientation="Vertical">
 
-        <Label Margin="{StaticResource DialogItemsMargin}">Choose storage method:</Label>
-        
+        <Label Margin="{StaticResource DialogItemsMargin}" Content="{x:Static res:Strings.NewWallWindow_Label_ChooseStorageMethod}" />
+
         <Button Margin="{StaticResource DialogItemsExceptTopMargin}" Command="{Binding SQLiteCommand}">
             <StackPanel Orientation="Horizontal">
                 <Image Width="64" Height="64" Source="\Resources\Images\Sqlite64.png" 
                        Margin="{StaticResource PopupItemsMargin}" />
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Margin="{StaticResource DialogItemsMargin}" Style="{StaticResource Header}">#SQLite</Label>
-                    <Label Margin="{StaticResource DialogItemsExceptTopMargin}">#Data is stored locally without collaboration option.</Label>
+                    <Label Margin="{StaticResource DialogItemsMargin}" Style="{StaticResource Header}" Content="{x:Static res:Strings.NewWallWindow_Label_SQLite}" />
+                    <Label Margin="{StaticResource DialogItemsExceptTopMargin}" Content="{x:Static res:Strings.NewWallWindow_Label_SQLite_Description}" />
                 </StackPanel>
             </StackPanel>
         </Button>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="#Cancel" Style="{StaticResource DialogButton}" Command="{Binding CancelCommand}" />
+            <Button Content="{x:Static res:Strings.Common_Cancel}" Style="{StaticResource DialogButton}" Command="{Binding CancelCommand}" />
         </StackPanel>
     </StackPanel>
 </Window>

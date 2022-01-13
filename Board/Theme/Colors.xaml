@@ -47,6 +47,15 @@
     <Color x:Key="EntryEditorButtonPressedBackground">#60000000</Color>
     <Color x:Key="EntryEditorButtonDisabledForeground">#838383</Color>
 
+    <!-- EntryEditorDefaultButton -->
+
+    <Color x:Key="EntryEditorDefaultButtonBackground">#0079bf</Color>
+    <Color x:Key="EntryEditorDefaultButtonForeground">#f4f4f4</Color>
+    <Color x:Key="EntryEditorDefaultButtonHoverBackground">#3192ca</Color>
+    <Color x:Key="EntryEditorDefaultButtonHoverForeground">#f4f4f4</Color>
+    <Color x:Key="EntryEditorDefaultButtonPressedBackground">#4a9ed0</Color>
+    <Color x:Key="EntryEditorDefaultButtonDisabledForeground">#e0e0e0</Color>
+
     <!-- Textbox -->
 
     <Color x:Key="TextBoxBackground">#ffffff</Color>
@@ -76,7 +85,13 @@
     <Color x:Key="ColumnBackgroundColor">#ebecf0</Color>
 
     <Color x:Key="ColumnHeaderForeground">#606060</Color>
-    
+
+    <!-- Comment -->
+
+    <Color x:Key="CommentContentBackground">#ffffff</Color>
+    <Color x:Key="CommentContentBorder">#eeeeee</Color>
+    <Color x:Key="CommentGrayLabelForeground">#606060</Color>
+
     <!-- Overlay -->
 
     <Color x:Key="OverlayBackground">#a0000000</Color>
@@ -84,7 +99,5 @@
     <!-- Entry editor -->
 
     <Color x:Key="EntryEditorBackgroundColor">#f4f4f4</Color>
-    <Color x:Key="EntryEditorTextContentBackground">#ffffff</Color>
-    <Color x:Key="EntryEditorTextContentBorder">#eeeeee</Color>    
     
 </ResourceDictionary>

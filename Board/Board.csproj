@@ -45,6 +45,8 @@
     <None Remove="Resources\Images\Edit16.png" />
     <None Remove="Resources\Images\EditBoard16.png" />
     <None Remove="Resources\Images\EditBoard32.png" />
+    <None Remove="Resources\Images\GrayAdd16.png" />
+    <None Remove="Resources\Images\GrayCancel16.png" />
     <None Remove="Resources\Images\New16.png" />
     <None Remove="Resources\Images\New32.png" />
     <None Remove="Resources\Images\Open16.png" />
@@ -91,6 +93,8 @@
     <Resource Include="Resources\Images\Edit16.png" />
     <Resource Include="Resources\Images\EditBoard16.png" />
     <Resource Include="Resources\Images\EditBoard32.png" />
+    <Resource Include="Resources\Images\GrayAdd16.png" />
+    <Resource Include="Resources\Images\GrayCancel16.png" />
     <Resource Include="Resources\Images\New16.png" />
     <Resource Include="Resources\Images\New32.png" />
     <Resource Include="Resources\Images\Open16.png" />

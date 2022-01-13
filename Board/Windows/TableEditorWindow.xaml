@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Board.Windows" 
         xmlns:tableeditor="clr-namespace:Board.BusinessLogic.ViewModels.TableEditor;assembly=Board.BusinessLogic" 
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
         d:DataContext="{d:DesignInstance Type=tableeditor:TableEditorWindowViewModel}"
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
@@ -21,15 +22,15 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="#Board name" Margin="{StaticResource DialogItemsMargin}"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.TableEditorWindow_Label_BoardName}" Margin="{StaticResource DialogItemsMargin}"/>
                 <TextBox x:Name="tbTableName" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Margin="{StaticResource DialogItemsMargin}" />
             </Grid>
         </GroupBox>
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Style="{StaticResource DialogButton}" Command="{Binding OkCommand}">#OK</Button>
-            <Button Style="{StaticResource DialogButton}" Command="{Binding CancelCommand}">#Cancel</Button>
+            <Button Style="{StaticResource DialogButton}" Command="{Binding OkCommand}" Content="{x:Static res:Strings.Common_OK}" />
+            <Button Style="{StaticResource DialogButton}" Command="{Binding CancelCommand}" Content="{x:Static res:Strings.Common_Cancel}" />
         </StackPanel>
     </StackPanel>
 </Window>

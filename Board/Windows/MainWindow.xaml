@@ -9,43 +9,47 @@
                 xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
                 xmlns:c="clr-namespace:Board.Controls" 
                 xmlns:main="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
+                xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
                 d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
                 mc:Ignorable="d"
                 Title="MainWindow" Height="450" Width="800">
+    <f:RibbonWindow.Resources>
+        <Thickness x:Key="EntryEditorMargin">32</Thickness>
+    </f:RibbonWindow.Resources>
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <f:Ribbon DockPanel.Dock="Top">
-                <f:RibbonTabItem Header="#Home">
-                    <f:RibbonGroupBox Header="#File">
-                        <f:Button Header="#Open wall" SizeDefinition="Large"
+                <f:RibbonTabItem Header="{x:Static res:Strings.MainWindow_RibbonTab_Home}">
+                    <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_File}">
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_OpenWall}" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/Open32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/Open16.png"
                               Command="{Binding OpenCommand}"/>
-                        <f:Button Header="#New wall" SizeDefinition="Middle" 
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_NewWall}" SizeDefinition="Middle" 
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/New32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/New16.png"
                               Command="{Binding NewCommand}"/>
                     </f:RibbonGroupBox>
 
-                    <f:RibbonGroupBox Header="#Board">
-                        <f:Button Header="#New board" SizeDefinition="Large"
+                    <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_Board}">
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_NewBoard}" SizeDefinition="Large"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/AddBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/AddBoard16.png"
                               Command="{Binding NewTableCommand}"/>
 
-                        <f:Button Header="#Edit board" SizeDefinition="Middle"
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_EditBoard}" SizeDefinition="Middle"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/EditBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/EditBoard16.png"
                               Command="{Binding EditTableCommand}"/>
 
-                        <f:Button Header="#Delete board" SizeDefinition="Middle"
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_DeleteBoard}" SizeDefinition="Middle"
                               LargeIcon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard32.png" 
                               Icon="pack://application:,,,/Board;component/Resources/Images/DeleteBoard16.png"
                               Command="{Binding DeleteTableCommand}"/>
                     </f:RibbonGroupBox>
 
-                    <f:RibbonGroupBox Header="#Tags">
-                        <f:Button Header="#Editor" SizeDefinition="Large" Command="{Binding OpenTagEditorCommand}" />
+                    <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_Tags}">
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_Editor}" SizeDefinition="Large" Command="{Binding OpenTagEditorCommand}" />
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
             </f:Ribbon>
@@ -64,12 +68,13 @@
             </TabControl>
         </DockPanel>
 
-        <ScrollViewer Background="#60000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource Overlay}" 
                       Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}">
 
-            <c:EntryEditor x:Name="eeEntry" DataContext="{Binding EntryEditor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <c:EntryEditor x:Name="eeEntry" DataContext="{Binding EntryEditor}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Margin="{StaticResource EntryEditorMargin}"/>
 
         </ScrollViewer>
     </Grid>

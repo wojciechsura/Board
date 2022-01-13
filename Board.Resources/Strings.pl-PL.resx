@@ -126,43 +126,190 @@
   <data name="DefaultFilter" xml:space="preserve">
     <value>Wszystkie pliki (*.*)|*.*</value>
   </data>
-  <data name="Dialog.OpenWall.ProjectFilterDesc" xml:space="preserve">
-    <value>Pliki projektowe ścian</value>
+  <data name="Column_AddCard" xml:space="preserve">
+    <value>Dodaj kartę</value>
   </data>
-  <data name="Dialog.OpenWall.Title" xml:space="preserve">
-    <value>Otwórz ścianę</value>
+  <data name="Column_Menu_DeleteColumn" xml:space="preserve">
+    <value>Usuń kolumnę</value>
   </data>
-  <data name="TableEditor.Title.New" xml:space="preserve">
-    <value>Nowa tablica</value>
-  </data>
-  <data name="TableEditor.Title.Edit" xml:space="preserve">
-    <value>Edytuj tablicę</value>
-  </data>
-  <data name="ColumnEditor.Title.Edit" xml:space="preserve">
+  <data name="Column_Menu_EditColumn" xml:space="preserve">
     <value>Edytuj kolumnę</value>
   </data>
-  <data name="ColumnEditor.Title.New" xml:space="preserve">
+  <data name="ColumnEditor_Title_Edit" xml:space="preserve">
+    <value>Edycja kolumny</value>
+  </data>
+  <data name="ColumnEditor_Title_New" xml:space="preserve">
     <value>Nowa kolumna</value>
   </data>
-  <data name="Message.TableDeletion" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć tablicę {0}?</value>
+  <data name="ColumnEditorWindow_Label_ColumnName" xml:space="preserve">
+    <value>Nazwa kolumny</value>
   </data>
-  <data name="Message.ColumnDeletion" xml:space="preserve">
+  <data name="Comment_Footer_Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Comment_Footer_Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="Comment_Header_Commented" xml:space="preserve">
+    <value>Komentowano</value>
+  </data>
+  <data name="Comment_Header_On" xml:space="preserve">
+    <value> dnia </value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Zamknij</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="Common_No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Common_Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
+  <data name="DeleteDialogWindow_Label_DeletePermanently" xml:space="preserve">
+    <value>Usuń permanentnie (tej operacji nie można cofnąć!)</value>
+  </data>
+  <data name="Dialog_OpenWall_ProjectFilterDesc" xml:space="preserve">
+    <value>Pliki projektów ścian</value>
+  </data>
+  <data name="Dialog_OpenWall_Title" xml:space="preserve">
+    <value>Otwórz ścianę</value>
+  </data>
+  <data name="Entry_Menu_Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Entry_Menu_Show" xml:space="preserve">
+    <value>Pokaż</value>
+  </data>
+  <data name="EntryEditor_Header_Comments" xml:space="preserve">
+    <value>Komentarze</value>
+  </data>
+  <data name="EntryEditor_Header_Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="EntryEditor_Label_AddNewComment" xml:space="preserve">
+    <value>Dodaj nowy komentarz</value>
+  </data>
+  <data name="EntryEditor_Label_AddTag" xml:space="preserve">
+    <value>Dodaj tag</value>
+  </data>
+  <data name="EntryEditor_Label_Tags" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="EntryEditor_Title_InColumn" xml:space="preserve">
+    <value>W kolumnie </value>
+  </data>
+  <data name="MainWindow_RibbonButton_DeleteBoard" xml:space="preserve">
+    <value>Usuń tablicę</value>
+  </data>
+  <data name="MainWindow_RibbonButton_EditBoard" xml:space="preserve">
+    <value>Edytuj tablicę</value>
+  </data>
+  <data name="MainWindow_RibbonButton_Editor" xml:space="preserve">
+    <value>Edytor</value>
+  </data>
+  <data name="MainWindow_RibbonButton_NewBoard" xml:space="preserve">
+    <value>Nowa tablica</value>
+  </data>
+  <data name="MainWindow_RibbonButton_NewWall" xml:space="preserve">
+    <value>Nowa ściana</value>
+  </data>
+  <data name="MainWindow_RibbonButton_OpenWall" xml:space="preserve">
+    <value>Otwórz ścianę</value>
+  </data>
+  <data name="MainWindow_RibbonGroup_Board" xml:space="preserve">
+    <value>Tablica</value>
+  </data>
+  <data name="MainWindow_RibbonGroup_File" xml:space="preserve">
+    <value>Plik</value>
+  </data>
+  <data name="MainWindow_RibbonGroup_Tags" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="MainWindow_RibbonTab_Home" xml:space="preserve">
+    <value>Narzędzia główne</value>
+  </data>
+  <data name="Message_ColumnDeletion" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć kolumnę {0}?</value>
   </data>
-  <data name="Message.EntryDeletion" xml:space="preserve">
+  <data name="Message_CommentDeletion" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć komentarz z dnia {0}?</value>
+  </data>
+  <data name="Message_EntryDeletion" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć kartę {0}?</value>
   </data>
-  <data name="TagEditor.Title.Edit" xml:space="preserve">
-    <value>Edytuj tag</value>
+  <data name="Message_TableDeletion" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć tablicę {0}?</value>
   </data>
-  <data name="TagEditor.Title.New" xml:space="preserve">
-    <value>Nowy tag</value>
-  </data>
-  <data name="Message.TagDeletion" xml:space="preserve">
+  <data name="Message_TagDeletion" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tag {0}?</value>
   </data>
-  <data name="Message.CommentDeletion" xml:space="preserve">
-    <value>Czy na pewno chcesz usunąć komentarz z {0}?</value>
+  <data name="NewWallWindow_Label_ChooseStorageMethod" xml:space="preserve">
+    <value>Wybierz sposób przechowywania danych:</value>
+  </data>
+  <data name="NewWallWindow_Label_SQLite" xml:space="preserve">
+    <value>SQLite</value>
+  </data>
+  <data name="NewWallWindow_Label_SQLite_Description" xml:space="preserve">
+    <value>Dane są przechowywane lokalnie bez opcji współpracy.</value>
+  </data>
+  <data name="NewWallWindow_Title" xml:space="preserve">
+    <value>Nowa ściana</value>
+  </data>
+  <data name="SQLiteConfigWindow_GroupBox_ConfigureSQLite" xml:space="preserve">
+    <value>Konfguracja SQLite</value>
+  </data>
+  <data name="SQLiteConfigWindow_Label_Location" xml:space="preserve">
+    <value>Lokalizacja</value>
+  </data>
+  <data name="SQLiteConfigWindow_Label_WallName" xml:space="preserve">
+    <value>Nazwa ściany</value>
+  </data>
+  <data name="SQLiteConfigWindow_Title" xml:space="preserve">
+    <value>Konfiguracja SQLite</value>
+  </data>
+  <data name="Table_Command_NewColumn" xml:space="preserve">
+    <value>Nowa kolumna...</value>
+  </data>
+  <data name="TableEditor_Title_Edit" xml:space="preserve">
+    <value>Edytuj tablicę</value>
+  </data>
+  <data name="TableEditor_Title_New" xml:space="preserve">
+    <value>Nowa tablica</value>
+  </data>
+  <data name="TableEditorWindow_Label_BoardName" xml:space="preserve">
+    <value>Nazwa tablicy</value>
+  </data>
+  <data name="TagEditor_Label_Color" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="TagEditor_Label_Name" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="TagEditor_Title_Edit" xml:space="preserve">
+    <value>Edycja taga</value>
+  </data>
+  <data name="TagEditor_Title_New" xml:space="preserve">
+    <value>Edycja taga</value>
+  </data>
+  <data name="TagListWindow_Button_NewTag" xml:space="preserve">
+    <value>Nowy tag</value>
+  </data>
+  <data name="TagListWindow_GroupBox_Tags" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="TagListWindow_Title_Tags" xml:space="preserve">
+    <value>Tagi</value>
   </data>
 </root>

@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Board.Windows"                  
-        xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.SQLiteConfig;assembly=Board.BusinessLogic" d:DataContext="{d:DesignInstance Type=vm:SQLiteConfigWindowViewModel}"
+        xmlns:vm="clr-namespace:Board.BusinessLogic.ViewModels.SQLiteConfig;assembly=Board.BusinessLogic" 
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+        d:DataContext="{d:DesignInstance Type=vm:SQLiteConfigWindowViewModel}"
         mc:Ignorable="d" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
-        Title="#Configure SQLite" SizeToContent="WidthAndHeight">
+        Title="{x:Static res:Strings.SQLiteConfigWindow_Title}" SizeToContent="WidthAndHeight">
     <StackPanel Orientation="Vertical">
-        <GroupBox Margin="{StaticResource DialogItemsMargin}" Header="#Configure SQLite">
+        <GroupBox Margin="{StaticResource DialogItemsMargin}" Header="{x:Static res:Strings.SQLiteConfigWindow_GroupBox_ConfigureSQLite}">
             <Grid Width="400">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -20,11 +22,11 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Margin="{StaticResource DialogItemsMargin}" Content="#Wall name" />
+                <Label Grid.Row="0" Grid.Column="0" Margin="{StaticResource DialogItemsMargin}" Content="{x:Static res:Strings.SQLiteConfigWindow_Label_WallName}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Margin="{StaticResource DialogItemsMargin}" 
                          HorizontalAlignment="Stretch" Text="{Binding WallName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=300}" />
 
-                <Label Grid.Row="1" Grid.Column="0" Margin="{StaticResource DialogItemsExceptTopMargin}" Content="#Location" />
+                <Label Grid.Row="1" Grid.Column="0" Margin="{StaticResource DialogItemsExceptTopMargin}" Content="{x:Static res:Strings.SQLiteConfigWindow_Label_Location}" />
                 <DockPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource DialogItemsExceptTopMargin}">
                     <Button DockPanel.Dock="Right" Width="24" Height="24" Padding="0"
                             Command="{Binding OpenFolderCommand}">
@@ -36,8 +38,8 @@
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource DialogButton}" Content="#OK" Command="{Binding OkCommand}" />
-            <Button Style="{StaticResource DialogButton}" Content="#Cancel" Command="{Binding CancelCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="{x:Static res:Strings.Common_OK}" Command="{Binding OkCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="{x:Static res:Strings.Common_Cancel}" Command="{Binding CancelCommand}" />
         </StackPanel>
     </StackPanel>
 </Window>

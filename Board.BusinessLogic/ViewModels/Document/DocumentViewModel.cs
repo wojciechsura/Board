@@ -279,6 +279,9 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             var tableProgress = (TableProgress)e.UserState;
             tables.Add(tableProgress.Table);
+
+            if (ActiveTable == null)
+                ActiveTable = tables.Last();
         }
 
         // Public methods -----------------------------------------------------

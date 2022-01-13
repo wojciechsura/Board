@@ -61,11 +61,38 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add card.
+        /// </summary>
+        public static string Column_AddCard {
+            get {
+                return ResourceManager.GetString("Column_AddCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete column.
+        /// </summary>
+        public static string Column_Menu_DeleteColumn {
+            get {
+                return ResourceManager.GetString("Column_Menu_DeleteColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit column.
+        /// </summary>
+        public static string Column_Menu_EditColumn {
+            get {
+                return ResourceManager.GetString("Column_Menu_EditColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit column.
         /// </summary>
         public static string ColumnEditor_Title_Edit {
             get {
-                return ResourceManager.GetString("ColumnEditor.Title.Edit", resourceCulture);
+                return ResourceManager.GetString("ColumnEditor_Title_Edit", resourceCulture);
             }
         }
         
@@ -74,7 +101,115 @@ namespace Board.Resources {
         /// </summary>
         public static string ColumnEditor_Title_New {
             get {
-                return ResourceManager.GetString("ColumnEditor.Title.New", resourceCulture);
+                return ResourceManager.GetString("ColumnEditor_Title_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Column name.
+        /// </summary>
+        public static string ColumnEditorWindow_Label_ColumnName {
+            get {
+                return ResourceManager.GetString("ColumnEditorWindow_Label_ColumnName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete.
+        /// </summary>
+        public static string Comment_Footer_Delete {
+            get {
+                return ResourceManager.GetString("Comment_Footer_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit.
+        /// </summary>
+        public static string Comment_Footer_Edit {
+            get {
+                return ResourceManager.GetString("Comment_Footer_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Commented.
+        /// </summary>
+        public static string Comment_Header_Commented {
+            get {
+                return ResourceManager.GetString("Comment_Header_Commented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu  on .
+        /// </summary>
+        public static string Comment_Header_On {
+            get {
+                return ResourceManager.GetString("Comment_Header_On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
+        /// </summary>
+        public static string Common_Cancel {
+            get {
+                return ResourceManager.GetString("Common_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Close.
+        /// </summary>
+        public static string Common_Close {
+            get {
+                return ResourceManager.GetString("Common_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit.
+        /// </summary>
+        public static string Common_Edit {
+            get {
+                return ResourceManager.GetString("Common_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No.
+        /// </summary>
+        public static string Common_No {
+            get {
+                return ResourceManager.GetString("Common_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu OK.
+        /// </summary>
+        public static string Common_OK {
+            get {
+                return ResourceManager.GetString("Common_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save.
+        /// </summary>
+        public static string Common_Save {
+            get {
+                return ResourceManager.GetString("Common_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Yes.
+        /// </summary>
+        public static string Common_Yes {
+            get {
+                return ResourceManager.GetString("Common_Yes", resourceCulture);
             }
         }
         
@@ -106,11 +241,20 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete permanently (this cannot be reversed!).
+        /// </summary>
+        public static string DeleteDialogWindow_Label_DeletePermanently {
+            get {
+                return ResourceManager.GetString("DeleteDialogWindow_Label_DeletePermanently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wall project files.
         /// </summary>
         public static string Dialog_OpenWall_ProjectFilterDesc {
             get {
-                return ResourceManager.GetString("Dialog.OpenWall.ProjectFilterDesc", resourceCulture);
+                return ResourceManager.GetString("Dialog_OpenWall_ProjectFilterDesc", resourceCulture);
             }
         }
         
@@ -119,7 +263,169 @@ namespace Board.Resources {
         /// </summary>
         public static string Dialog_OpenWall_Title {
             get {
-                return ResourceManager.GetString("Dialog.OpenWall.Title", resourceCulture);
+                return ResourceManager.GetString("Dialog_OpenWall_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete.
+        /// </summary>
+        public static string Entry_Menu_Delete {
+            get {
+                return ResourceManager.GetString("Entry_Menu_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Show.
+        /// </summary>
+        public static string Entry_Menu_Show {
+            get {
+                return ResourceManager.GetString("Entry_Menu_Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Comments.
+        /// </summary>
+        public static string EntryEditor_Header_Comments {
+            get {
+                return ResourceManager.GetString("EntryEditor_Header_Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Description.
+        /// </summary>
+        public static string EntryEditor_Header_Description {
+            get {
+                return ResourceManager.GetString("EntryEditor_Header_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add new comment.
+        /// </summary>
+        public static string EntryEditor_Label_AddNewComment {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_AddNewComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add tag.
+        /// </summary>
+        public static string EntryEditor_Label_AddTag {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_AddTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tags.
+        /// </summary>
+        public static string EntryEditor_Label_Tags {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu In column .
+        /// </summary>
+        public static string EntryEditor_Title_InColumn {
+            get {
+                return ResourceManager.GetString("EntryEditor_Title_InColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete board.
+        /// </summary>
+        public static string MainWindow_RibbonButton_DeleteBoard {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_DeleteBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit board.
+        /// </summary>
+        public static string MainWindow_RibbonButton_EditBoard {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_EditBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Editor.
+        /// </summary>
+        public static string MainWindow_RibbonButton_Editor {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_Editor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New board.
+        /// </summary>
+        public static string MainWindow_RibbonButton_NewBoard {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_NewBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New wall.
+        /// </summary>
+        public static string MainWindow_RibbonButton_NewWall {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_NewWall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open wall.
+        /// </summary>
+        public static string MainWindow_RibbonButton_OpenWall {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_OpenWall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Board.
+        /// </summary>
+        public static string MainWindow_RibbonGroup_Board {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonGroup_Board", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu File.
+        /// </summary>
+        public static string MainWindow_RibbonGroup_File {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonGroup_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tags.
+        /// </summary>
+        public static string MainWindow_RibbonGroup_Tags {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonGroup_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Home.
+        /// </summary>
+        public static string MainWindow_RibbonTab_Home {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonTab_Home", resourceCulture);
             }
         }
         
@@ -128,7 +434,7 @@ namespace Board.Resources {
         /// </summary>
         public static string Message_ColumnDeletion {
             get {
-                return ResourceManager.GetString("Message.ColumnDeletion", resourceCulture);
+                return ResourceManager.GetString("Message_ColumnDeletion", resourceCulture);
             }
         }
         
@@ -137,7 +443,7 @@ namespace Board.Resources {
         /// </summary>
         public static string Message_CommentDeletion {
             get {
-                return ResourceManager.GetString("Message.CommentDeletion", resourceCulture);
+                return ResourceManager.GetString("Message_CommentDeletion", resourceCulture);
             }
         }
         
@@ -146,7 +452,7 @@ namespace Board.Resources {
         /// </summary>
         public static string Message_EntryDeletion {
             get {
-                return ResourceManager.GetString("Message.EntryDeletion", resourceCulture);
+                return ResourceManager.GetString("Message_EntryDeletion", resourceCulture);
             }
         }
         
@@ -155,7 +461,7 @@ namespace Board.Resources {
         /// </summary>
         public static string Message_TableDeletion {
             get {
-                return ResourceManager.GetString("Message.TableDeletion", resourceCulture);
+                return ResourceManager.GetString("Message_TableDeletion", resourceCulture);
             }
         }
         
@@ -164,7 +470,88 @@ namespace Board.Resources {
         /// </summary>
         public static string Message_TagDeletion {
             get {
-                return ResourceManager.GetString("Message.TagDeletion", resourceCulture);
+                return ResourceManager.GetString("Message_TagDeletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choose storage method:.
+        /// </summary>
+        public static string NewWallWindow_Label_ChooseStorageMethod {
+            get {
+                return ResourceManager.GetString("NewWallWindow_Label_ChooseStorageMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu SQLite.
+        /// </summary>
+        public static string NewWallWindow_Label_SQLite {
+            get {
+                return ResourceManager.GetString("NewWallWindow_Label_SQLite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data is stored locally without collaboration option..
+        /// </summary>
+        public static string NewWallWindow_Label_SQLite_Description {
+            get {
+                return ResourceManager.GetString("NewWallWindow_Label_SQLite_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New wall.
+        /// </summary>
+        public static string NewWallWindow_Title {
+            get {
+                return ResourceManager.GetString("NewWallWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Configure SQLite.
+        /// </summary>
+        public static string SQLiteConfigWindow_GroupBox_ConfigureSQLite {
+            get {
+                return ResourceManager.GetString("SQLiteConfigWindow_GroupBox_ConfigureSQLite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Location.
+        /// </summary>
+        public static string SQLiteConfigWindow_Label_Location {
+            get {
+                return ResourceManager.GetString("SQLiteConfigWindow_Label_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wall name.
+        /// </summary>
+        public static string SQLiteConfigWindow_Label_WallName {
+            get {
+                return ResourceManager.GetString("SQLiteConfigWindow_Label_WallName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Configure SQLite.
+        /// </summary>
+        public static string SQLiteConfigWindow_Title {
+            get {
+                return ResourceManager.GetString("SQLiteConfigWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New column....
+        /// </summary>
+        public static string Table_Command_NewColumn {
+            get {
+                return ResourceManager.GetString("Table_Command_NewColumn", resourceCulture);
             }
         }
         
@@ -173,7 +560,7 @@ namespace Board.Resources {
         /// </summary>
         public static string TableEditor_Title_Edit {
             get {
-                return ResourceManager.GetString("TableEditor.Title.Edit", resourceCulture);
+                return ResourceManager.GetString("TableEditor_Title_Edit", resourceCulture);
             }
         }
         
@@ -182,7 +569,34 @@ namespace Board.Resources {
         /// </summary>
         public static string TableEditor_Title_New {
             get {
-                return ResourceManager.GetString("TableEditor.Title.New", resourceCulture);
+                return ResourceManager.GetString("TableEditor_Title_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Board name.
+        /// </summary>
+        public static string TableEditorWindow_Label_BoardName {
+            get {
+                return ResourceManager.GetString("TableEditorWindow_Label_BoardName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Color.
+        /// </summary>
+        public static string TagEditor_Label_Color {
+            get {
+                return ResourceManager.GetString("TagEditor_Label_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Name.
+        /// </summary>
+        public static string TagEditor_Label_Name {
+            get {
+                return ResourceManager.GetString("TagEditor_Label_Name", resourceCulture);
             }
         }
         
@@ -191,7 +605,7 @@ namespace Board.Resources {
         /// </summary>
         public static string TagEditor_Title_Edit {
             get {
-                return ResourceManager.GetString("TagEditor.Title.Edit", resourceCulture);
+                return ResourceManager.GetString("TagEditor_Title_Edit", resourceCulture);
             }
         }
         
@@ -200,7 +614,34 @@ namespace Board.Resources {
         /// </summary>
         public static string TagEditor_Title_New {
             get {
-                return ResourceManager.GetString("TagEditor.Title.New", resourceCulture);
+                return ResourceManager.GetString("TagEditor_Title_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New tag.
+        /// </summary>
+        public static string TagListWindow_Button_NewTag {
+            get {
+                return ResourceManager.GetString("TagListWindow_Button_NewTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tags.
+        /// </summary>
+        public static string TagListWindow_GroupBox_Tags {
+            get {
+                return ResourceManager.GetString("TagListWindow_GroupBox_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tags.
+        /// </summary>
+        public static string TagListWindow_Title_Tags {
+            get {
+                return ResourceManager.GetString("TagListWindow_Title_Tags", resourceCulture);
             }
         }
     }

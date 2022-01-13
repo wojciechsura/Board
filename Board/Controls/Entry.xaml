@@ -10,6 +10,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vmd="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic" 
         xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
         d:DataContext="{d:DesignInstance Type=vmd:EntryViewModel}"
         mc:Ignorable="d" 
         x:Name="root"
@@ -36,8 +37,8 @@
                 e:ContextMenuOnLeftClick.Placement="Bottom" VerticalAlignment="Top">
             <Button.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="#Show" Command="{Binding EditEntryCommand}" />
-                    <MenuItem Header="#Delete" Command="{Binding DeleteEntryCommand}" />
+                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Show}" Command="{Binding EditEntryCommand}" />
+                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Delete}" Command="{Binding DeleteEntryCommand}" />
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>

@@ -57,9 +57,14 @@
     <!-- EntryEditorButton -->
 
     <CornerRadius x:Key="EntryEditorButtonCornerRadius">4</CornerRadius>
-    <Thickness x:Key="EntryEditorButtonMargin">8,8,8,8</Thickness>
     <sys:Double x:Key="EntryEditorButtonHeight">32</sys:Double>
     <Thickness x:Key="EntryEditorButtonPadding">10,0</Thickness>
+
+    <!-- EntryEditorDefaultButton -->
+
+    <CornerRadius x:Key="EntryEditorDefaultButtonCornerRadius">4</CornerRadius>
+    <sys:Double x:Key="EntryEditorDefaultButtonHeight">32</sys:Double>
+    <Thickness x:Key="EntryEditorDefaultButtonPadding">10,0</Thickness>
 
     <!-- TextBox -->
 
@@ -92,7 +97,13 @@
     <CornerRadius x:Key="ColumnCornerRadius">5</CornerRadius>
 
     <Thickness x:Key="ColumnHeaderMargin">8,8,8,0</Thickness>
-    
+
+    <!-- Comment -->
+
+    <Thickness x:Key="CommentContentBorderThickness">1</Thickness>
+    <Thickness x:Key="CommentPadding">12</Thickness>
+    <Thickness x:Key="CommentLabelPadding">0,2,4,2</Thickness>
+
     <!-- Dialog window -->
    
     <Thickness x:Key="DialogContentPadding">8</Thickness>
@@ -101,6 +112,6 @@
 
     <sys:Double x:Key="EntryEditorWidth">500</sys:Double>
     <CornerRadius x:Key="EntryEditorCornerRadius">3</CornerRadius>
-    <Thickness x:Key="EntryEditorSpacing">0,0,0,20</Thickness>
+
 
 </ResourceDictionary>

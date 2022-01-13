@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Board.Windows" xmlns:deletedialog="clr-namespace:Board.BusinessLogic.ViewModels.DeleteDialog;assembly=Board.BusinessLogic" d:DataContext="{d:DesignInstance Type=deletedialog:DeleteDialogWindowViewModel}"
+        xmlns:local="clr-namespace:Board.Windows" 
+        xmlns:deletedialog="clr-namespace:Board.BusinessLogic.ViewModels.DeleteDialog;assembly=Board.BusinessLogic" 
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+        d:DataContext="{d:DesignInstance Type=deletedialog:DeleteDialogWindowViewModel}"
         mc:Ignorable="d"
         ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"        
         SizeToContent="Height"
@@ -12,13 +15,13 @@
         <Border Margin="{StaticResource DialogContentPadding}">
             <StackPanel Orientation="Vertical">
                 <Label Margin="{StaticResource PopupItemsMargin}" Padding="0" Content="{Binding Message}" />
-                <CheckBox Margin="{StaticResource PopupItemsExceptTopMargin}" Padding="0" Content="#Delete permanently (this cannot be reversed!)"
+                <CheckBox Margin="{StaticResource PopupItemsExceptTopMargin}" Padding="0" Content="{x:Static res:Strings.DeleteDialogWindow_Label_DeletePermanently}"
                           IsChecked="{Binding DeletePermanently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/> 
             </StackPanel>
         </Border>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Style="{StaticResource DialogButton}" Content="#Yes" Command="{Binding YesCommand}" />
-            <Button Style="{StaticResource DialogButton}" Content="#No" Command="{Binding NoCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="{x:Static res:Strings.Common_Yes}" Command="{Binding YesCommand}" />
+            <Button Style="{StaticResource DialogButton}" Content="{x:Static res:Strings.Common_No}" Command="{Binding NoCommand}" />
         </StackPanel>
     </StackPanel>
 </Window>

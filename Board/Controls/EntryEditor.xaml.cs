@@ -95,6 +95,11 @@ namespace Board.Controls
             BeginTitleEdit();
         }
 
+        private void TitleLostFocus(object sender, RoutedEventArgs e)
+        {
+            CommitTitleEdit();
+        }
+
         private void EditorDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             viewModel = (EntryEditorViewModel)e.NewValue;

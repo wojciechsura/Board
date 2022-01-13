@@ -9,24 +9,38 @@
             xmlns:mdxaml="clr-namespace:MdXaml;assembly=MdXaml" 
             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
             xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
+            xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
             mc:Ignorable="d" 
             Orientation="Vertical">
-    <Label>
-        <TextBlock Text="{Binding Added, Mode=OneWay}" />
+
+    <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Style="{StaticResource CommentLabel}">
+        <TextBlock>
+            <Run Text="{x:Static res:Strings.Comment_Header_Commented}" FontWeight="Bold" />
+            <Run Text="{x:Static res:Strings.Comment_Header_On}">
+                <Run.Foreground>
+                    <SolidColorBrush Color="{StaticResource CommentGrayLabelForeground}" />
+                </Run.Foreground>
+            </Run>
+            <Run Text="{Binding Added, Mode=OneWay}">
+                <Run.Foreground>
+                    <SolidColorBrush Color="{StaticResource CommentGrayLabelForeground}" />
+                </Run.Foreground>
+            </Run>
+        </TextBlock>
     </Label>
-    <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}">
+    <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}" Margin="{StaticResource DialogItemsBottomMargin}">
         <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
                                                                 VerticalScrollBarVisibility="Disabled"
                                                                 Markdown="{Binding Content, Mode=OneWay}" />
     </Border>
     <StackPanel Orientation="Horizontal">
-        <Label Content="#Edit" Cursor="Hand">
+        <Label Content="{x:Static res:Strings.Comment_Footer_Edit}" Cursor="Hand" Style="{StaticResource CommentGrayLabel}">
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding EditCommentCommand}" />
             </i:Interaction.Behaviors>
         </Label>
-        <Label Content="-" />
-        <Label Content="#Delete" Cursor="Hand">
+        <Label Content=" - " Style="{StaticResource CommentGrayLabel}" />
+        <Label Content="{x:Static res:Strings.Comment_Footer_Delete}" Cursor="Hand" Style="{StaticResource CommentGrayLabel}">
             <i:Interaction.Behaviors>
                 <b:ClickBehavior Command="{Binding DeleteCommentCommand}" />
             </i:Interaction.Behaviors>
