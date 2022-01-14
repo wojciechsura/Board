@@ -26,6 +26,10 @@ namespace Board.Data.Entities
         [ForeignKey(nameof(Column))]
         public int ColumnId { get; set; }
         public bool IsDeleted { get; set; }
+
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
         public virtual List<Tag> Tags { get; set; }
         public virtual List<Comment> Comments { get; set; }
     }

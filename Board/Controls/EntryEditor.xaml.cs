@@ -125,9 +125,19 @@ namespace Board.Controls
             BeginDescriptionEdit();
         }
 
-        private void tbTags_Click(object sender, RoutedEventArgs e)
+        private void HandleAddTagsButtonClick(object sender, RoutedEventArgs e)
         {
-            pTags.IsOpen = true;
+            tpAddTags.IsOpen = true;
+        }
+
+        private void HandleTagsButtonClick(object sender, RoutedEventArgs e)
+        {
+            tpTags.IsOpen = true;
+        }
+
+        private void HandleDatesButtonClick(object sender, RoutedEventArgs e)
+        {
+            dpDates.IsOpen = true;
         }
 
         // Public methods -----------------------------------------------------

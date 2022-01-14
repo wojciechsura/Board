@@ -33,6 +33,8 @@
     <None Remove="Resources\Images\Add16.png" />
     <None Remove="Resources\Images\AddBoard16.png" />
     <None Remove="Resources\Images\AddBoard32.png" />
+    <None Remove="Resources\Images\Calendar16.png" />
+    <None Remove="Resources\Images\Calendar32.png" />
     <None Remove="Resources\Images\Cancel16.png" />
     <None Remove="Resources\Images\Card16.png" />
     <None Remove="Resources\Images\Card32.png" />
@@ -81,6 +83,8 @@
     <Resource Include="Resources\Images\Add16.png" />
     <Resource Include="Resources\Images\AddBoard16.png" />
     <Resource Include="Resources\Images\AddBoard32.png" />
+    <Resource Include="Resources\Images\Calendar16.png" />
+    <Resource Include="Resources\Images\Calendar32.png" />
     <Resource Include="Resources\Images\Cancel16.png" />
     <Resource Include="Resources\Images\Card16.png" />
     <Resource Include="Resources\Images\Card32.png" />

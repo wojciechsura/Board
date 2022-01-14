@@ -48,6 +48,7 @@
     <Thickness x:Key="ButtonPadding">10,6</Thickness>
     <Thickness x:Key="ButtonMargin">4,2</Thickness>
     <CornerRadius x:Key="ButtonBorderCornerRadius">2</CornerRadius>
+    <Thickness x:Key="ButtonIconMargin">0,0,8,0</Thickness>
 
     <!-- GrayButton -->
 

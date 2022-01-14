@@ -15,5 +15,7 @@ namespace Board.Models.Data
         public long Order { get; set; }
         public List<TagModel> Tags { get; set; }
         public List<CommentModel> Comments { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

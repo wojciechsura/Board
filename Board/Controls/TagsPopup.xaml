@@ -1,0 +1,58 @@
+﻿<!-- Bind DataContext to EntryEditorViewModel -->
+    
+<Popup x:Class="Board.Controls.TagsPopup"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:local="clr-namespace:Board.Controls"
+       xmlns:mvm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
+       xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+       mc:Ignorable="d" 
+       StaysOpen="False" AllowsTransparency="True">
+    <Border Style="{StaticResource EntryEditorPopup}">
+        <StackPanel Orientation="Vertical">
+            <Label Content="{x:Static res:Strings.EntryEditor_Label_AddTag}" Margin="{StaticResource PopupItemsMargin}" 
+                                   HorizontalAlignment="Center"/>
+
+            <Separator Margin="{StaticResource PopupItemsExceptTopMargin}" />
+
+            <Label Content="{x:Static res:Strings.EntryEditor_Label_Tags}" Margin="{StaticResource PopupItemsExceptTopMargin}" />
+
+            <ScrollViewer Width="200" MaxHeight="200" HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto" Margin="{StaticResource PopupItemsExceptTopMargin}">
+                <ItemsControl ItemsSource="{Binding AvailableTags}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
+                            <Border>
+                                <Button HorizontalAlignment="Stretch"
+                                                        Cursor="Hand" Margin="{StaticResource DialogItemsExceptBottomMargin}"
+                                                        Command="{Binding ToggleCommand}" Style="{StaticResource TagToggleButton}">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
+                                    </Button.Background>
+                                    <Button.Foreground>
+                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
+                                    </Button.Foreground>
+                                    <Button.Content>
+                                        <DockPanel>
+                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right" FontSize="14"
+                                                                   Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DockPanel>
+                                    </Button.Content>
+                                </Button>
+                            </Border>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+    </Border>
+</Popup>

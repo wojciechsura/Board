@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Data", "Board.Data\Bo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Data.SQLite", "Board.Data.SQLite\Board.Data.SQLite.csproj", "{18519B1B-176D-4F2D-9DEB-4BD45D148294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board.Models", "Board.Models\Board.Models.csproj", "{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Board.Models", "Board.Models\Board.Models.csproj", "{4120DD6C-8273-4CFA-B8DF-DE863B1D86F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

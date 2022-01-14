@@ -13,11 +13,16 @@ using Spooksoft.VisualStateManager.Commands;
 using System.Collections.ObjectModel;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.Resources;
+using System.Text.RegularExpressions;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
     public class EntryEditorViewModel : BaseViewModel, IEntryEditorHandler
     {
+        // Private constants --------------------------------------------------
+
+        private static Regex timeRegex = new Regex("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
+
         // Private fields -----------------------------------------------------
 
         private readonly int entryId;
@@ -27,11 +32,19 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly IDialogService dialogService;
         private bool isEditingTitle = false;
         private bool isEditingDescription = false;
+        private bool isEditingDates = false;
 
         [SyncWithModel(nameof(EntryModel.Title))]
         private string title;
         [SyncWithModel(nameof(EntryModel.Description))]
         private string description;
+
+        private bool startDateSet;
+        private DateTime startDate;
+        private string startTime;
+        private bool endDateSet;
+        private DateTime endDate;
+        private string endTime;
 
         // Private methods ----------------------------------------------------
 
@@ -72,6 +85,55 @@ namespace Board.BusinessLogic.ViewModels.Main
                 CommentViewModel commentViewModel = new(comment, this);
                 Comments.Add(commentViewModel);
             }
+
+            UpdateDates(model.StartDate, model.EndDate);
+        }
+
+        private void UpdateDates(DateTime? startDate, DateTime? endDate)
+        {
+            this.startDateSet = startDate != null;
+            this.startDate = startDate ?? DateTime.Now;
+            this.startTime = startDate?.ToString("HH:mm") ?? DateTime.Now.ToString("HH:mm");
+
+            this.endDateSet = endDate != null;
+            this.endDate = endDate ?? DateTime.Now;
+            this.endTime = endDate?.ToString("HH.mm") ?? DateTime.Now.ToString("HH:mm");
+        }
+
+        private void NotifyDatesChanged()
+        {
+            OnPropertyChanged(nameof(StartDateSet));
+            OnPropertyChanged(nameof(StartDate));
+            OnPropertyChanged(nameof(StartTime));
+            OnPropertyChanged(nameof(EndDateSet));
+            OnPropertyChanged(nameof(EndDate));
+            OnPropertyChanged(nameof(EndTime));
+        }
+
+        private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
+        {
+            var commentViewModel = new CommentViewModel(commentModel, this);
+            var index = Comments.IndexOf(inplaceCommentEditorViewModel);
+            Comments.RemoveAt(index);
+            Comments.Insert(index, commentViewModel);
+        }
+
+        private void HandleDatesChanged()
+        {
+            IsEditingDates = true;
+        }
+
+        private (int h, int m) SanitizeTime(string startTime)
+        {
+            int h = 0, m = 0;
+            if (timeRegex.IsMatch(startTime))
+            {
+                string[] parts = startTime.Split(':');
+                h = int.Parse(parts[0]);
+                m = int.Parse(parts[1]);
+            }
+
+            return (h, m);
         }
 
         // IEntryEditorHandler ------------------------------------------------
@@ -158,8 +220,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             var columnModel = document.Database.GetColumn(columnId);
             ColumnName = columnModel.Name;
 
-            var editEntryModel = document.Database.GetEntryEdit(entryId);
-
             this.entryId = entryId;
             this.tableId = tableId;
             this.document = document;
@@ -172,6 +232,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             AvailableTags = new ();
             Comments = new();
 
+            var editEntryModel = document.Database.GetEntryEdit(entryId);
             UpdateFromModel(editEntryModel);
         }
 
@@ -193,12 +254,54 @@ namespace Board.BusinessLogic.ViewModels.Main
             Description = description;
         }
 
-        private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
+        public void CancelDateChanges()
         {
-            var commentViewModel = new CommentViewModel(commentModel, this);
-            var index = Comments.IndexOf(inplaceCommentEditorViewModel);
-            Comments.RemoveAt(index);
-            Comments.Insert(index, commentViewModel);
+            var model = document.Database.GetEntryEdit(entryId);
+            UpdateDates(model.StartDate, model.EndDate);
+            NotifyDatesChanged();
+
+            IsEditingDates = false;
+        }
+
+        public void CommitDateChanges()
+        {
+            var model = document.Database.GetEntryById(entryId);
+
+            DateTime? startDate = null;
+
+            if (startDateSet)
+            {
+                (int h, int m) = SanitizeTime(startTime);
+
+                startDate = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, h, m, 0);
+                model.StartDate = startDate;
+            }
+            else
+            {
+                model.StartDate = null;
+            }
+
+            if (endDateSet)
+            {
+                (int h, int m) = SanitizeTime(endTime);
+
+                var endDate = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day, h, m, 0);
+                if (startDate != null && endDate < startDate)
+                    endDate = startDate.Value;
+
+                model.EndDate = endDate;
+            }
+            else
+            {
+                model.EndDate = null;
+            }
+
+            document.Database.UpdateEntry(model);
+
+            UpdateDates(model.StartDate, model.EndDate);
+            NotifyDatesChanged();
+
+            IsEditingDates = false;
         }
 
         // Public properties --------------------------------------------------
@@ -229,6 +332,12 @@ namespace Board.BusinessLogic.ViewModels.Main
             set => Set(ref isEditingDescription, value);
         }
 
+        public bool IsEditingDates
+        {
+            get => isEditingDates;
+            set => Set(ref isEditingDates, value);
+        }
+
         public ObservableCollection<AddedTagViewModel> AddedTags { get; }
 
         public ObservableCollection<AvailableTagViewModel> AvailableTags { get; }
@@ -236,5 +345,41 @@ namespace Board.BusinessLogic.ViewModels.Main
         public ObservableCollection<BaseCommentViewModel> Comments { get; }
 
         public ICommand CloseCommand { get; }
+
+        public bool StartDateSet
+        {
+            get => startDateSet; 
+            set => Set(ref startDateSet, value, changeHandler: HandleDatesChanged);
+        }
+
+        public DateTime StartDate
+        {
+            get => startDate; 
+            set => Set(ref startDate, value, changeHandler: HandleDatesChanged);
+        }
+
+        public string StartTime
+        {
+            get => startTime; 
+            set => Set(ref startTime, value, changeHandler: HandleDatesChanged);
+        }
+
+        public bool EndDateSet
+        {
+            get => endDateSet; 
+            set => Set(ref endDateSet, value, changeHandler: HandleDatesChanged);
+        }
+
+        public DateTime EndDate
+        {
+            get => endDate; 
+            set => Set(ref endDate, value, changeHandler: HandleDatesChanged);
+        }
+
+        public string EndTime
+        {
+            get => endTime; 
+            set => Set(ref endTime, value, changeHandler: HandleDatesChanged);
+        }
     }
 }

@@ -29,6 +29,7 @@
 
         <Thickness x:Key="EditorPadding">16</Thickness>
         <Thickness x:Key="EditorExceptTopPadding">16,0,16,16</Thickness>
+        <Thickness x:Key="EditorLeftPadding">16,0,0,0</Thickness>
 
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="FontSize" Value="{StaticResource EntryEditorTitleFontSize}" />
@@ -95,188 +96,177 @@
                 </Label>
             </Border>
 
-            <!-- Tags -->
+            <StackPanel Orientation="Horizontal">
 
-            <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
+                <!-- Editor area-->
 
-                <!-- Header -->
+                <StackPanel Orientation="Vertical">
 
-                <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="{x:Static res:Strings.EntryEditor_Label_Tags}" />
+                    <!-- Tags -->
 
-                <!-- Preview and add button -->
+                    <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
 
-                <DockPanel Margin="{StaticResource EntryEditorSpacing}">
-                    <Button x:Name="tbTags" VerticalAlignment="Top" DockPanel.Dock="Left" 
-                            Style="{StaticResource EntryEditorButton}"
-                            Width="{StaticResource EntryEditorButtonHeight}" 
-                            Margin="{StaticResource DialogItemsRightMargin}"
-                            Padding="0"
-                            Click="tbTags_Click">
-                        <Image Width="16" Height="16" Source="\Resources\Images\GrayAdd16.png" />
-                    </Button>
+                        <!-- Header -->
 
-                    <ItemsControl ItemsSource="{Binding AddedTags}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
-                                <c:Tag Margin="{StaticResource DialogItemsBottomRightMargin}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </DockPanel>
+                        <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="{x:Static res:Strings.EntryEditor_Label_Tags}" />
 
-                <!-- Tag editor popup -->
+                        <!-- Preview and add button -->
 
-                <Popup x:Name="pTags" StaysOpen="False" AllowsTransparency="True"
-                       Placement="Bottom" PlacementTarget="{Binding ElementName=tbTags}">
-                    <Border Style="{StaticResource EntryEditorPopup}">
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="{x:Static res:Strings.EntryEditor_Label_AddTag}" Margin="{StaticResource PopupItemsMargin}" 
-                                   HorizontalAlignment="Center"/>
+                        <DockPanel Margin="{StaticResource EntryEditorSpacing}">
+                            <Button x:Name="bAddTags" VerticalAlignment="Top" DockPanel.Dock="Left" 
+                                    Style="{StaticResource EntryEditorButton}"
+                                    Width="{StaticResource EntryEditorButtonHeight}" 
+                                    Margin="{StaticResource DialogItemsRightMargin}"
+                                    Padding="0"
+                                    Click="HandleAddTagsButtonClick">
+                                <Image Width="16" Height="16" Source="\Resources\Images\GrayAdd16.png" />
+                            </Button>
 
-                            <Separator Margin="{StaticResource PopupItemsExceptTopMargin}" />
+                            <ItemsControl ItemsSource="{Binding AddedTags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type mvm:AddedTagViewModel}">
+                                        <c:Tag Margin="{StaticResource DialogItemsBottomRightMargin}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DockPanel>
 
-                            <Label Content="{x:Static res:Strings.EntryEditor_Label_Tags}" Margin="{StaticResource PopupItemsExceptTopMargin}" />
+                        <!-- Tag editor popup -->
 
-                            <ScrollViewer Width="200" MaxHeight="200" HorizontalScrollBarVisibility="Disabled"
-                                          VerticalScrollBarVisibility="Auto" Margin="{StaticResource PopupItemsExceptTopMargin}">
-                                <ItemsControl ItemsSource="{Binding AvailableTags}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate DataType="{x:Type mvm:AvailableTagViewModel}">
-                                            <Border>
-                                                <Button HorizontalAlignment="Stretch"
-                                                        Cursor="Hand" Margin="{StaticResource DialogItemsExceptBottomMargin}"
-                                                        Command="{Binding ToggleCommand}" Style="{StaticResource TagToggleButton}">
-                                                    <Button.Background>
-                                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToColorConverter}}" />
-                                                    </Button.Background>
-                                                    <Button.Foreground>
-                                                        <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
-                                                    </Button.Foreground>
-                                                    <Button.Content>
-                                                        <DockPanel>
-                                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right" FontSize="14"
-                                                                   Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}" />
-                                                            <TextBlock Text="{Binding Name}" />
-                                                        </DockPanel>
-                                                    </Button.Content>
-                                                </Button>
-                                            </Border>
+                        <c:TagsPopup x:Name="tpAddTags" Placement="Bottom" PlacementTarget="{Binding ElementName=bAddTags}" />
 
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </StackPanel>
-                    </Border>
-                </Popup>
+                    </StackPanel>
 
-            </StackPanel>
+                    <!-- Description-->
 
-            <!-- Description-->
+                    <Grid Margin="{StaticResource EntryEditorSpacing}">
 
-            <Grid Margin="{StaticResource EntryEditorSpacing}">
+                        <!-- Description view mode -->
 
-                <!-- Description view mode -->
+                        <StackPanel Orientation="Vertical" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
 
-                <StackPanel Orientation="Vertical" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource InverseBoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
+                            <!-- Header -->
 
-                    <!-- Header -->
-
-                    <DockPanel Margin="{StaticResource EntryEditorSmallSpacing}">
-                        <Image Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" 
+                            <DockPanel Margin="{StaticResource EntryEditorSmallSpacing}">
+                                <Image Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" 
                             VerticalAlignment="Center"/>
 
-                        <Button VerticalAlignment="Center" DockPanel.Dock="Right" 
+                                <Button VerticalAlignment="Center" DockPanel.Dock="Right" 
                                 Style="{StaticResource EntryEditorButton}"
                                 Margin="{StaticResource DialogItemsMargin}"
                                 Click="EditDescriptionClick" Content="{x:Static res:Strings.Common_Edit}" />
 
-                        <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Description}" VerticalAlignment="Center" />
-                    </DockPanel>
+                                <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Description}" VerticalAlignment="Center" />
+                            </DockPanel>
 
-                    <!-- Contents -->
+                            <!-- Contents -->
 
-                    <Border Margin="{StaticResource EntryEditorSectionContentMargin}">
-                        <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
-                    </Border>
+                            <Border Margin="{StaticResource EntryEditorSectionContentMargin}">
+                                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
+                            </Border>
 
-                </StackPanel>
-
-                <!-- Description edit mode -->
-
-                <StackPanel Orientation="Vertical" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
-
-                    <!-- Header -->
-
-                    <DockPanel Margin="{StaticResource EntryEditorSmallSpacing}">
-                        <Image Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" 
-                            VerticalAlignment="Center"/>
-
-                        <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Description}" VerticalAlignment="Center" />
-                    </DockPanel>
-
-                    <!-- Editor -->
-
-                    <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
-
-                        <TextBox x:Name="tbDescription" MinHeight="100" MaxHeight="300" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                                              
-                                HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
-
-                        <StackPanel Orientation="Horizontal" Margin="{StaticResource DialogItemsTopMargin}">
-                            <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorDefaultButton}" 
-                                    Click="SaveDescriptionClick" Content="{x:Static res:Strings.Common_Save}"
-                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"/>
-                            <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}"                         
-                                    Click="CancelDescriptionClick" 
-                                    Margin="{StaticResource DialogItemsMargin}">
-                                <Image Width="16" Height="16" Source="\Resources\Images\GrayCancel16.png" />
-                            </Button>
                         </StackPanel>
 
+                        <!-- Description edit mode -->
+
+                        <StackPanel Orientation="Vertical" Visibility="{Binding Path=IsEditingDescription, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Collapsed}}">
+
+                            <!-- Header -->
+
+                            <DockPanel Margin="{StaticResource EntryEditorSmallSpacing}">
+                                <Image Style="{StaticResource SectionImage}" Source="\Resources\Images\Description16.png" 
+                            VerticalAlignment="Center"/>
+
+                                <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Description}" VerticalAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Editor -->
+
+                            <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
+
+                                <TextBox x:Name="tbDescription" MinHeight="100" MaxHeight="300" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                                              
+                                HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
+
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource DialogItemsTopMargin}">
+                                    <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorDefaultButton}" 
+                                    Click="SaveDescriptionClick" Content="{x:Static res:Strings.Common_Save}"
+                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"/>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}"                         
+                                    Click="CancelDescriptionClick" 
+                                    Margin="{StaticResource DialogItemsMargin}">
+                                        <Image Width="16" Height="16" Source="\Resources\Images\GrayCancel16.png" />
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <!-- Comments -->
+
+                    <DockPanel>
+                        <Image DockPanel.Dock="Left" VerticalAlignment="Center" Style="{StaticResource SectionImage}" Source="\Resources\Images\Comment16.png" />
+                        <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Comments}" />
+                    </DockPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
+                        <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" Margin="{StaticResource DialogItemsBottomMargin}"/>
+
+                        <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
+                            <ItemsControl.Resources>
+                                <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
+                                    <c:Comment Margin="{StaticResource EntryEditorSpacing}"/>
+                                </DataTemplate>
+
+                                <DataTemplate DataType="{x:Type mvm:InplaceCommentEditorViewModel}">
+                                    <c:InplaceCommentEditor Margin="{StaticResource EntryEditorSpacing}" />
+                                </DataTemplate>
+                            </ItemsControl.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </StackPanel>
+                </StackPanel>
+
+                <!-- Buttons area -->
+
+                <StackPanel Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}">
+                    <Label Content="#Add to card" Margin="{StaticResource DialogItemsMargin}" />
+
+                    <Button x:Name="bTags" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
+                            Click="HandleTagsButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" Margin="{StaticResource ButtonIconMargin}"/>
+                            <TextBlock Text="#Tags" />
+                        </StackPanel>
+                    </Button>
+
+                    <c:TagsPopup x:Name="tpTags" PlacementTarget="{Binding ElementName=bTags}" Placement="Right" />
+
+                    <Button x:Name="bDates" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
+                            Click="HandleDatesButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Calendar16.png" Margin="{StaticResource ButtonIconMargin}"/>
+                            <TextBlock Text="#Dates" />
+                        </StackPanel>
+                    </Button>
+
+                    <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right" />
 
                 </StackPanel>
 
-            </Grid>
-
-            <!-- Comments -->
-
-            <DockPanel>
-                <Image DockPanel.Dock="Left" VerticalAlignment="Center" Style="{StaticResource SectionImage}" Source="\Resources\Images\Comment16.png" />
-                <Label Style="{StaticResource SectionLabel}" Content="{x:Static res:Strings.EntryEditor_Header_Comments}" />
-            </DockPanel>
-
-            <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
-                <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" Margin="{StaticResource DialogItemsBottomMargin}"/>
-
-                <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
-                    <ItemsControl.Resources>
-                        <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
-                            <c:Comment Margin="{StaticResource EntryEditorSpacing}"/>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type mvm:InplaceCommentEditorViewModel}">
-                            <c:InplaceCommentEditor Margin="{StaticResource EntryEditorSpacing}" />
-                        </DataTemplate>
-                    </ItemsControl.Resources>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
             </StackPanel>
+           
         </StackPanel>
-
     </Border>
 </Border>
