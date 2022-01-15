@@ -142,6 +142,38 @@
 
                     </StackPanel>
 
+                    <!-- Dates -->
+
+                    <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}"
+                                Visibility="{Binding AnyDateSet, Converter={StaticResource BoolToVisibilityConverter}}">
+
+                        <!-- Header -->
+
+                        <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="Dates" />
+
+                        <Grid e:GridExtensions.RowsCols="auto,auto;auto,1*" Margin="{StaticResource EntryEditorSpacing}">
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_StartDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                                   Visibility="{Binding StartDate, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                            <c:Date Grid.Row="0" Grid.Column="1"
+                                    DisplayDate="{Binding StartDate}" 
+                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                                    Visibility="{Binding StartDate, Converter={StaticResource NullToVisibilityConverter}}"
+                                    HorizontalAlignment="Left" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_EndDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                                   Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                            <c:Date Grid.Row="1" Grid.Column="1"
+                                    DisplayDate="{Binding EndDate}" 
+                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                                    Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}"
+                                    HorizontalAlignment="Left" />
+                        </Grid>
+
+                    </StackPanel>
+
                     <!-- Description-->
 
                     <Grid Margin="{StaticResource EntryEditorSpacing}">
@@ -241,13 +273,13 @@
                 <!-- Buttons area -->
 
                 <StackPanel Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}">
-                    <Label Content="#Add to card" Margin="{StaticResource DialogItemsMargin}" />
+                    <Label Content="{x:Static res:Strings.EntryEditor_Label_AddToCard}" Margin="{StaticResource DialogItemsMargin}" />
 
                     <Button x:Name="bTags" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
                             Click="HandleTagsButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
                         <StackPanel Orientation="Horizontal">
                             <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" Margin="{StaticResource ButtonIconMargin}"/>
-                            <TextBlock Text="#Tags" />
+                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddTags}" />
                         </StackPanel>
                     </Button>
 
@@ -257,11 +289,12 @@
                             Click="HandleDatesButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
                         <StackPanel Orientation="Horizontal">
                             <Image Width="16" Height="16" Source="\Resources\Images\Calendar16.png" Margin="{StaticResource ButtonIconMargin}"/>
-                            <TextBlock Text="#Dates" />
+                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddDates}" />
                         </StackPanel>
                     </Button>
 
-                    <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right" />
+                    <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right"
+                                  DataContext="{Binding DateEditorViewModel}" />
 
                 </StackPanel>
 

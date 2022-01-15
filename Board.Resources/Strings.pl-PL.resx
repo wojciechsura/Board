@@ -312,4 +312,25 @@
   <data name="TagListWindow_Title_Tags" xml:space="preserve">
     <value>Tagi</value>
   </data>
+  <data name="DatesPopup_Label_EndDate" xml:space="preserve">
+    <value>Data zakończenia</value>
+  </data>
+  <data name="DatesPopup_Label_StartDate" xml:space="preserve">
+    <value>Data rozpoczęcia</value>
+  </data>
+  <data name="EntryEditor_Button_AddDates" xml:space="preserve">
+    <value>Daty</value>
+  </data>
+  <data name="EntryEditor_Button_AddTags" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="EntryEditor_Label_AddToCard" xml:space="preserve">
+    <value>Dodaj do karty</value>
+  </data>
+  <data name="EntryEditor_Label_EndDate" xml:space="preserve">
+    <value>Data zakończenia</value>
+  </data>
+  <data name="EntryEditor_Label_StartDate" xml:space="preserve">
+    <value>Data rozpoczęcia</value>
+  </data>
 </root>

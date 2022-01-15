@@ -17,13 +17,13 @@ using System.Text.RegularExpressions;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
-    public class EntryEditorViewModel : BaseViewModel, IEntryEditorHandler
+    public class EntryEditorViewModel : BaseViewModel, IEntryEditorHandler, IEntryDateEditorHandler
     {
-        // Private constants --------------------------------------------------
-
-        private static Regex timeRegex = new Regex("^([01]?[0-9]|2[0-3]):([0-5][0-9])$");
+        private const string DATES_PROPERTY_GROUP = "Dates";
 
         // Private fields -----------------------------------------------------
+
+        private readonly EntryDateEditorViewModel dateEditorViewModel;
 
         private readonly int entryId;
         private readonly int tableId;
@@ -38,13 +38,10 @@ namespace Board.BusinessLogic.ViewModels.Main
         private string title;
         [SyncWithModel(nameof(EntryModel.Description))]
         private string description;
-
-        private bool startDateSet;
-        private DateTime startDate;
-        private string startTime;
-        private bool endDateSet;
-        private DateTime endDate;
-        private string endTime;
+        [SyncWithModel(nameof(EntryModel.StartDate))]
+        private DateTime? startDate;
+        [SyncWithModel(nameof(EntryModel.EndDate))]
+        private DateTime? endDate;
 
         // Private methods ----------------------------------------------------
 
@@ -84,30 +81,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             {
                 CommentViewModel commentViewModel = new(comment, this);
                 Comments.Add(commentViewModel);
-            }
-
-            UpdateDates(model.StartDate, model.EndDate);
-        }
-
-        private void UpdateDates(DateTime? startDate, DateTime? endDate)
-        {
-            this.startDateSet = startDate != null;
-            this.startDate = startDate ?? DateTime.Now;
-            this.startTime = startDate?.ToString("HH:mm") ?? DateTime.Now.ToString("HH:mm");
-
-            this.endDateSet = endDate != null;
-            this.endDate = endDate ?? DateTime.Now;
-            this.endTime = endDate?.ToString("HH.mm") ?? DateTime.Now.ToString("HH:mm");
-        }
-
-        private void NotifyDatesChanged()
-        {
-            OnPropertyChanged(nameof(StartDateSet));
-            OnPropertyChanged(nameof(StartDate));
-            OnPropertyChanged(nameof(StartTime));
-            OnPropertyChanged(nameof(EndDateSet));
-            OnPropertyChanged(nameof(EndDate));
-            OnPropertyChanged(nameof(EndTime));
+            }            
         }
 
         private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
@@ -116,24 +90,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             var index = Comments.IndexOf(inplaceCommentEditorViewModel);
             Comments.RemoveAt(index);
             Comments.Insert(index, commentViewModel);
-        }
-
-        private void HandleDatesChanged()
-        {
-            IsEditingDates = true;
-        }
-
-        private (int h, int m) SanitizeTime(string startTime)
-        {
-            int h = 0, m = 0;
-            if (timeRegex.IsMatch(startTime))
-            {
-                string[] parts = startTime.Split(':');
-                h = int.Parse(parts[0]);
-                m = int.Parse(parts[1]);
-            }
-
-            return (h, m);
         }
 
         // IEntryEditorHandler ------------------------------------------------
@@ -207,6 +163,26 @@ namespace Board.BusinessLogic.ViewModels.Main
             }
         }
 
+        // IEntryDateEditorHandler implementation -----------------------------
+
+        (DateTime? startDate, DateTime? endDate) IEntryDateEditorHandler.GetCurrentDates()
+        {
+            return (startDate, endDate);
+        }
+
+        void IEntryDateEditorHandler.SetCurrentDates(DateTime? newStartDate, DateTime? newEndDate)
+        {
+            var model = document.Database.GetEntryById(entryId);
+            model.StartDate = newStartDate;
+            model.EndDate = newEndDate;
+            document.Database.UpdateEntry(model);
+
+            startDate = newStartDate;
+            endDate = newEndDate;
+
+            PropertyGroupChanged(DATES_PROPERTY_GROUP);
+        }
+
         // Public methods -----------------------------------------------------
 
         public EntryEditorViewModel(int entryId, 
@@ -234,6 +210,8 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             var editEntryModel = document.Database.GetEntryEdit(entryId);
             UpdateFromModel(editEntryModel);
+
+            dateEditorViewModel = new EntryDateEditorViewModel(editEntryModel.StartDate, editEntryModel.EndDate, this);
         }
 
         public void SetTitle(string title)
@@ -254,57 +232,9 @@ namespace Board.BusinessLogic.ViewModels.Main
             Description = description;
         }
 
-        public void CancelDateChanges()
-        {
-            var model = document.Database.GetEntryEdit(entryId);
-            UpdateDates(model.StartDate, model.EndDate);
-            NotifyDatesChanged();
-
-            IsEditingDates = false;
-        }
-
-        public void CommitDateChanges()
-        {
-            var model = document.Database.GetEntryById(entryId);
-
-            DateTime? startDate = null;
-
-            if (startDateSet)
-            {
-                (int h, int m) = SanitizeTime(startTime);
-
-                startDate = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, h, m, 0);
-                model.StartDate = startDate;
-            }
-            else
-            {
-                model.StartDate = null;
-            }
-
-            if (endDateSet)
-            {
-                (int h, int m) = SanitizeTime(endTime);
-
-                var endDate = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day, h, m, 0);
-                if (startDate != null && endDate < startDate)
-                    endDate = startDate.Value;
-
-                model.EndDate = endDate;
-            }
-            else
-            {
-                model.EndDate = null;
-            }
-
-            document.Database.UpdateEntry(model);
-
-            UpdateDates(model.StartDate, model.EndDate);
-            NotifyDatesChanged();
-
-            IsEditingDates = false;
-        }
-
         // Public properties --------------------------------------------------
+
+        public EntryDateEditorViewModel DateEditorViewModel => dateEditorViewModel;
 
         public string ColumnName { get; }
 
@@ -332,12 +262,6 @@ namespace Board.BusinessLogic.ViewModels.Main
             set => Set(ref isEditingDescription, value);
         }
 
-        public bool IsEditingDates
-        {
-            get => isEditingDates;
-            set => Set(ref isEditingDates, value);
-        }
-
         public ObservableCollection<AddedTagViewModel> AddedTags { get; }
 
         public ObservableCollection<AvailableTagViewModel> AvailableTags { get; }
@@ -346,40 +270,19 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         public ICommand CloseCommand { get; }
 
-        public bool StartDateSet
-        {
-            get => startDateSet; 
-            set => Set(ref startDateSet, value, changeHandler: HandleDatesChanged);
-        }
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public DateTime? StartDate => startDate;
 
-        public DateTime StartDate
-        {
-            get => startDate; 
-            set => Set(ref startDate, value, changeHandler: HandleDatesChanged);
-        }
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public string StartDateDisplay => startDate?.ToString("dddd, dd-MM-yyyy");
 
-        public string StartTime
-        {
-            get => startTime; 
-            set => Set(ref startTime, value, changeHandler: HandleDatesChanged);
-        }
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public DateTime? EndDate => endDate;
 
-        public bool EndDateSet
-        {
-            get => endDateSet; 
-            set => Set(ref endDateSet, value, changeHandler: HandleDatesChanged);
-        }
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public string EndDateDisplay => endDate?.ToString("dddd, dd-MM-yyyy");
 
-        public DateTime EndDate
-        {
-            get => endDate; 
-            set => Set(ref endDate, value, changeHandler: HandleDatesChanged);
-        }
-
-        public string EndTime
-        {
-            get => endTime; 
-            set => Set(ref endTime, value, changeHandler: HandleDatesChanged);
-        }
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public bool AnyDateSet => startDate != null || endDate != null;
     }
 }

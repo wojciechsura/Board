@@ -1,13 +1,16 @@
 ﻿<Application x:Class="Board.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Board" xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
+             xmlns:local="clr-namespace:Board" 
+             xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
+             xmlns:lc="clr-namespace:Board.Converters"
              StartupUri="Windows\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="Theme\Styles.xaml" />
+                <ResourceDictionary Source="Controls\DefaultTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />

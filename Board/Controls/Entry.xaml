@@ -16,6 +16,20 @@
         x:Name="root"
         Style="{StaticResource Card}" DataContextChanged="HandleDataContextChanged">
     <DockPanel>
+        <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
+                VerticalAlignment="Top"
+                Visibility="{Binding ElementName=root, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"
+                e:ContextMenuOnLeftClick.Enabled="True"
+                e:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bMenu}"
+                e:ContextMenuOnLeftClick.Placement="Bottom">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Show}" Command="{Binding EditEntryCommand}" />
+                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Delete}" Command="{Binding DeleteEntryCommand}" />
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+
         <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Tags}" Margin="{StaticResource DialogItemsMargin}"
                       Visibility="{Binding Tags.Count, Converter={StaticResource CollapseIfZeroConverter}}">
             <ItemsControl.ItemsPanel>
@@ -29,19 +43,11 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
-        <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
-                Visibility="{Binding ElementName=root, Path=IsMouseOver, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"
-                e:ContextMenuOnLeftClick.Enabled="True"
-                e:ContextMenuOnLeftClick.PlacementTarget="{Binding ElementName=bMenu}"
-                e:ContextMenuOnLeftClick.Placement="Bottom" VerticalAlignment="Top">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Show}" Command="{Binding EditEntryCommand}" />
-                    <MenuItem Header="{x:Static res:Strings.Entry_Menu_Delete}" Command="{Binding DeleteEntryCommand}" />
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
+
+        <c:DateRange DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}"
+                     StartDate="{Binding StartDate}" EndDate="{Binding EndDate}"
+                     Visibility="{Binding AnyDateSet, Converter={StaticResource BoolToVisibilityConverter}}"
+                     HorizontalAlignment="Left"/>
 
         <Label Cursor="Hand" VerticalAlignment="Stretch"
                VerticalContentAlignment="Center" MouseDown="HandleHeaderMouseDown"

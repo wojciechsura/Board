@@ -312,4 +312,25 @@
   <data name="Common_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="EntryEditor_Label_AddToCard" xml:space="preserve">
+    <value>Add to card</value>
+  </data>
+  <data name="EntryEditor_Label_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="EntryEditor_Label_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="EntryEditor_Button_AddTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="EntryEditor_Button_AddDates" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="DatesPopup_Label_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="DatesPopup_Label_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
 </root>

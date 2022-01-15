@@ -1,4 +1,4 @@
-﻿<!-- Bind DataContext to EntryEditorViewModel -->
+﻿<!-- Bind DataContext to EntryDateEditorViewModel -->
 
 <Popup x:Class="Board.Controls.DatesPopup"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,7 +7,8 @@
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
        xmlns:local="clr-namespace:Board.Controls"
        xmlns:mvm="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic"
-       xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources" d:DataContext="{d:DesignInstance Type=mvm:EntryEditorViewModel}"
+       xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources" 
+       d:DataContext="{d:DesignInstance Type=mvm:EntryDateEditorViewModel}"
        mc:Ignorable="d" 
        StaysOpen="False" AllowsTransparency="True" DataContextChanged="HandleDataContextChanged">
     <Border Style="{StaticResource EntryEditorPopup}">
@@ -29,7 +30,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <CheckBox x:Name="cbStartDate" Grid.Row="0" Grid.Column="0" Content="Start date" Margin="{StaticResource PopupItemsExceptTopMargin}"
+                <CheckBox x:Name="cbStartDate" Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.DatesPopup_Label_StartDate}" Margin="{StaticResource PopupItemsExceptTopMargin}"
                           VerticalAlignment="Center" IsChecked="{Binding StartDateSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DatePicker Grid.Row="0" Grid.Column="1" Margin="{StaticResource PopupItemsExceptTopMargin}" 
                             VerticalAlignment="Center"
@@ -41,7 +42,7 @@
                          Text="{Binding StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                          MaxLength="5" />
 
-                <CheckBox x:Name="cbEndDate" Grid.Row="1" Grid.Column="0" Content="End date" Margin="{StaticResource PopupItemsExceptTopMargin}" 
+                <CheckBox x:Name="cbEndDate" Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.DatesPopup_Label_EndDate}" Margin="{StaticResource PopupItemsExceptTopMargin}" 
                           VerticalAlignment="Center" IsChecked="{Binding EndDateSet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DatePicker Grid.Row="1" Grid.Column="1" Margin="{StaticResource PopupItemsExceptTopMargin}" 
                             VerticalAlignment="Center"
@@ -57,11 +58,12 @@
             <StackPanel Orientation="Horizontal" Margin="{StaticResource PopupItemsExceptTopMargin}"
                         Visibility="{Binding IsEditingDates, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorDefaultButton}" 
-                                    Click="HandleSaveDatesClick" Content="{x:Static res:Strings.Common_Save}"
-                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"/>
-                <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}"                         
-                                    Click="HandleCancelDatesClick" 
-                                    Margin="{StaticResource DialogItemsMargin}">
+                        Content="{x:Static res:Strings.Common_Save}"
+                        Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                        Click="SaveButtonClick"/>
+                <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorButton}"                                                             
+                        Margin="{StaticResource DialogItemsMargin}"
+                        Click="CancelButtonClick">
                     <Image Width="16" Height="16" Source="\Resources\Images\GrayCancel16.png" />
                 </Button>
             </StackPanel>

@@ -214,6 +214,24 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu End date.
+        /// </summary>
+        public static string DatesPopup_Label_EndDate {
+            get {
+                return ResourceManager.GetString("DatesPopup_Label_EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start date.
+        /// </summary>
+        public static string DatesPopup_Label_StartDate {
+            get {
+                return ResourceManager.GetString("DatesPopup_Label_StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Board.
         /// </summary>
         public static string DefaultDialogTitle {
@@ -286,6 +304,24 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dates.
+        /// </summary>
+        public static string EntryEditor_Button_AddDates {
+            get {
+                return ResourceManager.GetString("EntryEditor_Button_AddDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tags.
+        /// </summary>
+        public static string EntryEditor_Button_AddTags {
+            get {
+                return ResourceManager.GetString("EntryEditor_Button_AddTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Comments.
         /// </summary>
         public static string EntryEditor_Header_Comments {
@@ -318,6 +354,33 @@ namespace Board.Resources {
         public static string EntryEditor_Label_AddTag {
             get {
                 return ResourceManager.GetString("EntryEditor_Label_AddTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add to card.
+        /// </summary>
+        public static string EntryEditor_Label_AddToCard {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_AddToCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu End date.
+        /// </summary>
+        public static string EntryEditor_Label_EndDate {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start date.
+        /// </summary>
+        public static string EntryEditor_Label_StartDate {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_StartDate", resourceCulture);
             }
         }
         

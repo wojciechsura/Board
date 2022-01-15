@@ -22,7 +22,7 @@ namespace Board.Controls
     /// </summary>
     public partial class DatesPopup : Popup
     {
-        private EntryEditorViewModel viewModel;
+        private EntryDateEditorViewModel viewModel;
 
         public DatesPopup()
         {
@@ -31,17 +31,19 @@ namespace Board.Controls
 
         private void HandleDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            viewModel = (EntryEditorViewModel)e.NewValue;
+            viewModel = (EntryDateEditorViewModel)e.NewValue;
         }
 
-        private void HandleSaveDatesClick(object sender, RoutedEventArgs e)
+        private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.CommitDateChanges();
+            viewModel.Save();
+            IsOpen = false;
         }
 
-        private void HandleCancelDatesClick(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.CancelDateChanges();
+            viewModel.Cancel();
+            IsOpen = false;
         }
     }
 }
