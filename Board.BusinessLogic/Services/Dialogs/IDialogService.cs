@@ -18,8 +18,8 @@ namespace Board.BusinessLogic.Services.Dialogs
         (bool result, string path) ShowBrowseFolderDialog(string title = null, string path = null);
         (bool result, SQLiteConfigResult data) ShowSQLiteDataDialog(SQLiteConfigResult data = null);
         (bool result, DocumentInfo data) ShowNewWallDialog();
-        (bool result, TableModel model) ShowNewTableDialog();
-        bool ShowEditTableDialog(TableModel tableModel);
+        (bool result, TableEditModel model) ShowNewTableDialog();
+        bool ShowEditTableDialog(TableEditModel tableModel);
         (bool result, bool? permanently) ShowDeleteDialog(string message);
         (bool result, ColumnModel model) ShowNewColumnDialog();
         bool ShowEditColumnDialog(ColumnModel columnModel);

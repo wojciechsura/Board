@@ -9,27 +9,34 @@
               xmlns:dvm="clr-namespace:Board.BusinessLogic.ViewModels.Document;assembly=Board.BusinessLogic"
               xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
+             VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
               SnapsToDevicePixels="True" DataContextChanged="HandleDataContextChanged">
-    <StackPanel Orientation="Horizontal" Style="{StaticResource TableContents}">
-        <ItemsControl ItemsSource="{Binding Columns}" AllowDrop="True"
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="{Binding Background, Converter={StaticResource StreamToImageSourceConverter}}"
+                        Stretch="UniformToFill" />
+        </Border.Background>
+
+        <StackPanel Orientation="Horizontal" Style="{StaticResource TableContents}">
+            <ItemsControl ItemsSource="{Binding Columns}" AllowDrop="True"
                       Background="Transparent"
                       PreviewDragEnter="TableDragEnter"
                       PreviewDragOver="TableDragOver"
                       PreviewDragLeave="TableDragLeave"
                       PreviewDrop="TableDrop">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <local:ColumnStack />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type dvm:ColumnViewModel}">
-                    <local:Column />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <local:ColumnStack />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type dvm:ColumnViewModel}">
+                        <local:Column />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-        <Button VerticalAlignment="Top" Content="{x:Static res:Strings.Table_Command_NewColumn}" Command="{Binding NewColumnCommand}" />
-    </StackPanel>
+            <Button VerticalAlignment="Top" Content="{x:Static res:Strings.Table_Command_NewColumn}" Command="{Binding NewColumnCommand}" />
+        </StackPanel>
+    </Border>
 </ScrollViewer>

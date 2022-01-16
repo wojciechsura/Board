@@ -49,7 +49,9 @@
                     </f:RibbonGroupBox>
 
                     <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_Tags}">
-                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_Editor}" SizeDefinition="Large" Command="{Binding OpenTagEditorCommand}" />
+                        <f:Button Header="{x:Static res:Strings.MainWindow_RibbonButton_Editor}" SizeDefinition="Large" Command="{Binding OpenTagEditorCommand}" 
+                                  LargeIcon="pack://application:,,,/Board;component/Resources/Images/Tag32.png" 
+                                  Icon="pack://application:,,,/Board;component/Resources/Images/Tag16.png" />
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
             </f:Ribbon>

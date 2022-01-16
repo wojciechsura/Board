@@ -12,6 +12,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
         public abstract void AddTable(TableModel newTable);
         public abstract void DeleteTable(int tableId, bool permanent);
+
         public abstract long GetFirstTableOrder(bool includeDeleted);
         public abstract long GetLastTableOrder(bool includeDeleted);
         public abstract TableModel GetNextTable(TableModel table, bool includeDeleted);

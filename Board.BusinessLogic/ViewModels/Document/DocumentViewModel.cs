@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Board.BusinessLogic.Infrastructure.EntityOrdering;
 using AutoMapper;
 using Board.Models.Types;
+using System.IO;
+using Board.BusinessLogic.Infrastructure.Document.Filesystem;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
@@ -35,11 +37,13 @@ namespace Board.BusinessLogic.ViewModels.Document
         private class TableLoadingWorker : BackgroundWorker
         {
             private readonly BaseDatabase database;
+            private readonly BaseFilesystem filesystem;
             private readonly IDocumentHandler handler;            
 
-            public TableLoadingWorker(BaseDatabase database, IDocumentHandler handler)
+            public TableLoadingWorker(BaseDatabase database, BaseFilesystem filesystem, IDocumentHandler handler)
             {
                 this.database = database;
+                this.filesystem = filesystem;
                 this.handler = handler;
                 WorkerSupportsCancellation = true;
                 WorkerReportsProgress = true;
@@ -54,7 +58,7 @@ namespace Board.BusinessLogic.ViewModels.Document
                 {
                     if (CancellationPending)
                         return;
-                    TableViewModel tableViewModel = BuildTableViewModel(table, database, handler);
+                    TableViewModel tableViewModel = BuildTableViewModel(table, database, filesystem, handler);
 
                     // TODO: load columns and entities
 
@@ -218,7 +222,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             this.handler = handler;
         }
 
-        private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database, IDocumentHandler handler)
+        private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database, BaseFilesystem filesystem, IDocumentHandler handler)
         {
             List<ColumnModel> columns = database.GetColumns(table.Id, false);
             List<ColumnViewModel> columnViewModels = new();
@@ -229,7 +233,11 @@ namespace Board.BusinessLogic.ViewModels.Document
                 columnViewModels.Add(columnViewModel);
             }
 
-            var tableViewModel = new TableViewModel(table, columnViewModels, handler);
+            MemoryStream background = null;
+            if (!string.IsNullOrEmpty(table.Background))
+                background = filesystem.LoadFile(table.Background);
+
+            var tableViewModel = new TableViewModel(table, background, columnViewModels, handler);
             return tableViewModel;
         }
 
@@ -263,7 +271,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             IsLoading = true;
 
-            loadingWorker = new TableLoadingWorker(document.Database, handler);
+            loadingWorker = new TableLoadingWorker(document.Database, document.Filesystem, handler);
             loadingWorker.ProgressChanged += HandleLoadingWorkerProgress;
             loadingWorker.RunWorkerCompleted += HandleLoadingWorkerCompleted;
             loadingWorker.RunWorkerAsync();
@@ -282,6 +290,31 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             if (ActiveTable == null)
                 ActiveTable = tables.Last();
+        }
+
+        private void UpdateTableBackground(TableModel oldModel, TableEditModel newTable)
+        {
+            // We need table ID to work properly
+            if (newTable == null || newTable.Id <= 0)
+                throw new ArgumentException("Cannot update background on not-yet-existing table!");
+
+            // If background was not changed, ignore the call
+            if (!newTable.BackgroundChanged)
+                return;
+
+            // If old model is not null, remove old background (if any)
+            if (oldModel != null && !string.IsNullOrEmpty(oldModel.Background))
+            {
+                document.Filesystem.DeleteFile(oldModel.Background);
+            }
+
+            // Store new file
+            if (newTable.BackgroundChanged && newTable.BackgroundStream != null)
+            {
+                string path = @$"Tables\{newTable.Id}\background.dat";
+                document.Filesystem.SaveFile(path, newTable.BackgroundStream);
+                newTable.Background = path;
+            }
         }
 
         // Public methods -----------------------------------------------------
@@ -340,31 +373,46 @@ namespace Board.BusinessLogic.ViewModels.Document
             set => Set(ref isLoading, value);
         }
 
-        public void AddTableFromModel(TableModel newTable)
+        public void AddTableFromModel(TableEditModel newTable)
         {
-            // Fill in order
+            // Update data
+            var tableModel = mapper.Map<TableModel>(newTable);
             var tableCount = document.Database.GetTableCount(false);
-            tableOrdering.SetNewOrder(newTable, tableCount, 0);
-            document.Database.AddTable(newTable);
+            tableOrdering.SetNewOrder(tableModel, tableCount, 0);
+            document.Database.AddTable(tableModel);
 
-            var tableViewModel = BuildTableViewModel(newTable, document.Database, handler);
+            // Having new ID we can now save background if any
+            newTable.Id = tableModel.Id;
+            UpdateTableBackground(null, newTable);
+            mapper.Map(newTable, tableModel);
+            document.Database.UpdateTable(tableModel);
+
+            // Update view
+            var tableViewModel = BuildTableViewModel(tableModel, document.Database, document.Filesystem, handler);
             tables.Add(tableViewModel);
 
             if (ActiveTable == null)
                 ActiveTable = tableViewModel;
         }
 
-        public void UpdateTableFromModel(TableViewModel tableViewModel, TableModel updatedTable)
+        public void UpdateTableFromModel(TableViewModel tableViewModel, TableEditModel updatedTable)
         {
-            document.Database.UpdateTable(updatedTable);
+            // Update data
 
-            var newTableViewModel = BuildTableViewModel(updatedTable, document.Database, handler);
+            var oldModel = tableViewModel.Table;
+            UpdateTableBackground(oldModel, updatedTable);
 
+            var tableModel = mapper.Map<TableModel>(updatedTable);
+            document.Database.UpdateTable(tableModel);
+
+            // Update view
+
+            var newTableViewModel = BuildTableViewModel(tableModel, document.Database, document.Filesystem, handler);
             int index = tables.IndexOf(tableViewModel);
             tables[index] = newTableViewModel;
 
             ActiveTable = newTableViewModel;
-        }
+        }        
 
         public void UpdateColumnFromModel(ColumnViewModel columnViewModel, ColumnModel updatedColumn)
         {
@@ -501,7 +549,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             int tableId = updatedTable.Table.Id;
 
             var tableModel = document.Database.GetTable(tableId);
-            var newTableViewModel = BuildTableViewModel(tableModel, document.Database, handler);
+            var newTableViewModel = BuildTableViewModel(tableModel, document.Database, document.Filesystem, handler);
 
             int index = tables.IndexOf(updatedTable);
             bool selected = ActiveTable == updatedTable;
@@ -575,6 +623,19 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
+        public TableEditModel GetTableEditModel(TableViewModel activeTable)
+        {
+            var result = mapper.Map<TableEditModel>(activeTable.Table);
+
+            if (!string.IsNullOrEmpty(activeTable.Table.Background))
+            {
+                MemoryStream stream = document.Filesystem.LoadFile(activeTable.Table.Background);
+                result.BackgroundStream = stream;
+                result.BackgroundChanged = false;
+            }
+
+            return result;
+        }
 
         // Public properties --------------------------------------------------
 

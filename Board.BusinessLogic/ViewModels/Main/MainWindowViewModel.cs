@@ -56,7 +56,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private void DoNewTable()
         {
-            (bool result, TableModel newTable) = dialogService.ShowNewTableDialog();
+            (bool result, TableEditModel newTable) = dialogService.ShowNewTableDialog();
             if (result)
             {
                 activeDocument.AddTableFromModel(newTable);
@@ -78,12 +78,12 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private void DoEditTable()
         {
-            var modelClone = mapper.Map<TableModel>(activeDocument.ActiveTable.Table);
+            TableEditModel tableEditModel = activeDocument.GetTableEditModel(activeDocument.ActiveTable);
 
-            var result = dialogService.ShowEditTableDialog(modelClone);
+            var result = dialogService.ShowEditTableDialog(tableEditModel);
             if (result)
             {
-                activeDocument.UpdateTableFromModel(activeDocument.ActiveTable, modelClone);
+                activeDocument.UpdateTableFromModel(activeDocument.ActiveTable, tableEditModel);
             }
         }
 

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Board.Windows" 
         xmlns:tableeditor="clr-namespace:Board.BusinessLogic.ViewModels.TableEditor;assembly=Board.BusinessLogic" 
         xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+        xmlns:e="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
         d:DataContext="{d:DesignInstance Type=tableeditor:TableEditorWindowViewModel}"
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
@@ -13,18 +14,23 @@
         Title="{Binding Title}" FocusManager.FocusedElement="{Binding ElementName=tbTableName}">
     <StackPanel Orientation="Vertical">
         <GroupBox Header="{Binding Title}" Margin="{StaticResource DialogItemsMargin}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="300" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
+            <Grid e:GridExtensions.RowsCols="auto,auto;auto,300">
                 <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.TableEditorWindow_Label_BoardName}" Margin="{StaticResource DialogItemsMargin}"/>
                 <TextBox x:Name="tbTableName" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Margin="{StaticResource DialogItemsMargin}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Background image" Margin="{StaticResource DialogItemsMargin}"/>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                    <Button Command="{Binding OpenBackgroundCommand}" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Margin="{StaticResource ButtonIconMargin}" Source="\Resources\Images\Open16.png" />
+                            <TextBlock Text="Open..."/>
+                        </StackPanel>
+                    </Button>
+                    <Border Width="150" Height="150" HorizontalAlignment="Left" Margin="{StaticResource DialogItemsMargin}">
+                        <Image MaxWidth="150" MaxHeight="150" Source="{Binding Background, Converter={StaticResource StreamToImageSourceConverter}}" />
+                    </Border>
+                </StackPanel>
             </Grid>
         </GroupBox>
 

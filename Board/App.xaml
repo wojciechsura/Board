@@ -22,6 +22,7 @@
             <c:IntToForegroundColorConverter x:Key="IntToForegroundColorConverter" />
             <c:CollapseIfZeroConverter x:Key="CollapseIfZeroConverter" />
             <c:HideIfEmptyStringConverter x:Key="HideIfEmptyStringConverter" />
+            <c:StreamToImageSourceConverter x:Key="StreamToImageSourceConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

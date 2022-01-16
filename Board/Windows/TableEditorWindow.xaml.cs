@@ -37,7 +37,7 @@ namespace Board.Windows
 
         // Public methods -----------------------------------------------------
 
-        public TableEditorWindow(TableModel table, bool isNew)
+        public TableEditorWindow(TableEditModel table, bool isNew)
         {
             InitializeComponent();
 
@@ -49,6 +49,6 @@ namespace Board.Windows
 
         // Public properties --------------------------------------------------
 
-        public TableModel Result => viewModel.Result;
+        public TableEditModel Result => viewModel.Result;
     }
 }

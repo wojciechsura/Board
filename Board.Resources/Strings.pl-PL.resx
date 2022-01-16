@@ -333,4 +333,13 @@
   <data name="EntryEditor_Label_StartDate" xml:space="preserve">
     <value>Data rozpoczęcia</value>
   </data>
+  <data name="ImageFilter" xml:space="preserve">
+    <value>Obrazy (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp</value>
+  </data>
+  <data name="Dialog_OpenTableBackground_Title" xml:space="preserve">
+    <value>Otwórz tło tablicy</value>
+  </data>
+  <data name="Message_InvalidImageFile" xml:space="preserve">
+    <value>Nieprawidłowy plik obrazu!</value>
+  </data>
 </root>

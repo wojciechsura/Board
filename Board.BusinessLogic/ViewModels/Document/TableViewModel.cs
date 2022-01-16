@@ -10,19 +10,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.IO;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
     public class TableViewModel : BaseViewModel
     {
         private readonly TableModel table;
+        private readonly MemoryStream background;
         private readonly ObservableParentedCollection<ColumnViewModel, TableViewModel> columns;
         private readonly IDocumentHandler handler;
 
-        public TableViewModel(TableModel table, List<ColumnViewModel> columns, IDocumentHandler handler)
+        public TableViewModel(TableModel table, MemoryStream background, List<ColumnViewModel> columns, IDocumentHandler handler)
         {
             this.columns = new(this);
             this.table = table;
+            this.background = background;
             this.handler = handler;
 
             foreach (var column in columns)
@@ -39,6 +42,8 @@ namespace Board.BusinessLogic.ViewModels.Document
         public ObservableParentedCollection<ColumnViewModel, TableViewModel> Columns => columns;
 
         public string Name => table.Name;
+
+        public MemoryStream Background => background;
 
         public TableModel Table => table;
 

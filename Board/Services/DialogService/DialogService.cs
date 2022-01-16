@@ -161,9 +161,9 @@ namespace Board.Services.DialogService
             }
         }
 
-        public (bool result, TableModel model) ShowNewTableDialog()
+        public (bool result, TableEditModel model) ShowNewTableDialog()
         {
-            TableEditorWindow dialog = new TableEditorWindow(new TableModel(), true);
+            TableEditorWindow dialog = new TableEditorWindow(new TableEditModel(), true);
             dialog.Owner = GetOwnerWindow();
             dialogWindows.Push(dialog);
 
@@ -181,7 +181,7 @@ namespace Board.Services.DialogService
             }
         }
 
-        public bool ShowEditTableDialog(TableModel tableModel)
+        public bool ShowEditTableDialog(TableEditModel tableModel)
         {
             TableEditorWindow dialog = new TableEditorWindow(tableModel, false);
             dialog.Owner = GetOwnerWindow();

@@ -29,6 +29,8 @@ namespace Board.BusinessLogic.MappingProfiles
 
             CreateMap<Entry, EntryDisplayModel>();
             CreateMap<Entry, EntryEditModel>();
+
+            CreateMap<TableModel, TableEditModel>().ReverseMap();
         }
     }
 }

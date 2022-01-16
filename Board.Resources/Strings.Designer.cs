@@ -268,6 +268,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open table background.
+        /// </summary>
+        public static string Dialog_OpenTableBackground_Title {
+            get {
+                return ResourceManager.GetString("Dialog_OpenTableBackground_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wall project files.
         /// </summary>
         public static string Dialog_OpenWall_ProjectFilterDesc {
@@ -403,6 +412,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Images (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp.
+        /// </summary>
+        public static string ImageFilter {
+            get {
+                return ResourceManager.GetString("ImageFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete board.
         /// </summary>
         public static string MainWindow_RibbonButton_DeleteBoard {
@@ -516,6 +534,15 @@ namespace Board.Resources {
         public static string Message_EntryDeletion {
             get {
                 return ResourceManager.GetString("Message_EntryDeletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Invalid image file!.
+        /// </summary>
+        public static string Message_InvalidImageFile {
+            get {
+                return ResourceManager.GetString("Message_InvalidImageFile", resourceCulture);
             }
         }
         
