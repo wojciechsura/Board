@@ -25,7 +25,7 @@ namespace Board.Common.Wpf.Converters
                 byte min = Math.Min(color.R, Math.Min(color.G, color.B));
                 int luminance = (max + min) / 2;
 
-                if (luminance > 120)
+                if (luminance > 180)
                     return black;
                 else
                     return white;

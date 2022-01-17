@@ -60,7 +60,7 @@
 
             <!-- Title -->
 
-            <DockPanel>
+            <DockPanel HorizontalAlignment="Stretch">
                 <Image DockPanel.Dock="Left" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" 
                         VerticalAlignment="Center" />
 
@@ -100,7 +100,7 @@
 
                 <!-- Editor area-->
 
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Width="{StaticResource EntryEditorEditAreaWidth}">
 
                     <!-- Tags -->
 
@@ -176,7 +176,7 @@
 
                     <!-- Description-->
 
-                    <Grid Margin="{StaticResource EntryEditorSpacing}">
+                    <Grid Margin="{StaticResource EntryEditorSpacing}" HorizontalAlignment="Stretch">
 
                         <!-- Description view mode -->
 
@@ -222,7 +222,7 @@
                             <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
 
                                 <TextBox x:Name="tbDescription" MinHeight="100" MaxHeight="300" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"                                              
-                                HorizontalContentAlignment="Left" VerticalAlignment="Top" FontFamily="Consolas"/>
+                                HorizontalContentAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"/>
 
                                 <StackPanel Orientation="Horizontal" Margin="{StaticResource DialogItemsTopMargin}">
                                     <Button VerticalAlignment="Center" Style="{StaticResource EntryEditorDefaultButton}" 
@@ -249,16 +249,18 @@
                     </DockPanel>
 
                     <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
-                        <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" Margin="{StaticResource DialogItemsBottomMargin}"/>
+                        <Label Padding="0" Content="{x:Static res:Strings.EntryEditor_Label_AddNewComment}" Margin="{StaticResource DialogItemsBottomMargin}"
+                               HorizontalAlignment="Stretch"/>
 
-                        <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}">
+                        <ItemsControl ItemsSource="{Binding Comments}" Grid.Row="6" Grid.Column="1" Visibility="{Binding Comments.Count, Converter={StaticResource CollapseIfZeroConverter}}"
+                                      HorizontalAlignment="Stretch">
                             <ItemsControl.Resources>
                                 <DataTemplate DataType="{x:Type mvm:CommentViewModel}">
-                                    <c:Comment Margin="{StaticResource EntryEditorSpacing}"/>
+                                    <c:Comment Margin="{StaticResource EntryEditorSpacing}" HorizontalAlignment="Stretch"/>
                                 </DataTemplate>
 
                                 <DataTemplate DataType="{x:Type mvm:InplaceCommentEditorViewModel}">
-                                    <c:InplaceCommentEditor Margin="{StaticResource EntryEditorSpacing}" />
+                                    <c:InplaceCommentEditor Margin="{StaticResource EntryEditorSpacing}" HorizontalAlignment="Stretch"/>
                                 </DataTemplate>
                             </ItemsControl.Resources>
                             <ItemsControl.ItemsPanel>

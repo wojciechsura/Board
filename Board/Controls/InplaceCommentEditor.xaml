@@ -15,13 +15,14 @@
     <Border.Resources>
         <Thickness x:Key="CommentEditorSpacing">0,12,0,0</Thickness>
     </Border.Resources>
-    <StackPanel Orientation="Vertical">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
         <TextBox x:Name="tbEntryTitle" Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
-                 TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" Style="{StaticResource TransparentTextBox}" />
+                 TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" Style="{StaticResource TransparentTextBox}" 
+                 HorizontalAlignment="Stretch"/>
 
         <StackPanel Orientation="Horizontal" Visibility="{Binding Content, Converter={StaticResource HideIfEmptyStringConverter}}"
                     Margin="{StaticResource CommentEditorSpacing}">
-            <Button Command="{Binding SaveCommand}" Content="{x:Static res:Strings.Common_Save}" Style="{StaticResource EntryEditorButton}"
+            <Button Command="{Binding SaveCommand}" Content="{x:Static res:Strings.Common_Save}" Style="{StaticResource EntryEditorDefaultButton}"
                     Margin="{StaticResource DialogItemsRightMargin}"/>
             <Button Command="{Binding CancelCommand}" Style="{StaticResource EntryEditorButton}" 
                     Visibility="{Binding IsNew, Converter={StaticResource InverseBoolToVisibilityConverter}}">

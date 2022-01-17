@@ -112,10 +112,17 @@
     
     <!-- Entry editor -->
 
-    <sys:Double x:Key="EntryEditorWidth">500</sys:Double>
+    <sys:Double x:Key="EntryEditorEditAreaWidth">500</sys:Double>
     <CornerRadius x:Key="EntryEditorCornerRadius">3</CornerRadius>
     <Thickness x:Key="EntryEditorPopupPadding">8</Thickness>
     <Thickness x:Key="EntryEditorPopupBorderThickness">1</Thickness>
     <CornerRadius x:Key="EntryEditorPopupCornerRadius">3</CornerRadius>
+    
+    <!-- Tag -->
+
+    <CornerRadius x:Key="TagCornerRadius">4</CornerRadius>
+    <Thickness x:Key="TagTextMargin">10,0</Thickness>
+    <sys:Double x:Key="TagFontSize">13</sys:Double>
+    <FontWeight x:Key="TagFontWeight">Bold</FontWeight>
 
 </ResourceDictionary>

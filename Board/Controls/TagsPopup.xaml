@@ -40,9 +40,12 @@
                                         <SolidColorBrush Color="{Binding Color, Converter={StaticResource IntToForegroundColorConverter}}" />
                                     </Button.Foreground>
                                     <Button.Content>
-                                        <DockPanel>
-                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right" FontSize="14"
-                                                                   Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                        <DockPanel TextBlock.FontSize="{StaticResource TagFontSize}" 
+                                                   TextBlock.FontWeight="{StaticResource TagFontWeight}"
+                                                   TextBlock.FontFamily="{StaticResource Roboto}">
+                                            <TextBlock Text="a" FontFamily="Marlett" DockPanel.Dock="Right"
+                                                       
+                                                       Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverter}}" />
                                             <TextBlock Text="{Binding Name}" />
                                         </DockPanel>
                                     </Button.Content>

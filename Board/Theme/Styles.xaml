@@ -128,13 +128,16 @@
 
     <Style TargetType="Button" x:Key="TagToggleButton">
         <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Border" CornerRadius="{StaticResource GrayButtonCornerRadius}"
+                    <Border x:Name="Border" CornerRadius="{StaticResource TagCornerRadius}"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter Content="{TemplateBinding Content}" 
-                                          Margin="{TemplateBinding Padding}"/>
+                                          Margin="{TemplateBinding Padding}" TextBlock.FontSize="{StaticResource TagFontSize}"
+                                          TextBlock.FontWeight="{StaticResource TagFontWeight}"
+                                          TextBlock.FontFamily="{StaticResource Roboto}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -568,8 +571,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.Background).(SolidColorBrush.Color)">
-                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="Transparent" />
-                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource OverlayBackground}" />
+                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="{StaticResource OverlayBackground}" />
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
@@ -578,8 +580,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.Background).(SolidColorBrush.Color)">
-                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="{StaticResource OverlayBackground}" />
-                                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="Transparent" />
+                                <EasingColorKeyFrame KeyTime="0:0:0.0" Value="Transparent" />
                             </ColorAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
