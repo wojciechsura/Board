@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable disable
+
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]

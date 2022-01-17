@@ -11,7 +11,7 @@ namespace Board.Models.Data
     public class TableEditModel
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public long Order { get; set; }
         public string Background { get; set; }
 

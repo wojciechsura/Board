@@ -7,7 +7,7 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Board.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\Fonts\Roboto-Black.ttf" />
@@ -78,6 +78,7 @@
     <Resource Include="Resources\Fonts\RobotoCondensed-Light.ttf" />
     <Resource Include="Resources\Fonts\RobotoCondensed-LightItalic.ttf" />
     <Resource Include="Resources\Fonts\RobotoCondensed-Regular.ttf" />
+    <Content Include="Board.ico" />
     <Content Include="Resources\Fonts\SegoeUI-VF.ttf" />
     <Resource Include="Resources\Images\Accept16.png" />
     <Resource Include="Resources\Images\Add16.png" />

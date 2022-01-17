@@ -32,7 +32,6 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly IDialogService dialogService;
         private bool isEditingTitle = false;
         private bool isEditingDescription = false;
-        private bool isEditingDates = false;
 
         [SyncWithModel(nameof(EntryModel.Title))]
         private string title;

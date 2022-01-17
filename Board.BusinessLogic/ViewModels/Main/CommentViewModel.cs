@@ -16,10 +16,12 @@ namespace Board.BusinessLogic.ViewModels.Main
     {
         private readonly CommentModel comment;
 
+#pragma warning disable CS0649 // Add readonly modifier
         [SyncWithModel(nameof(CommentModel.Content))]
         private string content;
         [SyncWithModel(nameof(CommentModel.Added))]
         private DateTime added;
+#pragma warning restore CS0649 // Add readonly modifier
 
         public CommentViewModel(CommentModel comment, IEntryEditorHandler handler)
             : base(handler)

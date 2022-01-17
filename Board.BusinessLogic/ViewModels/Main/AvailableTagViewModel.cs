@@ -13,7 +13,6 @@ namespace Board.BusinessLogic.ViewModels.Main
     public class AvailableTagViewModel : BaseTagViewModel
     {
         private bool isSelected;
-        private readonly BaseCondition isSelectedCondition;
 
         public AvailableTagViewModel(TagModel tag, IEntryEditorHandler handler) : base(tag, handler)
         {
