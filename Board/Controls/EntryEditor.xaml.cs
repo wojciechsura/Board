@@ -19,7 +19,7 @@ namespace Board.Controls
     /// <summary>
     /// Logika interakcji dla klasy EntryEditor.xaml
     /// </summary>
-    public partial class EntryEditor : Border
+    public partial class EntryEditor : Border, IEntryEditorAccess
     {
         // Private fields -----------------------------------------------------
 
@@ -102,7 +102,13 @@ namespace Board.Controls
 
         private void EditorDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (viewModel != null)
+                viewModel.Access = null;
+
             viewModel = (EntryEditorViewModel)e.NewValue;
+
+            if (viewModel != null)
+                viewModel.Access = this;
         }
 
         private void EditDescriptionClick(object sender, RoutedEventArgs e)
@@ -138,6 +144,13 @@ namespace Board.Controls
         private void HandleDatesButtonClick(object sender, RoutedEventArgs e)
         {
             dpDates.IsOpen = true;
+        }
+
+        // IEntryEditorAccess implementation ----------------------------------
+
+        void IEntryEditorAccess.NotifyClosing()
+        {
+            dpDates.IsOpen = false;
         }
 
         // Public methods -----------------------------------------------------

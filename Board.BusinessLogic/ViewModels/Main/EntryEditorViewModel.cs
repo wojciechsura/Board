@@ -27,6 +27,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private readonly int entryId;
         private readonly int tableId;
+        private readonly EntryViewModel editedEntryViewModel;
         private readonly WallDocument document;
         private readonly IDocumentHandler handler;
         private readonly IDialogService dialogService;
@@ -43,6 +44,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DateTime? endDate;
 
         // Private methods ----------------------------------------------------
+
+        private void DoClose()
+        {
+            Access.NotifyClosing();
+            handler.RequestEditorClose(editedEntryViewModel);
+        }
 
         private void InsertTag<TTag>(ObservableCollection<TTag> tags, TTag tag)
             where TTag : BaseTagViewModel
@@ -197,14 +204,15 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             this.entryId = entryId;
             this.tableId = tableId;
+            this.editedEntryViewModel = editedEntryViewModel;
             this.document = document;
             this.handler = handler;
             this.dialogService = dialogService;
 
-            CloseCommand = new AppCommand(obj => handler.RequestEditorClose(editedEntryViewModel));
+            CloseCommand = new AppCommand(obj => DoClose());
 
-            AddedTags = new ();
-            AvailableTags = new ();
+            AddedTags = new();
+            AvailableTags = new();
             Comments = new();
 
             var editEntryModel = document.Database.GetEntryEdit(entryId);
@@ -232,6 +240,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         }
 
         // Public properties --------------------------------------------------
+
+        public IEntryEditorAccess Access { get; set; }
 
         public EntryDateEditorViewModel DateEditorViewModel => dateEditorViewModel;
 
