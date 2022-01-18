@@ -30,8 +30,9 @@
     </Label>
     <Border HorizontalAlignment="Stretch" Style="{StaticResource Comment}" Margin="{StaticResource DialogItemsBottomMargin}">
         <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                                                VerticalScrollBarVisibility="Disabled"
-                                                                Markdown="{Binding Content, Mode=OneWay}" />
+                                     VerticalScrollBarVisibility="Disabled"
+                                     Markdown="{Binding Content, Mode=OneWay}" 
+                                     ClickAction="OpenBrowser"/>
     </Border>
     <StackPanel Orientation="Horizontal">
         <Label Content="{x:Static res:Strings.Comment_Footer_Edit}" Cursor="Hand" Style="{StaticResource CommentGrayLabel}">

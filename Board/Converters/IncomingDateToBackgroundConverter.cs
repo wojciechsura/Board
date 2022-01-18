@@ -11,9 +11,9 @@ namespace Board.Converters
 {
     public class IncomingDateToBackgroundConverter : IValueConverter
     {
-        private static Brush lessThanADayBrush = new SolidColorBrush(Color.FromArgb(255, 255, 128, 102));
-        private static Brush lessThanThreeDaysBrush = new SolidColorBrush(Color.FromArgb(255, 255, 108, 0));
-        private static Brush lessThanWeekBrush = new SolidColorBrush(Color.FromArgb(255, 255, 210, 0));
+        private static Brush lessThanADayBrush = new SolidColorBrush(Color.FromArgb(255, 230, 110, 110));
+        private static Brush lessThanThreeDaysBrush = new SolidColorBrush(Color.FromArgb(192, 230, 110, 110));
+        private static Brush lessThanWeekBrush = new SolidColorBrush(Color.FromArgb(128, 230, 110, 110));
         private static Brush aLotOfTimeBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

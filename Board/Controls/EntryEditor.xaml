@@ -138,7 +138,10 @@
 
                         <!-- Tag editor popup -->
 
-                        <c:TagsPopup x:Name="tpAddTags" Placement="Bottom" PlacementTarget="{Binding ElementName=bAddTags}" />
+                        <Border Width="0" Height="0">
+                            <!-- Hack to prevent popup to occupy space in the UI -->
+                            <c:TagsPopup x:Name="tpAddTags" Placement="Bottom" PlacementTarget="{Binding ElementName=bAddTags}" />
+                        </Border>
 
                     </StackPanel>
 
@@ -199,7 +202,8 @@
                             <!-- Contents -->
 
                             <Border Margin="{StaticResource EntryEditorSectionContentMargin}">
-                                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
+                                <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
+                                                             ClickAction="OpenBrowser"/>
                             </Border>
 
                         </StackPanel>
@@ -285,7 +289,10 @@
                         </StackPanel>
                     </Button>
 
-                    <c:TagsPopup x:Name="tpTags" PlacementTarget="{Binding ElementName=bTags}" Placement="Right" />
+                    <Border Width="0" Height="0">
+                        <!-- Hack to prevent popup to occupy space in the UI -->
+                        <c:TagsPopup x:Name="tpTags" PlacementTarget="{Binding ElementName=bTags}" Placement="Right" />
+                    </Border>
 
                     <Button x:Name="bDates" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
                             Click="HandleDatesButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
@@ -295,8 +302,11 @@
                         </StackPanel>
                     </Button>
 
-                    <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right"
-                                  DataContext="{Binding DateEditorViewModel}" />
+                    <Border Width="0" Height="0">
+                        <!-- Hack to prevent popup to occupy space in the UI -->
+                        <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right"
+                                      DataContext="{Binding DateEditorViewModel}" />
+                    </Border>
 
                 </StackPanel>
 
