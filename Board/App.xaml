@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:Board" 
              xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf"
              xmlns:lc="clr-namespace:Board.Converters"
+             xmlns:comm="clr-namespace:Board.Commands" 
+             xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
              StartupUri="Windows\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +14,12 @@
                 <ResourceDictionary Source="Theme\Styles.xaml" />
                 <ResourceDictionary Source="Controls\DefaultTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <mdxam:Markdown x:Key="MdEngine">
+                <mdxam:Markdown.HyperlinkCommand>
+                    <comm:MarkdownLinkCommand />
+                </mdxam:Markdown.HyperlinkCommand>
+            </mdxam:Markdown>
 
             <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <c:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />

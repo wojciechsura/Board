@@ -32,7 +32,7 @@
         <mdxaml:MarkdownScrollViewer HorizontalScrollBarVisibility="Disabled"
                                      VerticalScrollBarVisibility="Disabled"
                                      Markdown="{Binding Content, Mode=OneWay}" 
-                                     ClickAction="OpenBrowser"/>
+                                     Engine="{StaticResource MdEngine}"/>
     </Border>
     <StackPanel Orientation="Horizontal">
         <Label Content="{x:Static res:Strings.Comment_Footer_Edit}" Cursor="Hand" Style="{StaticResource CommentGrayLabel}">

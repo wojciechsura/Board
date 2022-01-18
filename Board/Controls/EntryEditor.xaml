@@ -203,7 +203,7 @@
 
                             <Border Margin="{StaticResource EntryEditorSectionContentMargin}">
                                 <mdxaml:MarkdownScrollViewer MaxHeight="200" Markdown="{Binding Description}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
-                                                             ClickAction="OpenBrowser"/>
+                                                             Engine="{StaticResource MdEngine}"/>
                             </Border>
 
                         </StackPanel>

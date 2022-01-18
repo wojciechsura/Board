@@ -342,4 +342,7 @@
   <data name="Message_InvalidImageFile" xml:space="preserve">
     <value>Invalid image file!</value>
   </data>
+  <data name="Message_CannotOpenLink" xml:space="preserve">
+    <value>Cannot open link {0}!</value>
+  </data>
 </root>
