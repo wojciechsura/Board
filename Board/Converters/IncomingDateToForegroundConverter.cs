@@ -20,7 +20,7 @@ namespace Board.Converters
             {
                 var diff = date - DateTime.Now;
                 
-                if (diff.Days < 7)
+                if (diff.Days < 1)
                     return notMuchTimeBrush;
                 else
                     return aLotOfTimeBrush;
