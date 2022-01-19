@@ -292,29 +292,25 @@ namespace Board.BusinessLogic.ViewModels.Document
                 ActiveTable = tables.Last();
         }
 
-        private void UpdateTableBackground(TableModel oldModel, TableEditModel newTable)
+        private void UpdateBackground(TableModel model, MemoryStream backgroundStream)
         {
-            // We need table ID to work properly
-            if (newTable == null || newTable.Id <= 0)
-                throw new ArgumentException("Cannot update background on not-yet-existing table!");
-
-            // If background was not changed, ignore the call
-            if (!newTable.BackgroundChanged)
-                return;
-
             // If old model is not null, remove old background (if any)
-            if (oldModel != null && !string.IsNullOrEmpty(oldModel.Background))
+            if (!string.IsNullOrEmpty(model.Background))
             {
-                document.Filesystem.DeleteFile(oldModel.Background);
+                document.Filesystem.DeleteFile(model.Background);
             }
 
             // Store new file
-            if (newTable.BackgroundChanged && newTable.BackgroundStream != null)
+            if (backgroundStream != null)
             {
-                string path = @$"Tables\{newTable.Id}\background.dat";
-                document.Filesystem.SaveFile(path, newTable.BackgroundStream);
-                newTable.Background = path;
-            }
+                string path = @$"Tables\{model.Id}\background.dat";
+                document.Filesystem.SaveFile(path, backgroundStream);
+                model.Background = path;
+            }        
+            else
+            {
+                model.Background = null;
+            }                
         }
 
         // Public methods -----------------------------------------------------
@@ -382,10 +378,11 @@ namespace Board.BusinessLogic.ViewModels.Document
             document.Database.AddTable(tableModel);
 
             // Having new ID we can now save background if any
-            newTable.Id = tableModel.Id;
-            UpdateTableBackground(null, newTable);
-            mapper.Map(newTable, tableModel);
-            document.Database.UpdateTable(tableModel);
+            if (newTable.BackgroundChanged)
+            {
+                UpdateBackground(tableModel, newTable.BackgroundStream);
+                document.Database.UpdateTable(tableModel);
+            }
 
             // Update view
             var tableViewModel = BuildTableViewModel(tableModel, document.Database, document.Filesystem, handler);
@@ -399,10 +396,11 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             // Update data
 
-            var oldModel = tableViewModel.Table;
-            UpdateTableBackground(oldModel, updatedTable);
-
             var tableModel = mapper.Map<TableModel>(updatedTable);
+            if (updatedTable.BackgroundChanged)
+            {
+                UpdateBackground(tableModel, updatedTable.BackgroundStream);
+            }
             document.Database.UpdateTable(tableModel);
 
             // Update view
