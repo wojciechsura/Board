@@ -65,13 +65,16 @@ namespace Board.BusinessLogic.ViewModels.TagList
         {
             (bool result, TagModel newTag) = dialogService.ShowNewTagDialog();
 
-            newTag.TableId = tableId;
-            document.Database.AddTag(newTag);
+            if (result)
+            {
+                newTag.TableId = tableId;
+                document.Database.AddTag(newTag);
 
-            var tagViewModel = new TagViewModel(newTag, this);
-            InsertTag(tagViewModel);
+                var tagViewModel = new TagViewModel(newTag, this);
+                InsertTag(tagViewModel);
 
-            eventBus.Send(new TagChangedEvent(ChangeKind.Add, tableId, newTag.Id));
+                eventBus.Send(new TagChangedEvent(ChangeKind.Add, tableId, newTag.Id));
+            }
         }
 
         // ITagHandler implementation -----------------------------------------
