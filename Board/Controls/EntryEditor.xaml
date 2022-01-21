@@ -165,7 +165,7 @@
                             <Label Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_StartDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                    Visibility="{Binding StartDate, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                            <c:Date Grid.Row="2" Grid.Column="1"
+                            <c:Date Grid.Row="1" Grid.Column="1"
                                     DisplayDate="{Binding StartDate}" 
                                     IsDone="{Binding IsDone}"
                                     Margin="{StaticResource DialogItemsExceptLeftMargin}"
