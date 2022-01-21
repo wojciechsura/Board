@@ -345,4 +345,10 @@
   <data name="Message_CannotOpenLink" xml:space="preserve">
     <value>Nie można otworzyć linku {0}!</value>
   </data>
+  <data name="EntryEditor_Label_Dates" xml:space="preserve">
+    <value>Daty</value>
+  </data>
+  <data name="EntryEditor_Label_Done" xml:space="preserve">
+    <value>Zakończone</value>
+  </data>
 </root>

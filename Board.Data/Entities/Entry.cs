@@ -29,6 +29,7 @@ namespace Board.Data.Entities
 
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public bool IsDone { get; set; } = false;
 
         public virtual List<Tag> Tags { get; set; }
         public virtual List<Comment> Comments { get; set; }

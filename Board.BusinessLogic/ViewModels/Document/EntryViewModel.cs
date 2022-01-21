@@ -36,6 +36,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         public DateTime? StartDate => entry.StartDate;
         public DateTime? EndDate => entry.EndDate;
         public bool AnyDateSet => entry.StartDate != null || entry.EndDate != null;
+        public bool IsDone => entry.IsDone;
 
         public ICommand DeleteEntryCommand { get; }
         public ICommand EditEntryCommand { get; }

@@ -42,6 +42,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DateTime? startDate;
         [SyncWithModel(nameof(EntryModel.EndDate))]
         private DateTime? endDate;
+        [SyncWithModel(nameof(EntryModel.IsDone))]
+        private bool isDone;
 
         // Private methods ----------------------------------------------------
 
@@ -96,6 +98,13 @@ namespace Board.BusinessLogic.ViewModels.Main
             var index = Comments.IndexOf(inplaceCommentEditorViewModel);
             Comments.RemoveAt(index);
             Comments.Insert(index, commentViewModel);
+        }
+
+        private void HandleIsDoneChanged()
+        {
+            var model = document.Database.GetEntryById(entryId);
+            model.IsDone = isDone;
+            document.Database.UpdateEntry(model);
         }
 
         // IEntryEditorHandler ------------------------------------------------
@@ -293,5 +302,11 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
         public bool AnyDateSet => startDate != null || endDate != null;
+
+        public bool IsDone
+        {
+            get => isDone;
+            set => Set(ref isDone, value, changeHandler: HandleIsDoneChanged);
+        }
     }
 }

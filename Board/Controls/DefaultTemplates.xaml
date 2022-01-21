@@ -17,9 +17,21 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:Date}">
-                        <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}"
-                                Background="{TemplateBinding DisplayDate, Converter={StaticResource IncomingDateToBackgroundConverter}}">
-                            <Label Foreground="{TemplateBinding DisplayDate, Converter={StaticResource IncomingDateToForegroundConverter}}">
+                        <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}">
+                            <Border.Background>
+                                <MultiBinding Converter="{StaticResource IncomingDateToBackgroundConverter}">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="DisplayDate" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
+                                </MultiBinding>
+                            </Border.Background>
+
+                            <Label>
+                                <Label.Foreground>
+                                    <MultiBinding Converter="{StaticResource IncomingDateToForegroundConverter}">
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="DisplayDate" />
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
+                                    </MultiBinding>
+                                </Label.Foreground>
                                 <Label.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Image Width="16" Height="16" Margin="{StaticResource DateImageMargin}" Source="\Resources\Images\Calendar16.png" />
@@ -39,9 +51,22 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:DateRange}">
-                        <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}"
-                                Background="{TemplateBinding EndDate, Converter={StaticResource IncomingDateToBackgroundConverter}}">
-                            <Label Foreground="{TemplateBinding EndDate, Converter={StaticResource IncomingDateToForegroundConverter}}">
+                        <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}">
+                            <Border.Background>
+                                <MultiBinding Converter="{StaticResource IncomingDateToBackgroundConverter}">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="EndDate" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
+                                </MultiBinding>
+                            </Border.Background>
+                                                        
+                            <Label>
+                                <Label.Foreground>
+                                    <MultiBinding Converter="{StaticResource IncomingDateToForegroundConverter}">
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="EndDate" />
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
+                                    </MultiBinding>
+                                </Label.Foreground>
+
                                 <Label.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Image Width="16" Height="16" Margin="{StaticResource DateImageMargin}" Source="\Resources\Images\Calendar16.png" />

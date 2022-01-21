@@ -15,6 +15,7 @@ namespace Board.Models.Data
         public string Description { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public List<TagModel> Tags { get; set; }        
+        public bool IsDone { get; set; }
+        public List<TagModel> Tags { get; set; }
     }
 }

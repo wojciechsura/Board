@@ -152,26 +152,36 @@
 
                         <!-- Header -->
 
-                        <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="Dates" />
+                        <Label Padding="0" Margin="{StaticResource DialogItemsBottomMargin}" Content="{x:Static res:Strings.EntryEditor_Label_Dates}" />
 
-                        <Grid e:GridExtensions.RowsCols="auto,auto;auto,1*" Margin="{StaticResource EntryEditorSpacing}">
+                        <Grid e:GridExtensions.RowsCols="auto,auto,auto;auto,1*" Margin="{StaticResource EntryEditorSpacing}">
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_StartDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                            <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_Done}" Visibility="{Binding AnyDateSet, Converter={StaticResource BoolToVisibilityConverter}}" 
+                                   Margin="{StaticResource DialogItemsExceptLeftMargin}"/>
+
+                            <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsDone}" Visibility="{Binding AnyDateSet, Converter={StaticResource BoolToVisibilityConverter}}" 
+                                      Margin="{StaticResource DialogItemsExceptLeftMargin}" VerticalAlignment="Center" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_StartDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                    Visibility="{Binding StartDate, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                            <c:Date Grid.Row="0" Grid.Column="1"
+                            <c:Date Grid.Row="2" Grid.Column="1"
                                     DisplayDate="{Binding StartDate}" 
+                                    IsDone="{Binding IsDone}"
                                     Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                     Visibility="{Binding StartDate, Converter={StaticResource NullToVisibilityConverter}}"
+                                    VerticalAlignment="Center"
                                     HorizontalAlignment="Left" />
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_EndDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                            <Label Grid.Row="2" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_EndDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                    Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                            <c:Date Grid.Row="1" Grid.Column="1"
+                            <c:Date Grid.Row="2" Grid.Column="1"
                                     DisplayDate="{Binding EndDate}" 
+                                    IsDone="{Binding IsDone}"
                                     Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                     Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}"
+                                    VerticalAlignment="Center"
                                     HorizontalAlignment="Left" />
                         </Grid>
 

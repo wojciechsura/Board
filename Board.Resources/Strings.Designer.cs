@@ -376,6 +376,24 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dates.
+        /// </summary>
+        public static string EntryEditor_Label_Dates {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_Dates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string EntryEditor_Label_Done {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         public static string EntryEditor_Label_EndDate {

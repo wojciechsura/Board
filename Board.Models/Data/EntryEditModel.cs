@@ -19,5 +19,6 @@ namespace Board.Models.Data
         public List<CommentModel> Comments { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public bool IsDone { get; set; }
     }
 }
