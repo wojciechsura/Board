@@ -60,20 +60,15 @@
 
             <!-- Title -->
 
-            <DockPanel HorizontalAlignment="Stretch">
-                <Image DockPanel.Dock="Left" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" 
+            <Grid e:GridExtensions.RowsCols="auto;auto,1*,auto" HorizontalAlignment="Stretch">
+                <Image Grid.Column="0" Style="{StaticResource SectionImage}" Source="\Resources\Images\Card16.png" 
                         VerticalAlignment="Center" />
 
-                <Button DockPanel.Dock="Right" Style="{StaticResource GrayButton}" Width="24" Height="24" Padding="0"
-                        Command="{Binding CloseCommand}">
-                    <Image Width="16" Height="16" Source="\Resources\Images\GrayCancel16.png" />
-                </Button>
-
-                <Grid>
-                    <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" VerticalAlignment="Center"
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Label x:Name="lTitle" Style="{StaticResource TitleLabel}" VerticalAlignment="Center" HorizontalAlignment="Stretch"                           
                            Cursor="Hand" MouseLeftButtonDown="TitleLabelMouseDown"
                            Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow" />
                     </Label>
 
                     <TextBox x:Name="tbTitleEditor" FontSize="{StaticResource EntryEditorTitleFontSize}" FontFamily="{StaticResource Roboto}"
@@ -81,7 +76,11 @@
                              Visibility="{Binding Path=IsEditingTitle, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </Grid>
 
-            </DockPanel>
+                <Button Grid.Column="2" Style="{StaticResource GrayButton}" Width="24" Height="24" Padding="0"
+                        Command="{Binding CloseCommand}" VerticalAlignment="Top">
+                    <Image Width="16" Height="16" Source="\Resources\Images\GrayCancel16.png" />
+                </Button>
+            </Grid>
 
             <!-- Column info -->
 
@@ -96,11 +95,11 @@
                 </Label>
             </Border>
 
-            <StackPanel Orientation="Horizontal">
+            <DockPanel>
 
                 <!-- Editor area-->
 
-                <StackPanel Orientation="Vertical" Width="{StaticResource EntryEditorEditAreaWidth}">
+                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Width="{StaticResource EntryEditorEditAreaWidth}">
 
                     <!-- Tags -->
 
@@ -288,7 +287,7 @@
 
                 <!-- Buttons area -->
 
-                <StackPanel Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}">
+                <StackPanel Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}" HorizontalAlignment="Stretch">
                     <Label Content="{x:Static res:Strings.EntryEditor_Label_AddToCard}" Margin="{StaticResource DialogItemsMargin}" />
 
                     <Button x:Name="bTags" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
@@ -320,7 +319,7 @@
 
                 </StackPanel>
 
-            </StackPanel>
+            </DockPanel>
            
         </StackPanel>
     </Border>

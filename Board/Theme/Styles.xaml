@@ -285,7 +285,6 @@
     </Style>
 
     <Style TargetType="Button" x:Key="EntryEditorSideButton" BasedOn="{StaticResource EntryEditorButton}">
-        <Setter Property="Width" Value="150" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
     
@@ -501,6 +500,7 @@
     
     <Style TargetType="Border" x:Key="EntryEditor">
         <Setter Property="CornerRadius" Value="{StaticResource EntryEditorCornerRadius}" />
+        <Setter Property="Width" Value="{StaticResource EntryEditorWidth}" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource EntryEditorBackgroundColor}" />
