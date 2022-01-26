@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Board.BusinessLogic.Services.Config;
 using Board.BusinessLogic.Services.DatabaseBuilder;
 using Board.BusinessLogic.Services.Document;
 using Board.BusinessLogic.Services.EventBus;
@@ -30,6 +31,7 @@ namespace Board.BusinessLogic.Dependencies
             container.RegisterType<IFilesystemBuilderService, FilesystemBuilderService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IDatabaseBuilderService, DatabaseBuilderService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IDocumentFactory, DocumentFactory>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IConfigurationService, ConfigurationService>(new ContainerControlledLifetimeManager());
 
             // Register mapper
             var mapperConfig = new MapperConfiguration(config =>

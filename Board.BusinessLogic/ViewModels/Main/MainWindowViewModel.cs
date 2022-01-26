@@ -19,6 +19,7 @@ using Unity;
 using Board.BusinessLogic.Types.Enums;
 using Board.BusinessLogic.Services.EventBus;
 using Board.Models.Events;
+using Board.BusinessLogic.Services.Config;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
@@ -28,6 +29,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private readonly IMainWindowAccess access;
         private readonly IDialogService dialogService;
+        private readonly IConfigurationService configurationService;
         private readonly IDocumentFactory documentFactory;
         private readonly IPathService pathService;
         private readonly IMapper mapper;
@@ -194,7 +196,8 @@ namespace Board.BusinessLogic.ViewModels.Main
                 entryViewModel,
                 activeDocument.Document,
                 this,
-                dialogService);
+                dialogService,
+                configurationService);
         }
 
         void IDocumentHandler.RequestEditorClose(EntryViewModel entryToUpdate)
@@ -225,6 +228,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         public MainWindowViewModel(IMainWindowAccess access,
             IDialogService dialogService,
+            IConfigurationService configurationService,
             IDocumentFactory documentFactory,
             IPathService pathService,
             IMapper mapper,
@@ -232,6 +236,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             this.access = access;
             this.dialogService = dialogService;
+            this.configurationService = configurationService;
             this.documentFactory = documentFactory;
             this.pathService = pathService;
             this.mapper = mapper;

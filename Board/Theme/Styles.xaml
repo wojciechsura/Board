@@ -708,7 +708,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-           
+
+    <Style TargetType="TextBlock" x:Key="EntryEditorSideButtonLabel">
+        <Setter Property="MinWidth" Value="{StaticResource EntryEditorSideButtonLabelMinWidth}" />
+        <Setter Property="Margin" Value="{StaticResource EntryEditorSideButtonLabelMargin}" />
+    </Style>
     
     <Style TargetType="Window">
         <Setter Property="FontFamily" Value="{StaticResource SegoeUiVariable}" />

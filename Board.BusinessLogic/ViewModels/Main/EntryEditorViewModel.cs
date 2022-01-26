@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using Board.BusinessLogic.Services.Dialogs;
 using Board.Resources;
 using System.Text.RegularExpressions;
+using Board.BusinessLogic.Services.Config;
 
 namespace Board.BusinessLogic.ViewModels.Main
 {
@@ -31,8 +32,10 @@ namespace Board.BusinessLogic.ViewModels.Main
         private readonly WallDocument document;
         private readonly IDocumentHandler handler;
         private readonly IDialogService dialogService;
+        private readonly IConfigurationService configurationService;
         private bool isEditingTitle = false;
         private bool isEditingDescription = false;
+        private bool areButtonsExpanded = true;
 
         [SyncWithModel(nameof(EntryModel.Title))]
         private string title;
@@ -105,6 +108,16 @@ namespace Board.BusinessLogic.ViewModels.Main
             var model = document.Database.GetEntryById(entryId);
             model.IsDone = isDone;
             document.Database.UpdateEntry(model);
+        }
+
+        private void DoToggleButtonsExpanded()
+        {
+            areButtonsExpanded = !areButtonsExpanded;
+
+            configurationService.Configuration.UI.EntryEditorButtonsExpanded = areButtonsExpanded;
+            configurationService.Save();
+
+            OnPropertyChanged(nameof(AreButtonsExpanded));
         }
 
         // IEntryEditorHandler ------------------------------------------------
@@ -206,7 +219,8 @@ namespace Board.BusinessLogic.ViewModels.Main
             EntryViewModel editedEntryViewModel,
             WallDocument document,
             IDocumentHandler handler,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            IConfigurationService configurationService)
         {
             var columnModel = document.Database.GetColumn(columnId);
             ColumnName = columnModel.Name;
@@ -217,8 +231,12 @@ namespace Board.BusinessLogic.ViewModels.Main
             this.document = document;
             this.handler = handler;
             this.dialogService = dialogService;
+            this.configurationService = configurationService;
+
+            areButtonsExpanded = configurationService.Configuration.UI.EntryEditorButtonsExpanded;
 
             CloseCommand = new AppCommand(obj => DoClose());
+            ToggleButtonsExpandedCommand = new AppCommand(obj => DoToggleButtonsExpanded());
 
             AddedTags = new();
             AvailableTags = new();
@@ -288,6 +306,8 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         public ICommand CloseCommand { get; }
 
+        public ICommand ToggleButtonsExpandedCommand { get; }
+
         [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
         public DateTime? StartDate => startDate;
 
@@ -307,6 +327,11 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => isDone;
             set => Set(ref isDone, value, changeHandler: HandleIsDoneChanged);
+        }
+
+        public bool AreButtonsExpanded
+        {
+            get => areButtonsExpanded;
         }
     }
 }

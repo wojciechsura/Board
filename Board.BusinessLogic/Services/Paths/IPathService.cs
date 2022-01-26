@@ -8,5 +8,6 @@
         string GetSQLiteDatabasePath(string projectPath);
         string GetLocalFilesystemPath(string projectPath);
         string GetProjectDefinitionPath(string projectPath);
+        string GetConfigFilePath();
     }
 }

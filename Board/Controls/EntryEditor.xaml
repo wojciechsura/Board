@@ -13,7 +13,7 @@
         xmlns:mdxaml="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:b="clr-namespace:Board.Common.Wpf.Behaviors;assembly=Board.Common.Wpf"
-        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+        xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources" xmlns:conv="clr-namespace:Board.Converters"
         mc:Ignorable="d" 
         Style="{StaticResource EntryEditor}" 
         x:Name="root" DataContextChanged="EditorDataContextChanged"
@@ -30,6 +30,8 @@
         <Thickness x:Key="EditorPadding">16</Thickness>
         <Thickness x:Key="EditorExceptTopPadding">16,0,16,16</Thickness>
         <Thickness x:Key="EditorLeftPadding">16,0,0,0</Thickness>
+
+        <conv:EntryEditorButtonsExpandedToStringConverter x:Key="EntryEditorButtonsExpandedToStringConverter" />
 
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="FontSize" Value="{StaticResource EntryEditorTitleFontSize}" />
@@ -97,9 +99,49 @@
 
             <DockPanel>
 
+                <!-- Buttons area -->
+
+                <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}" HorizontalAlignment="Stretch">
+
+                    <DockPanel>
+                        <Button DockPanel.Dock="Right" Style="{StaticResource GrayButton}" FontFamily="Marlett" Content="{Binding AreButtonsExpanded, Converter={StaticResource EntryEditorButtonsExpandedToStringConverter}}" 
+                                Command="{Binding ToggleButtonsExpandedCommand}" Margin="{StaticResource DialogItemsExceptRightMargin}"/>
+                        <Label Content="{x:Static res:Strings.EntryEditor_Label_AddToCard}" Margin="{StaticResource DialogItemsMargin}" 
+                               Visibility="{Binding AreButtonsExpanded, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        
+                    </DockPanel>
+                    
+                    <Button x:Name="bTags" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
+                            Click="HandleTagsButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" />
+                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddTags}" Style="{StaticResource EntryEditorSideButtonLabel}" 
+                                       Visibility="{Binding AreButtonsExpanded, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <c:TagsPopup x:Name="tpTags" PlacementTarget="{Binding ElementName=bTags}" Placement="Right" />
+
+                    <Button x:Name="bDates" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
+                            Click="HandleDatesButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" Source="\Resources\Images\Calendar16.png" />
+                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddDates}" Style="{StaticResource EntryEditorSideButtonLabel}"
+                                       Visibility="{Binding AreButtonsExpanded, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Border Width="0" Height="0">
+                        <!-- Hack to prevent popup to occupy space in the UI -->
+                        <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right"
+                                      DataContext="{Binding DateEditorViewModel}" />
+                    </Border>
+
+                </StackPanel>
+
                 <!-- Editor area-->
 
-                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Width="{StaticResource EntryEditorEditAreaWidth}">
+                <StackPanel Orientation="Vertical">
 
                     <!-- Tags -->
 
@@ -283,40 +325,6 @@
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
                     </StackPanel>
-                </StackPanel>
-
-                <!-- Buttons area -->
-
-                <StackPanel Orientation="Vertical" Margin="{StaticResource EditorLeftPadding}" HorizontalAlignment="Stretch">
-                    <Label Content="{x:Static res:Strings.EntryEditor_Label_AddToCard}" Margin="{StaticResource DialogItemsMargin}" />
-
-                    <Button x:Name="bTags" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
-                            Click="HandleTagsButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="16" Height="16" Source="\Resources\Images\Tag16.png" Margin="{StaticResource ButtonIconMargin}"/>
-                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddTags}" />
-                        </StackPanel>
-                    </Button>
-
-                    <Border Width="0" Height="0">
-                        <!-- Hack to prevent popup to occupy space in the UI -->
-                        <c:TagsPopup x:Name="tpTags" PlacementTarget="{Binding ElementName=bTags}" Placement="Right" />
-                    </Border>
-
-                    <Button x:Name="bDates" Style="{StaticResource EntryEditorSideButton}" HorizontalAlignment="Stretch"
-                            Click="HandleDatesButtonClick" Margin="{StaticResource DialogItemsBottomMargin}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="16" Height="16" Source="\Resources\Images\Calendar16.png" Margin="{StaticResource ButtonIconMargin}"/>
-                            <TextBlock Text="{x:Static res:Strings.EntryEditor_Button_AddDates}" />
-                        </StackPanel>
-                    </Button>
-
-                    <Border Width="0" Height="0">
-                        <!-- Hack to prevent popup to occupy space in the UI -->
-                        <c:DatesPopup x:Name="dpDates" PlacementTarget="{Binding ElementName=bDates}" Placement="Right"
-                                      DataContext="{Binding DateEditorViewModel}" />
-                    </Border>
-
                 </StackPanel>
 
             </DockPanel>

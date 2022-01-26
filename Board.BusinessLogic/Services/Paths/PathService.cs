@@ -9,11 +9,12 @@ namespace Board.BusinessLogic.Services.Paths
 {
     internal class PathService : IPathService
     {
-        private const string PUBLISHER = "Publisher";
-        private const string APPNAME = "Application";
+        private const string PUBLISHER = "Spooksoft";
+        private const string APPNAME = "Board";
         private const string SQLITE_DB_NAME = "wall.db";
         private const string PROJECT_DEFINITION_NAME = "wall.project";
         private const string LOCAL_DATA_NAME = "Data";
+        private const string CONFIG_NAME = "config.xml";
 
         private readonly string appDataPath;
 
@@ -40,6 +41,8 @@ namespace Board.BusinessLogic.Services.Paths
         public string GetSQLiteDatabasePath(string projectPath)
         {
             return System.IO.Path.Combine(projectPath, SQLITE_DB_NAME);
-        }        
+        }
+
+        public string GetConfigFilePath() => Path.Combine(appDataPath, CONFIG_NAME);
     }
 }

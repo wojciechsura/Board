@@ -112,12 +112,13 @@
     
     <!-- Entry editor -->
 
-    <sys:Double x:Key="EntryEditorEditAreaWidth">500</sys:Double>
     <sys:Double x:Key="EntryEditorWidth">750</sys:Double>
     <CornerRadius x:Key="EntryEditorCornerRadius">3</CornerRadius>
     <Thickness x:Key="EntryEditorPopupPadding">8</Thickness>
     <Thickness x:Key="EntryEditorPopupBorderThickness">1</Thickness>
     <CornerRadius x:Key="EntryEditorPopupCornerRadius">3</CornerRadius>
+    <sys:Double x:Key="EntryEditorSideButtonLabelMinWidth">150</sys:Double>
+    <Thickness x:Key="EntryEditorSideButtonLabelMargin">8,0,0,0</Thickness>
     
     <!-- Tag -->
 
