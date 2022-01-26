@@ -357,4 +357,7 @@
   <data name="Column_LoadMore" xml:space="preserve">
     <value>Load more</value>
   </data>
+  <data name="Column_MoreCards" xml:space="preserve">
+    <value>More cards</value>
+  </data>
 </root>

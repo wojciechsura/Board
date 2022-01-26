@@ -357,4 +357,7 @@
   <data name="ColumnEditorWindow_Label_LimitDefaultEntryCount" xml:space="preserve">
     <value>Ogranicz wyświetlane karty</value>
   </data>
+  <data name="Column_MoreCards" xml:space="preserve">
+    <value>Więcej kart</value>
+  </data>
 </root>

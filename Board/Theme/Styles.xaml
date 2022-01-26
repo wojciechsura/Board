@@ -601,6 +601,16 @@
         <Setter Property="Margin" Value="0" />
     </Style>
 
+    <Style TargetType="Label" x:Key="ColumnLabel">
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource ColumnHeaderForeground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
     <Style TargetType="Label" x:Key="CommentLabel">
         <Setter Property="Padding" Value="{StaticResource CommentLabelPadding}" />
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />

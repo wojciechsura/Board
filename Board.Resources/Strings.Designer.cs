@@ -97,6 +97,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More cards.
+        /// </summary>
+        public static string Column_MoreCards {
+            get {
+                return ResourceManager.GetString("Column_MoreCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit column.
         /// </summary>
         public static string ColumnEditor_Title_Edit {

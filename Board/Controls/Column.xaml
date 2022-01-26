@@ -56,18 +56,38 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <Grid Grid.Row="2" e:GridExtensions.RowsCols="auto;1*,auto,1*" Visibility="{Binding CanLoadMore, Converter={StaticResource BoolToVisibilityConverter}}">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Visibility="{Binding CanLoadMore, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel.Resources>
+                <Geometry x:Key="DownArrow">M 0 0 H 6 L 3 4 Z M 0 4 H 6 L 3 8 Z</Geometry>
+            </StackPanel.Resources>
 
-            <Button Grid.Column="0" Content="{x:Static res:Strings.Column_AddCard}" Command="{Binding NewInplaceEntryCommand}" 
-                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                    Style="{StaticResource GrayButton}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="{StaticResource DialogItemsVerticalOnlyMargin}">
+                <Path Data="{StaticResource DownArrow}" VerticalAlignment="Center" Margin="{StaticResource DialogItemsMargin}">
+                    <Path.Fill>
+                        <SolidColorBrush Color="{StaticResource ColumnHeaderForeground}" />
+                    </Path.Fill>
+                </Path>
+                <Label Style="{StaticResource ColumnLabel}" Content="{x:Static res:Strings.Column_MoreCards}"/>
+                <Path Data="{StaticResource DownArrow}" VerticalAlignment="Center" Margin="{StaticResource DialogItemsMargin}">
+                    <Path.Fill>
+                        <SolidColorBrush Color="{StaticResource ColumnHeaderForeground}" />
+                    </Path.Fill>
+                </Path>
+            </StackPanel>
+            
+            <Grid e:GridExtensions.RowsCols="auto;1*,auto,1*">
 
-            <Separator Grid.Column="1" Style="{StaticResource VerticalSeparator}" Margin="{StaticResource DialogItemsMargin}"/>
+                <Button Grid.Column="0" Content="{x:Static res:Strings.Column_AddCard}" Command="{Binding NewInplaceEntryCommand}" 
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Style="{StaticResource GrayButton}"/>
 
-            <Button Grid.Column="2" Content="{x:Static res:Strings.Column_LoadMore}" Command="{Binding LoadMoreEntriesCommand}"
-                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                    Style="{StaticResource GrayButton}"/>
-        </Grid>
+                <Separator Grid.Column="1" Style="{StaticResource VerticalSeparator}" Margin="{StaticResource DialogItemsMargin}"/>
+
+                <Button Grid.Column="2" Content="{x:Static res:Strings.Column_LoadMore}" Command="{Binding LoadMoreEntriesCommand}"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Style="{StaticResource GrayButton}"/>
+            </Grid>
+        </StackPanel>
 
         <Button Grid.Row="2" Content="{x:Static res:Strings.Column_AddCard}" Command="{Binding NewInplaceEntryCommand}" 
                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
