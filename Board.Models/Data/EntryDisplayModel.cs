@@ -17,5 +17,6 @@ namespace Board.Models.Data
         public DateTime? EndDate { get; set; }
         public bool IsDone { get; set; }
         public List<TagModel> Tags { get; set; }
+        public long Order { get; set; }
     }
 }

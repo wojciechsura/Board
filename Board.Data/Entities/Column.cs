@@ -20,6 +20,7 @@ namespace Board.Data.Entities
         public string Name { get; set; }        
         [Required]
         public long Order { get; set; }
+        public int? LimitShownItems { get; set; }
         [Required]
         public Table Table { get; set; }
         [ForeignKey(nameof(Table))]

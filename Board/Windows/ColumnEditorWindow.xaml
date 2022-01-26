@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Board.Windows" 
         xmlns:cvm="clr-namespace:Board.BusinessLogic.ViewModels.ColumnEditor;assembly=Board.BusinessLogic" 
         xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+        xmlns:ext="clr-namespace:Board.Common.Wpf.Extensions;assembly=Board.Common.Wpf"
         d:DataContext="{d:DesignInstance Type=cvm:ColumnEditorWindowViewModel}"
         mc:Ignorable="d"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
@@ -13,18 +14,18 @@
         Title="{Binding Title}" FocusManager.FocusedElement="{Binding ElementName=tbColumnName}">
     <StackPanel Orientation="Vertical">
         <GroupBox Header="{Binding Title}" Margin="{StaticResource DialogItemsMargin}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="300" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <Grid ext:GridExtensions.RowsCols="auto,auto;auto,300">
 
                 <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.ColumnEditorWindow_Label_ColumnName}" Margin="{StaticResource DialogItemsMargin}"/>
                 <TextBox x:Name="tbColumnName" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                          Margin="{StaticResource DialogItemsMargin}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static res:Strings.ColumnEditorWindow_Label_LimitDefaultEntryCount}" Margin="{StaticResource DialogItemsMargin}"/>
+                <DockPanel Grid.Row="1" Grid.Column="1">
+                    <CheckBox x:Name="cbLimitVisibleItems" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="{StaticResource DialogItemsHorizontalOnlyMargin}" 
+                              IsChecked="{Binding IsLimitVisibleItems}"/>
+                    <TextBox Text="{Binding LimitVisibleItemsCount}" IsEnabled="{Binding IsLimitVisibleItems}" VerticalAlignment="Center" />
+                </DockPanel>
             </Grid>
         </GroupBox>
 

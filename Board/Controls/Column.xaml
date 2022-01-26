@@ -12,12 +12,7 @@
         d:DataContext="{d:DesignInstance Type=dvm:ColumnViewModel}"
         Style="{StaticResource Column}"
         mc:Ignorable="d" DataContextChanged="HandleDataContextChanged">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid e:GridExtensions.RowsCols="auto,1*,auto;1*">
 
         <DockPanel Grid.Row="0" Margin="{StaticResource ColumnHeaderMargin}">
             <Button x:Name="bColumnMenu" DockPanel.Dock="Right" Style="{StaticResource GrayButton}" 
@@ -61,8 +56,22 @@
             </ItemsControl>
         </ScrollViewer>
 
+        <Grid Grid.Row="2" e:GridExtensions.RowsCols="auto;1*,auto,1*" Visibility="{Binding CanLoadMore, Converter={StaticResource BoolToVisibilityConverter}}">
+
+            <Button Grid.Column="0" Content="{x:Static res:Strings.Column_AddCard}" Command="{Binding NewInplaceEntryCommand}" 
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Style="{StaticResource GrayButton}"/>
+
+            <Separator Grid.Column="1" Style="{StaticResource VerticalSeparator}" Margin="{StaticResource DialogItemsMargin}"/>
+
+            <Button Grid.Column="2" Content="{x:Static res:Strings.Column_LoadMore}" Command="{Binding LoadMoreEntriesCommand}"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Style="{StaticResource GrayButton}"/>
+        </Grid>
+
         <Button Grid.Row="2" Content="{x:Static res:Strings.Column_AddCard}" Command="{Binding NewInplaceEntryCommand}" 
                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                Style="{StaticResource GrayButton}"/>
+                Style="{StaticResource GrayButton}"
+                Visibility="{Binding CanLoadMore, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
     </Grid>
 </Border>

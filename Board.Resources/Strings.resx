@@ -351,4 +351,10 @@
   <data name="EntryEditor_Label_Done" xml:space="preserve">
     <value>Done</value>
   </data>
+  <data name="ColumnEditorWindow_Label_LimitDefaultEntryCount" xml:space="preserve">
+    <value>Limit displayed entries</value>
+  </data>
+  <data name="Column_LoadMore" xml:space="preserve">
+    <value>Load more</value>
+  </data>
 </root>

@@ -20,5 +20,6 @@ namespace Board.BusinessLogic.ViewModels.Document
         void RequestEditorClose(EntryViewModel entryToUpdate);
         void RequestMoveEntry(EntryViewModel entryViewModel, ColumnViewModel targetColumnViewModel, int newIndex);
         void RequestMoveColumn(ColumnViewModel columnViewModel, TableViewModel targetTableViewModel, int newIndex);
+        void LoadMoreEntries(ColumnViewModel columnViewModel);
     }
 }

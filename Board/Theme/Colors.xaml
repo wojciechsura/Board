@@ -103,4 +103,8 @@
     <Color x:Key="EntryEditorPopupBackgroundColor">#ffffff</Color>
     <Color x:Key="EntryEditorPopupBorderColor">#c0c0c0</Color>
     
+    <!-- Separator -->
+
+    <Color x:Key="VerticalSeparatorColor">#cfcfcf</Color>
+    
 </ResourceDictionary>

@@ -713,7 +713,22 @@
         <Setter Property="MinWidth" Value="{StaticResource EntryEditorSideButtonLabelMinWidth}" />
         <Setter Property="Margin" Value="{StaticResource EntryEditorSideButtonLabelMargin}" />
     </Style>
-    
+
+    <Style TargetType="Separator" x:Key="VerticalSeparator">
+        <Setter Property="Width" Value="{StaticResource VerticalSeparatorWidth}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border>
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource VerticalSeparatorColor}" />
+                        </Border.Background>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="Window">
         <Setter Property="FontFamily" Value="{StaticResource SegoeUiVariable}" />
     </Style>

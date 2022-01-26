@@ -365,6 +365,23 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             return result;
         }
 
+        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, long fromOrderInclusive, int count, bool includeDeleted)
+        {
+            var context = new TableContext(path);
+
+            var entryEntities = context.Entries
+                .Include(e => e.Tags.Where(t => (includeDeleted || !t.IsDeleted)).OrderBy(t => t.Name))
+                .Include(e => e.Comments.Where(c => (includeDeleted || !c.IsDeleted)).OrderByDescending(c => c.Added))
+                .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted) && e.Order >= fromOrderInclusive)
+                .OrderBy(e => e.Order)
+                .Take(count)
+                .ToList();
+
+            var result = mapper.Map<List<EntryDisplayModel>>(entryEntities);
+
+            return result;
+        }
+
         public override List<EntryModel> GetEntries(int columnId, bool includeDeleted)
         {
             var context = new TableContext(path);

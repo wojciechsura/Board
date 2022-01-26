@@ -127,4 +127,8 @@
     <sys:Double x:Key="TagFontSize">13</sys:Double>
     <FontWeight x:Key="TagFontWeight">Bold</FontWeight>
 
+    <!-- Separator -->
+
+    <sys:Double x:Key="VerticalSeparatorWidth">1</sys:Double>
+    
 </ResourceDictionary>

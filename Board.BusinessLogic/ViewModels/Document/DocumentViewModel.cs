@@ -196,6 +196,8 @@ namespace Board.BusinessLogic.ViewModels.Document
             }
         }
 
+        private const int LOADED_ENTRY_COUNT = 10;
+
         // Private fields -----------------------------------------------------
 
         private readonly WallDocument document;
@@ -243,14 +245,27 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database, IDocumentHandler handler)
         {
-            List<EntryDisplayModel> entries = database.GetDisplayEntries(column.Id, false);
+            List<EntryDisplayModel> entries;
+            bool canLoadMore;
+
+            if (column.LimitShownItems == null)
+            {
+                entries = database.GetDisplayEntries(column.Id, false);
+                canLoadMore = false;
+            }
+            else
+            {
+                entries = database.GetDisplayEntries(column.Id, long.MinValue, column.LimitShownItems.Value, false);
+                int totalEntries = database.GetEntryCount(column.Id, false);
+                canLoadMore = totalEntries > entries.Count;
+            }
 
             List<BaseEntryViewModel> entryViewModels = entries
                 .Select(e => BuildEntryViewModel(e, database, handler))
                 .Cast<BaseEntryViewModel>()
                 .ToList();
 
-            var columnViewModel = new ColumnViewModel(column, entryViewModels, handler);
+            var columnViewModel = new ColumnViewModel(column, entryViewModels, handler, canLoadMore);
             return columnViewModel;
         }
 
@@ -514,7 +529,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public void AddNewInplaceEntry(ColumnViewModel columnViewModel)
         {
-            columnViewModel.Entries.Add(new NewInplaceEntryViewModel(handler));
+            columnViewModel.Entries.Insert(0, new NewInplaceEntryViewModel(handler));
         }
 
         public void AddEntryFromInplaceNew(NewInplaceEntryViewModel newInplaceEntryViewModel)
@@ -526,7 +541,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             // Fill in order
             var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id, false);
-            entryOrdering.SetNewOrder(newEntry, entryCount, columnViewModel.Column.Id);
+            entryOrdering.SetNewOrder(newEntry, 0, columnViewModel.Column.Id);
             document.Database.AddEntry(newEntry);
 
             var displayEntry = document.Database.GetEntryDisplay(newEntry.Id);
@@ -534,7 +549,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             // Add new entry in the end
             columnViewModel.Entries.Remove(newInplaceEntryViewModel);
-            columnViewModel.Entries.Add(entryViewModel);
+            columnViewModel.Entries.Insert(0, entryViewModel);
         }
 
         public void RemoveInplaceNewEntry(NewInplaceEntryViewModel newInplaceEntryViewModel)
@@ -572,20 +587,24 @@ namespace Board.BusinessLogic.ViewModels.Document
                 // Note: old order doesn't matter even if the underlying entity will be updated
                 // during reordering process.
 
+                var currentIndex = targetColumnViewModel.Entries.IndexOf(entryViewModel);
+                if (newIndex == currentIndex || newIndex == currentIndex + 1)
+                    return;
+
                 var entryModel = document.Database.GetEntryById(entryViewModel.Entry.Id);
                 entryOrdering.SetNewOrder(entryModel, newIndex, targetColumnViewModel.Column.Id);
                 document.Database.UpdateEntry(entryModel);
 
-                var currentIndex = targetColumnViewModel.Entries.IndexOf(entryViewModel);
-                if (newIndex != currentIndex && newIndex != currentIndex + 1)
-                {
-                    bool afterCurrent = newIndex > currentIndex;
-                    if (afterCurrent)
-                        newIndex -= 1;
+                // Recreate entry viewmodel
+                var updatedEntryDisplayModel = document.Database.GetEntryDisplay(entryViewModel.Entry.Id);
+                var updatedEntryViewModel = new EntryViewModel(updatedEntryDisplayModel, handler);
 
-                    targetColumnViewModel.Entries.RemoveAt(currentIndex);
-                    targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);
-                }
+                bool afterCurrent = newIndex > currentIndex;
+                if (afterCurrent)
+                    newIndex -= 1;
+
+                targetColumnViewModel.Entries.RemoveAt(currentIndex);
+                targetColumnViewModel.Entries.Insert(newIndex, updatedEntryViewModel);
             }
             else
             {
@@ -596,8 +615,12 @@ namespace Board.BusinessLogic.ViewModels.Document
                 entryModel.ColumnId = targetColumnViewModel.Column.Id;
                 document.Database.UpdateEntry(entryModel);
 
+                // Recreate entry viewmodel
+                var updatedEntryDisplayModel = document.Database.GetEntryDisplay(entryViewModel.Entry.Id);
+                var updatedEntryViewModel = new EntryViewModel(updatedEntryDisplayModel, handler);
+
                 entryViewModel.Parent.Entries.Remove(entryViewModel);
-                targetColumnViewModel.Entries.Insert(newIndex, entryViewModel);
+                targetColumnViewModel.Entries.Insert(newIndex, updatedEntryViewModel);
             }
         }
 
@@ -619,6 +642,22 @@ namespace Board.BusinessLogic.ViewModels.Document
                 targetTableViewModel.Columns.RemoveAt(currentIndex);
                 targetTableViewModel.Columns.Insert(newIndex, columnViewModel);
             }
+        }
+
+        public void LoadMoreEntries(ColumnViewModel columnViewModel)
+        {
+            var maxOrder = columnViewModel.Entries.OfType<EntryViewModel>().Max(e => e.Entry.Order);
+            var moreEntryModels = document.Database.GetDisplayEntries(columnViewModel.Column.Id, maxOrder + 1, LOADED_ENTRY_COUNT, false);
+            bool canLoadMore = moreEntryModels.Count == LOADED_ENTRY_COUNT;
+
+            List<BaseEntryViewModel> moreEntryViewModels = moreEntryModels
+                .Select(e => BuildEntryViewModel(e, document.Database, handler))
+                .Cast<BaseEntryViewModel>()
+                .ToList();
+
+            foreach (var entryViewModel in moreEntryViewModels)
+                columnViewModel.Entries.Add(entryViewModel);
+            columnViewModel.CanLoadMore = canLoadMore;
         }
 
         public TableEditModel GetTableEditModel(TableViewModel activeTable)

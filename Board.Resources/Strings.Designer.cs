@@ -70,6 +70,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load more.
+        /// </summary>
+        public static string Column_LoadMore {
+            get {
+                return ResourceManager.GetString("Column_LoadMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete column.
         /// </summary>
         public static string Column_Menu_DeleteColumn {
@@ -111,6 +120,15 @@ namespace Board.Resources {
         public static string ColumnEditorWindow_Label_ColumnName {
             get {
                 return ResourceManager.GetString("ColumnEditorWindow_Label_ColumnName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit displayed entries.
+        /// </summary>
+        public static string ColumnEditorWindow_Label_LimitDefaultEntryCount {
+            get {
+                return ResourceManager.GetString("ColumnEditorWindow_Label_LimitDefaultEntryCount", resourceCulture);
             }
         }
         

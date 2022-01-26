@@ -351,4 +351,10 @@
   <data name="EntryEditor_Label_Done" xml:space="preserve">
     <value>Zakończone</value>
   </data>
+  <data name="Column_LoadMore" xml:space="preserve">
+    <value>Załaduj więcej</value>
+  </data>
+  <data name="ColumnEditorWindow_Label_LimitDefaultEntryCount" xml:space="preserve">
+    <value>Ogranicz wyświetlane karty</value>
+  </data>
 </root>

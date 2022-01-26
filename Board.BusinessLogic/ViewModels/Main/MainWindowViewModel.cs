@@ -216,6 +216,11 @@ namespace Board.BusinessLogic.ViewModels.Main
             activeDocument.MoveColumn(columnViewModel, tableViewModel, newIndex);
         }
 
+        void IDocumentHandler.LoadMoreEntries(ColumnViewModel columnViewModel)
+        {
+            activeDocument.LoadMoreEntries(columnViewModel);            
+        }
+
         // IEventListener<TagChangedEvent> implementation ---------------------
 
         void IEventListener<TagChangedEvent>.Receive(TagChangedEvent @event)
