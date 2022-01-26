@@ -20,8 +20,14 @@
                  TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" Style="{StaticResource TransparentTextBox}" 
                  HorizontalAlignment="Stretch"/>
 
-        <StackPanel Orientation="Horizontal" Visibility="{Binding Content, Converter={StaticResource HideIfEmptyStringConverter}}"
+        <StackPanel Orientation="Horizontal"            
                     Margin="{StaticResource CommentEditorSpacing}">
+            <StackPanel.Visibility>
+                <MultiBinding Converter="{StaticResource CommentButtonsVisibilityConverter}">
+                    <Binding Path="Content" />
+                    <Binding Path="IsNew" />
+                </MultiBinding>
+            </StackPanel.Visibility>
             <Button Command="{Binding SaveCommand}" Content="{x:Static res:Strings.Common_Save}" Style="{StaticResource EntryEditorDefaultButton}"
                     Margin="{StaticResource DialogItemsRightMargin}"/>
             <Button Command="{Binding CancelCommand}" Style="{StaticResource EntryEditorButton}" 

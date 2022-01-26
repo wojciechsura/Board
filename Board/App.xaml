@@ -31,6 +31,7 @@
             <c:CollapseIfZeroConverter x:Key="CollapseIfZeroConverter" />
             <c:HideIfEmptyStringConverter x:Key="HideIfEmptyStringConverter" />
             <c:StreamToImageSourceConverter x:Key="StreamToImageSourceConverter" />
+            <lc:CommentButtonsVisibilityConverter x:Key="CommentButtonsVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
