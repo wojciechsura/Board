@@ -133,6 +133,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dim items.
+        /// </summary>
+        public static string ColumnEditorWindow_Label_DimItems {
+            get {
+                return ResourceManager.GetString("ColumnEditorWindow_Label_DimItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limit displayed entries.
         /// </summary>
         public static string ColumnEditorWindow_Label_LimitDefaultEntryCount {

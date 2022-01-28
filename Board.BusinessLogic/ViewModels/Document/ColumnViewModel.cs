@@ -55,6 +55,8 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         public ColumnModel Column => column;
 
+        public bool DimItems => column.DimItems;
+
         public bool CanLoadMore
         {
             get => canLoadMore;

@@ -360,4 +360,7 @@
   <data name="Column_MoreCards" xml:space="preserve">
     <value>More cards</value>
   </data>
+  <data name="ColumnEditorWindow_Label_DimItems" xml:space="preserve">
+    <value>Dim items</value>
+  </data>
 </root>

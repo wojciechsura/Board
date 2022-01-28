@@ -21,6 +21,7 @@ namespace Board.Data.Entities
         [Required]
         public long Order { get; set; }
         public int? LimitShownItems { get; set; }
+        public bool DimItems { get; set; }
         [Required]
         public Table Table { get; set; }
         [ForeignKey(nameof(Table))]

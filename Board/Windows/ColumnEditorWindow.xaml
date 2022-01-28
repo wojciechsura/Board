@@ -14,7 +14,7 @@
         Title="{Binding Title}" FocusManager.FocusedElement="{Binding ElementName=tbColumnName}">
     <StackPanel Orientation="Vertical">
         <GroupBox Header="{Binding Title}" Margin="{StaticResource DialogItemsMargin}">
-            <Grid ext:GridExtensions.RowsCols="auto,auto;auto,300">
+            <Grid ext:GridExtensions.RowsCols="auto,auto,auto;auto,300">
 
                 <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.ColumnEditorWindow_Label_ColumnName}" Margin="{StaticResource DialogItemsMargin}"/>
                 <TextBox x:Name="tbColumnName" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
@@ -26,6 +26,10 @@
                               IsChecked="{Binding IsLimitVisibleItems}"/>
                     <TextBox Text="{Binding LimitVisibleItemsCount}" IsEnabled="{Binding IsLimitVisibleItems}" VerticalAlignment="Center" />
                 </DockPanel>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="{x:Static res:Strings.ColumnEditorWindow_Label_DimItems}" Margin="{StaticResource DialogItemsMargin}"/>
+                <CheckBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="{StaticResource DialogItemsHorizontalOnlyMargin}" HorizontalAlignment="Left"
+                              IsChecked="{Binding DimItems}" />
             </Grid>
         </GroupBox>
 

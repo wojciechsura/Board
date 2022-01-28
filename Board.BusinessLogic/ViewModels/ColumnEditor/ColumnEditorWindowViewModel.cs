@@ -20,6 +20,7 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
         private string name;
         private string limitVisibleItemsCount;
         private bool isLimitVisibleItems;
+        private bool dimItems;
         private readonly BaseCondition limitVisibleItemsCountValidCondition;
         private readonly BaseCondition formValidCondition;
 
@@ -91,6 +92,13 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
         {
             get => limitVisibleItemsCount;
             set => Set(ref limitVisibleItemsCount, value);
+        }
+
+        [SyncWithModel(nameof(ColumnModel.DimItems))]
+        public bool DimItems
+        {
+            get => dimItems;
+            set => Set(ref dimItems, value);
         }
 
         public ICommand OkCommand { get; }

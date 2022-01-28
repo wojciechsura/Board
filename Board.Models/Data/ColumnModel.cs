@@ -13,5 +13,6 @@ namespace Board.Models.Data
         public int Id { get; set; }
         public long Order { get; set; }
         public int? LimitShownItems { get; set; }
+        public bool DimItems { get; set; }
     }
 }

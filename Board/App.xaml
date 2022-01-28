@@ -32,6 +32,7 @@
             <c:HideIfEmptyStringConverter x:Key="HideIfEmptyStringConverter" />
             <c:StreamToImageSourceConverter x:Key="StreamToImageSourceConverter" />
             <lc:CommentButtonsVisibilityConverter x:Key="CommentButtonsVisibilityConverter" />
+            <lc:DimToOpactityConverter x:Key="DimToOpactityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

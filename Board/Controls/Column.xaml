@@ -38,7 +38,8 @@
             <ItemsControl ItemsSource="{Binding Entries}" AllowDrop="True" Margin="{StaticResource ColumnCardAreaMargin}"
                           Background="Transparent" MinHeight="32"
                           PreviewDragEnter="ColumnDragEnter" PreviewDragOver="ColumnDragOver" 
-                          PreviewDragLeave="ColumnDragLeave" PreviewDrop="ColumnDrop">
+                          PreviewDragLeave="ColumnDragLeave" PreviewDrop="ColumnDrop"
+                          Opacity="{Binding DimItems, Converter={StaticResource DimToOpactityConverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" />
