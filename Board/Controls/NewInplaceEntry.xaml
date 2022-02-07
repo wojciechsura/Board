@@ -10,10 +10,11 @@
         xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
         d:DataContext="{d:DesignInstance Type=document:NewInplaceEntryViewModel}"
         mc:Ignorable="d" 
-        Style="{StaticResource Card}" FocusManager.FocusedElement="{Binding ElementName=tbEntryTitle}">
+        Style="{StaticResource Card}" FocusManager.FocusedElement="{Binding ElementName=tbEntryTitle}"
+        DataContextChanged="HandleRootDataContextChanged">
     <StackPanel Orientation="Vertical">
         <TextBox x:Name="tbEntryTitle" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource DialogItemsMargin}"
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" PreviewKeyDown="HandleTitleKeyDown"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Command="{Binding SaveCommand}" Content="{x:Static res:Strings.Common_Save}" Style="{StaticResource DialogButton}" />

@@ -15,7 +15,7 @@ namespace Board.Converters
             if (value is bool bValue)
             {
                 if (bValue)
-                    return 0.5;
+                    return 0.75;
                 else
                     return 1;
             }

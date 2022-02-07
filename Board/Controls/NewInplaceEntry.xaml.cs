@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Board.BusinessLogic.ViewModels.Document;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,34 @@ namespace Board.Controls
     /// </summary>
     public partial class NewInplaceEntry : Border
     {
+        private NewInplaceEntryViewModel viewModel;
+
         public NewInplaceEntry()
         {
             InitializeComponent();
+        }
+
+        private void HandleTitleKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (viewModel.SaveCommand.CanExecute(null))
+                    viewModel.SaveCommand.Execute(null);
+
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (viewModel.CancelCommand.CanExecute(null))
+                    viewModel.CancelCommand.Execute(null);
+
+                e.Handled = true;
+            }
+        }
+
+        private void HandleRootDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            viewModel = e.NewValue as NewInplaceEntryViewModel;
         }
     }
 }
