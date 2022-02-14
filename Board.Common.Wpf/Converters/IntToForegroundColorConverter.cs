@@ -20,10 +20,7 @@ namespace Board.Common.Wpf.Converters
             if (value is int iValue)
             {
                 Color color = iValue.ToColor();
-
-                byte max = Math.Max(color.R, Math.Max(color.G, color.B));
-                byte min = Math.Min(color.R, Math.Min(color.G, color.B));
-                int luminance = (max + min) / 2;
+                int luminance = color.GetLuminance();
 
                 if (luminance > 180)
                     return black;

@@ -18,5 +18,20 @@ namespace Board.Common.Wpf.Helpers
         {
             return color.A << 24 | color.R << 16 | color.G << 8 | color.B;
         }
+
+        public static Color GradientTo(this Color from, Color to, byte step)
+        {
+            return Color.FromArgb((byte)(from.A + (to.A - from.A) * step / 100),
+                (byte)(from.R + (to.R - from.R) * step / 100),
+                (byte)(from.G + (to.G - from.G) * step / 100),
+                (byte)(from.B + (to.B - from.B) * step / 100));
+        }
+
+        public static byte GetLuminance(this Color color)
+        {
+            byte max = Math.Max(color.R, Math.Max(color.G, color.B));
+            byte min = Math.Min(color.R, Math.Min(color.G, color.B));
+            return (byte)((max + min) / 2);
+        }
     }
 }

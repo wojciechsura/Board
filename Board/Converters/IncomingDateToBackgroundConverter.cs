@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Board.Common.Wpf.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,14 +10,8 @@ using System.Windows.Media;
 
 namespace Board.Converters
 {
-    public class IncomingDateToBackgroundConverter : IMultiValueConverter
+    public class IncomingDateToBackgroundConverter : BaseIncomingDateConverter, IMultiValueConverter
     {
-        private static Brush lessThanADayBrush = new SolidColorBrush(Color.FromArgb(255, 230, 110, 110));
-        private static Brush lessThanThreeDaysBrush = new SolidColorBrush(Color.FromArgb(255, 255, 228, 192));
-        private static Brush lessThanWeekBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 192));
-        private static Brush aLotOfTimeBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-        private static Brush doneBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length == 2)
@@ -28,14 +23,11 @@ namespace Board.Converters
 
                     var diff = date - DateTime.Now;
 
-                    if (diff.Days < 1)
-                        return lessThanADayBrush;
-                    if (diff.Days < 3)
-                        return lessThanThreeDaysBrush;
-                    if (diff.Days < 7)
-                        return lessThanWeekBrush;
+                    var days = Math.Max(0, diff.Days);
+                    if (days > 14)
+                        return doneBrush;
                     else
-                        return aLotOfTimeBrush;
+                        return dayBrushes[days];
                 }
             }
 
