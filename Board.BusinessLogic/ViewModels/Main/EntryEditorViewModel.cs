@@ -323,6 +323,9 @@ namespace Board.BusinessLogic.ViewModels.Main
         [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
         public bool AnyDateSet => startDate != null || endDate != null;
 
+        [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
+        public bool IsOverdue => endDate != null && endDate.Value < DateTime.Now;
+
         public bool IsDone
         {
             get => isDone;

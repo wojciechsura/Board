@@ -217,13 +217,19 @@
                             <Label Grid.Row="2" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_EndDate}" Margin="{StaticResource DialogItemsExceptLeftMargin}"
                                    Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                            <c:Date Grid.Row="2" Grid.Column="1"
-                                    DisplayDate="{Binding EndDate}" 
-                                    IsDone="{Binding IsDone}"
-                                    Margin="{StaticResource DialogItemsExceptLeftMargin}"
-                                    Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left" />
+                            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                                <c:Date DisplayDate="{Binding EndDate}" 
+                                        IsDone="{Binding IsDone}"
+                                        Margin="{StaticResource DialogItemsExceptLeftMargin}"
+                                        Visibility="{Binding EndDate, Converter={StaticResource NullToVisibilityConverter}}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left" />
+
+                                <Image Source="\Resources\Images\Warning16.png" Width="16" Height="16"
+                                       Visibility="{Binding IsOverdue, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       Margin="{StaticResource DialogItemsLeftMargin}" />
+                            </StackPanel>
+
                         </Grid>
 
                     </StackPanel>

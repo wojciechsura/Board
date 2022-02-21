@@ -51,5 +51,19 @@ namespace Board.Controls
             DependencyProperty.Register("IsDone", typeof(bool), typeof(DateRange), new PropertyMetadata(false));
 
         #endregion
+
+        #region IsOverdue dependency property
+
+        public bool IsOverdue
+        {
+            get { return (bool)GetValue(IsOverdueProperty); }
+            set { SetValue(IsOverdueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsOverdue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsOverdueProperty =
+            DependencyProperty.Register("IsOverdue", typeof(bool), typeof(DateRange), new PropertyMetadata(false));
+
+        #endregion
     }
 }

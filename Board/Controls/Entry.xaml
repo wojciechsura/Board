@@ -46,6 +46,7 @@
 
         <c:DateRange DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}"
                      StartDate="{Binding StartDate}" EndDate="{Binding EndDate}" IsDone="{Binding IsDone}"
+                     IsOverdue="{Binding IsOverdue}"
                      Visibility="{Binding AnyDateSet, Converter={StaticResource BoolToVisibilityConverter}}"
                      HorizontalAlignment="Left"/>
 

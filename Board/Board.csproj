@@ -60,6 +60,7 @@
     <None Remove="Resources\Images\sqlite64.png" />
     <None Remove="Resources\Images\Tag16.png" />
     <None Remove="Resources\Images\Tag32.png" />
+    <None Remove="Resources\Images\Warning16.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Fonts\Roboto-Black.ttf" />
@@ -123,6 +124,7 @@
     <Resource Include="Resources\Images\Sqlite64.png" />
     <Resource Include="Resources\Images\Tag16.png" />
     <Resource Include="Resources\Images\Tag32.png" />
+    <Resource Include="Resources\Images\Warning16.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fluent.Ribbon" Version="9.0.1" />

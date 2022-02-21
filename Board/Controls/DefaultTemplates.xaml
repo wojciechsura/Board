@@ -1,12 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Board.Controls" 
-                    xmlns:lc="clr-namespace:Board.Converters">
+                    xmlns:lc="clr-namespace:Board.Converters"
+                    xmlns:c="clr-namespace:Board.Common.Wpf.Converters;assembly=Board.Common.Wpf">
 
     <lc:IncomingDateToBackgroundConverter x:Key="IncomingDateToBackgroundConverter" />
     <lc:IncomingDateToForegroundConverter x:Key="IncomingDateToForegroundConverter" />
     <lc:DateTimeToDateStringConverter x:Key="DateTimeToDateStringConverter" />
     <lc:DateRangeToDateStringConverter x:Key="DateRangeToDateStringConverter" />
+    <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
     <CornerRadius x:Key="DateCornerRadius">3</CornerRadius>
     <Thickness x:Key="DatePadding">1</Thickness>
@@ -51,37 +53,42 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:DateRange}">
-                        <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}">
-                            <Border.Background>
-                                <MultiBinding Converter="{StaticResource IncomingDateToBackgroundConverter}">
-                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="EndDate" />
-                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
-                                </MultiBinding>
-                            </Border.Background>
-                                                        
-                            <Label>
-                                <Label.Foreground>
-                                    <MultiBinding Converter="{StaticResource IncomingDateToForegroundConverter}">
+                        <StackPanel Orientation="Horizontal">
+                            <Border CornerRadius="{StaticResource DateCornerRadius}" Padding="{StaticResource DatePadding}">
+                                <Border.Background>
+                                    <MultiBinding Converter="{StaticResource IncomingDateToBackgroundConverter}">
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="EndDate" />
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
                                     </MultiBinding>
-                                </Label.Foreground>
+                                </Border.Background>
+                                                        
+                                <Label>
+                                    <Label.Foreground>
+                                        <MultiBinding Converter="{StaticResource IncomingDateToForegroundConverter}">
+                                            <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="EndDate" />
+                                            <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsDone" />
+                                        </MultiBinding>
+                                    </Label.Foreground>
 
-                                <Label.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Width="16" Height="16" Margin="{StaticResource DateImageMargin}" Source="\Resources\Images\Calendar16.png" />
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding Converter="{StaticResource DateRangeToDateStringConverter}">
-                                                    <Binding Path="StartDate" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                                    <Binding Path="EndDate" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Label.Content>
-                            </Label>
-                        </Border>
+                                    <Label.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="16" Height="16" Margin="{StaticResource DateImageMargin}" Source="\Resources\Images\Calendar16.png" />
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding Converter="{StaticResource DateRangeToDateStringConverter}">
+                                                        <Binding Path="StartDate" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                                        <Binding Path="EndDate" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Label.Content>
+                                </Label>
+                            </Border>
+
+                            <Image Source="\Resources\Images\Warning16.png" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsOverdue, Converter={StaticResource BoolToVisibilityConverter}}"
+                                   Width="16" Height="16" VerticalAlignment="Center" Margin="{StaticResource DialogItemsLeftMargin}" />
+                        </StackPanel>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
