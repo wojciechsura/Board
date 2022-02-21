@@ -457,6 +457,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
 
             var entry = context.Entries
                 .Include(e => e.Tags.Where(t => !t.IsDeleted))
+                .Include(e => e.Comments.Where(c => !c.IsDeleted))
                 .First(e => e.Id == entryId && !e.IsDeleted);
             var result = mapper.Map<EntryDisplayModel>(entry);
             return result;

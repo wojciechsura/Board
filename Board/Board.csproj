@@ -40,6 +40,8 @@
     <None Remove="Resources\Images\Cancel16.png" />
     <None Remove="Resources\Images\Card16.png" />
     <None Remove="Resources\Images\Card32.png" />
+    <None Remove="Resources\Images\CardDetails16.png" />
+    <None Remove="Resources\Images\CardDetails32.png" />
     <None Remove="Resources\Images\Comment16.png" />
     <None Remove="Resources\Images\Comment32.png" />
     <None Remove="Resources\Images\DeleteBoard16.png" />
@@ -92,6 +94,8 @@
     <Resource Include="Resources\Images\Cancel16.png" />
     <Resource Include="Resources\Images\Card16.png" />
     <Resource Include="Resources\Images\Card32.png" />
+    <Resource Include="Resources\Images\CardDetails16.png" />
+    <Resource Include="Resources\Images\CardDetails32.png" />
     <Resource Include="Resources\Images\Comment16.png" />
     <Resource Include="Resources\Images\Comment32.png" />
     <Resource Include="Resources\Images\DeleteBoard16.png" />

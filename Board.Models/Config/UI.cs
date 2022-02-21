@@ -9,5 +9,6 @@ namespace Board.Models.Config
     public class UI
     {
         public bool EntryEditorButtonsExpanded { get; set; } = true;
+        public bool ShowEntryDetails { get; set; } = true;
     }
 }

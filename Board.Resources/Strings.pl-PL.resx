@@ -363,4 +363,10 @@
   <data name="ColumnEditorWindow_Label_DimItems" xml:space="preserve">
     <value>Przygaszone karty</value>
   </data>
+  <data name="MainWindow_RibbonButton_CardDetails" xml:space="preserve">
+    <value>Szczegóły kart</value>
+  </data>
+  <data name="MainWindow_RibbonGroup_View" xml:space="preserve">
+    <value>Widok</value>
+  </data>
 </root>

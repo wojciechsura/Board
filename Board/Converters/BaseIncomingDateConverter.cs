@@ -24,7 +24,7 @@ namespace Board.Converters
             {
                 dayBrushes[i] = new SolidColorBrush(criticalColor.GradientTo(mediumColor, (byte)(i * 100 / 7)));
             }
-            for (int i = 8; i < 15; i++)
+            for (int i = 7; i < 15; i++)
             {
                 dayBrushes[i] = new SolidColorBrush(mediumColor.GradientTo(lowColor, (byte)((i - 7) * 100 / 7)));
             }

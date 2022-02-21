@@ -24,6 +24,7 @@ namespace Board.Controls
     public partial class Entry : Border
     {
         private bool inDragDrop;
+        private bool lBtnDown;
         private EntryViewModel viewModel;
         private DragAdorner dragAdorner;
 
@@ -31,16 +32,21 @@ namespace Board.Controls
         {
             InitializeComponent();
             inDragDrop = false;
+            lBtnDown = false;
         }
 
         private void HandleHeaderMouseDown(object sender, MouseButtonEventArgs e)
         {
             inDragDrop = false;
+
+            if (e.ChangedButton == MouseButton.Left && sender is Label)
+                lBtnDown = true;
         }
 
         private void HandleHeaderMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed &&
+            if (lBtnDown &&
+                e.LeftButton == MouseButtonState.Pressed &&
                 sender is Label lSender &&
                 viewModel != null)
             {
@@ -61,10 +67,15 @@ namespace Board.Controls
 
         private void HandleHeaderMouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (inDragDrop && e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
-                inDragDrop = false;
-            }            
+                if (inDragDrop)
+                {
+                    inDragDrop = false;
+                }
+
+                lBtnDown = false;
+            }
         }
 
         private void HandleHeaderGiveFeedback(object sender, GiveFeedbackEventArgs e)

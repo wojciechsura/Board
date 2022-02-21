@@ -53,6 +53,13 @@
                                   LargeIcon="pack://application:,,,/Board;component/Resources/Images/Tag32.png" 
                                   Icon="pack://application:,,,/Board;component/Resources/Images/Tag16.png" />
                     </f:RibbonGroupBox>
+
+                    <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_View}">
+                        <f:ToggleButton Header="{x:Static res:Strings.MainWindow_RibbonButton_CardDetails}" SizeDefinition="Large"
+                                        IsChecked="{Binding ShowEntryDetails}"
+                                        LargeIcon="pack://application:,,,/Board;component/Resources/Images/CardDetails32.png"
+                                        Icon="pack://application:,,,/Board;component/Resources/Images/CardDetails16.png" />
+                    </f:RibbonGroupBox>
                 </f:RibbonTabItem>
             </f:Ribbon>
 

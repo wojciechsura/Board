@@ -108,6 +108,8 @@ namespace Board.BusinessLogic.ViewModels.Main
             var model = document.Database.GetEntryById(entryId);
             model.IsDone = isDone;
             document.Database.UpdateEntry(model);
+
+            OnPropertyChanged(nameof(IsOverdue));
         }
 
         private void DoToggleButtonsExpanded()
@@ -324,7 +326,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         public bool AnyDateSet => startDate != null || endDate != null;
 
         [PropertyNotificationGroup(DATES_PROPERTY_GROUP)]
-        public bool IsOverdue => endDate != null && endDate.Value < DateTime.Now;
+        public bool IsOverdue => !isDone && endDate != null && endDate.Value < DateTime.Now;
 
         public bool IsDone
         {

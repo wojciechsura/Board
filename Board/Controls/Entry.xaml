@@ -44,6 +44,62 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}">
+            <StackPanel.Visibility>
+                <MultiBinding Converter="{StaticResource MultiBoolToVisibilityConverter}">
+                    <Binding Path="HasDetails" />
+                    <Binding Path="Handler.ShowEntryDetails" />
+                </MultiBinding>
+            </StackPanel.Visibility>
+            
+            <!-- Description -->
+            
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowDescriptionIcon, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Margin="{StaticResource DetailsMargin}">
+                <Canvas Width="16" Height="16" VerticalAlignment="Center">
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1.5" Canvas.Top="2.5" 
+                               Width="13" Height="10" RadiusX="1" RadiusY="1" 
+                               StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" 
+                               StrokeStartLineCap="Square" StrokeEndLineCap="Square"/>
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                        <Path.Data>
+                            <PathGeometry Figures="m 4 5.5 h 8" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                        <Path.Data>
+                            <PathGeometry Figures="m 4 7.5 h 8" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                        <Path.Data>
+                            <PathGeometry Figures="M 4 9.5 H 8" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </StackPanel>
+            
+            <!-- Comments -->
+
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowCommentsIcon, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Margin="{StaticResource DetailsMargin}">
+
+                <Canvas Width="16" Height="16" VerticalAlignment="Center"
+                        Margin="{StaticResource DetailsValueMargin}">
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeMiterLimit="4">
+                        <Path.Data>
+                            <PathGeometry Figures="M 8 2.5 A 6.5 4.5 0 0 0 1.5 7 A 6.5 4.5 0 0 0 8 11.5 A 6.5 4.5 0 0 0 10.242188 11.222656 L 12.904297 13.148438 L 12.357422 10.333984 A 6.5 4.5 0 0 0 14.5 7 A 6.5 4.5 0 0 0 8 2.5 z " FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+
+                <TextBlock Text="{Binding CommentCount, Mode=OneTime}" d:Text="12" Foreground="{StaticResource DetailsForegroundBrush}" 
+                           VerticalAlignment="Center"/>
+
+            </StackPanel>
+            
+        </StackPanel>
+        
         <c:DateRange DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}"
                      StartDate="{Binding StartDate}" EndDate="{Binding EndDate}" IsDone="{Binding IsDone}"
                      IsOverdue="{Binding IsOverdue}"

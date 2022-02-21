@@ -27,7 +27,8 @@ namespace Board.BusinessLogic.MappingProfiles
             CreateMap<ColumnModel, ColumnModel>();
             CreateMap<EntryModel, EntryModel>();
 
-            CreateMap<Entry, EntryDisplayModel>();
+            CreateMap<Entry, EntryDisplayModel>()
+                .ForMember(edm => edm.CommentCount, o => o.MapFrom(e => e.Comments.Count));
             CreateMap<Entry, EntryEditModel>();
 
             CreateMap<TableModel, TableEditModel>().ReverseMap();

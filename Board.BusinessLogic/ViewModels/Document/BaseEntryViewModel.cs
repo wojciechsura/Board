@@ -17,6 +17,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             this.handler = handler;
         }
 
+        public IDocumentHandler Handler => handler;
         public ColumnViewModel Parent { get; set; }
     }
 }

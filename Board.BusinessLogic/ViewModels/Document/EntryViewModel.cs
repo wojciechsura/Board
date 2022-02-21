@@ -37,12 +37,17 @@ namespace Board.BusinessLogic.ViewModels.Document
         public DateTime? EndDate => entry.EndDate;
         public bool AnyDateSet => entry.StartDate != null || entry.EndDate != null;
         public bool IsDone => entry.IsDone;
-        public bool IsOverdue => entry.EndDate != null && entry.EndDate.Value < DateTime.Now;
+        public bool IsOverdue => !IsDone && entry.EndDate != null && entry.EndDate.Value < DateTime.Now;
 
         public ICommand DeleteEntryCommand { get; }
         public ICommand EditEntryCommand { get; }
         public EntryDisplayModel Entry => entry;
 
         public ObservableCollection<TagViewModel> Tags { get; }
+
+        public bool ShowDescriptionIcon => !string.IsNullOrEmpty(entry.Description);
+        public bool ShowCommentsIcon => entry.CommentCount > 0;
+        public int CommentCount => entry.CommentCount;
+        public bool HasDetails => ShowCommentsIcon || ShowDescriptionIcon;
     }
 }

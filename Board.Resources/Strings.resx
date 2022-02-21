@@ -363,4 +363,10 @@
   <data name="ColumnEditorWindow_Label_DimItems" xml:space="preserve">
     <value>Dim items</value>
   </data>
+  <data name="MainWindow_RibbonGroup_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="MainWindow_RibbonButton_CardDetails" xml:space="preserve">
+    <value>Card details</value>
+  </data>
 </root>

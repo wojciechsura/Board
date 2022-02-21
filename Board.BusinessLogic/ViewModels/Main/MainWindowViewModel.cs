@@ -40,6 +40,7 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         private DocumentViewModel activeDocument;
         private EntryEditorViewModel entryEditor;
+        private bool showEntryDetails;
 
         // Private methods ----------------------------------------------------
 
@@ -123,6 +124,12 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             var newDocument = new DocumentViewModel(mapper, documentFactory, info, this);
             ActiveDocument = newDocument;
+        }
+
+        private void HandleShowEntryDetailsChanged()
+        {
+            configurationService.Configuration.UI.ShowEntryDetails = showEntryDetails;
+            configurationService.Save();
         }
 
         // IDocumentHandler implementation ------------------------------------
@@ -221,6 +228,8 @@ namespace Board.BusinessLogic.ViewModels.Main
             activeDocument.LoadMoreEntries(columnViewModel);            
         }
 
+        bool IDocumentHandler.ShowEntryDetails => showEntryDetails;
+
         // IEventListener<TagChangedEvent> implementation ---------------------
 
         void IEventListener<TagChangedEvent>.Receive(TagChangedEvent @event)
@@ -253,6 +262,8 @@ namespace Board.BusinessLogic.ViewModels.Main
             documentNotLoadingCondition = new LambdaCondition<MainWindowViewModel>(this, vm => !vm.ActiveDocument.IsLoading, true);
             tableSelectedCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument.ActiveTable != null, false);
 
+            showEntryDetails = configurationService.Configuration.UI.ShowEntryDetails;
+
             NewCommand = new AppCommand(obj => DoNew());
             OpenCommand = new AppCommand(obj => DoOpen());
             NewTableCommand = new AppCommand(obj => DoNewTable(), documentExistsCondition & documentNotLoadingCondition);
@@ -281,6 +292,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => entryEditor;
             set => Set(ref entryEditor, value);
+        }
+
+        public bool ShowEntryDetails
+        {
+            get => showEntryDetails;
+            set => Set(ref showEntryDetails, value, changeHandler: HandleShowEntryDetailsChanged);
         }
     }
 }

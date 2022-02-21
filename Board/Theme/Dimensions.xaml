@@ -83,6 +83,8 @@
     <CornerRadius x:Key="CardCornerRadius">4</CornerRadius>
     <Thickness x:Key="CardMargin">8,8,8,0</Thickness>
     <Thickness x:Key="CardPadding">4</Thickness>
+    <Thickness x:Key="DetailsMargin">0,0,8,0</Thickness>
+    <Thickness x:Key="DetailsValueMargin">0,0,2,0</Thickness>
 
     <!-- Table -->
 

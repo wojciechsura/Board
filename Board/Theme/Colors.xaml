@@ -74,6 +74,9 @@
 
     <Color x:Key="CardBorderColor">#b0b0b0</Color>
     <Color x:Key="CardBackground">#ffffff</Color>
+    <Color x:Key="DetailsForeground">#a0a0a0</Color>
+
+    <SolidColorBrush x:Key="DetailsForegroundBrush" Color="{StaticResource DetailsForeground}" />
 
     <!-- Card editor -->
 
