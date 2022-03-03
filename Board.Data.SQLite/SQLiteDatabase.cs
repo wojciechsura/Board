@@ -17,8 +17,30 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         private readonly string path;
         private readonly IMapper mapper;
 
+        private void CreateRollingBackup(string path)
+        {
+            string filePath = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileNameWithoutExtension(path);
+            
+            for (int i = 9; i >= 1; i--)
+            {
+                string from = Path.Combine(filePath, $"{fileName}-{i}.bak");
+                string to = Path.Combine(filePath, $"{fileName}-{i + 1}.bak");
+
+                if (File.Exists(to))
+                    File.Delete(to);
+
+                if (File.Exists(from))
+                    File.Move(from, to);
+            }
+
+            File.Copy(path, Path.Combine(filePath, $"{fileName}-1.bak"));
+        }
+
         public SQLiteDatabase(string path, IMapper mapper)
         {
+            CreateRollingBackup(path);
+
             var context = new TableContext(path);
 
             context.Database.Migrate();
