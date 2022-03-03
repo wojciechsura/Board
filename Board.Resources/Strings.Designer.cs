@@ -484,6 +484,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string MainWindow_Filter_Search {
+            get {
+                return ResourceManager.GetString("MainWindow_Filter_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card details.
         /// </summary>
         public static string MainWindow_RibbonButton_CardDetails {

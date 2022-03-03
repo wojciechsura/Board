@@ -372,4 +372,10 @@
   <data name="EntryEditor_Label_Added" xml:space="preserve">
     <value>, dodana </value>
   </data>
+  <data name="MainWindow_RibbonGroup_Filter" xml:space="preserve">
+    <value>Filtrowanie</value>
+  </data>
+  <data name="MainWindow_Filter_Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
 </root>

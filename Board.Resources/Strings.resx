@@ -375,4 +375,7 @@
   <data name="MainWindow_RibbonGroup_Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="MainWindow_Filter_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>
