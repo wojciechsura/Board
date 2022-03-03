@@ -17,6 +17,7 @@ using AutoMapper;
 using Board.Models.Types;
 using System.IO;
 using Board.BusinessLogic.Infrastructure.Document.Filesystem;
+using Board.BusinessLogic.Infrastructure.Collections;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
@@ -213,15 +214,42 @@ namespace Board.BusinessLogic.ViewModels.Document
         private TableLoadingWorker loadingWorker;
         private bool isLoading;
 
-        private readonly ObservableCollection<TableViewModel> tables = new();
+        private readonly ObservableParentedCollection<TableViewModel, DocumentViewModel> tables;
         private TableViewModel activeTable = null;
 
         // Private methods ----------------------------------------------------
 
         private DocumentViewModel(IDocumentHandler handler)
         {
+            tables = new(this);
+
             isLoading = false;
             this.handler = handler;
+        }
+
+        private static (List<BaseEntryViewModel> entries, bool canLoadMore) LoadEntries(ColumnModel column, BaseDatabase database, IDocumentHandler handler, string filter = null)
+        {
+            List<EntryDisplayModel> entries;
+            bool canLoadMore;
+
+            if (column.LimitShownItems == null)
+            {
+                entries = database.GetDisplayEntries(column.Id, filter, false);
+                canLoadMore = false;
+            }
+            else
+            {
+                entries = database.GetDisplayEntries(column.Id, long.MinValue, column.LimitShownItems.Value, filter, false);
+                int totalEntries = database.GetEntryCount(column.Id, false);
+                canLoadMore = totalEntries > entries.Count;
+            }
+
+            List<BaseEntryViewModel> entryViewModels = entries
+                .Select(e => BuildEntryViewModel(e, database, handler))
+                .Cast<BaseEntryViewModel>()
+                .ToList();
+
+            return (entryViewModels, canLoadMore);
         }
 
         private static TableViewModel BuildTableViewModel(TableModel table, BaseDatabase database, BaseFilesystem filesystem, IDocumentHandler handler)
@@ -245,25 +273,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         private static ColumnViewModel BuildColumnViewModel(ColumnModel column, BaseDatabase database, IDocumentHandler handler)
         {
-            List<EntryDisplayModel> entries;
-            bool canLoadMore;
-
-            if (column.LimitShownItems == null)
-            {
-                entries = database.GetDisplayEntries(column.Id, false);
-                canLoadMore = false;
-            }
-            else
-            {
-                entries = database.GetDisplayEntries(column.Id, long.MinValue, column.LimitShownItems.Value, false);
-                int totalEntries = database.GetEntryCount(column.Id, false);
-                canLoadMore = totalEntries > entries.Count;
-            }
-
-            List<BaseEntryViewModel> entryViewModels = entries
-                .Select(e => BuildEntryViewModel(e, database, handler))
-                .Cast<BaseEntryViewModel>()
-                .ToList();
+            (List<BaseEntryViewModel> entryViewModels, bool canLoadMore) = LoadEntries(column, database, handler);
 
             var columnViewModel = new ColumnViewModel(column, entryViewModels, handler, canLoadMore);
             return columnViewModel;
@@ -378,10 +388,19 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         }
 
-        public bool IsLoading
+        public void ApplyFilter(TableViewModel tableViewModel)
         {
-            get => isLoading;
-            set => Set(ref isLoading, value);
+            foreach (var column in tableViewModel.Columns)
+            {
+                column.Entries.Clear();
+
+                (List<BaseEntryViewModel> entries, bool canLoadMore) = LoadEntries(column.Column, document.Database, handler, tableViewModel.FilterText);
+
+                foreach (var entry in entries)
+                    column.Entries.Add(entry);
+
+                column.CanLoadMore = canLoadMore;
+            }
         }
 
         public void AddTableFromModel(TableEditModel newTable)
@@ -648,7 +667,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         public void LoadMoreEntries(ColumnViewModel columnViewModel)
         {
             var maxOrder = columnViewModel.Entries.OfType<EntryViewModel>().Max(e => e.Entry.Order);
-            var moreEntryModels = document.Database.GetDisplayEntries(columnViewModel.Column.Id, maxOrder + 1, LOADED_ENTRY_COUNT, false);
+            var moreEntryModels = document.Database.GetDisplayEntries(columnViewModel.Column.Id, maxOrder + 1, LOADED_ENTRY_COUNT, columnViewModel.Parent.FilterText, false);
             bool canLoadMore = moreEntryModels.Count == LOADED_ENTRY_COUNT;
 
             List<BaseEntryViewModel> moreEntryViewModels = moreEntryModels
@@ -677,7 +696,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         // Public properties --------------------------------------------------
 
-        public ObservableCollection<TableViewModel> Tables => tables;
+        public ObservableParentedCollection<TableViewModel, DocumentViewModel> Tables => tables;
 
         public WallDocument Document => document;
 
@@ -685,6 +704,12 @@ namespace Board.BusinessLogic.ViewModels.Document
         {
             get => activeTable;
             set => Set(ref activeTable, value);
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => Set(ref isLoading, value);
         }
     }
 }

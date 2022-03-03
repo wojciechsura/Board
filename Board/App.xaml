@@ -24,6 +24,7 @@
             <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <c:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
             <c:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <c:NullToBoolConverter x:Key="NullToBoolConverter" />
             <c:MultiBoolToVisbilityConverter x:Key="MultiBoolToVisibilityConverter" />
             <c:NegateConverter x:Key="NegateConverter" />
             <c:IntToColorConverter x:Key="IntToColorConverter" />

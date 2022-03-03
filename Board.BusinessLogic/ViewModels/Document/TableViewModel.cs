@@ -14,12 +14,18 @@ using System.IO;
 
 namespace Board.BusinessLogic.ViewModels.Document
 {
-    public class TableViewModel : BaseViewModel
+    public class TableViewModel : BaseViewModel, IParentedItem<DocumentViewModel>
     {
         private readonly TableModel table;
         private readonly MemoryStream background;
         private readonly ObservableParentedCollection<ColumnViewModel, TableViewModel> columns;
         private readonly IDocumentHandler handler;
+        private string filterText;
+
+        private void HandleFilterTextChanged()
+        {
+            handler.RequestApplyFilter(this);
+        }
 
         public TableViewModel(TableModel table, MemoryStream background, List<ColumnViewModel> columns, IDocumentHandler handler)
         {
@@ -48,5 +54,13 @@ namespace Board.BusinessLogic.ViewModels.Document
         public TableModel Table => table;
 
         public ICommand NewColumnCommand { get; }
+
+        public string FilterText
+        {
+            get => filterText;
+            set => Set(ref filterText, value, changeHandler: HandleFilterTextChanged);
+        }
+        
+        public DocumentViewModel Parent { get; set; }
     }
 }

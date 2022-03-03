@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Board.Data.Helpers;
 
 #nullable disable
 
@@ -371,7 +372,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             }
         }
 
-        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, bool includeDeleted)
+        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, string filter, bool includeDeleted)
         {
             var context = new TableContext(path);
 
@@ -379,6 +380,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 .Include(e => e.Tags.Where(t => (includeDeleted || !t.IsDeleted)).OrderBy(t => t.Name))
                 .Include(e => e.Comments.Where(c => (includeDeleted || !c.IsDeleted)).OrderByDescending(c => c.Added))
                 .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
+                .ApplyFilter(filter)
                 .OrderBy(e => e.Order)
                 .ToList();
 
@@ -387,7 +389,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             return result;
         }
 
-        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, long fromOrderInclusive, int count, bool includeDeleted)
+        public override List<EntryDisplayModel> GetDisplayEntries(int columnId, long fromOrderInclusive, int count, string filter, bool includeDeleted)
         {
             var context = new TableContext(path);
 
@@ -395,6 +397,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                 .Include(e => e.Tags.Where(t => (includeDeleted || !t.IsDeleted)).OrderBy(t => t.Name))
                 .Include(e => e.Comments.Where(c => (includeDeleted || !c.IsDeleted)).OrderByDescending(c => c.Added))
                 .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted) && e.Order >= fromOrderInclusive)
+                .ApplyFilter(filter)
                 .OrderBy(e => e.Order)
                 .Take(count)
                 .ToList();

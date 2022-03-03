@@ -41,6 +41,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DocumentViewModel activeDocument;
         private EntryEditorViewModel entryEditor;
         private bool showEntryDetails;
+        private string filterText;
 
         // Private methods ----------------------------------------------------
 
@@ -109,6 +110,11 @@ namespace Board.BusinessLogic.ViewModels.Main
         private void DoOpenTagEditor()
         {
             dialogService.ShowEditTagsDialog(activeDocument.Document, activeDocument.ActiveTable.Table.Id);
+        }
+
+        private void DoClearFilter()
+        {
+            activeDocument.ActiveTable.FilterText = null;
         }
 
         private void SetNewDocument(DocumentInfo info)
@@ -228,6 +234,11 @@ namespace Board.BusinessLogic.ViewModels.Main
             activeDocument.LoadMoreEntries(columnViewModel);            
         }
 
+        void IDocumentHandler.RequestApplyFilter(TableViewModel tableViewModel)
+        {
+            activeDocument.ApplyFilter(tableViewModel);
+        }
+
         bool IDocumentHandler.ShowEntryDetails => showEntryDetails;
 
         // IEventListener<TagChangedEvent> implementation ---------------------
@@ -270,6 +281,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             EditTableCommand = new AppCommand(obj => DoEditTable(), documentExistsCondition & tableSelectedCondition);
             DeleteTableCommand = new AppCommand(obj => DoDeleteTable(), documentExistsCondition & tableSelectedCondition);
             OpenTagEditorCommand = new AppCommand(obj => DoOpenTagEditor(), documentExistsCondition & tableSelectedCondition);
+            ClearFilterCommand = new AppCommand(obj => DoClearFilter(), documentExistsCondition & tableSelectedCondition);
 
         }
 
@@ -281,6 +293,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         public ICommand EditTableCommand { get; }
         public ICommand DeleteTableCommand { get; }
         public ICommand OpenTagEditorCommand { get; }
+        public ICommand ClearFilterCommand { get; }
 
         public DocumentViewModel ActiveDocument
         {
@@ -298,6 +311,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => showEntryDetails;
             set => Set(ref showEntryDetails, value, changeHandler: HandleShowEntryDetailsChanged);
+        }
+
+        public string FilterText
+        {
+            get => filterText;
+            set => Set(ref filterText, value);
         }
     }
 }

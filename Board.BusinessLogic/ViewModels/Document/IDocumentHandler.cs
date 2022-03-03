@@ -18,6 +18,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         void NewInplaceEntryRequest(ColumnViewModel columnViewModel);
         void DeleteEntryRequest(EntryViewModel entryViewModel);
         void EditEntryRequest(EntryViewModel entryViewModel);
+        void RequestApplyFilter(TableViewModel tableViewModel);
         void RequestEditorClose(EntryViewModel entryToUpdate);
         void RequestMoveEntry(EntryViewModel entryViewModel, ColumnViewModel targetColumnViewModel, int newIndex);
         void RequestMoveColumn(ColumnViewModel columnViewModel, TableViewModel targetTableViewModel, int newIndex);

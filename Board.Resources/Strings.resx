@@ -372,4 +372,7 @@
   <data name="EntryEditor_Label_Added" xml:space="preserve">
     <value>, added </value>
   </data>
+  <data name="MainWindow_RibbonGroup_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
 </root>

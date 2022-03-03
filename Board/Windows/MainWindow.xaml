@@ -10,6 +10,7 @@
                 xmlns:c="clr-namespace:Board.Controls" 
                 xmlns:main="clr-namespace:Board.BusinessLogic.ViewModels.Main;assembly=Board.BusinessLogic" 
                 xmlns:res="clr-namespace:Board.Resources;assembly=Board.Resources"
+                xmlns:b="clr-namespace:Board.Common.Wpf.Boxes;assembly=Board.Common.Wpf"
                 d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
                 mc:Ignorable="d"
                 Title="MainWindow" Height="450" Width="800">
@@ -60,6 +61,17 @@
                                         LargeIcon="pack://application:,,,/Board;component/Resources/Images/CardDetails32.png"
                                         Icon="pack://application:,,,/Board;component/Resources/Images/CardDetails16.png" />
                     </f:RibbonGroupBox>
+
+                    <f:RibbonGroupBox Header="{x:Static res:Strings.MainWindow_RibbonGroup_Filter}">
+                        <f:RibbonToolBar>
+                            <f:RibbonToolBarControlGroup>
+                                <f:TextBox Header="Search" Text="{Binding ActiveDocument.ActiveTable.FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=750}"
+                                           Width="150" IsEnabled="{Binding ActiveDocument.ActiveTable, Converter={StaticResource NullToBoolConverter}, FallbackValue={x:Static b:BooleanBox.False}}"/>
+                                <f:Button Icon="pack://application:,,,/Board;component/Resources/Images/Clear16.png" 
+                                          SizeDefinition="Small" Command="{Binding ClearFilterCommand}"/>
+                            </f:RibbonToolBarControlGroup>
+                        </f:RibbonToolBar>
+                    </f:RibbonGroupBox>
                 </f:RibbonTabItem>
             </f:Ribbon>
 
@@ -80,7 +92,8 @@
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource Overlay}" 
-                      Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}">
+                      Visibility="{Binding EntryEditor, Converter={StaticResource NullToVisibilityConverter}}"
+                      d:Visibility="Collapsed">
 
             <c:EntryEditor x:Name="eeEntry" DataContext="{Binding EntryEditor}" HorizontalAlignment="Center" VerticalAlignment="Center"
                            Margin="{StaticResource EntryEditorMargin}"/>

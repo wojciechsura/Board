@@ -46,8 +46,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         public abstract void AddEntry(EntryModel newEntry);
         public abstract void AddTagToEntry(int entryId, int tagId);
         public abstract void DeleteEntry(int entryId, bool permanent);
-        public abstract List<EntryDisplayModel> GetDisplayEntries(int columnId, bool includeDeleted);
-        public abstract List<EntryDisplayModel> GetDisplayEntries(int columnId, long fromOrderInclusive, int count, bool includeDeleted);
+        public abstract List<EntryDisplayModel> GetDisplayEntries(int columnId, string filter, bool includeDeleted);
+        public abstract List<EntryDisplayModel> GetDisplayEntries(int columnId, long fromOrderInclusive, int count, string filter, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, int skip, int take, bool includeDeleted);
         public abstract EntryModel GetEntryById(int id);

@@ -565,6 +565,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string MainWindow_RibbonGroup_Filter {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonGroup_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tags.
         /// </summary>
         public static string MainWindow_RibbonGroup_Tags {
