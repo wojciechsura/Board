@@ -16,5 +16,6 @@ namespace Board.Models.Data
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public bool IsDone { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

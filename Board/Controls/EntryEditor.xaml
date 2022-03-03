@@ -92,6 +92,8 @@
                         <TextBlock.Inlines>
                             <Run Text="{x:Static res:Strings.EntryEditor_Title_InColumn}" />
                             <Run FontWeight="Bold" Text="{Binding ColumnName, Mode=OneWay}" />
+                            <Run Text="{x:Static res:Strings.EntryEditor_Label_Added}" />
+                            <Run FontWeight="Bold" Text="{Binding AddedDate, Mode=OneWay}" />
                         </TextBlock.Inlines>
                     </TextBlock>
                 </Label>

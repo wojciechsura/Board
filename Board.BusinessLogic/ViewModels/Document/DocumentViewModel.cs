@@ -538,6 +538,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             var newEntry = newInplaceEntryViewModel.Entry;
             newEntry.ColumnId = columnViewModel.Column.Id;
+            newEntry.CreatedDate = DateTime.Now;
 
             // Fill in order
             var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id, false);

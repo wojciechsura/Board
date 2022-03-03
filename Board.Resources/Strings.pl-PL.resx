@@ -369,4 +369,7 @@
   <data name="MainWindow_RibbonGroup_View" xml:space="preserve">
     <value>Widok</value>
   </data>
+  <data name="EntryEditor_Label_Added" xml:space="preserve">
+    <value>, dodana </value>
+  </data>
 </root>

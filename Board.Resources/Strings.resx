@@ -369,4 +369,7 @@
   <data name="MainWindow_RibbonButton_CardDetails" xml:space="preserve">
     <value>Card details</value>
   </data>
+  <data name="EntryEditor_Label_Added" xml:space="preserve">
+    <value>, added </value>
+  </data>
 </root>

@@ -47,6 +47,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DateTime? endDate;
         [SyncWithModel(nameof(EntryModel.IsDone))]
         private bool isDone;
+        private string addedDate;
 
         // Private methods ----------------------------------------------------
 
@@ -70,6 +71,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             base.UpdateFromModel(model);
 
+            // Tags
+
             var tags = document.Database.GetTags(tableId, false)
                 .OrderBy(t => t.Name);
 
@@ -86,13 +89,19 @@ namespace Board.BusinessLogic.ViewModels.Main
                 AvailableTags.Add(availableTag);
             }
 
+            // Comments
+
             Comments.Add(new InplaceCommentEditorViewModel(this, new CommentModel() { EntryId = entryId }, true));
 
             foreach (var comment in model.Comments.OrderByDescending(c => c.Added))
             {
                 CommentViewModel commentViewModel = new(comment, this);
                 Comments.Add(commentViewModel);
-            }            
+            }
+
+            // Added date
+
+            AddedDate = model.CreatedDate.ToString("dddd, yyyy-MM-dd");
         }
 
         private void ReplaceCommentEditor(InplaceCommentEditorViewModel inplaceCommentEditorViewModel, CommentModel commentModel)
@@ -275,6 +284,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         public EntryDateEditorViewModel DateEditorViewModel => dateEditorViewModel;
 
         public string ColumnName { get; }
+
+        public string AddedDate
+        {
+            get => addedDate; 
+            set => Set(ref addedDate, value);
+        }
 
         public string Title
         {

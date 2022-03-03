@@ -19,5 +19,6 @@ namespace Board.Models.Data
         public List<TagModel> Tags { get; set; }
         public int CommentCount { get; set; }
         public long Order { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }
