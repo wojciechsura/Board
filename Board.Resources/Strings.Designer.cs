@@ -556,6 +556,15 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tag details.
+        /// </summary>
+        public static string MainWindow_RibbonButton_TagDetails {
+            get {
+                return ResourceManager.GetString("MainWindow_RibbonButton_TagDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Board.
         /// </summary>
         public static string MainWindow_RibbonGroup_Board {

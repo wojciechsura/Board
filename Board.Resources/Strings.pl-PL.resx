@@ -378,4 +378,7 @@
   <data name="MainWindow_Filter_Search" xml:space="preserve">
     <value>Szukaj</value>
   </data>
+  <data name="MainWindow_RibbonButton_TagDetails" xml:space="preserve">
+    <value>Szczegóły tagów</value>
+  </data>
 </root>
