@@ -51,7 +51,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         public abstract List<EntryModel> GetEntries(int columnId, bool includeDeleted);
         public abstract List<EntryModel> GetEntries(int columnId, int skip, int take, bool includeDeleted);
         public abstract EntryModel GetEntryById(int id);
-        public abstract int GetEntryCount(int columnId, bool includeDeleted);
+        public abstract int GetEntryCount(int columnId, string filter, bool includeDeleted);
         public abstract EntryDisplayModel GetEntryDisplay(int entryId);
         public abstract EntryEditModel GetEntryEdit(int entryId);
         public abstract long GetFirstEntryOrder(int columnId, bool includeDeleted);

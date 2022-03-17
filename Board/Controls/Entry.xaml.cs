@@ -48,7 +48,8 @@ namespace Board.Controls
             if (lBtnDown &&
                 e.LeftButton == MouseButtonState.Pressed &&
                 sender is Label lSender &&
-                viewModel != null)
+                viewModel != null &&
+                viewModel.CanDragDrop)
             {
                 FrameworkElement parent = lSender;
                 

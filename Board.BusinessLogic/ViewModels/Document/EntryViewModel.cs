@@ -32,6 +32,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             EditEntryCommand = new AppCommand(obj => handler.EditEntryRequest(this));
         }
 
+        public bool CanDragDrop => handler.CanDragDrop;
         public string Title => entry.Title;
         public DateTime? StartDate => entry.StartDate;
         public DateTime? EndDate => entry.EndDate;

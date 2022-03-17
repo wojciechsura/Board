@@ -42,7 +42,6 @@ namespace Board.BusinessLogic.ViewModels.Main
         private EntryEditorViewModel entryEditor;
         private bool showEntryDetails;
         private bool showTagDetails;
-        private string filterText;
 
         // Private methods ----------------------------------------------------
 
@@ -250,6 +249,8 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         bool IDocumentHandler.ShowTagDetails => showTagDetails;
 
+        bool IDocumentHandler.CanDragDrop => string.IsNullOrEmpty(ActiveDocument?.ActiveTable?.FilterText ?? null);
+
         // IEventListener<TagChangedEvent> implementation ---------------------
 
         void IEventListener<TagChangedEvent>.Receive(TagChangedEvent @event)
@@ -327,12 +328,6 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => showTagDetails;
             set => Set(ref showTagDetails, value, changeHandler: HandleShowTagDetailsChanged);
-        }
-
-        public string FilterText
-        {
-            get => filterText;
-            set => Set(ref filterText, value);
         }
     }
 }

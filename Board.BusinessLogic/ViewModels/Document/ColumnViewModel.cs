@@ -42,6 +42,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             handler.RequestMoveEntry(entryViewModel, this, newIndex);
         }
 
+        public bool CanDragDrop => handler.CanDragDrop;
         public TableViewModel Parent { get; set; }
 
         public ObservableParentedCollection<BaseEntryViewModel, ColumnViewModel> Entries => entries;

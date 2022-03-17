@@ -26,5 +26,6 @@ namespace Board.BusinessLogic.ViewModels.Document
 
         bool ShowEntryDetails { get; }
         bool ShowTagDetails { get; }
+        bool CanDragDrop { get; }
     }
 }

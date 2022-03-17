@@ -456,19 +456,21 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
             return result;
         }
 
-        public override int GetEntryCount(int columnId, bool includeDeleted)
+        public override int GetEntryCount(int columnId, string filter, bool includeDeleted)
         {
             var context = new TableContext(path);
 
             return context.Entries
-                .Count(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted));
+                .ApplyFilter(filter)
+                .Where(e => e.ColumnId == columnId && (includeDeleted || !e.IsDeleted))
+                .Count();
         }
 
         public override long GetFirstEntryOrder(int columnId, bool includeDeleted)
         {
             var context = new TableContext(path);
 
-            if (GetEntryCount(columnId, includeDeleted) == 0)
+            if (GetEntryCount(columnId, null, includeDeleted) == 0)
                 return 0;
 
             return context.Entries
@@ -492,7 +494,7 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
         {
             var context = new TableContext(path);
 
-            if (GetEntryCount(columnId, includeDeleted) == 0)
+            if (GetEntryCount(columnId, null, includeDeleted) == 0)
                 return 0;
 
             return context.Entries

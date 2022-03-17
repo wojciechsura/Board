@@ -84,7 +84,7 @@ namespace Board.BusinessLogic.ViewModels.Document
 
             protected override int GetModelCount(int groupId)
             {
-                return database.GetEntryCount(groupId, false);
+                return database.GetEntryCount(groupId, null, false);
             }
 
             protected override List<EntryModel> GetOrderedModels(int groupId, int skip, int take)
@@ -240,7 +240,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             else
             {
                 entries = database.GetDisplayEntries(column.Id, long.MinValue, column.LimitShownItems.Value, filter, false);
-                int totalEntries = database.GetEntryCount(column.Id, false);
+                int totalEntries = database.GetEntryCount(column.Id, filter, false);
                 canLoadMore = totalEntries > entries.Count;
             }
 
@@ -560,7 +560,7 @@ namespace Board.BusinessLogic.ViewModels.Document
             newEntry.CreatedDate = DateTime.Now;
 
             // Fill in order
-            var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id, false);
+            var entryCount = document.Database.GetEntryCount(columnViewModel.Column.Id, null, false);
             entryOrdering.SetNewOrder(newEntry, 0, columnViewModel.Column.Id);
             document.Database.AddEntry(newEntry);
 
