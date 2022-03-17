@@ -10,5 +10,6 @@ namespace Board.Models.Config
     {
         public bool EntryEditorButtonsExpanded { get; set; } = true;
         public bool ShowEntryDetails { get; set; } = true;
+        public bool ShowTagDetails { get; set; } = false;
     }
 }

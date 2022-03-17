@@ -25,5 +25,6 @@ namespace Board.BusinessLogic.ViewModels.Document
         void LoadMoreEntries(ColumnViewModel columnViewModel);
 
         bool ShowEntryDetails { get; }
+        bool ShowTagDetails { get; }
     }
 }

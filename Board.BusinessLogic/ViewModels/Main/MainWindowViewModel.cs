@@ -41,6 +41,7 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DocumentViewModel activeDocument;
         private EntryEditorViewModel entryEditor;
         private bool showEntryDetails;
+        private bool showTagDetails;
         private string filterText;
 
         // Private methods ----------------------------------------------------
@@ -135,6 +136,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         private void HandleShowEntryDetailsChanged()
         {
             configurationService.Configuration.UI.ShowEntryDetails = showEntryDetails;
+            configurationService.Save();
+        }
+
+        private void HandleShowTagDetailsChanged()
+        {
+            configurationService.Configuration.UI.ShowTagDetails = showTagDetails;
             configurationService.Save();
         }
 
@@ -241,6 +248,8 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         bool IDocumentHandler.ShowEntryDetails => showEntryDetails;
 
+        bool IDocumentHandler.ShowTagDetails => showTagDetails;
+
         // IEventListener<TagChangedEvent> implementation ---------------------
 
         void IEventListener<TagChangedEvent>.Receive(TagChangedEvent @event)
@@ -274,6 +283,7 @@ namespace Board.BusinessLogic.ViewModels.Main
             tableSelectedCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument.ActiveTable != null, false);
 
             showEntryDetails = configurationService.Configuration.UI.ShowEntryDetails;
+            showTagDetails = configurationService.Configuration.UI.ShowTagDetails;
 
             NewCommand = new AppCommand(obj => DoNew());
             OpenCommand = new AppCommand(obj => DoOpen());
@@ -311,6 +321,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => showEntryDetails;
             set => Set(ref showEntryDetails, value, changeHandler: HandleShowEntryDetailsChanged);
+        }
+
+        public bool ShowTagDetails
+        {
+            get => showTagDetails;
+            set => Set(ref showTagDetails, value, changeHandler: HandleShowTagDetailsChanged);
         }
 
         public string FilterText
