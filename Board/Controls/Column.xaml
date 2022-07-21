@@ -13,6 +13,43 @@
         Style="{StaticResource Column}"
         mc:Ignorable="d" DataContextChanged="HandleDataContextChanged"
         Opacity="{Binding DimItems, Converter={StaticResource DimToOpactityConverter}}">
+
+    <Border.Resources>
+
+        <Style x:Key="CardScrollViewer" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="0">
+                                <ScrollContentPresenter CanContentScroll="{TemplateBinding CanContentScroll}" />
+                            </Border>
+                            <ScrollBar Grid.Column="1" x:Name="PART_VerticalScrollBar" Value="{TemplateBinding VerticalOffset}"
+                                       Margin="{StaticResource ColumnScrollViewerScrollBarMargin}"
+                                       Maximum="{TemplateBinding ScrollableHeight}" 
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                            <ScrollBar x:Name="PART_HorizontalScrollBar" Orientation="Horizontal"
+                                       Grid.Row="1" Grid.Column="0" Value="{TemplateBinding HorizontalOffset}"
+                                       Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}"
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Border.Resources>
+    
     <Grid e:GridExtensions.RowsCols="auto,1*,auto;1*">
 
         <DockPanel Grid.Row="0" Margin="{StaticResource ColumnHeaderMargin}">
@@ -35,7 +72,7 @@
         </DockPanel>
 
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Auto">
+                      VerticalScrollBarVisibility="Auto" Style="{StaticResource CardScrollViewer}">
             <ItemsControl ItemsSource="{Binding Entries}" AllowDrop="True" Margin="{StaticResource ColumnCardAreaMargin}"
                           Background="Transparent" MinHeight="32"
                           PreviewDragEnter="ColumnDragEnter" PreviewDragOver="ColumnDragOver" 
