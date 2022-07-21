@@ -75,7 +75,13 @@
     <!-- Border -->
 
     <CornerRadius x:Key="BorderPopupCornerRadius">6</CornerRadius>
-    
+
+    <!-- ScrollBar -->
+
+    <CornerRadius x:Key="ScrollBarCornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="ScrollBarTrackCornerRadius">3</CornerRadius>
+    <sys:Double x:Key="ScrollBarSize">10</sys:Double>
+
     <!-- Card -->
 
     <sys:Double x:Key="CardFontSize">14</sys:Double>
@@ -93,10 +99,10 @@
     <!-- Column -->
 
     <sys:Double x:Key="ColumnHeaderFontSize">14</sys:Double>
-    <Thickness x:Key="ColumnCardAreaMargin">0</Thickness>
+    <Thickness x:Key="ColumnCardAreaMargin">0,0,6,0</Thickness>
     <Thickness x:Key="ColumnBorderThickness">1,1,1,2</Thickness>
     <sys:Double x:Key="ColumnWidth">300</sys:Double>
-    <Thickness x:Key="ColumnMargin">0,0,8,0</Thickness>
+    <Thickness x:Key="ColumnMargin">0,0,0,0</Thickness>
     <CornerRadius x:Key="ColumnCornerRadius">5</CornerRadius>
 
     <Thickness x:Key="ColumnHeaderMargin">8,8,8,0</Thickness>

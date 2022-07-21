@@ -70,6 +70,14 @@
 
     <Color x:Key="PopupBorderBackgroundColor">#eeeeee</Color>
     
+    <!-- ScrollBar -->
+
+    <Color x:Key="ScrollBarBackground">#b0b0b0</Color>
+    <Color x:Key="ScrollBarTrackBackground">#d0d0d0</Color>
+    <Color x:Key="ScrollBarGlyphForeground">#606060</Color>
+    <Color x:Key="ScrollBarGlyphPressedForeground">#000000</Color>
+    <Color x:Key="ScrollBarGlyphDisabledForeground">#a0a0a0</Color>
+
     <!-- Card -->
 
     <Color x:Key="CardBorderColor">#b0b0b0</Color>
