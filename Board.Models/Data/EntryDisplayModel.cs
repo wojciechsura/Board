@@ -16,6 +16,7 @@ namespace Board.Models.Data
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public bool IsDone { get; set; }
+        public bool IsHighPriority { get; set; }
         public List<TagModel> Tags { get; set; }
         public int CommentCount { get; set; }
         public long Order { get; set; }

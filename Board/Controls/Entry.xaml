@@ -14,7 +14,7 @@
         d:DataContext="{d:DesignInstance Type=vmd:EntryViewModel}"
         mc:Ignorable="d" 
         x:Name="root"
-        Style="{StaticResource Card}" DataContextChanged="HandleDataContextChanged">
+        Style="{StaticResource EntryCard}" DataContextChanged="HandleDataContextChanged">
     <DockPanel>
         <Button x:Name="bMenu" DockPanel.Dock="Right" Content="···" Style="{StaticResource FlatButton}"
                 VerticalAlignment="Top"

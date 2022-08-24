@@ -381,4 +381,7 @@
   <data name="MainWindow_RibbonButton_TagDetails" xml:space="preserve">
     <value>Tag details</value>
   </data>
+  <data name="EntryEditor_Label_HighPriority" xml:space="preserve">
+    <value>High priority</value>
+  </data>
 </root>

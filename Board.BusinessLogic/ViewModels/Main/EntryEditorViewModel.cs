@@ -47,6 +47,8 @@ namespace Board.BusinessLogic.ViewModels.Main
         private DateTime? endDate;
         [SyncWithModel(nameof(EntryModel.IsDone))]
         private bool isDone;
+        [SyncWithModel(nameof(EntryModel.IsHighPriority))]
+        private bool isHighPriority;
         private string addedDate;
 
         // Private methods ----------------------------------------------------
@@ -120,6 +122,16 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             OnPropertyChanged(nameof(IsOverdue));
         }
+
+        private void HandleIsHighPriorityChanged()
+        {
+            var model = document.Database.GetEntryById(entryId);
+            model.IsHighPriority = isHighPriority;
+            document.Database.UpdateEntry(model);
+
+            OnPropertyChanged(nameof(IsHighPriority));
+        }
+
 
         private void DoToggleButtonsExpanded()
         {
@@ -347,6 +359,12 @@ namespace Board.BusinessLogic.ViewModels.Main
         {
             get => isDone;
             set => Set(ref isDone, value, changeHandler: HandleIsDoneChanged);
+        }
+
+        public bool IsHighPriority
+        {
+            get => isHighPriority;
+            set => Set(ref isHighPriority, value, changeHandler: HandleIsHighPriorityChanged);
         }
 
         public bool AreButtonsExpanded

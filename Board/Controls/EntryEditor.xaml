@@ -26,6 +26,7 @@
         <!-- = Section image width + its horizontal margins-->
         <Thickness x:Key="EntryEditorSpacing">0,0,0,20</Thickness>
         <Thickness x:Key="EntryEditorSmallSpacing">0,0,0,12</Thickness>
+        <Thickness x:Key="EntryEditorMinimumSpacing">0,0,0,6</Thickness>
 
         <Thickness x:Key="EditorPadding">16</Thickness>
         <Thickness x:Key="EditorExceptTopPadding">16,0,16,16</Thickness>
@@ -86,8 +87,8 @@
 
             <!-- Column info -->
 
-            <Border Margin="{StaticResource EntryEditorSectionContentMargin}">
-                <Label Padding="0" Margin="{StaticResource EntryEditorSpacing}">
+            <StackPanel Orientation="Vertical" Margin="{StaticResource EntryEditorSectionContentMargin}">
+                <Label Margin="{StaticResource EntryEditorMinimumSpacing}">
                     <TextBlock>
                         <TextBlock.Inlines>
                             <Run Text="{x:Static res:Strings.EntryEditor_Title_InColumn}" />
@@ -97,7 +98,16 @@
                         </TextBlock.Inlines>
                     </TextBlock>
                 </Label>
-            </Border>
+
+                <Grid e:GridExtensions.RowsCols="auto;auto,1*" Margin="{StaticResource EntryEditorMinimumSpacing}">
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static res:Strings.EntryEditor_Label_HighPriority}" />
+
+                    <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding IsHighPriority}" Margin="{StaticResource DialogItemsExceptLeftMargin}" 
+                              VerticalAlignment="Center" />
+
+                </Grid>
+            </StackPanel>
 
             <DockPanel>
 

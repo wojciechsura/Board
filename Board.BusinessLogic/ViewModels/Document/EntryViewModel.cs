@@ -38,6 +38,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         public DateTime? EndDate => entry.EndDate;
         public bool AnyDateSet => entry.StartDate != null || entry.EndDate != null;
         public bool IsDone => entry.IsDone;
+        public bool IsHighPriority => entry.IsHighPriority;
         public bool IsOverdue => !IsDone && entry.EndDate != null && entry.EndDate.Value < DateTime.Now;
 
         public ICommand DeleteEntryCommand { get; }
