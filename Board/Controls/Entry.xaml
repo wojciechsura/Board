@@ -44,21 +44,32 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}">
-            <StackPanel.Visibility>
-                <MultiBinding Converter="{StaticResource MultiBoolToVisibilityConverter}">
-                    <Binding Path="HasDetails" />
-                    <Binding Path="Handler.ShowEntryDetails" />
-                </MultiBinding>
-            </StackPanel.Visibility>
+        <DockPanel LastChildFill="False" DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}"
+                   HorizontalAlignment="Stretch" Visibility="{Binding Handler.ShowEntryDetails, Converter={StaticResource BoolToVisibilityConverter}}"
+                   SnapsToDevicePixels="True" UseLayoutRounding="True">
             
             <!-- Description -->
-            
-            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowDescriptionIcon, Converter={StaticResource BoolToVisibilityConverter}}"
+
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="{StaticResource DetailsMargin}">
+
+                <Canvas Width="16" Height="16" VerticalAlignment="Center">
+                    <Rectangle Canvas.Left="0" Canvas.Top="4" Width="11" Height="11"
+                               Stroke="{StaticResource DetailsForegroundBrush}" StrokeThickness="1" />
+
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat"
+                          Data="M 2 9.5 h 7" />
+                    <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat"
+                          Data="M 5.5 6 v 7" />
+                </Canvas>
+                
+                <TextBlock DockPanel.Dock="Left" Text="{Binding CreatedDate, Mode=OneTime}" d:Text="01-12-2022" Foreground="{StaticResource DetailsForegroundBrush}" />
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Visibility="{Binding ShowDescriptionIcon, Converter={StaticResource BoolToVisibilityConverter}}"
                         Margin="{StaticResource DetailsMargin}">
                 <Canvas Width="16" Height="16" VerticalAlignment="Center">
-                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1.5" Canvas.Top="2.5" 
-                               Width="13" Height="10" RadiusX="1" RadiusY="1" 
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="1" Canvas.Top="2" 
+                               Width="14" Height="11" RadiusX="1" RadiusY="1" 
                                StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" 
                                StrokeStartLineCap="Square" StrokeEndLineCap="Square"/>
                     <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
@@ -81,7 +92,7 @@
             
             <!-- Comments -->
 
-            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowCommentsIcon, Converter={StaticResource BoolToVisibilityConverter}}"
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Visibility="{Binding ShowCommentsIcon, Converter={StaticResource BoolToVisibilityConverter}}"
                         Margin="{StaticResource DetailsMargin}">
 
                 <Canvas Width="16" Height="16" VerticalAlignment="Center"
@@ -97,8 +108,8 @@
                            VerticalAlignment="Center"/>
 
             </StackPanel>
-            
-        </StackPanel>
+
+        </DockPanel>
         
         <c:DateRange DockPanel.Dock="Bottom" Margin="{StaticResource DialogItemsExceptTopMargin}"
                      StartDate="{Binding StartDate}" EndDate="{Binding EndDate}" IsDone="{Binding IsDone}"
