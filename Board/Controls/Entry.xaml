@@ -52,17 +52,18 @@
 
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="{StaticResource DetailsMargin}">
 
-                <Canvas Width="16" Height="16" VerticalAlignment="Center">
-                    <Rectangle Canvas.Left="0" Canvas.Top="4" Width="11" Height="11"
+                <Canvas Width="12" Height="16" VerticalAlignment="Center">
+                    <Rectangle Canvas.Left="0" Canvas.Top="4" Width="9" Height="9"
                                Stroke="{StaticResource DetailsForegroundBrush}" StrokeThickness="1" />
 
                     <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat"
-                          Data="M 2 9.5 h 7" />
+                          Data="M 2 8.5 h 5" />
                     <Path StrokeThickness="1" Stroke="{StaticResource DetailsForegroundBrush}" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat"
-                          Data="M 5.5 6 v 7" />
+                          Data="M 4.5 6 v 5" />
                 </Canvas>
                 
-                <TextBlock DockPanel.Dock="Left" Text="{Binding CreatedDate, Mode=OneTime}" d:Text="01-12-2022" Foreground="{StaticResource DetailsForegroundBrush}" />
+                <TextBlock Text="{Binding CreatedDate, Mode=OneTime}" d:Text="01-12-2022" Foreground="{StaticResource DetailsForegroundBrush}"
+                           VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Visibility="{Binding ShowDescriptionIcon, Converter={StaticResource BoolToVisibilityConverter}}"
