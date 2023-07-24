@@ -10,6 +10,7 @@
     <ApplicationIcon>Board.ico</ApplicationIcon>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Board.snk</AssemblyOriginatorKeyFile>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\Fonts\Roboto-Black.ttf" />

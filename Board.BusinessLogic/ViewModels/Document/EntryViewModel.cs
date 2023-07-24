@@ -51,5 +51,6 @@ namespace Board.BusinessLogic.ViewModels.Document
         public bool ShowCommentsIcon => entry.CommentCount > 0;
         public int CommentCount => entry.CommentCount;
         public bool HasDetails => ShowCommentsIcon || ShowDescriptionIcon;
+        public string CreatedDate => entry.CreatedDate.ToString("yyyy-MM-dd");
     }
 }
