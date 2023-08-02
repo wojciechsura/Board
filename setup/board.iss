@@ -34,131 +34,156 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "autostart"; Description: "Start Z automatically with Windows"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\Board\bin\Release\net6.0-windows\AutoMapper.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.BusinessLogic.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Common.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Dependencies.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Models.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.Resources.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Board.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\ColorPicker.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Fluent.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Humanizer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\ICSharpCode.AvalonEdit.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\MdXaml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Bcl.AsyncInterfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Data.Sqlite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.EntityFrameworkCore.Design.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.EntityFrameworkCore.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.EntityFrameworkCore.Relational.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.EntityFrameworkCore.Sqlite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Caching.Memory.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.DependencyModel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Logging.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.ObjectPool.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Options.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Extensions.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Spooksoft.VisualStateManager.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\SQLitePCLRaw.batteries_v2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\SQLitePCLRaw.core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\SQLitePCLRaw.provider.e_sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ComponentModel.Composition.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ComponentModel.Composition.Registration.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Data.Odbc.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Data.OleDb.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.DirectoryServices.AccountManagement.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.DirectoryServices.Protocols.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.IO.Ports.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Management.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Private.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Reflection.Context.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Runtime.Caching.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.Duplex.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.Http.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.NetTcp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.Security.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceModel.Syndication.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.ServiceProcess.ServiceController.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Speech.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\System.Web.Services.Description.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Unity.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\Unity.Container.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\pl-PL\Board.Resources.resources.dll"; DestDir: "{app}\pl-PL\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\alpine-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\alpine-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\freebsd\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\freebsd\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\illumos\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\illumos\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\ios\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\ios\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\linux\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\linux\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-arm\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-arm\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-arm\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-arm\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-arm64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-arm64\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-armel\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-armel\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-mips64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-mips64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-musl-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-musl-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-s390x\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-s390x\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-x64\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\linux-x86\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-x86\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\osx\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\osx\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx-arm64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\osx-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx-arm64\native\libSystem.IO.Ports.Native.dylib"; DestDir: "{app}\runtimes\osx-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx-x64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\osx-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib"; DestDir: "{app}\runtimes\osx-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\solaris\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\solaris\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\tvos\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\tvos\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\unix\lib\net6.0\System.IO.Ports.dll"; DestDir: "{app}\runtimes\unix\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll"; DestDir: "{app}\runtimes\unix\lib\netcoreapp2.1\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Data.OleDb.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.DirectoryServices.AccountManagement.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.IO.Ports.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Management.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.ServiceProcess.ServiceController.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Speech.dll"; DestDir: "{app}\runtimes\win\lib\net6.0\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll"; DestDir: "{app}\runtimes\win\lib\netcoreapp2.1\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-arm\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-arm\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-arm64\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-arm64\native\sni.dll"; DestDir: "{app}\runtimes\win-arm64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-x64\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-x64\native\sni.dll"; DestDir: "{app}\runtimes\win-x64\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-x86\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-x86\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\runtimes\win-x86\native\sni.dll"; DestDir: "{app}\runtimes\win-x86\native\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\tr\System.Private.ServiceModel.resources.dll"; DestDir: "{app}\tr\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\tr\System.Web.Services.Description.resources.dll"; DestDir: "{app}\tr\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\zh-Hans\System.Private.ServiceModel.resources.dll"; DestDir: "{app}\zh-Hans\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\zh-Hans\System.Web.Services.Description.resources.dll"; DestDir: "{app}\zh-Hans\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\zh-Hant\System.Private.ServiceModel.resources.dll"; DestDir: "{app}\zh-Hant\"; Flags: ignoreversion
-Source: "..\Board\bin\Release\net6.0-windows\zh-Hant\System.Web.Services.Description.resources.dll"; DestDir: "{app}\zh-Hant\"; Flags: ignoreversion
-Source: "..\Changelog.txt"; DestDir:"{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\AutoMapper.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.BusinessLogic.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Common.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Dependencies.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Models.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.Resources.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Board.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\ColorPicker.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Fluent.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\ICSharpCode.AvalonEdit.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\MdXaml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\MdXaml.Plugins.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Bcl.AsyncInterfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Data.Sqlite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.EntityFrameworkCore.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.EntityFrameworkCore.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.EntityFrameworkCore.Relational.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.EntityFrameworkCore.Sqlite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Caching.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Caching.Memory.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Configuration.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.DependencyInjection.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.DependencyModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Logging.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Logging.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.ObjectPool.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Options.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Extensions.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Win32.Registry.AccessControl.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Win32.SystemEvents.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Spooksoft.VisualStateManager.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\SQLitePCLRaw.batteries_v2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\SQLitePCLRaw.core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\SQLitePCLRaw.provider.e_sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.CodeDom.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ComponentModel.Composition.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ComponentModel.Composition.Registration.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Configuration.ConfigurationManager.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Data.Odbc.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Data.OleDb.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Diagnostics.EventLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Diagnostics.PerformanceCounter.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.DirectoryServices.AccountManagement.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.DirectoryServices.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.DirectoryServices.Protocols.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Drawing.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Formats.Asn1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.IO.Packaging.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.IO.Ports.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Management.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Private.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Reflection.Context.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Runtime.Caching.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Security.Cryptography.Pkcs.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Security.Cryptography.ProtectedData.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Security.Cryptography.Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Security.Permissions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.Duplex.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.Http.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.NetTcp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.Security.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceModel.Syndication.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.ServiceProcess.ServiceController.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Speech.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Text.Encoding.CodePages.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Text.Encodings.Web.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Text.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Threading.AccessControl.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Web.Services.Description.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\System.Windows.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Unity.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\Unity.Container.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\alpine-arm\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\alpine-arm\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\alpine-arm64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\alpine-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\alpine-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\alpine-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll"; DestDir: "{app}\runtimes\browser\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\browser-wasm\nativeassets\net6.0\e_sqlite3.a"; DestDir: "{app}\runtimes\browser-wasm\nativeassets\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\freebsd\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\freebsd\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\linux\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\linux\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-arm\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-arm\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-arm\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-arm\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-arm64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-arm64\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-armel\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-armel\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-mips64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-mips64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-musl-arm\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-musl-arm\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-musl-arm64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-musl-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-musl-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-musl-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-ppc64le\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-ppc64le\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-s390x\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-s390x\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-x64\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-x64\native\libSystem.IO.Ports.Native.so"; DestDir: "{app}\runtimes\linux-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\linux-x86\native\libe_sqlite3.so"; DestDir: "{app}\runtimes\linux-x86\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\maccatalyst-arm64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\maccatalyst-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\maccatalyst-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\osx\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\osx\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx-arm64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\osx-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx-arm64\native\libSystem.IO.Ports.Native.dylib"; DestDir: "{app}\runtimes\osx-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx-x64\native\libe_sqlite3.dylib"; DestDir: "{app}\runtimes\osx-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib"; DestDir: "{app}\runtimes\osx-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\unix\lib\net6.0\System.IO.Ports.dll"; DestDir: "{app}\runtimes\unix\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll"; DestDir: "{app}\runtimes\unix\lib\netcoreapp2.1"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\Microsoft.Win32.Registry.AccessControl.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Data.Odbc.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Data.OleDb.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.DirectoryServices.AccountManagement.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.DirectoryServices.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Drawing.Common.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.IO.Ports.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Management.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Runtime.Caching.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.ServiceProcess.ServiceController.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Speech.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Threading.AccessControl.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Windows.Extensions.dll"; DestDir: "{app}\runtimes\win\lib\net6.0"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll"; DestDir: "{app}\runtimes\win\lib\netcoreapp2.1"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-arm\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-arm\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-arm64\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-arm64\native\sni.dll"; DestDir: "{app}\runtimes\win-arm64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-x64\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-x64\native\sni.dll"; DestDir: "{app}\runtimes\win-x64\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-x86\native\e_sqlite3.dll"; DestDir: "{app}\runtimes\win-x86\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\runtimes\win-x86\native\sni.dll"; DestDir: "{app}\runtimes\win-x86\native"; Flags: ignoreversion
+Source: "..\Board\bin\Release\net6.0-windows\publish\pl-PL\Board.Resources.resources.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -167,55 +192,3 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
-[Dirs]
-Name: "{app}\pl-PL"
-Name: "{app}\runtimes"
-Name: "{app}\runtimes\alpine-x64"
-Name: "{app}\runtimes\freebsd"
-Name: "{app}\runtimes\illumos"
-Name: "{app}\runtimes\ios"
-Name: "{app}\runtimes\linux"
-Name: "{app}\runtimes\linux-arm"
-Name: "{app}\runtimes\linux-arm64"
-Name: "{app}\runtimes\linux-armel"
-Name: "{app}\runtimes\linux-mips64"
-Name: "{app}\runtimes\linux-musl-x64"
-Name: "{app}\runtimes\linux-s390x"
-Name: "{app}\runtimes\linux-x64"
-Name: "{app}\runtimes\linux-x86"
-Name: "{app}\runtimes\osx"
-Name: "{app}\runtimes\osx-arm64"
-Name: "{app}\runtimes\osx-x64"
-Name: "{app}\runtimes\solaris"
-Name: "{app}\runtimes\tvos"
-Name: "{app}\runtimes\unix"
-Name: "{app}\runtimes\win"
-Name: "{app}\runtimes\win-arm"
-Name: "{app}\runtimes\win-arm64"
-Name: "{app}\runtimes\win-x64"
-Name: "{app}\runtimes\win-x86"
-Name: "{app}\runtimes\alpine-x64\native"
-Name: "{app}\runtimes\freebsd\lib"
-Name: "{app}\runtimes\illumos\lib"
-Name: "{app}\runtimes\ios\lib"
-Name: "{app}\runtimes\linux\lib"
-Name: "{app}\runtimes\linux-arm\native"
-Name: "{app}\runtimes\linux-arm64\native"
-Name: "{app}\runtimes\linux-armel\native"
-Name: "{app}\runtimes\linux-mips64\native"
-Name: "{app}\runtimes\linux-musl-x64\native"
-Name: "{app}\runtimes\linux-s390x\native"
-Name: "{app}\runtimes\linux-x64\native"
-Name: "{app}\runtimes\linux-x86\native"
-Name: "{app}\runtimes\osx\lib"
-Name: "{app}\runtimes\osx-arm64\native"
-Name: "{app}\runtimes\osx-x64\native"
-Name: "{app}\runtimes\solaris\lib"
-Name: "{app}\runtimes\tvos\lib"
-Name: "{app}\runtimes\unix\lib"
-Name: "{app}\runtimes\win\lib"
-Name: "{app}\runtimes\win-arm\native"
-Name: "{app}\runtimes\win-arm64\native"
-Name: "{app}\runtimes\win-x64\native"
-Name: "{app}\runtimes\win-x86\native"
