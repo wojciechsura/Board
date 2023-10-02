@@ -35,7 +35,8 @@ namespace Board.BusinessLogic.Infrastructure.Document.Database
                     File.Move(from, to);
             }
 
-            File.Copy(path, Path.Combine(filePath, $"{fileName}-1.bak"));
+            if (File.Exists(path))
+                File.Copy(path, Path.Combine(filePath, $"{fileName}-1.bak"));
         }
 
         public SQLiteDatabase(string path, IMapper mapper)
