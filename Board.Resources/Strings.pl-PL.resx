@@ -207,8 +207,8 @@
   <data name="EntryEditor_Label_Tags" xml:space="preserve">
     <value>Tagi</value>
   </data>
-  <data name="EntryEditor_Title_InColumn" xml:space="preserve">
-    <value>W kolumnie </value>
+  <data name="EntryEditor_Label_InColumn" xml:space="preserve">
+    <value>, w kolumnie </value>
   </data>
   <data name="MainWindow_RibbonButton_DeleteBoard" xml:space="preserve">
     <value>Usuń tablicę</value>
@@ -383,5 +383,8 @@
   </data>
   <data name="EntryEditor_Label_HighPriority" xml:space="preserve">
     <value>Wysoki priorytet</value>
+  </data>
+  <data name="EntryEditor_Label_Id" xml:space="preserve">
+    <value>Id:</value>
   </data>
 </root>

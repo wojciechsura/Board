@@ -33,6 +33,7 @@ namespace Board.BusinessLogic.ViewModels.Document
         }
 
         public bool CanDragDrop => handler.CanDragDrop;
+        public string Id => $"#{entry.Id}";
         public string Title => entry.Title;
         public DateTime? StartDate => entry.StartDate;
         public DateTime? EndDate => entry.EndDate;

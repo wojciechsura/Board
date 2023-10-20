@@ -293,6 +293,8 @@ namespace Board.BusinessLogic.ViewModels.Main
 
         public IEntryEditorAccess Access { get; set; }
 
+        public string Id => $"#{entryId}";
+
         public EntryDateEditorViewModel DateEditorViewModel => dateEditorViewModel;
 
         public string ColumnName { get; }

@@ -192,8 +192,8 @@
   <data name="Entry_Menu_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="EntryEditor_Title_InColumn" xml:space="preserve">
-    <value>In column </value>
+  <data name="EntryEditor_Label_InColumn" xml:space="preserve">
+    <value>, in column </value>
   </data>
   <data name="EntryEditor_Label_Tags" xml:space="preserve">
     <value>Tags</value>
@@ -383,5 +383,8 @@
   </data>
   <data name="EntryEditor_Label_HighPriority" xml:space="preserve">
     <value>High priority</value>
+  </data>
+  <data name="EntryEditor_Label_Id" xml:space="preserve">
+    <value>Id:</value>
   </data>
 </root>

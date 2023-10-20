@@ -41,6 +41,10 @@
             <Setter Property="Padding" Value="0" />
         </Style>
 
+        <Style TargetType="Label" x:Key="IdLabel" BasedOn="{StaticResource TitleLabel}">
+            <Setter Property="Foreground" Value="{StaticResource DetailsForegroundBrush}" />
+        </Style>
+        
         <Style TargetType="Label" x:Key="SectionLabel">
             <Setter Property="FontSize" Value="{StaticResource EntryEditorSectionFontSize}" />
             <Setter Property="FontFamily" Value="{StaticResource RobotoCondensed}" />
@@ -91,10 +95,12 @@
                 <Label Margin="{StaticResource EntryEditorMinimumSpacing}">
                     <TextBlock>
                         <TextBlock.Inlines>
-                            <Run Text="{x:Static res:Strings.EntryEditor_Title_InColumn}" />
-                            <Run FontWeight="Bold" Text="{Binding ColumnName, Mode=OneWay}" />
+                            <Run Text="{x:Static res:Strings.EntryEditor_Label_Id}" />
+                            <Run FontWeight="Bold" Text="{Binding Id, Mode=OneWay}" d:Text="#123" />
+                            <Run Text="{x:Static res:Strings.EntryEditor_Label_InColumn}" />
+                            <Run FontWeight="Bold" Text="{Binding ColumnName, Mode=OneWay}" d:Text="Sample column"/>
                             <Run Text="{x:Static res:Strings.EntryEditor_Label_Added}" />
-                            <Run FontWeight="Bold" Text="{Binding AddedDate, Mode=OneWay}" />
+                            <Run FontWeight="Bold" Text="{Binding AddedDate, Mode=OneWay}" d:Text="2023-10-01"/>
                         </TextBlock.Inlines>
                     </TextBlock>
                 </Label>

@@ -457,6 +457,24 @@ namespace Board.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Id:.
+        /// </summary>
+        public static string EntryEditor_Label_Id {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu , in column .
+        /// </summary>
+        public static string EntryEditor_Label_InColumn {
+            get {
+                return ResourceManager.GetString("EntryEditor_Label_InColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start date.
         /// </summary>
         public static string EntryEditor_Label_StartDate {
@@ -471,15 +489,6 @@ namespace Board.Resources {
         public static string EntryEditor_Label_Tags {
             get {
                 return ResourceManager.GetString("EntryEditor_Label_Tags", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu In column .
-        /// </summary>
-        public static string EntryEditor_Title_InColumn {
-            get {
-                return ResourceManager.GetString("EntryEditor_Title_InColumn", resourceCulture);
             }
         }
         
