@@ -279,9 +279,9 @@ namespace Board.BusinessLogic.ViewModels.Main
 
             eventBus.Register<TagChangedEvent>(this);
 
-            documentExistsCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument != null, false);
-            documentNotLoadingCondition = new LambdaCondition<MainWindowViewModel>(this, vm => !vm.ActiveDocument.IsLoading, true);
-            tableSelectedCondition = new LambdaCondition<MainWindowViewModel>(this, vm => vm.ActiveDocument.ActiveTable != null, false);
+            documentExistsCondition = Condition.Lambda(this, vm => vm.ActiveDocument != null, false);
+            documentNotLoadingCondition = Condition.Lambda(this, vm => !vm.ActiveDocument.IsLoading, true);
+            tableSelectedCondition = Condition.Lambda(this, vm => vm.ActiveDocument.ActiveTable != null, false);
 
             showEntryDetails = configurationService.Configuration.UI.ShowEntryDetails;
             showTagDetails = configurationService.Configuration.UI.ShowTagDetails;

@@ -5,6 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Board.snk</AssemblyOriginatorKeyFile>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Strings.Designer.cs">

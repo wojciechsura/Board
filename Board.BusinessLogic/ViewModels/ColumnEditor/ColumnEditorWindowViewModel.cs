@@ -66,7 +66,7 @@ namespace Board.BusinessLogic.ViewModels.ColumnEditor
             else
                 Title = Strings.ColumnEditor_Title_Edit;
 
-            limitVisibleItemsCountValidCondition = new ChainedLambdaCondition<ColumnEditorWindowViewModel>(this, vm => !vm.IsLimitVisibleItems || (vm.IsLimitVisibleItems && IsStringValidInt(vm.LimitVisibleItemsCount)), false);
+            limitVisibleItemsCountValidCondition = Condition.ChainedLambda(this, vm => !vm.IsLimitVisibleItems || (vm.IsLimitVisibleItems && IsStringValidInt(vm.LimitVisibleItemsCount)), false);
             formValidCondition = limitVisibleItemsCountValidCondition;
 
             OkCommand = new AppCommand(obj => DoOk(), formValidCondition);

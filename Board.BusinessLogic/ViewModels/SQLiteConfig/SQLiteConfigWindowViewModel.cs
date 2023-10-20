@@ -56,9 +56,9 @@ namespace Board.BusinessLogic.ViewModels.SQLiteConfig
                 WallName = data.WallName;
             }
 
-            pathExistsCondition = new ChainedLambdaCondition<SQLiteConfigWindowViewModel>(this, vm => System.IO.Directory.Exists(vm.Path), false);
-            nameValidCondition = new ChainedLambdaCondition<SQLiteConfigWindowViewModel>(this, vm => !string.IsNullOrEmpty(vm.WallName) && vm.WallName.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) < 0, false);
-            fileAlreadyExistsCondition = new ChainedLambdaCondition<SQLiteConfigWindowViewModel>(this, vm => System.IO.Directory.Exists(vm.Path + vm.WallName), false);
+            pathExistsCondition = Condition.ChainedLambda(this, vm => System.IO.Directory.Exists(vm.Path), false);
+            nameValidCondition = Condition.ChainedLambda(this, vm => !string.IsNullOrEmpty(vm.WallName) && vm.WallName.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) < 0, false);
+            fileAlreadyExistsCondition = Condition.ChainedLambda(this, vm => System.IO.Directory.Exists(vm.Path + vm.WallName), false);
 
             OpenFolderCommand = new AppCommand(obj => DoOpenFolder());
             OkCommand = new AppCommand(obj => DoOk(), pathExistsCondition & nameValidCondition & !fileAlreadyExistsCondition);

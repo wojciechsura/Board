@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Board.Data.Entities
 {
     [Index(nameof(Id), IsUnique = true)]
-    [Index(new[] { nameof(Order), nameof(TableId)}, Name = "IX_ColumnOrder", IsUnique = true)]
+    [Index(nameof(Order), new[] { nameof(TableId)}, Name = "IX_ColumnOrder", IsUnique = true)]
     public class Column
     {
         public int Id { get; set; }
